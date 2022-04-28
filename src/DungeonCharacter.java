@@ -4,9 +4,9 @@ abstract class DungeonCharacter {
     int myMinDam;
     int myMaxDam;
     int myAttackSpeed;
-    int myHitChance;
+    double myHitChance;
 
-    public DungeonCharacter(String theName, int theHitPoints, int theMinDam, int theMaxDam, int theAttackSpeed, int theHitChance) {
+    public DungeonCharacter(String theName, int theHitPoints, int theMinDam, int theMaxDam, int theAttackSpeed, double theHitChance) {
         this.myName = theName;
         this.myHitPoints = theHitPoints;
         this.myMinDam = theMinDam;
@@ -57,7 +57,7 @@ abstract class DungeonCharacter {
         this.myAttackSpeed = myAttackSpeed;
     }
 
-    public int getMyHitChance() {
+    public double getMyHitChance() {
         return myHitChance;
     }
 
