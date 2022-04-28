@@ -11,6 +11,7 @@ public class Priestess extends Hero{
 
     @Override
     void specialSkill() {
+        // Heal: heals for [num] to [num] hit points
 
     }
 }

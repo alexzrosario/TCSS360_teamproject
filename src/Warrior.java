@@ -11,6 +11,7 @@ public class Warrior extends Hero{
 
     @Override
     void specialSkill() {
+        // Crushing Blow: does 75 to 175 points of damage but only has a 40% chance of succeeding
 
     }
 }
