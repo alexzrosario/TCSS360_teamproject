@@ -7,14 +7,14 @@ abstract class DungeonCharacter {
     double myHitChance;
     double myBlockChance;
 
-    public DungeonCharacter(String theName, int theHitPoints, int theMinDam, int theMaxDam, int theAttackSpeed, double theHitChance, double myBlockChance) {
+    public DungeonCharacter(String theName, int theHitPoints, int theMinDam, int theMaxDam, int theAttackSpeed, double theHitChance) {
         this.myName = theName;
         this.myHitPoints = theHitPoints;
         this.myMinDam = theMinDam;
         this.myMaxDam = theMaxDam;
         this.myAttackSpeed = theAttackSpeed;
         this.myHitChance = theHitChance;
-        this.myBlockChance = myBlockChance;
+        //this.myBlockChance = myBlockChance;
     }
 
     abstract void attack();
