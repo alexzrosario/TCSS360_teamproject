@@ -4,10 +4,10 @@ public class Warrior extends Hero{
         super(theName, 125, 35, 60, 4, 0.8, 0.2);
     }
 
-    @Override
-    void attack() {
+    /*@Override
+    int attack() {
 
-    }
+    }*/
 
     @Override
     void specialSkill() {

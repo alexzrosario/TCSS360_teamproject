@@ -4,10 +4,10 @@ public class Priestess extends Hero{
         super(theName, 75, 25, 45, 5, 0.7, 0.3);
     }
 
-    @Override
-    void attack() {
+    /*@Override
+    int attack() {
 
-    }
+    }*/
 
     @Override
     void specialSkill() {

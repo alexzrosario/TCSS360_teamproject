@@ -10,6 +10,8 @@ abstract class Monster extends DungeonCharacter{
         this.myMaxHeal = theMaxHeal;
     }
 
+    //abstract int attack();
+
     abstract void heal();
 
     public double getMyHealChance() {

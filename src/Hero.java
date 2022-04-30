@@ -6,7 +6,7 @@ abstract class Hero extends DungeonCharacter{
         this.myBlockChance = theBlockChance;
     }
 
-    abstract void attack();
+    //abstract int attack();
 
     abstract void specialSkill();
 

@@ -3,10 +3,10 @@ public class Gremlin extends Monster{
         super("Gremlin", 70, 15, 30, 5, 0.8, 0.4, 20, 40);
     }
 
-    @Override
-    void attack() {
+    /*@Override
+    int attack() {
 
-    }
+    }*/
 
     @Override
     void heal() {

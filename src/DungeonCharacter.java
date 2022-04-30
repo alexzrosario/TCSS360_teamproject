@@ -1,3 +1,5 @@
+import java.util.Random;
+
 abstract class DungeonCharacter {
     String myName;
     int myHitPoints;
@@ -15,7 +17,17 @@ abstract class DungeonCharacter {
         this.myHitChance = theHitChance;
     }
 
-    abstract void attack();
+    int attack() {
+        Random r = new Random();
+        int damageRoll = 0;
+        for (int i = 0; i < myAttackSpeed; i += 2) {
+            int attackRoll = r.nextInt(100) + 1;
+            if (attackRoll >= 100*(1-myHitChance)) {
+                damageRoll += r.nextInt(myMaxDam - myMinDam - 1) + myMinDam;
+            }
+        }
+        return damageRoll;
+    }
 
     public String getMyName() {
         return myName;

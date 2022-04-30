@@ -3,10 +3,10 @@ public class Skeleton extends Monster{
         super("Skeleton", 100, 30, 50, 3, 0.8, 0.3, 30, 50);
     }
 
-    @Override
-    void attack() {
+    /*@Override
+    int attack() {
 
-    }
+    }*/
 
     @Override
     void heal() {
