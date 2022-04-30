@@ -1,4 +1,6 @@
-abstract class Hero extends DungeonCharacter{
+package main.DungeonCharacter;
+
+abstract class Hero extends DungeonCharacter {
     double myBlockChance;
 
     public Hero(String theName, int theHitPoints, int theMinDam, int theMaxDam, int theAttackSpeed, double theHitChance, double theBlockChance) {

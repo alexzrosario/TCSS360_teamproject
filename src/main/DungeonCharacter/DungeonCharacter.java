@@ -1,3 +1,5 @@
+package main.DungeonCharacter;
+
 abstract class DungeonCharacter {
     String myName;
     int myHitPoints;

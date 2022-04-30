@@ -1,4 +1,6 @@
-abstract class Monster extends DungeonCharacter{
+package main.DungeonCharacter;
+
+abstract class Monster extends DungeonCharacter {
     double myHealChance;
     int myMinHeal;
     int myMaxHeal;
