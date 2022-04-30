@@ -25,7 +25,7 @@ abstract class DungeonCharacter {
         for (int i = 0; i < myAttackSpeed; i += 2) {
             int attackRoll = r.nextInt(100) + 1;
             if (attackRoll >= 100*(1-myHitChance)) {
-                damageRoll += r.nextInt(myMaxDam - myMinDam - 1) + myMinDam;
+                damageRoll += r.nextInt(myMaxDam - myMinDam + 1) + myMinDam;
             }
         }
         return damageRoll;
