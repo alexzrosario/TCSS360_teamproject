@@ -64,12 +64,13 @@ abstract class DungeonCharacter {
            setMyAlive();
        }
     }
+    public void setMyAlive() {this.myAlive = false;}
 
     public boolean getMyAlive() {
         return myAlive;
     }
 
-    public void setMyAlive() {this.myAlive = false;}
+
 
     public String getMyName() {
         return myName;
