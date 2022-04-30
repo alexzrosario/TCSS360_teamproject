@@ -1,14 +1,18 @@
 package main.DungeonCharacter;
 
-abstract class DungeonCharacter {
-    String myName;
-    int myHitPoints;
-    int myMinDam;
-    int myMaxDam;
-    int myAttackSpeed;
-    double myHitChance;
+import java.util.Random;
 
-    public DungeonCharacter(String theName, int theHitPoints, int theMinDam, int theMaxDam, int theAttackSpeed, double theHitChance) {
+abstract class DungeonCharacter {
+    private String myName;
+    private int myHitPoints;
+    private int myMinDam;
+    private int myMaxDam;
+    private int myAttackSpeed;
+    private double myHitChance;
+    private boolean myAlive= true; // alive by default
+
+    public DungeonCharacter(final String theName, final int theHitPoints, final int theMinDam,
+                            final int theMaxDam, final int theAttackSpeed, final double theHitChance) {
         this.myName = theName;
         this.myHitPoints = theHitPoints;
         this.myMinDam = theMinDam;
@@ -16,8 +20,56 @@ abstract class DungeonCharacter {
         this.myAttackSpeed = theAttackSpeed;
         this.myHitChance = theHitChance;
     }
+    public void basicAttack(final DungeonCharacter theTarget){
+        int attacks = 1;
+        if(this.getMyAttackSpeed() > theTarget.getMyAttackSpeed()){
+            if(this.getMyAttackSpeed() == 2 * theTarget.getMyAttackSpeed()){
+                attacks = 2;
+            } else if(this.getMyAttackSpeed() == 3 * theTarget.getMyAttackSpeed()){
+                attacks = 3;
+            }
+            for (int i = 0; i < attacks; i++) {
+                attackValue(theTarget);
+            }
+        } else {
+            attackValue(theTarget);
+        }
+    }
 
-    abstract void attack();
+    public int attackValue(final DungeonCharacter theTarget) {
+        Random r = new Random();
+        int damageRoll = 0;
+        if(Math.random() <= this.getMyHitChance()){
+            damageRoll = r.nextInt(this.getMyMinDam(), this.getMyMaxDam()+1);
+        }
+        if(theTarget instanceof Hero){
+            if(Math.random() <= ((Hero) theTarget).getMyBlockChance()){
+                damageRoll = 0;
+                //for testing - block
+                System.out.println("Attack blocked by hero.");
+            }else{
+                theTarget.updateHealth(damageRoll);
+            }
+        }else{
+            theTarget.updateHealth(damageRoll);
+        }
+        //for testing - correct damage
+        System.out.println(damageRoll);
+        return damageRoll;
+    }
+
+    public void updateHealth(final int theDamage){
+       this.setMyHitPoints(this.getMyHitPoints() - theDamage);
+       if(this.getMyHitPoints() <= 0){
+           setMyAlive();
+       }
+    }
+
+    public boolean getMyAlive() {
+        return myAlive;
+    }
+
+    public void setMyAlive() {this.myAlive = false;}
 
     public String getMyName() {
         return myName;

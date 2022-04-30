@@ -1,14 +1,14 @@
 package main.DungeonCharacter;
 
 abstract class Hero extends DungeonCharacter {
-    double myBlockChance;
+    private double myBlockChance;
 
-    public Hero(String theName, int theHitPoints, int theMinDam, int theMaxDam, int theAttackSpeed, double theHitChance, double theBlockChance) {
+    public Hero(final String theName, final int theHitPoints, final int theMinDam, final int theMaxDam,
+                final int theAttackSpeed, final double theHitChance, final double theBlockChance) {
+
         super(theName, theHitPoints, theMinDam, theMaxDam, theAttackSpeed, theHitChance);
         this.myBlockChance = theBlockChance;
     }
-
-    abstract void attack();
 
     abstract void specialSkill();
 
