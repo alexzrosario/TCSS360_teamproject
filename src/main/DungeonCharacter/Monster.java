@@ -1,5 +1,7 @@
 package main.DungeonCharacter;
 
+import java.util.Random;
+
 abstract class Monster extends DungeonCharacter {
     double myHealChance;
     int myMinHeal;
@@ -12,11 +14,20 @@ abstract class Monster extends DungeonCharacter {
         this.myMaxHeal = theMaxHeal;
     }
 
-    abstract void heal();
+    public void heal(){
+        Random r = new Random();
+        int heal;
+        heal = r.nextInt(getMyMinHeal(), getMyMaxHeal()+1);
+        this.setMyHitPoints(this.getMyHitPoints() + heal);
+    }
 
     public double getMyHealChance() {
         return myHealChance;
     }
+
+    public int getMyMinHeal() { return myMinHeal; }
+
+    public int getMyMaxHeal() { return myMaxHeal; }
 
     public void setMyHealChance(double myHealChance) {
         this.myHealChance = myHealChance;

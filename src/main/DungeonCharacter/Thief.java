@@ -7,10 +7,10 @@ public class Thief extends Hero {
     }
 
     @Override
-    void specialSkill() {
+    void specialSkill(final DungeonCharacter theTarget) {
         // Surprise Attack: 40 percent chance it is successful.
-        // If it is successful, main.DungeonCharacter.Thief gets an attack and another turn (extra attack) in the current round.
-        // There is a 20 percent chance the main.DungeonCharacter.Thief is caught in which case no attack at all is rendered.
+        // If it is successful, Thief gets an attack and another turn (extra attack) in the current round.
+        // There is a 20 percent chance the Thief is caught in which case no attack at all is rendered.
         // The other 40 percent is just a normal attack.
 
     }
