@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Priestess extends Hero{
 
     public Priestess(String theName, int theHitPoints, int theMinDam, int theMaxDam, int theAttackSpeed, double theHitChance, double theBlockChance) {
@@ -11,8 +13,10 @@ public class Priestess extends Hero{
 
     @Override
     void specialSkill() {
-        // Heal: heals for [num] to [num] hit points
-
+        // Heal: heals for 10 to 20 hit points
+        Random r = new Random();
+        int healRoll = r.nextInt(11) + 10;
+        setMyHitPoints(Math.min(healRoll + myHitPoints, MAX_HEALTH));
     }
 }
 

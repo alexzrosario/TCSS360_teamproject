@@ -10,12 +10,8 @@ public class Ogre extends Monster{
 
     }*/
 
-    @Override
+    /*@Override
     void heal() {
-        Random r = new Random();
-        int healChanceRoll = r.nextInt(100) + 1;
-        if (healChanceRoll >= 100*(1-myHealChance)) {
-            int healRoll = r.nextInt(myMaxHeal - myMinHeal - 1) + myMinHeal;
-        }
-    }
+
+    }*/
 }

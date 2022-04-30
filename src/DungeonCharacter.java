@@ -7,10 +7,12 @@ abstract class DungeonCharacter {
     int myMaxDam;
     int myAttackSpeed;
     double myHitChance;
+    final int MAX_HEALTH;
 
     public DungeonCharacter(String theName, int theHitPoints, int theMinDam, int theMaxDam, int theAttackSpeed, double theHitChance) {
         this.myName = theName;
         this.myHitPoints = theHitPoints;
+        this.MAX_HEALTH = theHitPoints;
         this.myMinDam = theMinDam;
         this.myMaxDam = theMaxDam;
         this.myAttackSpeed = theAttackSpeed;

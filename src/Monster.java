@@ -1,3 +1,5 @@
+import java.util.Random;
+
 abstract class Monster extends DungeonCharacter{
     double myHealChance;
     int myMinHeal;
@@ -12,7 +14,14 @@ abstract class Monster extends DungeonCharacter{
 
     //abstract int attack();
 
-    abstract void heal();
+    void heal() {
+        Random r = new Random();
+        int healChanceRoll = r.nextInt(100) + 1;
+        if (healChanceRoll >= 100*(1-myHealChance)) {
+            int healRoll = r.nextInt(myMaxHeal - myMinHeal + 1) + myMinHeal;
+            setMyHitPoints(Math.min(healRoll + myHitPoints, MAX_HEALTH));
+        }
+    }
 
     public double getMyHealChance() {
         return myHealChance;

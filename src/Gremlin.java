@@ -8,8 +8,8 @@ public class Gremlin extends Monster{
 
     }*/
 
-    @Override
+    /*@Override
     void heal() {
 
-    }
+    }*/
 }

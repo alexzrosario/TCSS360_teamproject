@@ -8,8 +8,8 @@ public class Skeleton extends Monster{
 
     }*/
 
-    @Override
+    /*@Override
     void heal() {
 
-    }
+    }*/
 }
