@@ -15,8 +15,8 @@ public class Priestess extends Hero {
         Random r = new Random();
         int heal;
         heal = r.nextInt(25, 50+1);
-        if((getMyHitPoints() + heal) >= theTarget.getMyMaxHealth()){
-            theTarget.setMyHitPoints(theTarget.getMyMaxHealth());
+        if((getMyHitPoints() + heal) >= theTarget.getMY_MAX_HEALTH()){
+            theTarget.setMyHitPoints(theTarget.getMY_MAX_HEALTH());
         }else {
             theTarget.setMyHitPoints(getMyHitPoints() + heal);
         }

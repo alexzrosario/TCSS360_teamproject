@@ -10,13 +10,13 @@ abstract class DungeonCharacter {
     private int myAttackSpeed;
     private double myHitChance;
     private boolean myAlive = true; // alive by default
-    private final int myMaxHealth; //used for priestess heal
+    private final int MY_MAX_HEALTH; //used for priestess heal
 
     public DungeonCharacter(final String theName, final int theHitPoints, final int theMinDam,
                             final int theMaxDam, final int theAttackSpeed, final double theHitChance) {
         this.myName = theName;
         this.myHitPoints = theHitPoints;
-        this.myMaxHealth = theHitPoints;
+        this.MY_MAX_HEALTH = theHitPoints;
         this.myMinDam = theMinDam;
         this.myMaxDam = theMaxDam;
         this.myAttackSpeed = theAttackSpeed;
@@ -130,7 +130,7 @@ abstract class DungeonCharacter {
     public void setMyHitChance(final double myHitChance) {
         this.myHitChance = myHitChance;
     }
-    public int getMyMaxHealth() {
-        return myMaxHealth;
+    public int getMY_MAX_HEALTH() {
+        return MY_MAX_HEALTH;
     }
 }

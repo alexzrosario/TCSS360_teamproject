@@ -18,9 +18,9 @@ public class Main {
         System.out.println(hero.getMyAlive());
         */
 
-        System.out.println(enemy.getMyHitPoints());
-        hero.specialSkill(enemy);
-        System.out.println(enemy.getMyHitPoints());
+     //   System.out.println(enemy.getMyHitPoints());
+       // hero.specialSkill(enemy);
+        //System.out.println(enemy.getMyHitPoints());
 
         System.out.println(enemy.getMyHitPoints());
         hero.basicAttack(enemy);
