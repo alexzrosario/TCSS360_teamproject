@@ -9,7 +9,7 @@ abstract class DungeonCharacter {
     private int myMaxDam;
     private int myAttackSpeed;
     private double myHitChance;
-    private boolean myAlive= true; // alive by default
+    private boolean myAlive = true; // alive by default
     private final int myMaxHealth; //used for priestess heal
 
     public DungeonCharacter(final String theName, final int theHitPoints, final int theMinDam,
