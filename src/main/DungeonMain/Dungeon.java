@@ -26,7 +26,7 @@ public class Dungeon {
         int col = r.nextInt(5);
         startingRow = row;
         startingCol = col;
-        dungeon[row][col].isEntrance = true;
+        dungeon[row][col].hasEntrance = true;
         dungeon[row][col].hasHealPotion = false;
         dungeon[row][col].hasVisionPotion = false;
         dungeon[row][col].hasPit = false;
@@ -43,7 +43,7 @@ public class Dungeon {
         if (dungeon[row][col] == dungeon[startingRow][startingCol]) {
             setExit();
         } else {
-            dungeon[row][col].isExit = true;
+            dungeon[row][col].hasExit = true;
             dungeon[row][col].hasHealPotion = false;
             dungeon[row][col].hasVisionPotion = false;
             dungeon[row][col].hasPit = false;
@@ -55,7 +55,7 @@ public class Dungeon {
         while(pillarCount > 0) {
             int row = r.nextInt(5);
             int col = r.nextInt(5);
-            if(dungeon[row][col].hasPillar || dungeon[row][col].isEntrance || dungeon[row][col].isExit) {
+            if(dungeon[row][col].hasPillar || dungeon[row][col].hasEntrance || dungeon[row][col].hasExit) {
                 setPillars();
             } else {
                 dungeon[row][col].hasPillar = true;

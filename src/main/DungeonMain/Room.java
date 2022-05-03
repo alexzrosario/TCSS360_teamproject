@@ -14,8 +14,8 @@ public class Room {
     boolean hasHealPotion = false;
     boolean hasMonster = false;
     boolean hasPillar = false;
-    boolean isEntrance = false;
-    boolean isExit = true;
+    boolean hasEntrance = false;
+    boolean hasExit = true;
 
     public Room() {
         Random r = new Random();
