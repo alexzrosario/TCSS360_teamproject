@@ -1,20 +1,21 @@
 package main.DungeonCharacter;
 
+import java.util.Random;
+
 public class Priestess extends Hero {
 
-    public Priestess(String theName, int theHitPoints, int theMinDam, int theMaxDam, int theAttackSpeed, double theHitChance, double theBlockChance) {
+    public Priestess(final String theName) {
         super(theName, 75, 25, 45, 5, 0.7, 0.3);
     }
 
-    @Override
-    void attack() {
-
-    }
 
     @Override
-    void specialSkill() {
-        // Heal: heals for [num] to [num] hit points
-
+    void specialSkill(final DungeonCharacter theTarget) {
+        // Heal: heals for 25 to 50 hit points
+        Random r = new Random();
+        int heal;
+        heal = 25 + r.nextInt(50 - 25 + 1);
+        theTarget.setMyHitPoints(Math.min((getMyHitPoints() + heal), theTarget.getMY_MAX_HEALTH()));
     }
 }
 
