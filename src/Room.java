@@ -59,4 +59,116 @@ public class Room {
 
         return roomString;
     }
+
+    public Room getMyNorthRoom() {
+        return myNorthRoom;
+    }
+
+    public void setMyNorthRoom(Room myNorthRoom) {
+        this.myNorthRoom = myNorthRoom;
+    }
+
+    public Room getMyEastRoom() {
+        return myEastRoom;
+    }
+
+    public void setMyEastRoom(Room myEastRoom) {
+        this.myEastRoom = myEastRoom;
+    }
+
+    public Room getMySouthRoom() {
+        return mySouthRoom;
+    }
+
+    public void setMySouthRoom(Room mySouthRoom) {
+        this.mySouthRoom = mySouthRoom;
+    }
+
+    public Room getMyWestRoom() {
+        return myWestRoom;
+    }
+
+    public void setMyWestRoom(Room myWestRoom) {
+        this.myWestRoom = myWestRoom;
+    }
+
+    public boolean isHasMultipleItems() {
+        return hasMultipleItems;
+    }
+
+    public void setHasMultipleItems(boolean hasMultipleItems) {
+        this.hasMultipleItems = hasMultipleItems;
+    }
+
+    public boolean isHasPit() {
+        return hasPit;
+    }
+
+    public void setHasPit(boolean hasPit) {
+        this.hasPit = hasPit;
+    }
+
+    public boolean isHasVisionPotion() {
+        return hasVisionPotion;
+    }
+
+    public void setHasVisionPotion(boolean hasVisionPotion) {
+        this.hasVisionPotion = hasVisionPotion;
+    }
+
+    public boolean isHasHealPotion() {
+        return hasHealPotion;
+    }
+
+    public void setHasHealPotion(boolean hasHealPotion) {
+        this.hasHealPotion = hasHealPotion;
+    }
+
+    public boolean isHasAbstractionPillar() {
+        return hasAbstractionPillar;
+    }
+
+    public void setHasAbstractionPillar(boolean hasAbstractionPillar) {
+        this.hasAbstractionPillar = hasAbstractionPillar;
+    }
+
+    public boolean isHasEncapsulationPillar() {
+        return hasEncapsulationPillar;
+    }
+
+    public void setHasEncapsulationPillar(boolean hasEncapsulationPillar) {
+        this.hasEncapsulationPillar = hasEncapsulationPillar;
+    }
+
+    public boolean isHasInheritancePillar() {
+        return hasInheritancePillar;
+    }
+
+    public void setHasInheritancePillar(boolean hasInheritancePillar) {
+        this.hasInheritancePillar = hasInheritancePillar;
+    }
+
+    public boolean isHasPolymorphismPillar() {
+        return hasPolymorphismPillar;
+    }
+
+    public void setHasPolymorphismPillar(boolean hasPolymorphismPillar) {
+        this.hasPolymorphismPillar = hasPolymorphismPillar;
+    }
+
+    public boolean isEntrance() {
+        return isEntrance;
+    }
+
+    public void setEntrance(boolean entrance) {
+        isEntrance = entrance;
+    }
+
+    public boolean isExit() {
+        return isExit;
+    }
+
+    public void setExit(boolean exit) {
+        isExit = exit;
+    }
 }
