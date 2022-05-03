@@ -6,7 +6,7 @@ public class Room {
     Room myEastRoom;
     Room mySouthRoom;
     Room myWestRoom;
-    boolean hasMultipleItems = false;
+    //boolean hasMultipleItems = false;
     boolean hasPit = false;
     boolean hasVisionPotion = false;
     boolean hasHealPotion = false;
@@ -16,6 +16,7 @@ public class Room {
     boolean hasPolymorphismPillar = false;
     boolean isEntrance = false;
     boolean isExit = false;
+    String myStringToken = " ";
 
     public Room() {
         Random r = new Random();
@@ -24,22 +25,26 @@ public class Room {
         if (itemRoll == 1) {
             hasPit = true;
             items++;
+            myStringToken = "X";
         }
         itemRoll = r.nextInt(10) + 1; // Determining if the room will contain a vision potion
         if (itemRoll == 1) {
             hasVisionPotion = true;
             items++;
+            myStringToken = "V";
         }
         itemRoll = r.nextInt(10) + 1; // Determining if the room will contain a healing potion
         if (itemRoll == 1) {
             hasHealPotion = true;
             items++;
+            myStringToken = "H";
         }
-        if (items > 1) hasMultipleItems = true;
+        if (items > 1) {
+            myStringToken = "M";
+        }
     }
 
     public String toString() {
-        String centerValue = " ";
         String roomString = "";
         if (myNorthRoom != null) roomString += "*-*\n";
         else roomString += "***\n";
@@ -47,9 +52,7 @@ public class Room {
         if (myWestRoom != null) roomString += "|";
         else roomString += "*";
 
-        // insert block for center value
-        roomString += " ";
-        //
+        roomString += myStringToken;
 
         if (myEastRoom != null) roomString += "|\n";
         else roomString += "*\n";
@@ -92,13 +95,13 @@ public class Room {
         this.myWestRoom = myWestRoom;
     }
 
-    public boolean isHasMultipleItems() {
+    /*public boolean isHasMultipleItems() {
         return hasMultipleItems;
-    }
+    }*/
 
-    public void setHasMultipleItems(boolean hasMultipleItems) {
+    /*public void setHasMultipleItems(boolean hasMultipleItems) {
         this.hasMultipleItems = hasMultipleItems;
-    }
+    }*/
 
     public boolean isHasPit() {
         return hasPit;
@@ -170,5 +173,13 @@ public class Room {
 
     public void setExit(boolean exit) {
         isExit = exit;
+    }
+
+    public String getMyStringToken() {
+        return myStringToken;
+    }
+
+    public void setMyStringToken(String myStringToken) {
+        this.myStringToken = myStringToken;
     }
 }
