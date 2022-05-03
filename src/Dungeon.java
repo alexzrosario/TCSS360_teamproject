@@ -1,5 +1,5 @@
 public class Dungeon {
-    Room[] myRooms;
+    Room[][] myRooms;
     public Dungeon() {
 
     }

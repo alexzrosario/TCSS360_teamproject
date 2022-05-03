@@ -10,6 +10,12 @@ public class Room {
     boolean hasPit = false;
     boolean hasVisionPotion = false;
     boolean hasHealPotion = false;
+    boolean hasAbstractionPillar = false;
+    boolean hasEncapsulationPillar = false;
+    boolean hasInheritancePillar = false;
+    boolean hasPolymorphismPillar = false;
+    boolean isEntrance = false;
+    boolean isExit = false;
 
     public Room() {
         Random r = new Random();
