@@ -81,8 +81,6 @@ abstract class DungeonCharacter {
         return myAlive;
     }
 
-
-
     public String getMyName() {
         return myName;
     }
