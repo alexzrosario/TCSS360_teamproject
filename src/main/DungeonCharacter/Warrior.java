@@ -3,7 +3,7 @@ package main.DungeonCharacter;
 public class Warrior extends Hero {
 
     public Warrior(final String theName) {
-        super(theName, 125, 35, 60, 4, 0.8, 0.2);
+        super(theName, 125, 35, 60, 4, 0.8, 0.2, "WarriorImage.png");
     }
 
     @Override
