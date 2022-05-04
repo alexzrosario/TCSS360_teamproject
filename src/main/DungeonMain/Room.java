@@ -1,4 +1,4 @@
-package main;
+package main.DungeonMain;
 
 import java.sql.SQLOutput;
 import java.util.Random;
