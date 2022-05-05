@@ -6,8 +6,8 @@ public class Main {
 
     public static void main(String[] args) {
 	// write your code here
-        Priestess hero = new Priestess("Name");
-        Ogre enemy = new Ogre();
+        Thief hero = new Thief("Name");
+        Skeleton enemy = new Skeleton();
         /*
         System.out.println(hero.getMyName());
         System.out.println(hero.getMyHitPoints());
@@ -18,16 +18,16 @@ public class Main {
         System.out.println(hero.getMyAlive());
         */
 
-     //   System.out.println(enemy.getMyHitPoints());
-       // hero.specialSkill(enemy);
-        //System.out.println(enemy.getMyHitPoints());
-
+        System.out.println(enemy.getMyHitPoints());
+        hero.specialSkill(enemy);
+        System.out.println(enemy.getMyHitPoints());
+/*
         System.out.println(hero.getMyHitPoints());
         enemy.basicAttack(hero);
         System.out.println(hero.getMyHitPoints());
         hero.specialSkill(hero);
         System.out.println(hero.getMyHitPoints());
-
+*/
         /*
         System.out.println(hero.getMyHitPoints());
         enemy.basicAttack(hero);
