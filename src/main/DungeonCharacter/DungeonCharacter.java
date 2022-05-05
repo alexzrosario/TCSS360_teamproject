@@ -24,16 +24,10 @@ abstract class DungeonCharacter {
     }
     public void basicAttack(final DungeonCharacter theTarget){
         int attacks = 1;
-        if(this.getMyAttackSpeed() > theTarget.getMyAttackSpeed()){
-            if(this.getMyAttackSpeed() == 2 * theTarget.getMyAttackSpeed()){
-                attacks = 2;
-            } else if(this.getMyAttackSpeed() == 3 * theTarget.getMyAttackSpeed()){
-                attacks = 3;
-            }
-            for (int i = 0; i < attacks; i++) {
-                attackValue(theTarget);
-            }
-        } else {
+        if(this.getMyAttackSpeed() > theTarget.getMyAttackSpeed()) {
+            attacks = this.getMyAttackSpeed() / theTarget.getMyAttackSpeed();
+        }
+        for (int i = 0; i < attacks; i++) {
             attackValue(theTarget);
         }
     }
@@ -43,30 +37,34 @@ abstract class DungeonCharacter {
         int damageRoll = 0;
         if (Math.random() <= this.getMyHitChance()) {
             damageRoll = r.nextInt(this.getMyMinDam(), this.getMyMaxDam() + 1);
-        }
-        if (theTarget instanceof Hero) {
-            if (Math.random() <= ((Hero) theTarget).getMyBlockChance()) {
-                damageRoll = 0;
-                //for testing - block
-                System.out.println("Attack blocked by hero.");
-            } else {
-                theTarget.updateHealth(damageRoll);
-            }
-        }else if(theTarget instanceof Monster) {
-            if(Math.random() <= ((Monster) theTarget).getMyHealChance()){
-                damageRoll = 0;
-                //for testing - heal
-                System.out.println("Monster Healed.");
-                ((Monster) theTarget).heal();
-            }else{
-                theTarget.updateHealth(damageRoll);
-            }
-        }else{
-            theTarget.updateHealth(damageRoll);
+            damageCheck(damageRoll,theTarget);
         }
         //for testing - correct damage
         System.out.println(damageRoll);
         return damageRoll;
+    }
+
+    public void damageCheck(int theDamageRoll, final DungeonCharacter theTarget){
+        if (theTarget instanceof Hero) {
+            if (Math.random() <= ((Hero) theTarget).getMyBlockChance()) {
+                //for testing - block
+                System.out.println("Attack blocked by hero.");
+            } else {
+                theTarget.updateHealth(theDamageRoll);
+            }
+        }else if(theTarget instanceof Monster) {
+            if(Math.random() <= ((Monster) theTarget).getMyHealChance()){
+                //for testing - heal
+                theTarget.updateHealth(theDamageRoll);
+                System.out.println("Monster Healed.");
+
+                if(theTarget.getMyAlive()) { // if monster is alive
+                    ((Monster) theTarget).heal();
+                }
+            }else{
+                theTarget.updateHealth(theDamageRoll);
+            }
+        }
     }
 
     public void updateHealth(final int theDamage){

@@ -9,7 +9,6 @@ public class Warrior extends Hero {
     @Override
     public void specialSkill(final DungeonCharacter theTarget) {
         // Crushing Blow: does 75 to 175 points of damage but only has a 40% chance of succeeding
-
         //save current hit chance, min damage, max damage
         double currHitChance = this.getMyHitChance();
         int currMinDam = this.getMyMinDam();
@@ -20,8 +19,8 @@ public class Warrior extends Hero {
         this.setMyMinDam(75);
         this.setMyMaxDam(175);
 
-        //call attack
-        basicAttack(theTarget);
+        //call attack - attacks only once
+        attackValue(theTarget);
 
         //set values back
         this.setMyHitChance(currHitChance);
