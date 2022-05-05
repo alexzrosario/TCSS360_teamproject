@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
 	// write your code here
-        Warrior hero = new Warrior("Name");
+        Priestess hero = new Priestess("Name");
         Ogre enemy = new Ogre();
         /*
         System.out.println(hero.getMyName());
@@ -22,9 +22,11 @@ public class Main {
        // hero.specialSkill(enemy);
         //System.out.println(enemy.getMyHitPoints());
 
-        System.out.println(enemy.getMyHitPoints());
-        hero.basicAttack(enemy);
-        System.out.println(enemy.getMyHitPoints());
+        System.out.println(hero.getMyHitPoints());
+        enemy.basicAttack(hero);
+        System.out.println(hero.getMyHitPoints());
+        hero.specialSkill(hero);
+        System.out.println(hero.getMyHitPoints());
 
         /*
         System.out.println(hero.getMyHitPoints());

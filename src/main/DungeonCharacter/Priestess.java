@@ -10,7 +10,7 @@ public class Priestess extends Hero {
 
 
     @Override
-    void specialSkill(final DungeonCharacter theTarget) {
+    public void specialSkill(final DungeonCharacter theTarget) {
         // Heal: heals for 25 to 50 hit points
         Random r = new Random();
         int heal;
