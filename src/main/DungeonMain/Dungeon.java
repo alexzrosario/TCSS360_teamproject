@@ -18,8 +18,17 @@ public class Dungeon {
                 dungeon[row][col] = new Room();
             }
         }
+        setEntrance();
+        setExit();
+        setHeroStart();
+        setAbstractionPillar();
+        setEncapsulationPillar();
+        setInheritancePillar();
+        setPolymorphismPillar();
     }
-
+    public Room[][] getDungeon() {
+        return dungeon;
+    }
     public void setEntrance() {
         Random r = new Random();
         int row = r.nextInt(5);

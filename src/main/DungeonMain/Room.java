@@ -18,7 +18,7 @@ public class Room {
     boolean hasPolymorphismPillar = false;
     boolean isEntrance = false;
     boolean isExit = false;
-    String myStringToken = " ";
+    String myStringToken = "0";// empty
 
     public Room() {
         Random r = new Random();
@@ -60,7 +60,7 @@ public class Room {
         else roomString += "*\n";
 
         if (mySouthRoom != null) roomString += "*-*";
-        else roomString += "***";
+        else roomString += "***\n";
 
         return roomString;
     }
