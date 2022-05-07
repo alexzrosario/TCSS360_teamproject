@@ -14,11 +14,13 @@ abstract class Monster extends DungeonCharacter {
         this.myMaxHeal = theMaxHeal;
     }
 
-    public void heal(){
+    void heal() {
         Random r = new Random();
-        int heal;
-        heal = getMyMinHeal() + r.nextInt(getMyMaxHeal() - getMyMinHeal() + 1);
-        this.setMyHitPoints(this.getMyHitPoints() + heal);
+        int healChanceRoll = r.nextInt(100) + 1;
+        if (healChanceRoll >= 100 * (1 - myHealChance)) {
+            int healRoll = r.nextInt(myMaxHeal - myMinHeal + 1) + myMinHeal;
+            setMyHitPoints(Math.min(healRoll + getMyHitPoints(), getMY_MAX_HEALTH()));
+        }
     }
 
     public double getMyHealChance() {

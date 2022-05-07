@@ -18,6 +18,7 @@ public class Room {
     boolean hasPolymorphismPillar = false;
     boolean isEntrance = false;
     boolean isExit = false;
+    boolean isVisited = false;
     String myStringToken = " ";
 
     public Room() {
@@ -183,5 +184,13 @@ public class Room {
 
     public void setMyStringToken(String myStringToken) {
         this.myStringToken = myStringToken;
+    }
+
+    public boolean isVisited() {
+        return isVisited;
+    }
+
+    public void setVisited(boolean visited) {
+        isVisited = visited;
     }
 }

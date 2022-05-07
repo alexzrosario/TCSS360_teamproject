@@ -30,6 +30,7 @@ public class Dungeon {
         dungeon[row][col].setHasHealPotion(false);
         dungeon[row][col].setHasVisionPotion(false);
         dungeon[row][col].setHasPit(false);
+        dungeon[row][col].setMyStringToken("i");
     }
 
     public void setHeroStart() {
@@ -47,6 +48,7 @@ public class Dungeon {
             dungeon[row][col].setHasHealPotion(false);
             dungeon[row][col].setHasVisionPotion(false);
             dungeon[row][col].setHasPit(false);
+            dungeon[row][col].setMyStringToken("O");
         }
     }
 
@@ -60,6 +62,7 @@ public class Dungeon {
             setAbstractionPillar();
         } else {
             dungeon[row][col].setHasAbstractionPillar(true);
+            dungeon[row][col].setMyStringToken("A");
         }
     }
 
@@ -73,6 +76,7 @@ public class Dungeon {
             setInheritancePillar();
         } else {
             dungeon[row][col].setHasInheritancePillar(true);
+            dungeon[row][col].setMyStringToken("I");
         }
     }
 
@@ -86,6 +90,7 @@ public class Dungeon {
             setEncapsulationPillar();
         } else {
             dungeon[row][col].setHasEncapsulationPillar(true);
+            dungeon[row][col].setMyStringToken("E");
         }
     }
 
@@ -99,6 +104,7 @@ public class Dungeon {
             setPolymorphismPillar();
         } else {
             dungeon[row][col].setHasPolymorphismPillar(true);
+            dungeon[row][col].setMyStringToken("P");
         }
     }
 
