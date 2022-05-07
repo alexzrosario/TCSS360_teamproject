@@ -41,7 +41,7 @@ public class DungeonEXP {
         int currentCol = myStartingCol;
         int nextRow = myStartingRow;
         int nextCol = myStartingCol;
-        Room currentRoom = myDungeon[currentRow][currentCol];
+        myDungeon[currentRow][currentCol].setVisited();
 
         while (roomsVisited < myDungeonRows*myDungeonCols) {
             //Temporary
@@ -56,21 +56,30 @@ public class DungeonEXP {
                 myDungeon[currentRow][currentCol].setMyNorthRoom(myDungeon[nextRow][nextCol]);
                 currentRow = nextRow;
                 //currentRoom.setMyNorthRoom(myDungeon[nextRow][nextCol]);
-                if(!myDungeon[currentRow][currentCol].isVisited()) roomsVisited++;
+                if(!myDungeon[currentRow][currentCol].isVisited()) {
+                    myDungeon[currentRow][currentCol].setVisited();
+                    roomsVisited++;
+                }
             }
             else if(currentRow - 1 > -1 && direction == 2) {
                 nextRow = currentRow - 1;
                 myDungeon[currentRow][currentCol].setMySouthRoom(myDungeon[nextRow][nextCol]);
                 currentRow = nextRow;
                 //currentRoom.setMySouthRoom(myDungeon[nextRow][nextCol]);
-                if(!myDungeon[currentRow][currentCol].isVisited()) roomsVisited++;
+                if(!myDungeon[currentRow][currentCol].isVisited()) {
+                    myDungeon[currentRow][currentCol].setVisited();
+                    roomsVisited++;
+                }
             }
             else if(currentCol + 1 < myDungeonCols && direction == 3) {
                 nextCol = currentCol + 1;
                 myDungeon[currentRow][currentCol].setMyEastRoom(myDungeon[nextRow][nextCol]);
                 currentCol = nextCol;
                 //currentRoom.setMyEastRoom(myDungeon[nextRow][nextCol]);
-                if(!myDungeon[currentRow][currentCol].isVisited()) roomsVisited++;
+                if(!myDungeon[currentRow][currentCol].isVisited()) {
+                    myDungeon[currentRow][currentCol].setVisited();
+                    roomsVisited++;
+                }
             }
             else if(currentCol - 1 > -1 && direction == 4) {
                 nextCol = currentCol - 1;
@@ -78,7 +87,10 @@ public class DungeonEXP {
                 currentCol = nextCol;
                 //currentRoom.setMyWestRoom(myDungeon[nextRow][nextCol]);
                 //currentRoom = myDungeon[nextRow][nextCol];
-                if(!myDungeon[currentRow][currentCol].isVisited()) roomsVisited++;
+                if(!myDungeon[currentRow][currentCol].isVisited()) {
+                    myDungeon[currentRow][currentCol].setVisited();
+                    roomsVisited++;
+                }
             }
         }
         setExit(currentRow, currentCol);
