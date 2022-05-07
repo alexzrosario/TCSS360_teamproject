@@ -60,8 +60,8 @@ public class Room {
         if (myEastRoom != null) roomString += "|\n";
         else roomString += "*\n";
 
-        if (mySouthRoom != null) roomString += "*-*";
-        else roomString += "***";
+        if (mySouthRoom != null) roomString += "*-*\n";
+        else roomString += "***\n";
 
         return roomString;
     }
@@ -190,7 +190,7 @@ public class Room {
         return isVisited;
     }
 
-    public void setVisited(boolean visited) {
-        isVisited = visited;
+    public void setVisited() {
+        isVisited = true;
     }
 }
