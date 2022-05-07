@@ -1,5 +1,6 @@
 package main.DungeonCharacter;
 
+
 import java.util.Random;
 
 abstract class DungeonCharacter {
