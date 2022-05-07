@@ -56,7 +56,7 @@ public class DungeonEXP {
                 myDungeon[currentRow][currentCol].setMyWestRoom(myDungeon[nextRow][nextCol]);
                 currentRow = nextRow;
                 //currentRoom.setMyNorthRoom(myDungeon[nextRow][nextCol]);
-                if(myDungeon[currentRow][currentCol].isVisited()) roomsVisited++;
+                if(!myDungeon[currentRow][currentCol].isVisited()) roomsVisited++;
             }
             else if(currentRow - 1 > -1 && direction == 2) {
                 nextRow = currentRow - 1;
