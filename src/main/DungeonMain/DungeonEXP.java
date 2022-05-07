@@ -21,6 +21,8 @@ public class DungeonEXP {
         myDungeonRows = 5;
         myDungeonCols = 5;
         myDungeon = new Room[myDungeonRows][myDungeonCols];
+        buildDungeonArray();
+        generateDungeon();
     }
 
     public void buildDungeonArray() {
@@ -51,24 +53,32 @@ public class DungeonEXP {
             //4 - WEST
             if(currentRow + 1 < myDungeonRows && direction == 1) {
                 nextRow = currentRow + 1;
-                currentRoom.setMyNorthRoom(myDungeon[nextRow][nextCol]);
-                if(currentRoom.isVisited()) roomsVisited++;
+                myDungeon[currentRow][currentCol].setMyWestRoom(myDungeon[nextRow][nextCol]);
+                currentRow = nextRow;
+                //currentRoom.setMyNorthRoom(myDungeon[nextRow][nextCol]);
+                if(myDungeon[currentRow][currentCol].isVisited()) roomsVisited++;
             }
             else if(currentRow - 1 > -1 && direction == 2) {
                 nextRow = currentRow - 1;
-                currentRoom.setMySouthRoom(myDungeon[nextRow][nextCol]);
-                if(currentRoom.isVisited()) roomsVisited++;
+                myDungeon[currentRow][currentCol].setMyWestRoom(myDungeon[nextRow][nextCol]);
+                currentRow = nextRow;
+                //currentRoom.setMySouthRoom(myDungeon[nextRow][nextCol]);
+                if(!myDungeon[currentRow][currentCol].isVisited()) roomsVisited++;
             }
             else if(currentCol + 1 < myDungeonCols && direction == 3) {
                 nextCol = currentCol + 1;
-                currentRoom.setMyEastRoom(myDungeon[nextRow][nextCol]);
-                if(currentRoom.isVisited()) roomsVisited++;
+                myDungeon[currentRow][currentCol].setMyWestRoom(myDungeon[nextRow][nextCol]);
+                currentCol = nextCol;
+                //currentRoom.setMyEastRoom(myDungeon[nextRow][nextCol]);
+                if(!myDungeon[currentRow][currentCol].isVisited()) roomsVisited++;
             }
             else if(currentCol - 1 > -1 && direction == 4) {
                 nextCol = currentCol - 1;
-                currentRoom.setMyWestRoom(myDungeon[nextRow][nextCol]);
-                currentRoom = myDungeon[nextRow][nextCol];
-                if(currentRoom.isVisited()) roomsVisited++;
+                myDungeon[currentRow][currentCol].setMyWestRoom(myDungeon[nextRow][nextCol]);
+                currentCol = nextCol;
+                //currentRoom.setMyWestRoom(myDungeon[nextRow][nextCol]);
+                //currentRoom = myDungeon[nextRow][nextCol];
+                if(!myDungeon[currentRow][currentCol].isVisited()) roomsVisited++;
             }
         }
         setExit(currentRow, currentCol);
@@ -93,6 +103,17 @@ public class DungeonEXP {
         myDungeon[row][col].setHasVisionPotion(false);
         myDungeon[row][col].setHasPit(false);
         myDungeon[row][col].setMyStringToken("O");
+    }
+
+    public String toString() {
+        String s = "";
+        for(int row = 0; row < myDungeonRows; row++) {
+            for(int col = 0; col < myDungeonCols; col++) {
+                s += myDungeon[row][col].toString();
+            }
+            s += "\n";
+        }
+        return s;
     }
 
 }

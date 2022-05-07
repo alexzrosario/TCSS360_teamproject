@@ -1,13 +1,16 @@
 package main;
 
 import main.DungeonCharacter.*;
+import main.DungeonMain.DungeonEXP;
 
 public class Main {
 
     public static void main(String[] args) {
+        DungeonEXP d = new DungeonEXP();
+        System.out.println(d.toString());
 	// write your code here
-        Thief hero = new Thief("Name");
-        Skeleton enemy = new Skeleton();
+        //Thief hero = new Thief("Name");
+        //Skeleton enemy = new Skeleton();
         /*
         System.out.println(hero.getMyName());
         System.out.println(hero.getMyHitPoints());
@@ -18,9 +21,9 @@ public class Main {
         System.out.println(hero.getMyAlive());
         */
 
-        System.out.println(enemy.getMyHitPoints());
-        hero.specialSkill(enemy);
-        System.out.println(enemy.getMyHitPoints());
+        //System.out.println(enemy.getMyHitPoints());
+        //hero.specialSkill(enemy);
+        //System.out.println(enemy.getMyHitPoints());
 /*
         System.out.println(hero.getMyHitPoints());
         enemy.basicAttack(hero);
