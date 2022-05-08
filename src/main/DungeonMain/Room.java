@@ -19,6 +19,7 @@ public class Room {
     boolean isEntrance = false;
     boolean isExit = false;
     boolean isVisited = false;
+    boolean isBuilt = false;
     String myStringToken = " ";
 
     public Room() {
@@ -192,5 +193,13 @@ public class Room {
 
     public void setVisited() {
         isVisited = true;
+    }
+
+    public boolean isBuilt() {
+        return isBuilt;
+    }
+
+    public void setBuilt() {
+        isBuilt = true;
     }
 }
