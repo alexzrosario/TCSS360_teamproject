@@ -11,9 +11,9 @@ public class DungeonEXP {
     private int myStartingCol;
     private final Random r = new Random();
 
-    public DungeonEXP() {
-        myDungeonRows = 5;
-        myDungeonCols = 5;
+    public DungeonEXP(int theDungeonRows, int theDungeonCols) {
+        myDungeonRows = theDungeonRows;
+        myDungeonCols = theDungeonCols;
         myDungeon = new Room[myDungeonRows][myDungeonCols];
         buildDungeonArray();
         generateDungeon();
@@ -30,13 +30,15 @@ public class DungeonEXP {
     public void generateDungeon() {
         int roomsBuilt = 1;
         myStartingRow = r.nextInt(myDungeonRows);
-        myStartingRow = r.nextInt(myDungeonCols);
+        myStartingCol = r.nextInt(myDungeonCols);
+        myHeroPosition = myDungeon[myStartingRow][myStartingCol];
         setEntrance(myStartingRow, myStartingCol);
         int currentRow = myStartingRow;
         int currentCol = myStartingCol;
         int nextRow = myStartingRow;
         int nextCol = myStartingCol;
         myDungeon[currentRow][currentCol].setBuilt();
+        myDungeon[currentRow][currentCol].setVisited();
         String[] directions = {"NORTH", "SOUTH", "EAST", "WEST"};
 
         while (roomsBuilt < myDungeonRows*myDungeonCols) {

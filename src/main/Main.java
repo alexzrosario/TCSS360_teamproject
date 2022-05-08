@@ -6,7 +6,7 @@ import main.DungeonMain.DungeonEXP;
 public class Main {
 
     public static void main(String[] args) {
-        DungeonEXP d = new DungeonEXP();
+        DungeonEXP d = new DungeonEXP(5, 5);
         System.out.println(d.toString());
 	// write your code here
         //Thief hero = new Thief("Name");
