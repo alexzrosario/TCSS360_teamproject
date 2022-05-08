@@ -1,12 +1,11 @@
 package main;
+import main.DungeonMain.Dungeon;
 
-import main.DungeonCharacter.*;
-import main.DungeonMain.DungeonEXP;
 
 public class Main {
 
     public static void main(String[] args) {
-        DungeonEXP d = new DungeonEXP();
+        Dungeon d = new Dungeon();
         System.out.println(d.toString());
 	// write your code here
         //Thief hero = new Thief("Name");

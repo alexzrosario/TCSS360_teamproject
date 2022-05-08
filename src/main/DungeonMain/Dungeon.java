@@ -7,19 +7,86 @@ public class Dungeon {
     private Room heroPosition;
     private int startingRow;
     private int startingCol;
+    private int myDungeonRows;
+    private int myDungeonCols;
 
     public Dungeon() {
-        dungeon = new Room[5][5];
+        myDungeonRows = 5;
+        myDungeonCols = 5;
+        dungeon = new Room[myDungeonRows][myDungeonCols];
+        buildDungeonArray();
+        generateDungeon();
     }
 
-    public void generateDungeon() {
+    public void buildDungeonArray() {
         for(int row = 0; row < dungeon.length; row++) {
             for(int col = 0; col < dungeon.length; col++) {
                 dungeon[row][col] = new Room();
             }
         }
     }
+    public void generateDungeon() {
+        Random r = new Random();
+        int roomsVisited = 1;
+        setEntrance();
+        int currentRow = startingRow;
+        int currentCol = startingCol;
+        int nextRow = startingRow;
+        int nextCol = startingCol;
+        dungeon[currentRow][currentCol].setVisited();
 
+        while (roomsVisited < myDungeonRows*myDungeonCols) {
+            //Temporary
+            //Change later
+            int direction = r.nextInt(4) + 1;
+            //1 - NORTH
+            //2 - SOUTH
+            //3 - EAST
+            //4 - WEST
+            if(currentRow + 1 < myDungeonRows && direction == 1) {
+                nextRow = currentRow + 1;
+                dungeon[currentRow][currentCol].setMyNorthRoom(dungeon[nextRow][nextCol]);
+                currentRow = nextRow;
+                //currentRoom.setMyNorthRoom(myDungeon[nextRow][nextCol]);
+                if(!dungeon[currentRow][currentCol].isVisited()) {
+                    dungeon[currentRow][currentCol].setVisited();
+                    roomsVisited++;
+                }
+            }
+            else if(currentRow - 1 > -1 && direction == 2) {
+                nextRow = currentRow - 1;
+                dungeon[currentRow][currentCol].setMySouthRoom(dungeon[nextRow][nextCol]);
+                currentRow = nextRow;
+                //currentRoom.setMySouthRoom(myDungeon[nextRow][nextCol]);
+                if(!dungeon[currentRow][currentCol].isVisited()) {
+                    dungeon[currentRow][currentCol].setVisited();
+                    roomsVisited++;
+                }
+            }
+            else if(currentCol + 1 < myDungeonCols && direction == 3) {
+                nextCol = currentCol + 1;
+                dungeon[currentRow][currentCol].setMyEastRoom(dungeon[nextRow][nextCol]);
+                currentCol = nextCol;
+                //currentRoom.setMyEastRoom(myDungeon[nextRow][nextCol]);
+                if(!dungeon[currentRow][currentCol].isVisited()) {
+                    dungeon[currentRow][currentCol].setVisited();
+                    roomsVisited++;
+                }
+            }
+            else if(currentCol - 1 > -1 && direction == 4) {
+                nextCol = currentCol - 1;
+                dungeon[currentRow][currentCol].setMyWestRoom(dungeon[nextRow][nextCol]);
+                currentCol = nextCol;
+                //currentRoom.setMyWestRoom(myDungeon[nextRow][nextCol]);
+                //currentRoom = myDungeon[nextRow][nextCol];
+                if(!dungeon[currentRow][currentCol].isVisited()) {
+                    dungeon[currentRow][currentCol].setVisited();
+                    roomsVisited++;
+                }
+            }
+        }
+        setExit();
+    }
     public void setEntrance() {
         Random r = new Random();
         int row = r.nextInt(5);
@@ -113,6 +180,14 @@ public class Dungeon {
     }
 
     public String toString() {
-        return "";
+        StringBuilder s = new StringBuilder();
+
+        for(int i = 0; i < dungeon.length; i++) {
+            s.append("\n");
+            for(int j = 0; j < dungeon[i].length; j++) {
+                s.append(dungeon[i][j].toString());
+            }
+        }
+        return s.toString();
     }
 }
