@@ -59,6 +59,8 @@ public class Room {
             else if (monsterRoll == 1) setMyMonster(new Gremlin());
             else setMyMonster(new Skeleton());
             setHasMonster(true);
+
+            myStringToken = "m"; // temp string token to indicate if a monster exists in the room
         }
     }
 
