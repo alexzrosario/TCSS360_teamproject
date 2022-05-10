@@ -1,27 +1,15 @@
 package main;
 
-import main.DungeonCharacter.*;
 import main.DungeonMain.Dungeon;
-import main.DungeonMain.Room;
 
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
-        Dungeon d = new Dungeon();
-        d.generateDungeon();
-        Room[][] dungeon = d.getDungeon();
-        for (int i = 0; i < 5; i++) {
-            System.out.println();
-            for (int j = 0; j < 5; j++) {
-                System.out.print(dungeon[i][j].getMyStringToken());
-                System.out.println(dungeon[i][j].toString());
-            }
-
-        }
-
+        Dungeon d = new Dungeon(5, 5);
+        System.out.println(d.toString());
+	    // write your code here
         //Thief hero = new Thief("Name");
-       // Skeleton enemy = new Skeleton();
+        //Skeleton enemy = new Skeleton();
         /*
         System.out.println(hero.getMyName());
         System.out.println(hero.getMyHitPoints());
