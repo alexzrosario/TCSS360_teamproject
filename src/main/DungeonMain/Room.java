@@ -1,5 +1,10 @@
 package main.DungeonMain;
 
+import main.DungeonCharacter.Gremlin;
+import main.DungeonCharacter.Monster;
+import main.DungeonCharacter.Ogre;
+import main.DungeonCharacter.Skeleton;
+
 import java.sql.SQLOutput;
 import java.util.Random;
 
@@ -8,7 +13,6 @@ public class Room {
     Room myEastRoom;
     Room mySouthRoom;
     Room myWestRoom;
-    //boolean hasMultipleItems = false;
     boolean hasPit = false;
     boolean hasVisionPotion = false;
     boolean hasHealPotion = false;
@@ -18,7 +22,11 @@ public class Room {
     boolean hasPolymorphismPillar = false;
     boolean isEntrance = false;
     boolean isExit = false;
-    String myStringToken = "0";// empty
+    boolean isVisited = false;
+    boolean isBuilt = false;
+    boolean hasMonster = false;
+    Monster myMonster;
+    String myStringToken = " ";
 
     public Room() {
         Random r = new Random();
@@ -44,6 +52,16 @@ public class Room {
         if (items > 1) {
             myStringToken = "M";
         }
+        // Determining if the room contains a monster, and randomly decides which monster to use
+        if (Math.random() < 0.25) {
+            int monsterRoll = r.nextInt(3);
+            if (monsterRoll == 0) setMyMonster(new Ogre());
+            else if (monsterRoll == 1) setMyMonster(new Gremlin());
+            else setMyMonster(new Skeleton());
+            setHasMonster(true);
+
+            myStringToken = "m"; // temp string token to indicate if a monster exists in the room
+        }
     }
 
     public String toString() {
@@ -59,7 +77,7 @@ public class Room {
         if (myEastRoom != null) roomString += "|\n";
         else roomString += "*\n";
 
-        if (mySouthRoom != null) roomString += "*-*";
+        if (mySouthRoom != null) roomString += "*-*\n";
         else roomString += "***\n";
 
         return roomString;
@@ -96,14 +114,6 @@ public class Room {
     public void setMyWestRoom(Room myWestRoom) {
         this.myWestRoom = myWestRoom;
     }
-
-    /*public boolean isHasMultipleItems() {
-        return hasMultipleItems;
-    }*/
-
-    /*public void setHasMultipleItems(boolean hasMultipleItems) {
-        this.hasMultipleItems = hasMultipleItems;
-    }*/
 
     public boolean isHasPit() {
         return hasPit;
@@ -183,5 +193,37 @@ public class Room {
 
     public void setMyStringToken(String myStringToken) {
         this.myStringToken = myStringToken;
+    }
+
+    public boolean isVisited() {
+        return isVisited;
+    }
+
+    public void setVisited() {
+        isVisited = true;
+    }
+
+    public boolean isBuilt() {
+        return isBuilt;
+    }
+
+    public void setBuilt() {
+        isBuilt = true;
+    }
+
+    public boolean isHasMonster() {
+        return hasMonster;
+    }
+
+    public void setHasMonster(boolean hasMonster) {
+        this.hasMonster = hasMonster;
+    }
+
+    public Monster getMyMonster() {
+        return myMonster;
+    }
+
+    public void setMyMonster(Monster myMonster) {
+        this.myMonster = myMonster;
     }
 }

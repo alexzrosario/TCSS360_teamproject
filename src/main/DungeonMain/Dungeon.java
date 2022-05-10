@@ -3,125 +3,170 @@ package main.DungeonMain;
 import java.util.Random;
 
 public class Dungeon {
-    private Room[][] dungeon;
-    private Room heroPosition;
-    private int startingRow;
-    private int startingCol;
+    private Room[][] myDungeon;
+    //private Room myHeroPosition;
+    private int myHeroRow;
+    private int myHeroCol;
+    private int myDungeonRows;
+    private int myDungeonCols;
+    private int myStartingRow;
+    private int myStartingCol;
+    private final Random r = new Random();
 
-    public Dungeon() {
-        dungeon = new Room[5][5];
+    public Dungeon(int theDungeonRows, int theDungeonCols) {
+        myDungeonRows = theDungeonRows;
+        myDungeonCols = theDungeonCols;
+        myDungeon = new Room[myDungeonRows][myDungeonCols];
+        buildDungeonArray();
+        generateDungeon();
+    }
+
+    public void buildDungeonArray() {
+        for(int row = 0; row < myDungeonRows; row++) {
+            for(int col = 0; col < myDungeonCols; col++) {
+                myDungeon[row][col] = new Room();
+            }
+        }
     }
 
     public void generateDungeon() {
-        for(int row = 0; row < dungeon.length; row++) {
-            for(int col = 0; col < dungeon.length; col++) {
-                dungeon[row][col] = new Room();
+        int roomsBuilt = 1;
+        myStartingRow = r.nextInt(myDungeonRows);
+        myStartingCol = r.nextInt(myDungeonCols);
+        myHeroRow = myStartingRow;
+        myHeroCol = myStartingCol;
+        //myHeroPosition = myDungeon[myStartingRow][myStartingCol];
+        setEntrance(myStartingRow, myStartingCol);
+        int currentRow = myStartingRow;
+        int currentCol = myStartingCol;
+        int nextRow = myStartingRow;
+        int nextCol = myStartingCol;
+        myDungeon[currentRow][currentCol].setBuilt();
+        myDungeon[currentRow][currentCol].setVisited();
+        String[] directions = {"NORTH", "SOUTH", "EAST", "WEST"};
+
+        while (roomsBuilt < myDungeonRows*myDungeonCols) {
+            String direction = directions[r.nextInt(4)];
+            if(currentRow < myDungeonRows - 1 && direction.equals("SOUTH")) {
+                nextRow = currentRow + 1;
+                myDungeon[currentRow][currentCol].setMySouthRoom(myDungeon[nextRow][nextCol]);
+                myDungeon[nextRow][nextCol].setMyNorthRoom(myDungeon[currentRow][currentCol]);
+                currentRow = nextRow;
+                roomsBuilt += checkBuilt(myDungeon[currentRow][currentCol]);
+            }
+            else if(currentRow > 0 && direction.equals("NORTH")) {
+                nextRow = currentRow - 1;
+                myDungeon[currentRow][currentCol].setMyNorthRoom(myDungeon[nextRow][nextCol]);
+                myDungeon[nextRow][nextCol].setMySouthRoom(myDungeon[currentRow][currentCol]);
+                currentRow = nextRow;
+                roomsBuilt += checkBuilt(myDungeon[currentRow][currentCol]);
+            }
+            else if(currentCol < myDungeonCols - 1 && direction.equals("EAST")) {
+                nextCol = currentCol + 1;
+                myDungeon[currentRow][currentCol].setMyEastRoom(myDungeon[nextRow][nextCol]);
+                myDungeon[nextRow][nextCol].setMyWestRoom(myDungeon[currentRow][currentCol]);
+                currentCol = nextCol;
+                roomsBuilt += checkBuilt(myDungeon[currentRow][currentCol]);
+            }
+            else if(currentCol > 0 && direction.equals("WEST")) {
+                nextCol = currentCol - 1;
+                myDungeon[currentRow][currentCol].setMyWestRoom(myDungeon[nextRow][nextCol]);
+                myDungeon[nextRow][nextCol].setMyEastRoom(myDungeon[currentRow][currentCol]);
+                currentCol = nextCol;
+                roomsBuilt += checkBuilt(myDungeon[currentRow][currentCol]);
             }
         }
-        setEntrance();
-        setExit();
-        setHeroStart();
-        setAbstractionPillar();
-        setEncapsulationPillar();
-        setInheritancePillar();
-        setPolymorphismPillar();
-    }
-    public Room[][] getDungeon() {
-        return dungeon;
-    }
-    public void setEntrance() {
-        Random r = new Random();
-        int row = r.nextInt(5);
-        int col = r.nextInt(5);
-        startingRow = row;
-        startingCol = col;
-        dungeon[row][col].setEntrance(true);
-        dungeon[row][col].setHasHealPotion(false);
-        dungeon[row][col].setHasVisionPotion(false);
-        dungeon[row][col].setHasPit(false);
-        dungeon[row][col].setMyStringToken("i");
+        setExit(currentRow, currentCol);
+        setAbstractionPillar(r.nextInt(myDungeonRows), r.nextInt(myDungeonCols));
+        setEncapsulationPillar(r.nextInt(myDungeonRows), r.nextInt(myDungeonCols));
+        setInheritancePillar(r.nextInt(myDungeonRows), r.nextInt(myDungeonCols));
+        setPolymorphismPillar(r.nextInt(myDungeonRows), r.nextInt(myDungeonCols));
     }
 
-    public void setHeroStart() {
-        heroPosition = dungeon[startingRow][startingCol];
+    public void setEntrance(int row, int col) {
+        myDungeon[row][col].setEntrance(true);
+        disableItems(row, col);
+        myDungeon[row][col].setMyStringToken("i");
     }
 
-    public void setExit() {
-        Random r = new Random();
-        int row = r.nextInt(5);
-        int col = r.nextInt(5);
-        if (dungeon[row][col] == dungeon[startingRow][startingCol]) {
-            setExit();
+    public void setExit(int row, int col) {
+        myDungeon[row][col].setExit(true);
+        disableItems(row, col);
+        myDungeon[row][col].setMyStringToken("O");
+    }
+
+    public void setAbstractionPillar(int row, int col) {
+        if(myDungeon[row][col].isEntrance() || myDungeon[row][col].isExit() ||
+                myDungeon[row][col].isHasEncapsulationPillar() || myDungeon[row][col].isHasInheritancePillar() ||
+                myDungeon[row][col].isHasPolymorphismPillar()) {
+            setAbstractionPillar(r.nextInt(myDungeonRows), r.nextInt(myDungeonCols));
         } else {
-            dungeon[row][col].setExit(true);
-            dungeon[row][col].setHasHealPotion(false);
-            dungeon[row][col].setHasVisionPotion(false);
-            dungeon[row][col].setHasPit(false);
-            dungeon[row][col].setMyStringToken("O");
+            myDungeon[row][col].setHasAbstractionPillar(true);
+            myDungeon[row][col].setMyStringToken("A");
         }
     }
 
-    public void setAbstractionPillar() {
-        Random r = new Random();
-        int row = r.nextInt(5);
-        int col = r.nextInt(5);
-        if(dungeon[row][col].isEntrance() || dungeon[row][col].isExit() ||
-                dungeon[row][col].isHasEncapsulationPillar() || dungeon[row][col].isHasInheritancePillar() ||
-                dungeon[row][col].isHasPolymorphismPillar()) {
-            setAbstractionPillar();
+    public void setInheritancePillar(int row, int col) {
+        if(myDungeon[row][col].isEntrance() || myDungeon[row][col].isExit() ||
+                myDungeon[row][col].isHasEncapsulationPillar() || myDungeon[row][col].isHasAbstractionPillar() ||
+                myDungeon[row][col].isHasPolymorphismPillar()) {
+            setInheritancePillar(r.nextInt(myDungeonRows), r.nextInt(myDungeonCols));
         } else {
-            dungeon[row][col].setHasAbstractionPillar(true);
-            dungeon[row][col].setMyStringToken("A");
+            myDungeon[row][col].setHasInheritancePillar(true);
+            myDungeon[row][col].setMyStringToken("I");
         }
     }
 
-    public void setInheritancePillar() {
-        Random r = new Random();
-        int row = r.nextInt(5);
-        int col = r.nextInt(5);
-        if(dungeon[row][col].isEntrance() || dungeon[row][col].isExit() ||
-                dungeon[row][col].isHasEncapsulationPillar() || dungeon[row][col].isHasAbstractionPillar() ||
-                dungeon[row][col].isHasPolymorphismPillar()) {
-            setInheritancePillar();
+    public void setEncapsulationPillar(int row, int col) {
+        if(myDungeon[row][col].isEntrance() || myDungeon[row][col].isExit() ||
+                myDungeon[row][col].isHasAbstractionPillar() || myDungeon[row][col].isHasInheritancePillar() ||
+                myDungeon[row][col].isHasPolymorphismPillar()) {
+            setEncapsulationPillar(r.nextInt(myDungeonRows), r.nextInt(myDungeonCols));
         } else {
-            dungeon[row][col].setHasInheritancePillar(true);
-            dungeon[row][col].setMyStringToken("I");
+            myDungeon[row][col].setHasEncapsulationPillar(true);
+            myDungeon[row][col].setMyStringToken("E");
         }
     }
 
-    public void setEncapsulationPillar() {
-        Random r = new Random();
-        int row = r.nextInt(5);
-        int col = r.nextInt(5);
-        if(dungeon[row][col].isEntrance() || dungeon[row][col].isExit() ||
-                dungeon[row][col].isHasAbstractionPillar() || dungeon[row][col].isHasInheritancePillar() ||
-                dungeon[row][col].isHasPolymorphismPillar()) {
-            setEncapsulationPillar();
+    public void setPolymorphismPillar(int row, int col) {
+        if(myDungeon[row][col].isEntrance() || myDungeon[row][col].isExit() ||
+                myDungeon[row][col].isHasEncapsulationPillar() || myDungeon[row][col].isHasInheritancePillar() ||
+                myDungeon[row][col].isHasAbstractionPillar()) {
+            setPolymorphismPillar(r.nextInt(myDungeonRows), r.nextInt(myDungeonCols));
         } else {
-            dungeon[row][col].setHasEncapsulationPillar(true);
-            dungeon[row][col].setMyStringToken("E");
+            myDungeon[row][col].setHasPolymorphismPillar(true);
+            myDungeon[row][col].setMyStringToken("P");
         }
     }
 
-    public void setPolymorphismPillar() {
-        Random r = new Random();
-        int row = r.nextInt(5);
-        int col = r.nextInt(5);
-        if(dungeon[row][col].isEntrance() || dungeon[row][col].isExit() ||
-                dungeon[row][col].isHasEncapsulationPillar() || dungeon[row][col].isHasInheritancePillar() ||
-                dungeon[row][col].isHasAbstractionPillar()) {
-            setPolymorphismPillar();
-        } else {
-            dungeon[row][col].setHasPolymorphismPillar(true);
-            dungeon[row][col].setMyStringToken("P");
+    public int checkBuilt(Room theRoom) {
+        if (!theRoom.isBuilt()) {
+            theRoom.setBuilt();
+            return 1;
         }
+        else return 0;
     }
 
-    public void setMonsters() {
+    public void disableItems(int row, int col) {
+        myDungeon[row][col].setHasHealPotion(false);
+        myDungeon[row][col].setHasVisionPotion(false);
+        myDungeon[row][col].setHasPit(false);
+    }
 
+    public void moveHero(int rowDirection, int colDirection) {
+        myHeroRow += rowDirection;
+        myHeroCol += colDirection;
     }
 
     public String toString() {
-        return "";
+        String s = "";
+        for(int row = 0; row < myDungeonRows; row++) {
+            for(int col = 0; col < myDungeonCols; col++) {
+                //s += "Row: " + row + " --- Col: " + col + "\n";
+                s += myDungeon[row][col].toString();
+            }
+            s += "\n";
+        }
+        return s;
     }
 }

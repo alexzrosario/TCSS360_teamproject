@@ -1,10 +1,14 @@
 package main.DungeonGUI;
 
+import main.DungeonCharacter.*;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Handler;
+import java.util.Objects;
 
 public class DungeonUI {
     JFrame window;
@@ -13,6 +17,7 @@ public class DungeonUI {
     JPanel gameTitlePanel;
     JPanel gameStartPanel;
     JPanel heroSelectPanel;
+    JPanel nameInputPanel;
 
     JLabel gameTitleLabel;
     JLabel heroSelectLabel;
@@ -20,12 +25,20 @@ public class DungeonUI {
     JButton gameStartButton;
     JButton heroSelectButton;
 
+    JTextField nameInputBox;
+    JButton nameSubmitButton;
+    JLabel nameInputLabel;
+    JComboBox<String> choices;
+
     Font gameTitleFont;
     Font regularFont = new Font("Times New Roman", Font.PLAIN, 20);
 
-    final String[] heroes = {"Warrior", "Priestess", "Thief"};
+    final String[] heroes = {"None","Warrior", "Priestess", "Thief"};
+    String name = "";
+    DungeonCharacter player;
+    String userClass = "";
 
-    public void DungeonUI(DungeonGame.Choices handleChoice) {
+    public void DungeonUI(DungeonGame.ChoiceController handleChoice) {
 
         try {
             gameTitleFont = Font.createFont(Font.TRUETYPE_FONT, new File("Antique Quest St.ttf")).deriveFont(40f);
@@ -37,6 +50,11 @@ public class DungeonUI {
 
         window = new JFrame();
         window.setSize(800, 600);
+
+        //puts frame in middle of screen
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        window.setLocation(dim.width / 2 - window.getSize().width / 2, dim.height / 2 - window.getSize().height / 2);
+
         window.getContentPane().setBackground(Color.WHITE);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLayout(null);
@@ -66,27 +84,64 @@ public class DungeonUI {
         gameStartPanel.add(gameStartButton);
         container.add(gameStartPanel);
 
+        //Name Input
+        nameInputPanel = new JPanel();
+        nameInputPanel.setBounds(150, 25, 500, 300);
+        nameInputPanel.setBackground(Color.BLACK);
+        nameInputLabel = new JLabel("Enter your Hero's name:");
+        nameInputLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        nameInputBox = new JTextField(10);
+        nameInputBox.addActionListener(e -> name = nameInputBox.getText());
+        nameSubmitButton = new JButton();
+        nameSubmitButton.setBackground(Color.BLACK);
+        nameSubmitButton.setForeground(Color.WHITE);
+        nameSubmitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        nameSubmitButton.addActionListener(handleChoice);
+        nameSubmitButton.setActionCommand("name");
+
+
+        nameInputPanel.add(nameInputLabel);
+        nameInputPanel.add(nameInputBox);
+        nameInputPanel.add(nameSubmitButton);
+        container.add(nameInputPanel);
+        nameInputPanel.setVisible(false);
+
         //Hero Selection
         heroSelectPanel = new JPanel();
         heroSelectPanel.setLayout(new BoxLayout(heroSelectPanel, BoxLayout.Y_AXIS));
-        heroSelectPanel.setBounds(150, 25, 500, 150);
+        heroSelectPanel.setBounds(150, 25, 500, 300);
         heroSelectPanel.setBackground(Color.BLACK);
         heroSelectLabel = new JLabel("Select your hero!");
         heroSelectLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         heroSelectPanel.add(heroSelectLabel);
-        final JComboBox<String> choices = new JComboBox<>(heroes);
+        choices = new JComboBox<>(heroes);
         choices.setMaximumSize(choices.getPreferredSize());
         choices.setAlignmentX(Component.CENTER_ALIGNMENT);
+        choices.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                userClass = (String) choices.getSelectedItem();
+                switch(Objects.requireNonNull(userClass)) {
+                    case "Warrior" -> player = new Warrior(name);
+                    case "Priestess" -> player = new Priestess(name);
+                    case "Thief" -> player = new Thief(name);
+                }
+            }
+        });
+
         heroSelectPanel.add(choices);
         heroSelectButton = new JButton("OK");
         heroSelectButton.setBackground(Color.BLACK);
         heroSelectButton.setForeground(Color.WHITE);
         heroSelectButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        heroSelectButton.addActionListener(handleChoice);
+        heroSelectButton.setActionCommand("hero");
+
+        heroSelectButton.addActionListener(e -> System.out.println(player + " " + player.getMyName()));
+
         heroSelectPanel.add(heroSelectButton);
         container.add(heroSelectPanel);
         heroSelectPanel.setVisible(false);
-
-
 
 
         window.setVisible(true);

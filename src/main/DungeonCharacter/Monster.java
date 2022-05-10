@@ -2,7 +2,7 @@ package main.DungeonCharacter;
 
 import java.util.Random;
 
-abstract class Monster extends DungeonCharacter {
+public abstract class Monster extends DungeonCharacter {
     double myHealChance;
     int myMinHeal;
     int myMaxHeal;
