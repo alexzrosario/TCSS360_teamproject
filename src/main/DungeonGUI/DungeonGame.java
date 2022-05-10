@@ -22,9 +22,9 @@ public class DungeonGame {
             String choice = event.getActionCommand();
             um.titleScreen();
             switch (choice) {
-                case "start" -> um.heroSelectScreen();
-                case "hero" -> um.nameInputScreen();
-                case "name" -> um.blankScreen();
+                case "start" -> um.nameInputScreen();
+                case "name" -> um.heroSelectScreen();
+                case "hero" -> um.blankScreen();
             }
         }
     }

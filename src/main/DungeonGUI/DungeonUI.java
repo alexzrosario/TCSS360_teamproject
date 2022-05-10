@@ -1,11 +1,14 @@
 package main.DungeonGUI;
 
+import main.DungeonCharacter.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class DungeonUI {
     JFrame window;
@@ -30,8 +33,10 @@ public class DungeonUI {
     Font gameTitleFont;
     Font regularFont = new Font("Times New Roman", Font.PLAIN, 20);
 
-    final String[] heroes = {"Warrior", "Priestess", "Thief"};
+    final String[] heroes = {"None","Warrior", "Priestess", "Thief"};
     String name = "";
+    DungeonCharacter player;
+    String userClass = "";
 
     public void DungeonUI(DungeonGame.ChoiceController handleChoice) {
 
@@ -74,30 +79,6 @@ public class DungeonUI {
         gameStartPanel.add(gameStartButton);
         container.add(gameStartPanel);
 
-        //Hero Selection
-        heroSelectPanel = new JPanel();
-        heroSelectPanel.setLayout(new BoxLayout(heroSelectPanel, BoxLayout.Y_AXIS));
-        heroSelectPanel.setBounds(150, 25, 500, 300);
-        heroSelectPanel.setBackground(Color.BLACK);
-        heroSelectLabel = new JLabel("Select your hero!");
-        heroSelectLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        heroSelectPanel.add(heroSelectLabel);
-        choices = new JComboBox<>(heroes);
-        choices.setMaximumSize(choices.getPreferredSize());
-        choices.setAlignmentX(Component.CENTER_ALIGNMENT);
-        choices.addActionListener(handleChoice);
-
-        heroSelectPanel.add(choices);
-        heroSelectButton = new JButton("OK");
-        heroSelectButton.setBackground(Color.BLACK);
-        heroSelectButton.setForeground(Color.WHITE);
-        heroSelectButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        heroSelectButton.addActionListener(handleChoice);
-        heroSelectButton.setActionCommand("hero");
-        heroSelectPanel.add(heroSelectButton);
-        container.add(heroSelectPanel);
-        heroSelectPanel.setVisible(false);
-
         //Name Input
         nameInputPanel = new JPanel();
         nameInputPanel.setBounds(150, 25, 500, 300);
@@ -113,13 +94,50 @@ public class DungeonUI {
         nameSubmitButton.addActionListener(handleChoice);
         nameSubmitButton.setActionCommand("name");
 
-        //nameSubmitButton.addActionListener(e -> System.out.println(name));
 
         nameInputPanel.add(nameInputLabel);
         nameInputPanel.add(nameInputBox);
         nameInputPanel.add(nameSubmitButton);
         container.add(nameInputPanel);
         nameInputPanel.setVisible(false);
+
+        //Hero Selection
+        heroSelectPanel = new JPanel();
+        heroSelectPanel.setLayout(new BoxLayout(heroSelectPanel, BoxLayout.Y_AXIS));
+        heroSelectPanel.setBounds(150, 25, 500, 300);
+        heroSelectPanel.setBackground(Color.BLACK);
+        heroSelectLabel = new JLabel("Select your hero!");
+        heroSelectLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        heroSelectPanel.add(heroSelectLabel);
+        choices = new JComboBox<>(heroes);
+        choices.setMaximumSize(choices.getPreferredSize());
+        choices.setAlignmentX(Component.CENTER_ALIGNMENT);
+        choices.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                userClass = (String) choices.getSelectedItem();
+                switch(Objects.requireNonNull(userClass)) {
+                    case "Warrior" -> player = new Warrior(name);
+                    case "Priestess" -> player = new Priestess(name);
+                    case "Thief" -> player = new Thief(name);
+                }
+            }
+        });
+
+        heroSelectPanel.add(choices);
+        heroSelectButton = new JButton("OK");
+        heroSelectButton.setBackground(Color.BLACK);
+        heroSelectButton.setForeground(Color.WHITE);
+        heroSelectButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        heroSelectButton.addActionListener(handleChoice);
+        heroSelectButton.setActionCommand("hero");
+
+        heroSelectButton.addActionListener(e -> System.out.println(player + " " + player.getMyName()));
+
+        heroSelectPanel.add(heroSelectButton);
+        container.add(heroSelectPanel);
+        heroSelectPanel.setVisible(false);
+
 
         window.setVisible(true);
     }

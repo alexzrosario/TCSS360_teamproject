@@ -3,7 +3,7 @@ package main.DungeonCharacter;
 
 import java.util.Random;
 
-abstract class DungeonCharacter {
+public abstract class DungeonCharacter {
     private String myName;
     private int myHitPoints;
     private int myMinDam;
@@ -81,7 +81,7 @@ abstract class DungeonCharacter {
     }
 
     public String getMyName() {
-        return myName;
+        return this.myName;
     }
 
     public void setMyName(String myName) {
