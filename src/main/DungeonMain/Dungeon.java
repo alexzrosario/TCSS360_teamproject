@@ -4,7 +4,9 @@ import java.util.Random;
 
 public class Dungeon {
     private Room[][] myDungeon;
-    private Room myHeroPosition;
+    //private Room myHeroPosition;
+    private int myHeroRow;
+    private int myHeroCol;
     private int myDungeonRows;
     private int myDungeonCols;
     private int myStartingRow;
@@ -31,7 +33,9 @@ public class Dungeon {
         int roomsBuilt = 1;
         myStartingRow = r.nextInt(myDungeonRows);
         myStartingCol = r.nextInt(myDungeonCols);
-        myHeroPosition = myDungeon[myStartingRow][myStartingCol];
+        myHeroRow = myStartingRow;
+        myHeroCol = myStartingCol;
+        //myHeroPosition = myDungeon[myStartingRow][myStartingCol];
         setEntrance(myStartingRow, myStartingCol);
         int currentRow = myStartingRow;
         int currentCol = myStartingCol;
@@ -147,6 +151,11 @@ public class Dungeon {
         myDungeon[row][col].setHasHealPotion(false);
         myDungeon[row][col].setHasVisionPotion(false);
         myDungeon[row][col].setHasPit(false);
+    }
+
+    public void moveHero(int rowDirection, int colDirection) {
+        myHeroRow += rowDirection;
+        myHeroCol += colDirection;
     }
 
     public String toString() {
