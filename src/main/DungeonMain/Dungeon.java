@@ -43,28 +43,28 @@ public class Dungeon {
 
         while (roomsBuilt < myDungeonRows*myDungeonCols) {
             String direction = directions[r.nextInt(4)];
-            if(currentRow + 1 < myDungeonRows && direction.equals("SOUTH")) {
+            if(currentRow < myDungeonRows - 1 && direction.equals("SOUTH")) {
                 nextRow = currentRow + 1;
                 myDungeon[currentRow][currentCol].setMySouthRoom(myDungeon[nextRow][nextCol]);
                 myDungeon[nextRow][nextCol].setMyNorthRoom(myDungeon[currentRow][currentCol]);
                 currentRow = nextRow;
                 roomsBuilt += checkBuilt(myDungeon[currentRow][currentCol]);
             }
-            else if(currentRow - 1 > -1 && direction.equals("NORTH")) {
+            else if(currentRow > 0 && direction.equals("NORTH")) {
                 nextRow = currentRow - 1;
                 myDungeon[currentRow][currentCol].setMyNorthRoom(myDungeon[nextRow][nextCol]);
                 myDungeon[nextRow][nextCol].setMySouthRoom(myDungeon[currentRow][currentCol]);
                 currentRow = nextRow;
                 roomsBuilt += checkBuilt(myDungeon[currentRow][currentCol]);
             }
-            else if(currentCol + 1 < myDungeonCols && direction.equals("EAST")) {
+            else if(currentCol < myDungeonCols - 1 && direction.equals("EAST")) {
                 nextCol = currentCol + 1;
                 myDungeon[currentRow][currentCol].setMyEastRoom(myDungeon[nextRow][nextCol]);
                 myDungeon[nextRow][nextCol].setMyWestRoom(myDungeon[currentRow][currentCol]);
                 currentCol = nextCol;
                 roomsBuilt += checkBuilt(myDungeon[currentRow][currentCol]);
             }
-            else if(currentCol - 1 > -1 && direction.equals("WEST")) {
+            else if(currentCol > 0 && direction.equals("WEST")) {
                 nextCol = currentCol - 1;
                 myDungeon[currentRow][currentCol].setMyWestRoom(myDungeon[nextRow][nextCol]);
                 myDungeon[nextRow][nextCol].setMyEastRoom(myDungeon[currentRow][currentCol]);
@@ -81,17 +81,13 @@ public class Dungeon {
 
     public void setEntrance(int row, int col) {
         myDungeon[row][col].setEntrance(true);
-        myDungeon[row][col].setHasHealPotion(false);
-        myDungeon[row][col].setHasVisionPotion(false);
-        myDungeon[row][col].setHasPit(false);
+        disableItems(row, col);
         myDungeon[row][col].setMyStringToken("i");
     }
 
     public void setExit(int row, int col) {
         myDungeon[row][col].setExit(true);
-        myDungeon[row][col].setHasHealPotion(false);
-        myDungeon[row][col].setHasVisionPotion(false);
-        myDungeon[row][col].setHasPit(false);
+        disableItems(row, col);
         myDungeon[row][col].setMyStringToken("O");
     }
 
@@ -145,6 +141,12 @@ public class Dungeon {
             return 1;
         }
         else return 0;
+    }
+
+    public void disableItems(int row, int col) {
+        myDungeon[row][col].setHasHealPotion(false);
+        myDungeon[row][col].setHasVisionPotion(false);
+        myDungeon[row][col].setHasPit(false);
     }
 
     public String toString() {
