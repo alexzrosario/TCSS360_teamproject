@@ -13,12 +13,29 @@ public class DungeonUIManager {
         ui.gameStartPanel.setVisible(true);
 
         ui.heroSelectPanel.setVisible(false);
+        ui.nameInputPanel.setVisible(false);
     }
 
     public void heroSelectScreen() {
         ui.heroSelectPanel.setVisible(true);
 
         ui.gameTitlePanel.setVisible(false);
-        ui.gameStartPanel.setVisible(false);    }
+        ui.gameStartPanel.setVisible(false);
+        ui.nameInputPanel.setVisible(false);
+    }
 
+    public void nameInputScreen() {
+        ui.nameInputPanel.setVisible(true);
+
+        ui.gameTitlePanel.setVisible(false);
+        ui.gameStartPanel.setVisible(false);
+        ui.heroSelectPanel.setVisible(false);
+    }
+
+    public void blankScreen() {
+        ui.gameTitlePanel.setVisible(false);
+        ui.gameStartPanel.setVisible(false);
+        ui.heroSelectPanel.setVisible(false);
+        ui.nameInputPanel.setVisible(false);
+    }
 }
