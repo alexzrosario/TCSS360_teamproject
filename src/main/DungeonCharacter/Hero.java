@@ -1,6 +1,6 @@
 package main.DungeonCharacter;
 
-abstract class Hero extends DungeonCharacter {
+public abstract class Hero extends DungeonCharacter {
     private double myBlockChance;
     private String myImage;
     private int myHealingPotions = 0;
