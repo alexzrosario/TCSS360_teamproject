@@ -50,6 +50,11 @@ public class DungeonUI {
 
         window = new JFrame();
         window.setSize(800, 600);
+
+        //puts frame in middle of screen
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        window.setLocation(dim.width / 2 - window.getSize().width / 2, dim.height / 2 - window.getSize().height / 2);
+
         window.getContentPane().setBackground(Color.WHITE);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLayout(null);
