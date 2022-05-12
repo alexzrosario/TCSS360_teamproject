@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 
 public class DungeonGame {
 
-    ChoiceController handleChoice = new ChoiceController();
-    DungeonUI ui = new DungeonUI();
-    DungeonUIManager um = new DungeonUIManager(ui);
+    private ChoiceController handleChoice = new ChoiceController();
+    private DungeonUI ui = new DungeonUI();
+    private DungeonUIManager um = new DungeonUIManager(ui);
 
     public static void main(String[] args) {
         new DungeonGame();

@@ -1,32 +1,30 @@
 package main.DungeonMain;
 
-import main.DungeonCharacter.Gremlin;
-import main.DungeonCharacter.Monster;
-import main.DungeonCharacter.Ogre;
-import main.DungeonCharacter.Skeleton;
+import main.DungeonCharacter.*;
 
 import java.sql.SQLOutput;
 import java.util.Random;
 
 public class Room {
-    Room myNorthRoom;
-    Room myEastRoom;
-    Room mySouthRoom;
-    Room myWestRoom;
-    boolean hasPit = false;
-    boolean hasVisionPotion = false;
-    boolean hasHealPotion = false;
-    boolean hasAbstractionPillar = false;
-    boolean hasEncapsulationPillar = false;
-    boolean hasInheritancePillar = false;
-    boolean hasPolymorphismPillar = false;
-    boolean isEntrance = false;
-    boolean isExit = false;
-    boolean isVisited = false;
-    boolean isBuilt = false;
-    boolean hasMonster = false;
-    Monster myMonster;
-    String myStringToken = " ";
+    private Room myNorthRoom;
+    private Room myEastRoom;
+    private Room mySouthRoom;
+    private Room myWestRoom;
+    private boolean hasPit = false;
+    private boolean hasVisionPotion = false;
+    private boolean hasHealPotion = false;
+    private boolean hasAbstractionPillar = false;
+    private boolean hasEncapsulationPillar = false;
+    private boolean hasInheritancePillar = false;
+    private boolean hasPolymorphismPillar = false;
+    private boolean isEntrance = false;
+    private boolean isExit = false;
+    private boolean isVisited = false;
+    private boolean isBuilt = false;
+    private boolean hasMonster = false;
+    private Monster myMonster;
+    private String myStringToken = " ";
+    private static String[] monsterArray = {"ogre", "gremlin", "skeleton"};
 
     public Room() {
         Random r = new Random();
@@ -55,9 +53,7 @@ public class Room {
         // Determining if the room contains a monster, and randomly decides which monster to use
         if (Math.random() < 0.25) {
             int monsterRoll = r.nextInt(3);
-            if (monsterRoll == 0) setMyMonster(new Ogre());
-            else if (monsterRoll == 1) setMyMonster(new Gremlin());
-            else setMyMonster(new Skeleton());
+            setMyMonster(new MonsterFactory().createMonster(monsterArray[monsterRoll]));
             setHasMonster(true);
 
             myStringToken = "m"; // temp string token to indicate if a monster exists in the room

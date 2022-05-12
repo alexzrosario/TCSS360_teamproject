@@ -11,32 +11,32 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class DungeonUI {
-    JFrame window;
-    Container container;
+    private JFrame window;
+    private Container container;
 
     JPanel gameTitlePanel;
     JPanel gameStartPanel;
     JPanel heroSelectPanel;
     JPanel nameInputPanel;
 
-    JLabel gameTitleLabel;
-    JLabel heroSelectLabel;
+    private JLabel gameTitleLabel;
+    private JLabel heroSelectLabel;
 
-    JButton gameStartButton;
-    JButton heroSelectButton;
+    private JButton gameStartButton;
+    private JButton heroSelectButton;
 
-    JTextField nameInputBox;
-    JButton nameSubmitButton;
-    JLabel nameInputLabel;
-    JComboBox<String> choices;
+    private JTextField nameInputBox;
+    private JButton nameSubmitButton;
+    private JLabel nameInputLabel;
+    private JComboBox<String> choices;
 
-    Font gameTitleFont;
-    Font regularFont = new Font("Times New Roman", Font.PLAIN, 20);
+    private Font gameTitleFont;
+    private Font regularFont = new Font("Times New Roman", Font.PLAIN, 20);
 
-    final String[] heroes = {"None","Warrior", "Priestess", "Thief"};
-    String name = "";
-    DungeonCharacter player;
-    String userClass = "";
+    private final String[] heroes = {"None","Warrior", "Priestess", "Thief"};
+    private String name = "";
+    private DungeonCharacter player;
+    private String userClass = "";
 
     public void DungeonUI(DungeonGame.ChoiceController handleChoice) {
 
