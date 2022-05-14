@@ -104,14 +104,13 @@ public class DungeonUI extends JPanel{
         nameInputLabel = new JLabel("Enter your Hero's name:");
         nameInputLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         nameInputBox = new JTextField(10);
-        nameInputBox.addActionListener(e -> name = nameInputBox.getText());
         nameSubmitButton = new JButton();
         nameSubmitButton.setBackground(Color.BLACK);
         nameSubmitButton.setForeground(Color.WHITE);
         nameSubmitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         nameSubmitButton.addActionListener(handleChoice);
         nameSubmitButton.setActionCommand("name");
-
+        nameSubmitButton.addActionListener(e -> name = nameInputBox.getText());// set name
 
         nameInputPanel.add(nameInputLabel);
         nameInputPanel.add(nameInputBox);
