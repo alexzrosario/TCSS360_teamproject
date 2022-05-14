@@ -38,4 +38,13 @@ public class DungeonUIManager {
         ui.heroSelectPanel.setVisible(false);
         ui.nameInputPanel.setVisible(false);
     }
+
+    public void dungeonRoomScreen() {
+        ui.dungeonRoomPanel.setVisible(true);
+
+        ui.gameTitlePanel.setVisible(false);
+        ui.gameStartPanel.setVisible(false);
+        ui.heroSelectPanel.setVisible(false);
+        ui.nameInputPanel.setVisible(false);
+    }
 }

@@ -2,43 +2,53 @@ package main.DungeonGUI;
 
 import main.DungeonCharacter.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
-public class DungeonUI {
-    private JFrame window;
-    private Container container;
+public class DungeonUI extends JPanel{
+    JFrame window;
+    Container container;
 
     JPanel gameTitlePanel;
     JPanel gameStartPanel;
     JPanel heroSelectPanel;
     JPanel nameInputPanel;
+    JPanel dungeonRoomPanel;
 
-    private JLabel gameTitleLabel;
-    private JLabel heroSelectLabel;
+    JLabel gameTitleLabel;
+    JLabel heroSelectLabel;
 
-    private JButton gameStartButton;
-    private JButton heroSelectButton;
+    JButton gameStartButton;
+    JButton heroSelectButton;
 
-    private JTextField nameInputBox;
-    private JButton nameSubmitButton;
-    private JLabel nameInputLabel;
-    private JComboBox<String> choices;
+    JTextField nameInputBox;
+    JButton nameSubmitButton;
+    JLabel nameInputLabel;
+    JComboBox<String> choices;
 
-    private Font gameTitleFont;
-    private Font regularFont = new Font("Times New Roman", Font.PLAIN, 20);
+    JLabel topLeftWallLabel;
+    JLabel topRightWallLabel;
+    JLabel bottomLeftWallLabel;
+    JLabel bottomRightWallLabel;
+    JLabel playerIcon;
 
-    private final String[] heroes = {"None","Warrior", "Priestess", "Thief"};
+    JButton testButton;
+    Font gameTitleFont;
+    Font regularFont = new Font("Times New Roman", Font.PLAIN, 20);
+
+    final private String[] heroes = {"None","Warrior", "Priestess", "Thief"};
     private String name = "";
-    private DungeonCharacter player;
+    private static DungeonCharacter player;
     private String userClass = "";
 
-    public void DungeonUI(DungeonGame.ChoiceController handleChoice) {
+    public void DungeonUI(DungeonGame.ChoiceController handleChoice) throws IOException {
 
         try {
             gameTitleFont = Font.createFont(Font.TRUETYPE_FONT, new File("Antique Quest St.ttf")).deriveFont(40f);
@@ -128,7 +138,6 @@ public class DungeonUI {
                 }
             }
         });
-
         heroSelectPanel.add(choices);
         heroSelectButton = new JButton("OK");
         heroSelectButton.setBackground(Color.BLACK);
@@ -136,14 +145,38 @@ public class DungeonUI {
         heroSelectButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         heroSelectButton.addActionListener(handleChoice);
         heroSelectButton.setActionCommand("hero");
-
-        heroSelectButton.addActionListener(e -> System.out.println(player + " " + player.getMyName()));
+        heroSelectButton.addActionListener(e -> playerIcon = new JLabel(new ImageIcon()));
 
         heroSelectPanel.add(heroSelectButton);
         container.add(heroSelectPanel);
         heroSelectPanel.setVisible(false);
 
 
+        //Dungeon Rooms
+        dungeonRoomPanel = new JPanel();
+        dungeonRoomPanel.setBounds(0,0,800,600);
+        dungeonRoomPanel.setBackground(Color.WHITE);
+
+//        testButton = new JButton("Test");
+//        testButton.setBackground(Color.BLACK);
+//        testButton.setForeground(Color.WHITE);
+//        testButton.setFont(regularFont);
+//        testButton.setFocusPainted(false);
+//        testButton.addActionListener(e -> System.out.println(player + " " + player.getMyName()));
+//        BufferedImage topLeftWall = ImageIO.read(new File("src/TopLeftWall.png"));
+//        BufferedImage topRightWall = ImageIO.read(new File("src/TopRightWall.png"));
+//        BufferedImage bottomLeftWall = ImageIO.read(new File("src/BottomLeftWall.png"));
+//        BufferedImage bottomRightWall = ImageIO.read(new File("src/BottomRightWall.png"));
+//        ImageIcon topLeftWallImage = new ImageIcon("src/img.png");
+//        topLeftWallLabel = new JLabel(topLeftWallImage);
+//        topLeftWallLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+//        topRightWallLabel = new JLabel(new ImageIcon("src/TopRightWall.png"));
+//        bottomLeftWallLabel = new JLabel(new ImageIcon("src/BottomLeftWall.png"));
+//        bottomRightWallLabel = new JLabel(new ImageIcon("src/BottomRightWall.png"));
+
+//        dungeonRoomPanel.setVisible(false);
+        dungeonRoomPanel.add(testButton);
+        container.add(dungeonRoomPanel);
         window.setVisible(true);
     }
 }
