@@ -11,6 +11,7 @@ public class Controller {
     private Hero myHero;
     private boolean myGameDone = false;
 
+    public Controller(){}
 
     public void startGame(final String theName, final int theClass){
         switch (theClass){
@@ -26,7 +27,9 @@ public class Controller {
         }
 
         myDungeon = new Dungeon(5,5);
-        traveseDungeon();
+        System.out.println(myDungeon.toString());
+        System.out.println(myHero.getMyName());
+        //traveseDungeon();
     }
 
     public void traveseDungeon(){

@@ -1,6 +1,7 @@
 package main.DungeonGUI;
 
 import main.DungeonCharacter.*;
+import main.Controller;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -11,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
+
 
 public class DungeonUI extends JPanel{
     JFrame window;
@@ -47,6 +49,7 @@ public class DungeonUI extends JPanel{
     private String name = "";
     private static DungeonCharacter player;
     private String userClass = "";
+    private Controller controller = new Controller();
 
     public void DungeonUI(DungeonGame.ChoiceController handleChoice) throws IOException {
 
@@ -132,10 +135,9 @@ public class DungeonUI extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 userClass = (String) choices.getSelectedItem();
                 switch(Objects.requireNonNull(userClass)) {
-                    case "Warrior" -> player = new Warrior(name);
-                    case "Priestess" -> player = new Priestess(name);
-                    case "Thief" -> player = new Thief(name);
-                }
+                    case "Warrior" -> controller.startGame(name,1);
+                    case "Priestess" -> controller.startGame(name,2);
+                    case "Thief" -> controller.startGame(name,3);}
             }
         });
         heroSelectPanel.add(choices);
@@ -157,12 +159,11 @@ public class DungeonUI extends JPanel{
         dungeonRoomPanel.setBounds(0,0,800,600);
         dungeonRoomPanel.setBackground(Color.WHITE);
 
-//        testButton = new JButton("Test");
-//        testButton.setBackground(Color.BLACK);
-//        testButton.setForeground(Color.WHITE);
-//        testButton.setFont(regularFont);
-//        testButton.setFocusPainted(false);
-//        testButton.addActionListener(e -> System.out.println(player + " " + player.getMyName()));
+        testButton = new JButton("Test");
+        testButton.setBackground(Color.BLACK);
+        testButton.setForeground(Color.WHITE);
+        testButton.setFont(regularFont);
+        testButton.setFocusPainted(false);
 //        BufferedImage topLeftWall = ImageIO.read(new File("src/TopLeftWall.png"));
 //        BufferedImage topRightWall = ImageIO.read(new File("src/TopRightWall.png"));
 //        BufferedImage bottomLeftWall = ImageIO.read(new File("src/BottomLeftWall.png"));
