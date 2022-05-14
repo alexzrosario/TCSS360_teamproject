@@ -135,9 +135,17 @@ public class DungeonUI extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 userClass = (String) choices.getSelectedItem();
                 switch(Objects.requireNonNull(userClass)) {
-                    case "Warrior" -> controller.startGame(name,1);
-                    case "Priestess" -> controller.startGame(name,2);
-                    case "Thief" -> controller.startGame(name,3);}
+                    case "Warrior" :
+                        controller.startGame(name,1);
+                        playerIcon = new JLabel(new ImageIcon("WarriorImage.png"));
+                        break;
+                    case "Priestess" :
+                        controller.startGame(name,2);
+                        break;
+                    case "Thief" :
+                        controller.startGame(name,3);
+                        break;
+                }
             }
         });
         heroSelectPanel.add(choices);
@@ -159,11 +167,11 @@ public class DungeonUI extends JPanel{
         dungeonRoomPanel.setBounds(0,0,800,600);
         dungeonRoomPanel.setBackground(Color.WHITE);
 
-        testButton = new JButton("Test");
-        testButton.setBackground(Color.BLACK);
-        testButton.setForeground(Color.WHITE);
-        testButton.setFont(regularFont);
-        testButton.setFocusPainted(false);
+//        testButton = new JButton("Test");
+//        testButton.setBackground(Color.BLACK);
+//        testButton.setForeground(Color.WHITE);
+//        testButton.setFont(regularFont);
+//        testButton.setFocusPainted(false);
 //        BufferedImage topLeftWall = ImageIO.read(new File("src/TopLeftWall.png"));
 //        BufferedImage topRightWall = ImageIO.read(new File("src/TopRightWall.png"));
 //        BufferedImage bottomLeftWall = ImageIO.read(new File("src/BottomLeftWall.png"));
