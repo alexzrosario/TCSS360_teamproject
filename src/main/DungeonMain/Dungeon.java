@@ -169,4 +169,16 @@ public class Dungeon {
         }
         return s;
     }
+
+    public int getMyHeroRow() {
+        return myHeroRow;
+    }
+
+    public Room getMyRoom() {
+        return myDungeon[myHeroRow][myHeroCol];
+    }
+
+    public int getMyHeroCol() {
+        return myHeroCol;
+    }
 }

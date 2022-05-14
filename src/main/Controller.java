@@ -5,7 +5,11 @@ import main.DungeonMain.*;
 
 public class Controller {
     private Dungeon myDungeon;
+    private Room myCurrRoom;
+    private int myRow;
+    private int myCol;
     private Hero myHero;
+    private boolean myGameDone = false;
 
 
     public void startGame(final String theName, final int theClass){
@@ -22,5 +26,14 @@ public class Controller {
         }
 
         myDungeon = new Dungeon(5,5);
+        traveseDungeon();
     }
+
+    public void traveseDungeon(){
+        while(!myGameDone){
+            myCurrRoom = myDungeon.getMyRoom();
+            //send currentRoom to GUI for input
+        }
+    }
+
 }
