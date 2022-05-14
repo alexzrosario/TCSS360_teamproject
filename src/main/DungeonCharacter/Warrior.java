@@ -27,9 +27,4 @@ public class Warrior extends Hero {
         this.setMyMinDam(currMinDam);
         this.setMyMaxDam(currMaxDam);
     }
-
-    @Override
-    public String getMyName() {
-        return super.getMyName();
-    }
 }

@@ -169,4 +169,11 @@ public class Dungeon {
         }
         return s;
     }
+
+    public int getMyDungeonRows() {
+        return myDungeon.length;
+    }
+    public int getMyDungeonCols() {
+        return myDungeon.length;
+    }
 }
