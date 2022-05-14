@@ -58,6 +58,8 @@ public class DungeonUI extends JPanel{
         }
         catch (IOException | FontFormatException ignored) {
         }
+        myDungeon.buildDungeonArray();
+        myDungeon.generateDungeon();
 
         window = new JFrame();
         window.setSize(1200, 1000);
@@ -103,14 +105,13 @@ public class DungeonUI extends JPanel{
         nameInputLabel = new JLabel("Enter your Hero's name:");
         nameInputLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         nameInputBox = new JTextField(10);
-        nameInputBox.addActionListener(e -> name = nameInputBox.getText());
         nameSubmitButton = new JButton();
         nameSubmitButton.setBackground(Color.BLACK);
         nameSubmitButton.setForeground(Color.WHITE);
         nameSubmitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        nameSubmitButton.addActionListener(e -> name = nameInputBox.getText());
         nameSubmitButton.addActionListener(handleChoice);
         nameSubmitButton.setActionCommand("name");
-
 
         nameInputPanel.add(nameInputLabel);
         nameInputPanel.add(nameInputBox);
@@ -189,18 +190,11 @@ public class DungeonUI extends JPanel{
 //        bottomLeftWallLabel = new JLabel(new ImageIcon("src/BottomLeftWall.png"));
 //        bottomRightWallLabel = new JLabel(new ImageIcon("src/BottomRightWall.png"));
 
-
         container.add(dungeonRoomPanel);
         dungeonRoomPanel.setVisible(false);
         window.setVisible(true);
 
         //Dungeon
     }
-    public void makeMaze() {
-        for (int i = 0; i < myDungeon.getMyDungeonRows(); i++) {
-            for (int j = 0; i < myDungeon.getMyDungeonCols(); j++) {
-//                dungeonRoomPanel.add(myDungeon);
-            }
-        }
-    }
+
 }

@@ -176,4 +176,8 @@ public class Dungeon {
     public int getMyDungeonCols() {
         return myDungeon.length;
     }
+
+    public Room getMyRoom() {
+        return myDungeon[myHeroRow][myHeroRow];
+    }
 }
