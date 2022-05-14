@@ -137,13 +137,18 @@ public class DungeonUI extends JPanel{
                 switch(Objects.requireNonNull(userClass)) {
                     case "Warrior" :
                         controller.startGame(name,1);
-                        playerIcon = new JLabel(new ImageIcon("WarriorImage.png"));
+                        playerIcon = new JLabel(new ImageIcon("src/WarriorImage.png"));
+                        dungeonRoomPanel.add(playerIcon);
                         break;
                     case "Priestess" :
                         controller.startGame(name,2);
+                        playerIcon = new JLabel(new ImageIcon("src/PriestessImage.png"));
+                        dungeonRoomPanel.add(playerIcon);
                         break;
                     case "Thief" :
                         controller.startGame(name,3);
+                        playerIcon = new JLabel(new ImageIcon("src/ThiefImage.png"));
+                        dungeonRoomPanel.add(playerIcon);
                         break;
                 }
             }
@@ -184,7 +189,6 @@ public class DungeonUI extends JPanel{
 //        bottomRightWallLabel = new JLabel(new ImageIcon("src/BottomRightWall.png"));
 
 //        dungeonRoomPanel.setVisible(false);
-        dungeonRoomPanel.add(testButton);
         container.add(dungeonRoomPanel);
         window.setVisible(true);
     }
