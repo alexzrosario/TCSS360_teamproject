@@ -161,24 +161,44 @@ public class Dungeon {
     public String toString() {
         String s = "";
         for(int row = 0; row < myDungeonRows; row++) {
-            for(int col = 0; col < myDungeonCols; col++) {
-                //s += "Row: " + row + " --- Col: " + col + "\n";
-                s += myDungeon[row][col].toString();
-            }
-            s += "\n";
+            s += getTopString(row);
+            s += getMidString(row);
         }
+        s+= "***********";
+        return s;
+    }
+    public String getTopString(final int theRow){
+        String s = "*";
+        for (int i = 0; i < myDungeonRows; i++) {
+            if(myDungeon[theRow][i].getMyNorthRoom() == null){
+                s += "**";
+            } else{
+                s += "-*";
+            }
+        }
+        s += "\n";
         return s;
     }
 
-    public int getMyHeroRow() {
-        return myHeroRow;
+    public String getMidString(final int theRow){
+        String s = "*";
+        for (int i = 0; i < myDungeonRows; i++) {
+            s += myDungeon[theRow][i].getMyStringToken();
+            if(myDungeon[theRow][i].getMyEastRoom() == null){
+                s += "*";
+            } else{
+                s += "|";
+            }
+        }
+        s += "\n";
+        return s;
+    }
+
+    public Room[][] getMyDungeon() {
+        return myDungeon;
     }
 
     public Room getMyRoom() {
         return myDungeon[myHeroRow][myHeroCol];
-    }
-
-    public int getMyHeroCol() {
-        return myHeroCol;
     }
 }
