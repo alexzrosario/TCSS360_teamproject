@@ -1,8 +1,12 @@
 package main;
 
 import main.DungeonCharacter.*;
+import main.DungeonGUI.DungeonUI;
+import main.DungeonGUI.DungeonUIManager;
 import main.DungeonMain.*;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 
 public class Controller {
@@ -11,7 +15,8 @@ public class Controller {
     private Hero myHero;
     private boolean myGameDone = false;
     private Random r = new Random();
-
+    private DungeonUI ui = new DungeonUI();
+    private DungeonUIManager um = new DungeonUIManager(ui);
     public Controller(){}
 
     public void startGame(final String theName, final int theClass){
@@ -92,5 +97,17 @@ public class Controller {
         System.out.println("\nHealing Potions: " + myHero.getMyHealingPotions());
         System.out.println("Vision Potions: " + myHero.getMyVisionPotions());
         System.out.println("Number of Pillars: " + myHero.getMyPillars()+"\n");
+    }
+
+    public class ChoiceController implements ActionListener {
+        public void actionPerformed(ActionEvent event) {
+            String choice = event.getActionCommand();
+            um.titleScreen();
+            switch (choice) {
+                case "start" -> um.nameInputScreen();
+                case "name" -> um.heroSelectScreen();
+                case "hero" -> um.dungeonRoomScreen();
+            }
+        }
     }
 }

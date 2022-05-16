@@ -48,10 +48,7 @@ public class DungeonUI extends JPanel{
     final private String[] heroes = {"None","Warrior", "Priestess", "Thief"};
     private String name = "";
     private String userClass = "";
-    private DungeonUIManager um = new DungeonUIManager(this);
     private Controller controller = new Controller();
-    private ChoiceController handleChoice = new ChoiceController();
-
     public void DungeonUI() throws IOException {
 
         try {
@@ -206,15 +203,5 @@ public class DungeonUI extends JPanel{
         container.add(dungeonRoomPanel);
         dungeonRoomPanel.setVisible(false);
     }
-    public class ChoiceController implements ActionListener {
-        public void actionPerformed(ActionEvent event) {
-            String choice = event.getActionCommand();
-            um.titleScreen();
-            switch (choice) {
-                case "start" -> um.nameInputScreen();
-                case "name" -> um.heroSelectScreen();
-                case "hero" -> um.dungeonRoomScreen();
-            }
-        }
-    }
+
 }
