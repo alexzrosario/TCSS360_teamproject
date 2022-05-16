@@ -2,11 +2,11 @@ package main;
 
 import main.DungeonMain.Dungeon;
 
+import javax.swing.text.View;
+
 public class Main {
 
     public static void main(String[] args) {
-        Dungeon d = new Dungeon(5, 5);
-        System.out.println(d.toString());
 	    // write your code here
         //Thief hero = new Thief("Name");
         //Skeleton enemy = new Skeleton();

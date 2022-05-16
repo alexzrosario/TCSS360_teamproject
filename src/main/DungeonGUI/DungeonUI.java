@@ -1,5 +1,6 @@
 package main.DungeonGUI;
 
+import main.Controller;
 import main.DungeonCharacter.*;
 import main.DungeonMain.Dungeon;
 
@@ -46,10 +47,12 @@ public class DungeonUI extends JPanel{
     private Dungeon myDungeon = new Dungeon(5, 5);
     final private String[] heroes = {"None","Warrior", "Priestess", "Thief"};
     private String name = "";
-    private DungeonCharacter player;
     private String userClass = "";
+    private DungeonUIManager um = new DungeonUIManager(this);
+    private Controller controller = new Controller();
+    private ChoiceController handleChoice = new ChoiceController();
 
-    public void DungeonUI(DungeonGame.ChoiceController handleChoice) throws IOException {
+    public void DungeonUI() throws IOException {
 
         try {
             gameTitleFont = Font.createFont(Font.TRUETYPE_FONT, new File("Antique Quest St.ttf")).deriveFont(40f);
@@ -58,8 +61,6 @@ public class DungeonUI extends JPanel{
         }
         catch (IOException | FontFormatException ignored) {
         }
-        myDungeon.buildDungeonArray();
-        myDungeon.generateDungeon();
 
         window = new JFrame();
         window.setSize(1200, 1000);
@@ -74,6 +75,16 @@ public class DungeonUI extends JPanel{
         window.setResizable(false);
         container = window.getContentPane();
 
+        gameTitle();
+        namePanel();
+        heroSelect();
+        dungeonRooms();
+
+        window.setVisible(true);
+
+        //Dungeon
+    }
+    public void gameTitle() {
         //Title
         gameTitlePanel = new JPanel();
         gameTitlePanel.setBounds(150, 25, 500, 150);
@@ -97,7 +108,9 @@ public class DungeonUI extends JPanel{
         gameStartButton.setActionCommand("start");
         gameStartPanel.add(gameStartButton);
         container.add(gameStartPanel);
+    }
 
+    public void namePanel() {
         //Name Input
         nameInputPanel = new JPanel();
         nameInputPanel.setBounds(150, 25, 500, 300);
@@ -118,7 +131,9 @@ public class DungeonUI extends JPanel{
         nameInputPanel.add(nameSubmitButton);
         container.add(nameInputPanel);
         nameInputPanel.setVisible(false);
+    }
 
+    public void heroSelect() {
         //Hero Selection
         heroSelectPanel = new JPanel();
         heroSelectPanel.setLayout(new BoxLayout(heroSelectPanel, BoxLayout.Y_AXIS));
@@ -134,24 +149,22 @@ public class DungeonUI extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 userClass = (String) choices.getSelectedItem();
-                switch(Objects.requireNonNull(userClass)) {
-                    case "Warrior":
-                        player = new Warrior(name);
+                switch (Objects.requireNonNull(userClass)) {
+                    case "Warrior" -> {
+                        controller.startGame(name, 1);
                         playerIcon = new JLabel(new ImageIcon(new ImageIcon("src/WarriorImage.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
                         dungeonRoomPanel.add(playerIcon);
-                        break;
-                    case "Priestess":
-                        player = new Priestess(name);
-                        playerIcon = new JLabel(new ImageIcon("src/PriestessImage.png"));
+                    }
+                    case "Priestess" -> {
+                        controller.startGame(name, 2);
                         playerIcon = new JLabel(new ImageIcon(new ImageIcon("src/PriestessImage.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
                         dungeonRoomPanel.add(playerIcon);
-                        break;
-                    case "Thief":
-                        player = new Thief(name);
-                        playerIcon = new JLabel(new ImageIcon("src/ThiefImage.png"));
+                    }
+                    case "Thief" -> {
+                        controller.startGame(name, 3);
                         playerIcon = new JLabel(new ImageIcon(new ImageIcon("src/Thief.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
                         dungeonRoomPanel.add(playerIcon);
-                        break;
+                    }
                 }
             }
         });
@@ -166,11 +179,11 @@ public class DungeonUI extends JPanel{
         heroSelectPanel.add(heroSelectButton);
         container.add(heroSelectPanel);
         heroSelectPanel.setVisible(false);
+    }
 
-
-        //Dungeon Rooms
+    public void dungeonRooms() {
         dungeonRoomPanel = new JPanel();
-        dungeonRoomPanel.setBounds(0,0,800,600);
+        dungeonRoomPanel.setBounds(0,0,1200,1000);
         dungeonRoomPanel.setBackground(Color.WHITE);
         dungeonRoomPanel.setLayout(new GridLayout(myDungeon.getMyDungeonRows(), myDungeon.getMyDungeonCols()));
 //        testButton = new JButton("Test");
@@ -192,9 +205,16 @@ public class DungeonUI extends JPanel{
 
         container.add(dungeonRoomPanel);
         dungeonRoomPanel.setVisible(false);
-        window.setVisible(true);
-
-        //Dungeon
     }
-
+    public class ChoiceController implements ActionListener {
+        public void actionPerformed(ActionEvent event) {
+            String choice = event.getActionCommand();
+            um.titleScreen();
+            switch (choice) {
+                case "start" -> um.nameInputScreen();
+                case "name" -> um.heroSelectScreen();
+                case "hero" -> um.dungeonRoomScreen();
+            }
+        }
+    }
 }
