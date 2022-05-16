@@ -154,8 +154,10 @@ public class Dungeon {
     }
 
     public void moveHero(int rowDirection, int colDirection) {
+        myDungeon[myHeroRow][myHeroCol].setMyStringToken("v");
         myHeroRow += rowDirection;
         myHeroCol += colDirection;
+        myDungeon[myHeroRow][myHeroCol].setMyStringToken("h");
     }
 
     public String toString() {
@@ -183,7 +185,16 @@ public class Dungeon {
     public String getMidString(final int theRow){
         String s = "*";
         for (int i = 0; i < myDungeonRows; i++) {
-            s += myDungeon[theRow][i].getMyStringToken();
+            //s += myDungeon[theRow][i].getMyStringToken(); show all tokens
+            if (myDungeon[theRow][i].getMyStringToken() == "i") {
+                s += "h";
+            }else if(myDungeon[theRow][i].getMyStringToken()== "h") {
+                s += "h";
+            }else if(myDungeon[theRow][i].getMyStringToken()== "v") {
+                s += "v";
+            }else {
+                s += " ";
+            } // empty dungeon
             if(myDungeon[theRow][i].getMyEastRoom() == null){
                 s += "*";
             } else{
