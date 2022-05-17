@@ -3,9 +3,9 @@ package main.DungeonCharacter;
 import java.util.Random;
 
 public abstract class Monster extends DungeonCharacter {
-    double myHealChance;
-    int myMinHeal;
-    int myMaxHeal;
+    private double myHealChance;
+    private int myMinHeal;
+    private int myMaxHeal;
 
     public Monster(String theName, int theHitPoints, int theMinDam, int theMaxDam, int theAttackSpeed, double theHitChance, double theHealChance, int theMinHeal, int theMaxHeal) {
         super(theName, theHitPoints, theMinDam, theMaxDam, theAttackSpeed, theHitChance);
