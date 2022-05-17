@@ -15,8 +15,6 @@ public class Controller {
     private Hero myHero;
     private boolean myGameDone = false;
     private Random r = new Random();
-    private DungeonUI ui = new DungeonUI();
-    private DungeonUIManager um = new DungeonUIManager(ui);
     public Controller(){}
 
     public void startGame(final String theName, final int theClass){
@@ -99,15 +97,15 @@ public class Controller {
         System.out.println("Number of Pillars: " + myHero.getMyPillars()+"\n");
     }
 
-    public class ChoiceController implements ActionListener {
-        public void actionPerformed(ActionEvent event) {
-            String choice = event.getActionCommand();
-            um.titleScreen();
-            switch (choice) {
-                case "start" -> um.nameInputScreen();
-                case "name" -> um.heroSelectScreen();
-                case "hero" -> um.dungeonRoomScreen();
-            }
-        }
-    }
+//    public class ChoiceController implements ActionListener {
+//        public void actionPerformed(ActionEvent event) {
+//            String choice = event.getActionCommand();
+//            um.titleScreen();
+//            switch (choice) {
+//                case "start" -> um.nameInputScreen();
+//                case "name" -> um.heroSelectScreen();
+//                case "hero" -> um.dungeonRoomScreen();
+//            }
+//        }
+//    }
 }

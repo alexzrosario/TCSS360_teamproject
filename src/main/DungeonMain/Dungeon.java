@@ -154,20 +154,63 @@ public class Dungeon {
     }
 
     public void moveHero(int rowDirection, int colDirection) {
+        myDungeon[myHeroRow][myHeroCol].setMyStringToken("v");
         myHeroRow += rowDirection;
         myHeroCol += colDirection;
+        myDungeon[myHeroRow][myHeroCol].setMyStringToken("h");
     }
 
     public String toString() {
         String s = "";
         for(int row = 0; row < myDungeonRows; row++) {
-            for(int col = 0; col < myDungeonCols; col++) {
-                //s += "Row: " + row + " --- Col: " + col + "\n";
-                s += myDungeon[row][col].toString();
-            }
-            s += "\n";
+            s += getTopString(row);
+            s += getMidString(row);
         }
+        s+= "***********";
         return s;
+    }
+    public String getTopString(final int theRow){
+        String s = "*";
+        for (int i = 0; i < myDungeonRows; i++) {
+            if(myDungeon[theRow][i].getMyNorthRoom() == null){
+                s += "**";
+            } else{
+                s += "-*";
+            }
+        }
+        s += "\n";
+        return s;
+    }
+
+    public String getMidString(final int theRow){
+        String s = "*";
+        for (int i = 0; i < myDungeonRows; i++) {
+            //s += myDungeon[theRow][i].getMyStringToken(); show all tokens
+            if (myDungeon[theRow][i].getMyStringToken() == "i") {
+                s += "h";
+            }else if(myDungeon[theRow][i].getMyStringToken()== "h") {
+                s += "h";
+            }else if(myDungeon[theRow][i].getMyStringToken()== "v") {
+                s += "v";
+            }else {
+                s += " ";
+            } // empty dungeon
+            if(myDungeon[theRow][i].getMyEastRoom() == null){
+                s += "*";
+            } else{
+                s += "|";
+            }
+        }
+        s += "\n";
+        return s;
+    }
+
+    public Room[][] getMyDungeon() {
+        return myDungeon;
+    }
+
+    public Room getMyRoom() {
+        return myDungeon[myHeroRow][myHeroCol];
     }
 
     public int getMyDungeonRows() {
@@ -175,9 +218,5 @@ public class Dungeon {
     }
     public int getMyDungeonCols() {
         return myDungeon.length;
-    }
-
-    public Room getMyRoom() {
-        return myDungeon[myHeroRow][myHeroRow];
     }
 }
