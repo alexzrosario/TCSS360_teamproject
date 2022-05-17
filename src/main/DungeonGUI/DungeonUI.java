@@ -161,7 +161,7 @@ public class DungeonUI extends JPanel{
                     }
                     case "Thief" -> {
                         controller.startGame(name, 3);
-                        playerIcon = new JLabel(new ImageIcon(new ImageIcon("src/Thief.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
+                        playerIcon = new JLabel(new ImageIcon(new ImageIcon("src/ThiefImage.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
                         dungeonRoomPanel.add(playerIcon);
                     }
                 }
