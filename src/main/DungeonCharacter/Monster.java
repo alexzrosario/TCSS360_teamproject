@@ -23,7 +23,7 @@ public abstract class Monster extends DungeonCharacter {
         heal();
     }
 
-    void heal() {
+    public void heal() {
         Random theRandom = new Random();
         int healChanceRoll = theRandom.nextInt(100) + 1;
         if (healChanceRoll >= 100 * (1 - myHealChance)) {
