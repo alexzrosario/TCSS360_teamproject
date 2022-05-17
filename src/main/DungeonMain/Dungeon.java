@@ -11,7 +11,7 @@ public class Dungeon {
     private int myDungeonCols;
     private int myStartingRow;
     private int myStartingCol;
-    private final Random r = new Random();
+    private final Random myRandom = new Random();
 
     public Dungeon(int theDungeonRows, int theDungeonCols) {
         myDungeonRows = theDungeonRows;
@@ -31,8 +31,8 @@ public class Dungeon {
 
     public void generateDungeon() {
         int roomsBuilt = 1;
-        myStartingRow = r.nextInt(myDungeonRows);
-        myStartingCol = r.nextInt(myDungeonCols);
+        myStartingRow = myRandom.nextInt(myDungeonRows);
+        myStartingCol = myRandom.nextInt(myDungeonCols);
         myHeroRow = myStartingRow;
         myHeroCol = myStartingCol;
         //myHeroPosition = myDungeon[myStartingRow][myStartingCol];
@@ -46,7 +46,7 @@ public class Dungeon {
         String[] directions = {"NORTH", "SOUTH", "EAST", "WEST"};
 
         while (roomsBuilt < myDungeonRows*myDungeonCols) {
-            String direction = directions[r.nextInt(4)];
+            String direction = directions[myRandom.nextInt(4)];
             if(currentRow < myDungeonRows - 1 && direction.equals("SOUTH")) {
                 nextRow = currentRow + 1;
                 myDungeon[currentRow][currentCol].setMySouthRoom(myDungeon[nextRow][nextCol]);
@@ -77,10 +77,10 @@ public class Dungeon {
             }
         }
         setExit(currentRow, currentCol);
-        setAbstractionPillar(r.nextInt(myDungeonRows), r.nextInt(myDungeonCols));
-        setEncapsulationPillar(r.nextInt(myDungeonRows), r.nextInt(myDungeonCols));
-        setInheritancePillar(r.nextInt(myDungeonRows), r.nextInt(myDungeonCols));
-        setPolymorphismPillar(r.nextInt(myDungeonRows), r.nextInt(myDungeonCols));
+        setAbstractionPillar(myRandom.nextInt(myDungeonRows), myRandom.nextInt(myDungeonCols));
+        setEncapsulationPillar(myRandom.nextInt(myDungeonRows), myRandom.nextInt(myDungeonCols));
+        setInheritancePillar(myRandom.nextInt(myDungeonRows), myRandom.nextInt(myDungeonCols));
+        setPolymorphismPillar(myRandom.nextInt(myDungeonRows), myRandom.nextInt(myDungeonCols));
     }
 
     public void setEntrance(int row, int col) {
@@ -99,7 +99,7 @@ public class Dungeon {
         if(myDungeon[row][col].isEntrance() || myDungeon[row][col].isExit() ||
                 myDungeon[row][col].isHasEncapsulationPillar() || myDungeon[row][col].isHasInheritancePillar() ||
                 myDungeon[row][col].isHasPolymorphismPillar()) {
-            setAbstractionPillar(r.nextInt(myDungeonRows), r.nextInt(myDungeonCols));
+            setAbstractionPillar(myRandom.nextInt(myDungeonRows), myRandom.nextInt(myDungeonCols));
         } else {
             myDungeon[row][col].setHasAbstractionPillar(true);
             myDungeon[row][col].setMyStringToken("A");
@@ -110,7 +110,7 @@ public class Dungeon {
         if(myDungeon[row][col].isEntrance() || myDungeon[row][col].isExit() ||
                 myDungeon[row][col].isHasEncapsulationPillar() || myDungeon[row][col].isHasAbstractionPillar() ||
                 myDungeon[row][col].isHasPolymorphismPillar()) {
-            setInheritancePillar(r.nextInt(myDungeonRows), r.nextInt(myDungeonCols));
+            setInheritancePillar(myRandom.nextInt(myDungeonRows), myRandom.nextInt(myDungeonCols));
         } else {
             myDungeon[row][col].setHasInheritancePillar(true);
             myDungeon[row][col].setMyStringToken("I");
@@ -121,7 +121,7 @@ public class Dungeon {
         if(myDungeon[row][col].isEntrance() || myDungeon[row][col].isExit() ||
                 myDungeon[row][col].isHasAbstractionPillar() || myDungeon[row][col].isHasInheritancePillar() ||
                 myDungeon[row][col].isHasPolymorphismPillar()) {
-            setEncapsulationPillar(r.nextInt(myDungeonRows), r.nextInt(myDungeonCols));
+            setEncapsulationPillar(myRandom.nextInt(myDungeonRows), myRandom.nextInt(myDungeonCols));
         } else {
             myDungeon[row][col].setHasEncapsulationPillar(true);
             myDungeon[row][col].setMyStringToken("E");
@@ -132,7 +132,7 @@ public class Dungeon {
         if(myDungeon[row][col].isEntrance() || myDungeon[row][col].isExit() ||
                 myDungeon[row][col].isHasEncapsulationPillar() || myDungeon[row][col].isHasInheritancePillar() ||
                 myDungeon[row][col].isHasAbstractionPillar()) {
-            setPolymorphismPillar(r.nextInt(myDungeonRows), r.nextInt(myDungeonCols));
+            setPolymorphismPillar(myRandom.nextInt(myDungeonRows), myRandom.nextInt(myDungeonCols));
         } else {
             myDungeon[row][col].setHasPolymorphismPillar(true);
             myDungeon[row][col].setMyStringToken("P");
