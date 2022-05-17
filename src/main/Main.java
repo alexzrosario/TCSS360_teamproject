@@ -1,12 +1,14 @@
 package main;
 
 import main.DungeonMain.Dungeon;
-
-import javax.swing.text.View;
+import main.DungeonMain.DungeonAdventure;
+import main.DungeonMain.Room;
 
 public class Main {
 
     public static void main(String[] args) {
+        DungeonAdventure v = new DungeonAdventure();
+        v.start();
 	    // write your code here
         //Thief hero = new Thief("Name");
         //Skeleton enemy = new Skeleton();

@@ -23,7 +23,7 @@ public abstract class DungeonCharacter {
         this.myAttackSpeed = theAttackSpeed;
         this.myHitChance = theHitChance;
     }
-    public void basicAttack(final DungeonCharacter theTarget){
+    public int basicAttack(final DungeonCharacter theTarget){
         int attacks = 1;
         if(this.getMyAttackSpeed() > theTarget.getMyAttackSpeed()) {
             attacks = this.getMyAttackSpeed() / theTarget.getMyAttackSpeed();
@@ -31,6 +31,7 @@ public abstract class DungeonCharacter {
         for (int i = 0; i < attacks; i++) {
             attackValue(theTarget);
         }
+        return attacks;
     }
 
     public int attackValue(final DungeonCharacter theTarget) {
@@ -38,14 +39,15 @@ public abstract class DungeonCharacter {
         int damageRoll = 0;
         if (Math.random() <= this.getMyHitChance()) {
             damageRoll = r.nextInt(this.getMyMinDam(), this.getMyMaxDam() + 1);
-            damageCheck(damageRoll,theTarget);
+            //damageCheck(damageRoll,theTarget);
+            theTarget.updateHealth(damageRoll);
         }
         //for testing - correct damage
         System.out.println(damageRoll);
         return damageRoll;
     }
 
-    public void damageCheck(int theDamageRoll, final DungeonCharacter theTarget){
+    /*public void damageCheck(int theDamageRoll, final DungeonCharacter theTarget){
         if (theTarget instanceof Hero) {
             if (Math.random() <= ((Hero) theTarget).getMyBlockChance()) {
                 //for testing - block
@@ -66,13 +68,9 @@ public abstract class DungeonCharacter {
                 theTarget.updateHealth(theDamageRoll);
             }
         }
-    }
+    }*/
 
     public void updateHealth(final int theDamage){
-       this.setMyHitPoints(this.getMyHitPoints() - theDamage);
-       if(this.getMyHitPoints() <= 0){
-           setMyAlive();
-       }
     }
     public void setMyAlive() {this.myAlive = false;}
 

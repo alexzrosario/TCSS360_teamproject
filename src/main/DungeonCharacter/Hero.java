@@ -15,6 +15,16 @@ public abstract class Hero extends DungeonCharacter {
         this.myImage = theImage;
     }
 
+    @Override
+    public void updateHealth(final int theDamage) {
+        if (Math.random() > myBlockChance) {
+            this.setMyHitPoints(this.getMyHitPoints() - theDamage);
+            if(this.getMyHitPoints() <= 0){
+                setMyAlive();
+            }
+        }
+    }
+
     abstract void specialSkill(final DungeonCharacter theTarget);
 
     public double getMyBlockChance() {

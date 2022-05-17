@@ -8,23 +8,54 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PriestessTest {
-    private Priestess testPriestess = new Priestess("testPriestess");
+    private Priestess testHero = new Priestess("testPriestess");
     private Ogre testMonster = new Ogre();
 
     @RepeatedTest(20)
     void testAttackValue() {
-        assertTrue(35 <= testPriestess.attackValue(testMonster) && 60 >= testPriestess.attackValue(testMonster));
+        testHero.setMyHitChance(1.0);
+        assertTrue(25 <= testHero.attackValue(testMonster) && 45 >= testHero.attackValue(testMonster));
     }
 
     @Test
     void testUpdateHealth() {
-        testPriestess.updateHealth(25);
-        assertEquals(50, testPriestess.getMyHitPoints());
+        testHero.setMyBlockChance(0.0);
+        testHero.updateHealth(25);
+        assertEquals(50, testHero.getMyHitPoints());
+    }
+
+    @Test
+    void testSuccessfulBlock() {
+        int healthCheck = testHero.getMyHitPoints();
+        testHero.setMyBlockChance(1.0);
+        testHero.updateHealth(75);
+        assertEquals(healthCheck, testHero.getMyHitPoints());
+    }
+
+    @Test
+    void testIsAliveTrue() {
+        testHero.setMyBlockChance(0.0);
+        testHero.updateHealth(25);
+        assertTrue(testHero.getMyAlive());
     }
 
     @Test
     void testIsAliveFalse() {
-        testPriestess.updateHealth(75);
-        assertFalse(testPriestess.getMyAlive());
+        testHero.updateHealth(75);
+        assertFalse(testHero.getMyAlive());
+    }
+
+    @Test
+    void testSpecialSkill() {
+        testHero.setMyHitPoints(10);
+        testHero.specialSkill(testHero);
+        assertTrue(35 <= testHero.getMyHitPoints() && 60 >= testHero.getMyHitPoints());
+    }
+
+    @Test
+    void testSpecialSkillMaxHealth() {
+        testHero.setMyHitPoints(74);
+        testHero.specialSkill(testHero);
+        assertEquals(75, testHero.getMyHitPoints());
     }
 }
