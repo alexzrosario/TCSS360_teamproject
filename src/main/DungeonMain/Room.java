@@ -27,21 +27,21 @@ public class Room {
     private static String[] monsterArray = {"ogre", "gremlin", "skeleton"};
 
     public Room() {
-        Random r = new Random();
+        Random theRandom = new Random();
         int items = 0;
-        int itemRoll = r.nextInt(10) + 1; // Determining if the room will contain a pit
+        int itemRoll = theRandom.nextInt(10) + 1; // Determining if the room will contain a pit
         if (itemRoll == 1) {
             hasPit = true;
             items++;
             myStringToken = "X";
         }
-        itemRoll = r.nextInt(10) + 1; // Determining if the room will contain a vision potion
+        itemRoll = theRandom.nextInt(10) + 1; // Determining if the room will contain a vision potion
         if (itemRoll == 1) {
             hasVisionPotion = true;
             items++;
             myStringToken = "V";
         }
-        itemRoll = r.nextInt(10) + 1; // Determining if the room will contain a healing potion
+        itemRoll = theRandom.nextInt(10) + 1; // Determining if the room will contain a healing potion
         if (itemRoll == 1) {
             hasHealPotion = true;
             items++;
@@ -52,7 +52,7 @@ public class Room {
         }
         // Determining if the room contains a monster, and randomly decides which monster to use
         if (Math.random() < 0.25) {
-            int monsterRoll = r.nextInt(3);
+            int monsterRoll = theRandom.nextInt(3);
             setMyMonster(new MonsterFactory().createMonster(monsterArray[monsterRoll]));
             setHasMonster(true);
 

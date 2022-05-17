@@ -71,10 +71,6 @@ public abstract class DungeonCharacter {
     }*/
 
     public void updateHealth(final int theDamage){
-       this.setMyHitPoints(this.getMyHitPoints() - theDamage);
-       if(this.getMyHitPoints() <= 0){
-           setMyAlive();
-       }
     }
     public void setMyAlive() {this.myAlive = false;}
 

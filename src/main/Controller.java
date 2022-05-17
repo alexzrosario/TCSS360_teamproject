@@ -8,6 +8,7 @@ import java.util.Random;
 public class Controller {
     private Dungeon myDungeon;
     private Room myCurrRoom;
+    private Monster myCurrMonst;
     private Hero myHero;
     private boolean myGameDone = false;
     private Random r = new Random();
@@ -40,18 +41,22 @@ public class Controller {
     public void moveNorth(){
         myDungeon.moveHero(-1,0);
         traverseDungeon();
+        System.out.println(myDungeon);
     }
     public void moveSouth(){
         myDungeon.moveHero(1,0);
         traverseDungeon();
+        System.out.println(myDungeon);
     }
     public void moveEast(){
         myDungeon.moveHero(0,1);
         traverseDungeon();
+        System.out.println(myDungeon);
     }
     public void moveWest(){
         myDungeon.moveHero(0,-1);
         traverseDungeon();
+        System.out.println(myDungeon);
     }
 
     public void useHealPotion(){
@@ -68,4 +73,27 @@ public class Controller {
     public Room getMyCurrRoom() {
         return myCurrRoom;
     }
+
+    public void heroInfo() {
+        System.out.println("\nName: " + myHero.getMyName());
+        if(myHero instanceof Warrior){
+            System.out.println("Class: Warrior");
+        } else if(myHero instanceof Priestess){
+            System.out.println("Class: Priestess");
+        } else if(myHero instanceof Thief){
+            System.out.println("Class: Thief");
+        }
+        System.out.println("HP: " + myHero.getMyHitPoints());
+        System.out.println("Attack Speed: " + myHero.getMyAttackSpeed());
+        System.out.println("Damage Range: " + myHero.getMyMinDam() +"-"+ myHero.getMyMaxDam());
+        System.out.println("Hit Chance: " + myHero.getMyHitChance()+"\n");
+    }
+
+    public void heroInventory() {
+        System.out.println("\nHealing Potions: " + myHero.getMyHealingPotions());
+        System.out.println("Vision Potions: " + myHero.getMyVisionPotions());
+        System.out.println("Number of Pillars: " + myHero.getMyPillars()+"\n");
+    }
+
+
 }
