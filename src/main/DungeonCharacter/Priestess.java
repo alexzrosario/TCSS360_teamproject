@@ -17,5 +17,17 @@ public class Priestess extends Hero {
         heal = r.nextInt(25, 50+1);
         theTarget.setMyHitPoints(Math.min((getMyHitPoints() + heal), theTarget.getMY_MAX_HEALTH()));
     }
+
+    @Override
+    public void battleMenu(DungeonCharacter theMonster, int theChoice) {
+        switch(theChoice) {
+            case 1 ->
+                    basicAttack(theMonster);
+            case 2 ->
+                    specialSkill(this);
+            default ->
+                    System.out.println("Invalid Choice");
+        }
+    }
 }
 

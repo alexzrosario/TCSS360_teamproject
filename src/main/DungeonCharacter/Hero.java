@@ -56,4 +56,16 @@ public abstract class Hero extends DungeonCharacter {
     public void setMyPillars(int myPillars) {
         this.myPillars = myPillars;
     }
+
+    public void battleMenu(DungeonCharacter theMonster, int theChoice) {
+        switch(theChoice) {
+            case 1 ->
+                basicAttack(theMonster);
+            case 2 ->
+                specialSkill(theMonster);
+            default ->
+                System.out.println("Invalid Choice");
+        }
+    }
+
 }

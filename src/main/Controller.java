@@ -97,6 +97,14 @@ public class Controller {
         System.out.println("Number of Pillars: " + myHero.getMyPillars()+"\n");
     }
 
+    public void saveGame() {
+
+    }
+
+    public void loadGame() {
+
+    }
+
 //    public class ChoiceController implements ActionListener {
 //        public void actionPerformed(ActionEvent event) {
 //            String choice = event.getActionCommand();
