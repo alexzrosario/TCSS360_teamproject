@@ -100,9 +100,9 @@ public class Controller {
 
     public void traverse() {
         Scanner scan = new Scanner(System.in);
-        boolean gameNotDone = true;
+        //boolean gameNotDone = true;
         String dir;
-        while (gameNotDone)   {
+        while (!myGameDone)   {
             System.out.println("Select an option to move the following:\n");
             System.out.println("N for North, S for South, E for East, or W for West");
             System.out.println("H to see hero info");
@@ -139,33 +139,53 @@ public class Controller {
 
     public void checkRoom() {
         Room room;
-        while(myHero.getMyAlive()) {
+        while(!myGameDone) {
             room = getMyCurrRoom();
             if(room.isHasAbstractionPillar()) {
                 myHero.setMyPillars(myHero.getMyPillars() + 1);
+                System.out.println("You have found the Pillar of Abstraction!");
+                room.setHasAbstractionPillar(false);
             }
             if(room.isHasEncapsulationPillar()) {
                 myHero.setMyPillars(myHero.getMyPillars() + 1);
+                System.out.println("You have found the Pillar of Encapsulation!");
+                room.setHasEncapsulationPillar(false);
             }
             if(room.isHasInheritancePillar()) {
                 myHero.setMyPillars(myHero.getMyPillars() + 1);
+                System.out.println("You have found the Pillar of Inheritance!");
+                room.setHasInheritancePillar(false);
             }
             if(room.isHasPolymorphismPillar()) {
                 myHero.setMyPillars(myHero.getMyPillars() + 1);
+                System.out.println("You have found the Pillar of Polymorphism!");
+                room.setHasPolymorphismPillar(false);
             }
             if(room.isHasPit()) {
-                myHero.updateHealth(myHero.pitDamage());
+                int pitDamageTaken = myHero.pitDamage();
+                double tempBlockChance = myHero.getMyBlockChance();
+                myHero.setMyBlockChance(0.0);
+                myHero.updateHealth(pitDamageTaken);
+                myHero.setMyBlockChance(tempBlockChance);
+                System.out.println("You have fallen into a pit and have taken " + pitDamageTaken + " damage!");
+                room.setHasPit(false);
             }
             if(room.isHasHealPotion()) {
-                myHero.setMyHealingPotions(myHero.getMyHealingPotions() - 1);
+                myHero.setMyHealingPotions(myHero.getMyHealingPotions() + 1);
+                System.out.println("You have found a healing potion!");
+                room.setHasHealPotion(false);
             }
             if(room.isHasVisionPotion()) {
                 myHero.setMyVisionPotions(myHero.getMyVisionPotions() + 1);
+                System.out.println("You have found a vision potion!");
+                room.setHasVisionPotion(false);
             }
             if(room.isHasMonster()) {
                 Monster theMonster = room.getMyMonster();
-                battle(myHero, theMonster);
+                System.out.println("You have encountered a " + theMonster.getMyName() + "!");
+                //battle(myHero, theMonster);
                 room.setMyMonster(null);
+                room.setHasMonster(false);
             }
             if(room.isExit()) {
                 if(myHero.getMyPillars() < 4) {
@@ -173,6 +193,7 @@ public class Controller {
                 }
                 else {
                     myGameDone = true;
+                    System.out.println("you win!");
                 }
             }
             traverse();

@@ -72,9 +72,7 @@ public abstract class Hero extends DungeonCharacter {
     public int pitDamage() {
         Random r = new Random();
         int damageRoll = 0;
-        if (Math.random() <= this.getMyHitChance()) {
-            damageRoll = r.nextInt(1, 20);
-        }
+        damageRoll = r.nextInt(1, 20);
         return damageRoll;
     }
 
