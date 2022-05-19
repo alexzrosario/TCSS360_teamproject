@@ -183,7 +183,7 @@ public class Controller {
             if(room.isHasMonster()) {
                 Monster theMonster = room.getMyMonster();
                 System.out.println("You have encountered a " + theMonster.getMyName() + "!");
-                //battle(myHero, theMonster);
+                battle(myHero, theMonster);
                 room.setMyMonster(null);
                 room.setHasMonster(false);
             }
