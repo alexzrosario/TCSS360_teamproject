@@ -18,12 +18,15 @@ public class Controller {
         switch (theClass){
             case 1: // warrior
                 myHero = new Warrior(theName);
+                myGameDone = false;
                 break;
             case 2: // priestess
                 myHero = new Priestess(theName);
+                myGameDone = false;
                 break;
             case 3: // thief
                 myHero = new Thief(theName);
+                myGameDone = false;
                 break;
         }
 
@@ -60,13 +63,22 @@ public class Controller {
 
     public void useHealPotion(){
         int maxHealth = myHero.getMY_MAX_HEALTH();
-        if(myHero.getMyHealingPotions()>0){
+        if(myHero.getMyHealingPotions()>0 && myHero.getMyHitPoints() < myHero.getMY_MAX_HEALTH()){
             int heal = r.nextInt((int) (.05*maxHealth),(int) (.1*maxHealth)); // can change later
             myHero.setMyHealingPotions(myHero.getMyHealingPotions()-1);
             //call to add heal from healing potion
             myHero.setMyHitPoints(Math.min((myHero.getMyHitPoints() + heal), myHero.getMY_MAX_HEALTH()));
         }
-        System.out.println("No Healing Potions To Use");
+        else if (myHero.getMyHealingPotions()>0 && myHero.getMyHitPoints() == myHero.getMY_MAX_HEALTH())
+            System.out.println("You are already at full health");
+        else System.out.println("No Healing Potions To Use");
+    }
+
+    public int pitDamage() {
+        Random r = new Random();
+        int damageRoll = 0;
+        damageRoll = r.nextInt(1, 15) + 1;
+        return damageRoll;
     }
 
     public Room getMyCurrRoom() {
@@ -89,9 +101,27 @@ public class Controller {
     }
 
     public void heroInventory() {
-        System.out.println("\nHealing Potions: " + myHero.getMyHealingPotions());
-        System.out.println("Vision Potions: " + myHero.getMyVisionPotions());
-        System.out.println("Number of Pillars: " + myHero.getMyPillars()+"\n");
+        boolean inventoryHelper = true;
+        Scanner scan = new Scanner(System.in);
+        while (inventoryHelper){
+            System.out.println("\nHealing Potions: " + myHero.getMyHealingPotions());
+            System.out.println("Vision Potions: " + myHero.getMyVisionPotions());
+            System.out.println("Number of Pillars: " + myHero.getMyPillars() + "\n");
+            System.out.println("B to use a Healing Potion");
+            System.out.println("V to use a Vision Potion");
+            System.out.println("C to close the inventory screen");
+            String input = scan.next();
+            switch (input){
+                case "B" :
+                    useHealPotion();
+                    break;
+                case "V" :
+                    break;
+                case "C" :
+                    inventoryHelper = false;
+            }
+        }
+        System.out.println(myDungeon);
     }
 
     public boolean isAlive() {
@@ -162,13 +192,14 @@ public class Controller {
                 room.setHasPolymorphismPillar(false);
             }
             if(room.isHasPit()) {
-                int pitDamageTaken = myHero.pitDamage();
+                int pitDamageTaken = pitDamage();
                 double tempBlockChance = myHero.getMyBlockChance();
                 myHero.setMyBlockChance(0.0);
                 myHero.updateHealth(pitDamageTaken);
                 myHero.setMyBlockChance(tempBlockChance);
                 System.out.println("You have fallen into a pit and have taken " + pitDamageTaken + " damage!");
                 room.setHasPit(false);
+                if (!myHero.getMyAlive()) myGameDone = true;
             }
             if(room.isHasHealPotion()) {
                 myHero.setMyHealingPotions(myHero.getMyHealingPotions() + 1);
@@ -186,6 +217,7 @@ public class Controller {
                 battle(myHero, theMonster);
                 room.setMyMonster(null);
                 room.setHasMonster(false);
+                System.out.println(myDungeon);
             }
             if(room.isExit()) {
                 if(myHero.getMyPillars() < 4) {
@@ -204,6 +236,8 @@ public class Controller {
         Scanner scan = new Scanner(System.in);
         int myChoice;
         while(theHero.getMyAlive() && theMonster.getMyAlive()) {
+            System.out.println(theHero.getMyName() + " health: " + theHero.getMyHitPoints());
+            System.out.println(theMonster.getMyName() + " health: " + theMonster.getMyHitPoints());
             System.out.println("Attack: 1");
             System.out.println("Special Attack: 2");
             System.out.println("Use Health Potion: 3\n" + "Potions Remaining: " + theHero.getMyHealingPotions());

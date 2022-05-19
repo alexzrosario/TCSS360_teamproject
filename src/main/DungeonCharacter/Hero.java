@@ -25,6 +25,7 @@ public abstract class Hero extends DungeonCharacter {
                 setMyAlive();
             }
         }
+        else System.out.println(getMyName() + " blocked the attack");
     }
 
     abstract void specialSkill(final DungeonCharacter theTarget);
@@ -69,12 +70,12 @@ public abstract class Hero extends DungeonCharacter {
         this.myPillars = myPillars;
     }
 
-    public int pitDamage() {
+    /*public int pitDamage() {
         Random r = new Random();
         int damageRoll = 0;
         damageRoll = r.nextInt(1, 20);
         return damageRoll;
-    }
+    }*/
 
     public void battleMenu(DungeonCharacter theMonster, int theChoice) {
         switch(theChoice) {

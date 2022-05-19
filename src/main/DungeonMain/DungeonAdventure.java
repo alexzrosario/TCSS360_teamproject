@@ -63,8 +63,8 @@ public class DungeonAdventure {
         }
     }
     public void play(){
-        while(controller.isAlive()) {
+        //while(controller.isAlive()) {
             controller.traverse();
-        }
+        //}
     }
 }
