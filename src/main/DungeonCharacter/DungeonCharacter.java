@@ -40,10 +40,10 @@ public abstract class DungeonCharacter {
         if (Math.random() <= this.getMyHitChance()) {
             damageRoll = r.nextInt(this.getMyMinDam(), this.getMyMaxDam() + 1);
             //damageCheck(damageRoll,theTarget);
+            System.out.println(myName + " hits for " + damageRoll + " damage");
             theTarget.updateHealth(damageRoll);
         }
-        //for testing - correct damage
-        System.out.println(damageRoll);
+        else System.out.println(myName + " missed their attack");
         return damageRoll;
     }
 
