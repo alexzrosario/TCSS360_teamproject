@@ -63,32 +63,10 @@ public class DungeonAdventure {
         }
     }
     public void play(){
-        Room room;
-        while(controller.getMyAlive()) {
-            room = controller.getMyCurrRoom();
-            if(room.isHasAbstractionPillar()) {
-
-            }
-            if(room.isHasEncapsulationPillar()) {
-
-            }
-            if(room.isHasInheritancePillar()) {
-
-            }
-            if(room.isHasPolymorphismPillar()) {
-
-            }
-            if(room.isHasPit()) {
-
-            }
-            if(room.isHasHealPotion()) {
-
-            }
-            if(room.isHasVisionPotion()) {
-
-            }
+        while(controller.isAlive()) {
+            controller.checkRoom();
+            traverse();
         }
-
     }
 
     private void traverse() {
@@ -122,26 +100,6 @@ public class DungeonAdventure {
                     break;
                 default:
                     break;
-            }
-        }
-    }
-
-    private void battle(Hero theHero, Monster theMonster) {
-        Scanner scan = new Scanner(System.in);
-        int myChoice;
-        while(theHero.getMyAlive() && theMonster.getMyAlive()) {
-            System.out.println("Attack: 1");
-            System.out.println("Special Attack: 2");
-            System.out.println("Use Health Potion: 3\n" + "Potions Remaining: " + theHero.getMyHealingPotions());
-            myChoice = scan.nextInt();
-            if(myChoice == 3 && theHero.getMyHealingPotions() > 0) {
-                controller.useHealPotion();
-            } else if (myChoice == 3 && theHero.getMyHealingPotions() == 0){
-                System.out.println("You have no health potions remaining!");
-            }
-            theHero.battleMenu(theMonster, myChoice);
-            if(theMonster.getMyAlive()) {
-                theMonster.basicAttack(theHero);
             }
         }
     }
