@@ -4,6 +4,7 @@ import main.DungeonCharacter.*;
 import main.DungeonMain.*;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class Controller {
     private Dungeon myDungeon;
@@ -93,8 +94,72 @@ public class Controller {
         System.out.println("Number of Pillars: " + myHero.getMyPillars()+"\n");
     }
 
-    public boolean getMyAlive() {
+    public boolean isAlive() {
         return myHero.getMyAlive();
+    }
+
+    public void checkRoom() {
+        Room room;
+        while(myHero.getMyAlive()) {
+            room = getMyCurrRoom();
+            if(room.isHasAbstractionPillar()) {
+                myHero.setMyPillars(myHero.getMyPillars() + 1);
+            }
+            if(room.isHasEncapsulationPillar()) {
+                myHero.setMyPillars(myHero.getMyPillars() + 1);
+            }
+            if(room.isHasInheritancePillar()) {
+                myHero.setMyPillars(myHero.getMyPillars() + 1);
+            }
+            if(room.isHasPolymorphismPillar()) {
+                myHero.setMyPillars(myHero.getMyPillars() + 1);
+            }
+            if(room.isHasPit()) {
+                myHero.updateHealth(myHero.pitDamage());
+            }
+            if(room.isHasHealPotion()) {
+                myHero.setMyHealingPotions(myHero.getMyHealingPotions() - 1);
+            }
+            if(room.isHasVisionPotion()) {
+                myHero.setMyVisionPotions(myHero.getMyVisionPotions() + 1);
+            }
+            if(room.isHasMonster()) {
+                Monster theMonster = room.getMyMonster();
+                battle(myHero, theMonster);
+                room.setMyMonster(null);
+            }
+            if(room.isExit()) {
+                if(myHero.getMyPillars() < 4) {
+                    System.out.println("You have not collected all the pillars!");
+                }
+                else {
+                    myGameDone = true;
+                }
+            }
+        }
+    }
+
+    private void battle(Hero theHero, Monster theMonster) {
+        Scanner scan = new Scanner(System.in);
+        int myChoice;
+        while(theHero.getMyAlive() && theMonster.getMyAlive()) {
+            System.out.println("Attack: 1");
+            System.out.println("Special Attack: 2");
+            System.out.println("Use Health Potion: 3\n" + "Potions Remaining: " + theHero.getMyHealingPotions());
+            myChoice = scan.nextInt();
+            if(myChoice == 3 && theHero.getMyHealingPotions() > 0) {
+                useHealPotion();
+            } else if (myChoice == 3 && theHero.getMyHealingPotions() == 0){
+                System.out.println("You have no health potions remaining!");
+            }
+            theHero.battleMenu(theMonster, myChoice);
+            if(theMonster.getMyAlive()) {
+                theMonster.basicAttack(theHero);
+                if(!theHero.getMyAlive()) {
+                    myGameDone = true;
+                }
+            }
+        }
     }
 
     public void saveGame() {
