@@ -157,7 +157,7 @@ public class Controller {
                 myHero.updateHealth(myHero.pitDamage());
             }
             if(room.isHasHealPotion()) {
-                myHero.setMyHealingPotions(myHero.getMyHealingPotions() - 1);
+                myHero.setMyHealingPotions(myHero.getMyHealingPotions() + 1);
             }
             if(room.isHasVisionPotion()) {
                 myHero.setMyVisionPotions(myHero.getMyVisionPotions() + 1);
