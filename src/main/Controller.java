@@ -98,6 +98,45 @@ public class Controller {
         return myHero.getMyAlive();
     }
 
+    public void traverse() {
+        Scanner scan = new Scanner(System.in);
+        boolean gameNotDone = true;
+        String dir;
+        while (gameNotDone)   {
+            System.out.println("Select an option to move the following:\n");
+            System.out.println("N for North, S for South, E for East, or W for West");
+            System.out.println("H to see hero info");
+            System.out.println("I to open hero inventory");
+            dir = scan.next();
+            switch (dir){
+                case "N" :
+                    moveNorth();
+                    checkRoom();
+                    break;
+                case "S" :
+                    moveSouth();
+                    checkRoom();
+                    break;
+                case "E":
+                    moveEast();
+                    checkRoom();
+                    break;
+                case "W":
+                    moveWest();
+                    checkRoom();
+                    break;
+                case "H":
+                    heroInfo();
+                    break;
+                case "I":
+                    heroInventory();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
     public void checkRoom() {
         Room room;
         while(myHero.getMyAlive()) {
@@ -136,6 +175,7 @@ public class Controller {
                     myGameDone = true;
                 }
             }
+            traverse();
         }
     }
 

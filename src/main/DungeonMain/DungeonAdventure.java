@@ -64,43 +64,7 @@ public class DungeonAdventure {
     }
     public void play(){
         while(controller.isAlive()) {
-            controller.checkRoom();
-            traverse();
-        }
-    }
-
-    private void traverse() {
-        Scanner scan = new Scanner(System.in);
-        boolean gameNotDone = true;
-        String dir;
-        while (gameNotDone)   {
-            System.out.println("Select an option to move the following:\n");
-            System.out.println("N for North, S for South, E for East, or W for West");
-            System.out.println("H to see hero info");
-            System.out.println("I to open hero inventory");
-            dir = scan.next();
-            switch (dir){
-                case "N" :
-                    controller.moveNorth();
-                    break;
-                case "S" :
-                    controller.moveSouth();
-                    break;
-                case "E":
-                    controller.moveEast();
-                    break;
-                case "W":
-                    controller.moveWest();
-                    break;
-                case "H":
-                    controller.heroInfo();
-                    break;
-                case "I":
-                    controller.heroInventory();
-                    break;
-                default:
-                    break;
-            }
+            controller.traverse();
         }
     }
 }
