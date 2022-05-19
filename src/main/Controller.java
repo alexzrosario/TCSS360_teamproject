@@ -1,12 +1,8 @@
 package main;
 
 import main.DungeonCharacter.*;
-import main.DungeonGUI.DungeonUI;
-import main.DungeonGUI.DungeonUIManager;
 import main.DungeonMain.*;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Random;
 
 public class Controller {
@@ -95,6 +91,10 @@ public class Controller {
         System.out.println("\nHealing Potions: " + myHero.getMyHealingPotions());
         System.out.println("Vision Potions: " + myHero.getMyVisionPotions());
         System.out.println("Number of Pillars: " + myHero.getMyPillars()+"\n");
+    }
+
+    public boolean getMyAlive() {
+        return myHero.getMyAlive();
     }
 
     public void saveGame() {

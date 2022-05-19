@@ -21,6 +21,7 @@ public class DungeonAdventure {
             choice = scan.next();
             switch (choice){
                 case "1" :
+                    chooseHero();
                     play();
                     break;
                 case "2" :
@@ -35,7 +36,7 @@ public class DungeonAdventure {
         }
     }
 
-    public void play(){
+    public void chooseHero() {
         Scanner scan = new Scanner(System.in);
         String name;
         String theClass;
@@ -46,21 +47,46 @@ public class DungeonAdventure {
         System.out.println("To play the Priestess: 2");
         System.out.println("To play the Thief: 3");
         theClass = scan.next();
-        switch (theClass){
-            case "1" :
+        switch (theClass) {
+            case "1" -> {
                 controller.startGame(name, 1);
-                traverse();
-                break;
-            case "2" :
+            }
+            case "2" -> {
                 controller.startGame(name, 2);
-                traverse();
-                break;
-            case "3":
+            }
+            case "3" -> {
                 controller.startGame(name, 3);
-                traverse();
-                break;
-            default:
-                break;
+            }
+            default -> {
+                System.out.println("Invalid Input");
+            }
+        }
+    }
+    public void play(){
+        Room room;
+        while(controller.getMyAlive()) {
+            room = controller.getMyCurrRoom();
+            if(room.isHasAbstractionPillar()) {
+
+            }
+            if(room.isHasEncapsulationPillar()) {
+
+            }
+            if(room.isHasInheritancePillar()) {
+
+            }
+            if(room.isHasPolymorphismPillar()) {
+
+            }
+            if(room.isHasPit()) {
+
+            }
+            if(room.isHasHealPotion()) {
+
+            }
+            if(room.isHasVisionPotion()) {
+
+            }
         }
 
     }
