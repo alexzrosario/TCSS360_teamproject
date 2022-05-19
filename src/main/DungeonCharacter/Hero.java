@@ -1,5 +1,7 @@
 package main.DungeonCharacter;
 
+import java.util.Random;
+
 public abstract class Hero extends DungeonCharacter {
     private double myBlockChance;
     private String myImage;
@@ -65,6 +67,15 @@ public abstract class Hero extends DungeonCharacter {
 
     public void setMyPillars(int myPillars) {
         this.myPillars = myPillars;
+    }
+
+    public int pitDamage() {
+        Random r = new Random();
+        int damageRoll = 0;
+        if (Math.random() <= this.getMyHitChance()) {
+            damageRoll = r.nextInt(1, 20);
+        }
+        return damageRoll;
     }
 
     public void battleMenu(DungeonCharacter theMonster, int theChoice) {
