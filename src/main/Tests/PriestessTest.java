@@ -41,6 +41,7 @@ class PriestessTest {
 
     @Test
     void testIsAliveFalse() {
+        testHero.setMyBlockChance(0.0);
         testHero.updateHealth(75);
         assertFalse(testHero.getMyAlive());
     }
