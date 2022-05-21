@@ -1,14 +1,15 @@
 package main.Tests;
 
-import main.DungeonCharacter.Skeleton;
+import main.DungeonCharacter.Monster;
 import main.DungeonCharacter.Warrior;
+import main.DungeonCharacter.MonsterFactory;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class SkeletonTest {
-    private Skeleton testMonster = new Skeleton();
+    private Monster testMonster = new MonsterFactory().createMonster("skeleton");
     private Warrior testHero = new Warrior("testWarrior");
 
     @RepeatedTest(20)
