@@ -43,8 +43,8 @@ public class MonsterFactory {
                 int minDam = rs.getInt( "MIND" );
                 int maxDam = rs.getInt( "MADAM" );
                 int attkSpeed = rs.getInt( "SPEED" );
-                int hitChance = rs.getInt( "HITCHANCE" );
-                int healChance = rs.getInt( "HEALCHANCE" );
+                float hitChance = rs.getFloat( "HITCHANCE" );
+                float healChance = rs.getFloat( "HEALCHANCE" );
                 int minHeal = rs.getInt( "MINHEAL" );
                 int maxHeal = rs.getInt( "MAXHEAL" );
 

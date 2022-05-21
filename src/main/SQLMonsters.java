@@ -51,8 +51,8 @@ public class SQLMonsters {
                 "MIND INTEGER,"+
                 "MADAM INTEGER,"+
                 "SPEED INTEGER,"+
-                "HITCHANCE INTEGER,"+
-                "HEALCHANCE INTEGER,"+
+                "HITCHANCE FLOAT ,"+
+                "HEALCHANCE FLOAT,"+
                 "MINHEAL INTEGER,"+
                 "MAXHEAL INTEGER)";
         try ( Connection conn = ds.getConnection();
@@ -106,8 +106,8 @@ public class SQLMonsters {
                 int minDam = rs.getInt( "MIND" );
                 int maxDam = rs.getInt( "MADAM" );
                 int attkSpeed = rs.getInt( "SPEED" );
-                int hitChance = rs.getInt( "HITCHANCE" );
-                int healChance = rs.getInt( "HEALCHANCE" );
+                float hitChance = rs.getFloat( "HITCHANCE" );
+                float healChance = rs.getFloat( "HEALCHANCE" );
                 int minHeal = rs.getInt( "MINHEAL" );
                 int maxHeal = rs.getInt( "MAXHEAL" );
 
