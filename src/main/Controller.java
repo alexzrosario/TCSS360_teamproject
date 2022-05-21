@@ -74,6 +74,37 @@ public class Controller {
         else System.out.println("No Healing Potions To Use");
     }
 
+    public void useVisionPotion() {
+        if (myHero.getMyVisionPotions() > 0) {
+            if (myCurrRoom.getMyNorthRoom() != null) {
+                myCurrRoom.getMyNorthRoom().setSeen(true);
+            }
+            if (myCurrRoom.getMySouthRoom() != null) {
+                myCurrRoom.getMySouthRoom().setSeen(true);
+            }
+            if (myCurrRoom.getMyWestRoom() != null) {
+                myCurrRoom.getMyWestRoom().setSeen(true);
+            }
+            if (myCurrRoom.getMyEastRoom() != null) {
+                myCurrRoom.getMyEastRoom().setSeen(true);
+            }
+            if (myCurrRoom.getMyNorthRoom() != null && myCurrRoom.getMyNorthRoom().getMyWestRoom() != null) {
+                myCurrRoom.getMyNorthRoom().getMyWestRoom().setSeen(true);
+            }
+            if (myCurrRoom.getMySouthRoom() != null && myCurrRoom.getMySouthRoom().getMyWestRoom() != null) {
+                myCurrRoom.getMySouthRoom().getMyWestRoom().setSeen(true);
+            }
+            if (myCurrRoom.getMyNorthRoom() != null && myCurrRoom.getMyNorthRoom().getMyEastRoom() != null) {
+                myCurrRoom.getMyNorthRoom().getMyEastRoom().setSeen(true);
+            }
+            if (myCurrRoom.getMySouthRoom() != null && myCurrRoom.getMySouthRoom().getMyEastRoom() != null) {
+                myCurrRoom.getMySouthRoom().getMyEastRoom().setSeen(true);
+            }
+            myHero.setMyVisionPotions(myHero.getMyVisionPotions() - 1);
+        }
+        else System.out.println("No Vision Potions To Use");
+    }
+
     public int pitDamage() {
         Random r = new Random();
         int damageRoll = 0;
@@ -116,6 +147,7 @@ public class Controller {
                     useHealPotion();
                     break;
                 case "V" :
+                    useVisionPotion();
                     break;
                 case "C" :
                     inventoryHelper = false;
@@ -140,18 +172,34 @@ public class Controller {
             dir = scan.next();
             switch (dir){
                 case "N" :
+                    /*if (myCurrRoom.getMyNorthRoom() != null) {
+                        moveNorth();
+                        checkRoom();
+                    }*/
                     moveNorth();
                     checkRoom();
                     break;
                 case "S" :
+                    /*if (myCurrRoom.getMySouthRoom() != null) {
+                        moveSouth();
+                        checkRoom();
+                    }*/
                     moveSouth();
                     checkRoom();
                     break;
                 case "E":
+                    /*if (myCurrRoom.getMyEastRoom() != null) {
+                        moveEast();
+                        checkRoom();
+                    }*/
                     moveEast();
                     checkRoom();
                     break;
                 case "W":
+                    /*if (myCurrRoom.getMyWestRoom() != null) {
+                        moveWest();
+                        checkRoom();
+                    }*/
                     moveWest();
                     checkRoom();
                     break;

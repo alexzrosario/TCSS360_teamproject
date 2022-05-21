@@ -151,6 +151,8 @@ public class Dungeon {
         myDungeon[row][col].setHasHealPotion(false);
         myDungeon[row][col].setHasVisionPotion(false);
         myDungeon[row][col].setHasPit(false);
+        myDungeon[row][col].setHasMonster(false);
+        myDungeon[row][col].setMyMonster(null);
     }
 
     public void moveHero(int rowDirection, int colDirection) {
@@ -186,12 +188,14 @@ public class Dungeon {
         String s = "*";
         for (int i = 0; i < myDungeonRows; i++) {
             //s += myDungeon[theRow][i].getMyStringToken(); show all tokens
-            if (myDungeon[theRow][i].getMyStringToken() == "i") {
+            if (myDungeon[theRow][i].getMyStringToken().equals("i")) {
                 s += "h";
-            }else if(myDungeon[theRow][i].getMyStringToken()== "h") {
+            }else if(myDungeon[theRow][i].getMyStringToken().equals("h")) {
                 s += "h";
-            }else if(myDungeon[theRow][i].getMyStringToken()== "v") {
+            }else if(myDungeon[theRow][i].getMyStringToken().equals("v")) {
                 s += "v";
+            }else if(myDungeon[theRow][i].isSeen()) {
+                s += myDungeon[theRow][i].getMyStringToken();
             }else {
                 s += " ";
             } // empty dungeon

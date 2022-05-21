@@ -22,6 +22,7 @@ public class Room {
     private boolean isVisited = false;
     private boolean isBuilt = false;
     private boolean hasMonster = false;
+    private boolean isSeen = false;
     private Monster myMonster;
     private String myStringToken = " ";
     private static String[] monsterArray = {"ogre", "gremlin", "skeleton"};
@@ -51,13 +52,13 @@ public class Room {
             myStringToken = "M";
         }
         // Determining if the room contains a monster, and randomly decides which monster to use
-        if (Math.random() < 0.25) {
-            int monsterRoll = theRandom.nextInt(3);
-            setMyMonster(new MonsterFactory().createMonster(monsterArray[monsterRoll]));
-            setHasMonster(true);
+        //if (Math.random() < 0.25) {
+        //    int monsterRoll = theRandom.nextInt(3);
+        //    setMyMonster(new MonsterFactory().createMonster(monsterArray[monsterRoll]));
+        //    setHasMonster(true);
 
-            myStringToken = "m"; // temp string token to indicate if a monster exists in the room
-        }
+            //myStringToken = "m"; // temp string token to indicate if a monster exists in the room
+        //}
     }
 
     public String toString() {
@@ -221,5 +222,13 @@ public class Room {
 
     public void setMyMonster(Monster myMonster) {
         this.myMonster = myMonster;
+    }
+
+    public boolean isSeen() {
+        return isSeen;
+    }
+
+    public void setSeen(boolean seen) {
+        isSeen = seen;
     }
 }
