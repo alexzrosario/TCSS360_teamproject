@@ -166,42 +166,54 @@ public class Controller {
         String dir;
         while (!myGameDone)   {
             System.out.println("Select an option to move the following:\n");
-            System.out.println("N for North, S for South, E for East, or W for West");
+            //System.out.println("N for North, S for South, E for East, or W for West");
+            if (myCurrRoom.getMyNorthRoom() != null) {
+                System.out.println("N to traverse North");
+            }
+            if (myCurrRoom.getMySouthRoom() != null) {
+                System.out.println("S to traverse South");
+            }
+            if (myCurrRoom.getMyWestRoom() != null) {
+                System.out.println("W to traverse West");
+            }
+            if (myCurrRoom.getMyEastRoom() != null) {
+                System.out.println("E to traverse East");
+            }
             System.out.println("H to see hero info");
             System.out.println("I to open hero inventory");
             dir = scan.next();
             switch (dir){
                 case "N" :
-                    /*if (myCurrRoom.getMyNorthRoom() != null) {
+                    if (myCurrRoom.getMyNorthRoom() != null) {
                         moveNorth();
                         checkRoom();
-                    }*/
-                    moveNorth();
-                    checkRoom();
+                    }
+                    //moveNorth();
+                    //checkRoom();
                     break;
                 case "S" :
-                    /*if (myCurrRoom.getMySouthRoom() != null) {
+                    if (myCurrRoom.getMySouthRoom() != null) {
                         moveSouth();
                         checkRoom();
-                    }*/
-                    moveSouth();
-                    checkRoom();
+                    }
+                    //moveSouth();
+                    //checkRoom();
                     break;
                 case "E":
-                    /*if (myCurrRoom.getMyEastRoom() != null) {
+                    if (myCurrRoom.getMyEastRoom() != null) {
                         moveEast();
                         checkRoom();
-                    }*/
-                    moveEast();
-                    checkRoom();
+                    }
+                    //moveEast();
+                    //checkRoom();
                     break;
                 case "W":
-                    /*if (myCurrRoom.getMyWestRoom() != null) {
+                    if (myCurrRoom.getMyWestRoom() != null) {
                         moveWest();
                         checkRoom();
-                    }*/
-                    moveWest();
-                    checkRoom();
+                    }
+                    //moveWest();
+                    //checkRoom();
                     break;
                 case "H":
                     heroInfo();
