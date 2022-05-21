@@ -8,5 +8,4 @@ public class Main {
         DungeonAdventure v = new DungeonAdventure();
         v.start();
     }
-
 }
