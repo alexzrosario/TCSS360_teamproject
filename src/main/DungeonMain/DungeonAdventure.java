@@ -27,6 +27,7 @@ public class DungeonAdventure implements Serializable {
                     break;
                 case "2" :
                     controller.useLoad();
+                    play();
                     break;
                 case "q":
                     quit = true;
@@ -80,6 +81,7 @@ public class DungeonAdventure implements Serializable {
         } catch (IOException i) {
             i.printStackTrace();
         }
+        controller = null;
     }
 
     public void loadGame() {
