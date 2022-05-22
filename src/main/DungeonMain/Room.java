@@ -3,9 +3,10 @@ package main.DungeonMain;
 import main.DungeonCharacter.Monster;
 import main.DungeonCharacter.MonsterFactory;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Room {
+public class Room implements Serializable {
     private Room myNorthRoom;
     private Room myEastRoom;
     private Room mySouthRoom;

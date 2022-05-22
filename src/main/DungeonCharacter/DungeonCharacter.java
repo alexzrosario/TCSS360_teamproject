@@ -1,9 +1,10 @@
 package main.DungeonCharacter;
 
 
+import java.io.Serializable;
 import java.util.Random;
 
-public abstract class DungeonCharacter {
+public abstract class DungeonCharacter implements Serializable {
     private String myName;
     private int myHitPoints;
     private int myMinDam;

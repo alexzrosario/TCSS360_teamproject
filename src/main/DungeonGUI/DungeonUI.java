@@ -3,6 +3,7 @@ package main.DungeonGUI;
 import main.Controller;
 import main.DungeonCharacter.*;
 import main.DungeonMain.Dungeon;
+import main.DungeonMain.DungeonAdventure;
 
 import javax.swing.*;
 import java.awt.*;
@@ -48,7 +49,8 @@ public class DungeonUI extends JPanel{
     final private String[] heroes = {"None","Warrior", "Priestess", "Thief"};
     private String name = "";
     private String userClass = "";
-    private Controller controller = new Controller();
+    DungeonAdventure dummy = new DungeonAdventure();
+    private Controller controller = new Controller(dummy);
     ChoiceController handleChoice = new ChoiceController();
     private DungeonUIManager um = new DungeonUIManager(this);
     public void DungeonUI() throws IOException {

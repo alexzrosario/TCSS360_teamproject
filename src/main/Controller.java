@@ -7,13 +7,16 @@ import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Controller {
+public class Controller implements Serializable{
     private Dungeon myDungeon;
     private Room myCurrRoom;
     private Hero myHero;
     private boolean myGameDone = false;
     private Random r = new Random();
-    public Controller(){}
+    private DungeonAdventure myDungeonAdventure;
+    public Controller(DungeonAdventure theDungeonAdventure){
+        myDungeonAdventure = theDungeonAdventure;
+    }
 
     public void startGame(final String theName, final int theClass){
         switch (theClass){
@@ -154,6 +157,10 @@ public class Controller {
                     break;
                 case "C" :
                     inventoryHelper = false;
+                    break;
+                case "S" :
+                    useSave();
+                    break;
             }
         }
         System.out.println(myDungeon);
@@ -318,6 +325,14 @@ public class Controller {
                 }
             }
         }
+    }
+
+    public void useSave() {
+        myDungeonAdventure.saveGame();
+    }
+
+    public void useLoad() {
+        myDungeonAdventure.loadGame();
     }
 
 

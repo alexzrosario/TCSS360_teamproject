@@ -7,8 +7,8 @@ import main.DungeonCharacter.Monster;
 import java.io.*;
 import java.util.Scanner;
 
-public class DungeonAdventure {
-    Controller controller = new Controller();
+public class DungeonAdventure implements Serializable {
+    private Controller controller = new Controller(this);
     public void start(){
         boolean quit = false;
         System.out.println("Welcome to the Dungeon\n");
@@ -26,7 +26,7 @@ public class DungeonAdventure {
                     play();
                     break;
                 case "2" :
-                    System.out.println("2");
+                    controller.useLoad();
                     break;
                 case "q":
                     quit = true;

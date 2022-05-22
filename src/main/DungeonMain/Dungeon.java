@@ -1,8 +1,9 @@
 package main.DungeonMain;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Dungeon {
+public class Dungeon implements Serializable {
     private Room[][] myDungeon;
     //private Room myHeroPosition;
     private int myHeroRow;
