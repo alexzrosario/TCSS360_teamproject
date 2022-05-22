@@ -74,6 +74,37 @@ public class Controller {
         else System.out.println("No Healing Potions To Use");
     }
 
+    public void useVisionPotion() {
+        if (myHero.getMyVisionPotions() > 0) {
+            if (myCurrRoom.getMyNorthRoom() != null) {
+                myCurrRoom.getMyNorthRoom().setSeen(true);
+            }
+            if (myCurrRoom.getMySouthRoom() != null) {
+                myCurrRoom.getMySouthRoom().setSeen(true);
+            }
+            if (myCurrRoom.getMyWestRoom() != null) {
+                myCurrRoom.getMyWestRoom().setSeen(true);
+            }
+            if (myCurrRoom.getMyEastRoom() != null) {
+                myCurrRoom.getMyEastRoom().setSeen(true);
+            }
+            if (myCurrRoom.getMyNorthRoom() != null && myCurrRoom.getMyNorthRoom().getMyWestRoom() != null) {
+                myCurrRoom.getMyNorthRoom().getMyWestRoom().setSeen(true);
+            }
+            if (myCurrRoom.getMySouthRoom() != null && myCurrRoom.getMySouthRoom().getMyWestRoom() != null) {
+                myCurrRoom.getMySouthRoom().getMyWestRoom().setSeen(true);
+            }
+            if (myCurrRoom.getMyNorthRoom() != null && myCurrRoom.getMyNorthRoom().getMyEastRoom() != null) {
+                myCurrRoom.getMyNorthRoom().getMyEastRoom().setSeen(true);
+            }
+            if (myCurrRoom.getMySouthRoom() != null && myCurrRoom.getMySouthRoom().getMyEastRoom() != null) {
+                myCurrRoom.getMySouthRoom().getMyEastRoom().setSeen(true);
+            }
+            myHero.setMyVisionPotions(myHero.getMyVisionPotions() - 1);
+        }
+        else System.out.println("No Vision Potions To Use");
+    }
+
     public int pitDamage() {
         Random r = new Random();
         int damageRoll = 0;
@@ -116,6 +147,7 @@ public class Controller {
                     useHealPotion();
                     break;
                 case "V" :
+                    useVisionPotion();
                     break;
                 case "C" :
                     inventoryHelper = false;
@@ -134,26 +166,54 @@ public class Controller {
         String dir;
         while (!myGameDone)   {
             System.out.println("Select an option to move the following:\n");
-            System.out.println("N for North, S for South, E for East, or W for West");
+            //System.out.println("N for North, S for South, E for East, or W for West");
+            if (myCurrRoom.getMyNorthRoom() != null) {
+                System.out.println("N to traverse North");
+            }
+            if (myCurrRoom.getMySouthRoom() != null) {
+                System.out.println("S to traverse South");
+            }
+            if (myCurrRoom.getMyWestRoom() != null) {
+                System.out.println("W to traverse West");
+            }
+            if (myCurrRoom.getMyEastRoom() != null) {
+                System.out.println("E to traverse East");
+            }
             System.out.println("H to see hero info");
             System.out.println("I to open hero inventory");
             dir = scan.next();
             switch (dir){
                 case "N" :
-                    moveNorth();
-                    checkRoom();
+                    if (myCurrRoom.getMyNorthRoom() != null) {
+                        moveNorth();
+                        checkRoom();
+                    }
+                    //moveNorth();
+                    //checkRoom();
                     break;
                 case "S" :
-                    moveSouth();
-                    checkRoom();
+                    if (myCurrRoom.getMySouthRoom() != null) {
+                        moveSouth();
+                        checkRoom();
+                    }
+                    //moveSouth();
+                    //checkRoom();
                     break;
                 case "E":
-                    moveEast();
-                    checkRoom();
+                    if (myCurrRoom.getMyEastRoom() != null) {
+                        moveEast();
+                        checkRoom();
+                    }
+                    //moveEast();
+                    //checkRoom();
                     break;
                 case "W":
-                    moveWest();
-                    checkRoom();
+                    if (myCurrRoom.getMyWestRoom() != null) {
+                        moveWest();
+                        checkRoom();
+                    }
+                    //moveWest();
+                    //checkRoom();
                     break;
                 case "H":
                     heroInfo();

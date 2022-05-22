@@ -1,6 +1,7 @@
 package main.Tests;
 
-import main.DungeonCharacter.Gremlin;
+import main.DungeonCharacter.Monster;
+import main.DungeonCharacter.MonsterFactory;
 import main.DungeonCharacter.Warrior;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -8,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GremlinTest {
-    private Gremlin testMonster = new Gremlin();
+    private Monster testMonster = new MonsterFactory().createMonster("gremlin");
     private Warrior testHero = new Warrior("testWarrior");
 
     @RepeatedTest(20)
