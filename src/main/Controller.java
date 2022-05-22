@@ -69,6 +69,7 @@ public class Controller {
             myHero.setMyHealingPotions(myHero.getMyHealingPotions()-1);
             //call to add heal from healing potion
             myHero.setMyHitPoints(Math.min((myHero.getMyHitPoints() + heal), myHero.getMY_MAX_HEALTH()));
+            System.out.println("You healed for " + heal + " health");
         }
         else if (myHero.getMyHealingPotions()>0 && myHero.getMyHitPoints() == myHero.getMY_MAX_HEALTH())
             System.out.println("You are already at full health");
@@ -102,14 +103,14 @@ public class Controller {
                 myCurrRoom.getMySouthRoom().getMyEastRoom().setSeen(true);
             }
             myHero.setMyVisionPotions(myHero.getMyVisionPotions() - 1);
+            System.out.println("You can see nearby traversable rooms");
         }
         else System.out.println("No Vision Potions To Use");
     }
 
     public int pitDamage() {
         Random r = new Random();
-        int damageRoll = 0;
-        damageRoll = r.nextInt(1, 15) + 1;
+        int damageRoll = r.nextInt(1, 15) + 1;
         return damageRoll;
     }
 

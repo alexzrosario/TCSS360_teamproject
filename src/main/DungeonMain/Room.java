@@ -1,8 +1,8 @@
 package main.DungeonMain;
 
-import main.DungeonCharacter.*;
+import main.DungeonCharacter.Monster;
+import main.DungeonCharacter.MonsterFactory;
 
-import java.sql.SQLOutput;
 import java.util.Random;
 
 public class Room {
@@ -51,7 +51,7 @@ public class Room {
         if (items > 1) {
             myStringToken = "M";
         }
-//         Determining if the room contains a monster, and randomly decides which monster to use
+        // Determining if the room contains a monster, and randomly decides which monster to use
         if (Math.random() < 0.25) {
             int monsterRoll = theRandom.nextInt(3);
             setMyMonster(new MonsterFactory().createMonster(monsterArray[monsterRoll]));
