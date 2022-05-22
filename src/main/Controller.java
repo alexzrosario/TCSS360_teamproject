@@ -3,6 +3,7 @@ package main;
 import main.DungeonCharacter.*;
 import main.DungeonMain.*;
 
+import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -140,6 +141,7 @@ public class Controller {
             System.out.println("Number of Pillars: " + myHero.getMyPillars() + "\n");
             System.out.println("B to use a Healing Potion");
             System.out.println("V to use a Vision Potion");
+            System.out.println("S to Save Game");
             System.out.println("C to close the inventory screen");
             String input = scan.next();
             switch (input){
@@ -317,13 +319,7 @@ public class Controller {
         }
     }
 
-    public void saveGame() {
 
-    }
-
-    public void loadGame() {
-
-    }
 
 //    public class ChoiceController implements ActionListener {
 //        public void actionPerformed(ActionEvent event) {
