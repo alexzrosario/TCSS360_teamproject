@@ -35,7 +35,7 @@ public class SQLMonsters {
         //establish connection (creates db file if it does not exist :-)
         try {
             ds = new SQLiteDataSource();
-            ds.setUrl("jdbc:sqlite:monsters.db");
+            ds.setUrl("jdbc:sqlite:monster.db");
         } catch ( Exception e ) {
             e.printStackTrace();
             System.exit(0);
@@ -44,7 +44,7 @@ public class SQLMonsters {
         System.out.println( "Opened database successfully" );
 
         //now create a table
-        String query = "CREATE TABLE IF NOT EXISTS monsters ( " +
+        String query = "CREATE TABLE IF NOT EXISTS monster ( " +
                 "NAME TEXT, " +
                 "HP INTEGER, " +
                 "MIND INTEGER,"+
@@ -67,9 +67,9 @@ public class SQLMonsters {
         //next insert two rows of data
         System.out.println( "Attempting to insert 3 rows into monsters table" );
 
-        String query1 = "INSERT INTO monsters ( NAME, HP, MIND, MADAM, SPEED, HITCHANCE, HEALCHANCE, MINHEAL, MAXHEAL ) VALUES ( 'Ogre', 200, 30, 60, 2, 0.6, 0.1, 30, 60 )";
-        String query2 = "INSERT INTO monsters ( NAME, HP, MIND, MADAM, SPEED, HITCHANCE, HEALCHANCE, MINHEAL, MAXHEAL ) VALUES ( 'Gremlin', 70, 15, 30, 5, 0.8, 0.4, 20, 40 )";
-        String query3 = "INSERT INTO monsters ( NAME, HP, MIND, MADAM, SPEED, HITCHANCE, HEALCHANCE, MINHEAL, MAXHEAL ) VALUES ( 'Skeleton', 100, 30, 50, 3, 0.8, 0.3, 30, 50 )";
+        String query1 = "INSERT INTO monster ( NAME, HP, MIND, MADAM, SPEED, HITCHANCE, HEALCHANCE, MINHEAL, MAXHEAL ) VALUES ( 'Ogre', 200, 30, 60, 2, 0.6, 0.1, 30, 60 )";
+        String query2 = "INSERT INTO monster ( NAME, HP, MIND, MADAM, SPEED, HITCHANCE, HEALCHANCE, MINHEAL, MAXHEAL ) VALUES ( 'Gremlin', 70, 15, 30, 5, 0.8, 0.4, 20, 40 )";
+        String query3 = "INSERT INTO monster ( NAME, HP, MIND, MADAM, SPEED, HITCHANCE, HEALCHANCE, MINHEAL, MAXHEAL ) VALUES ( 'Skeleton', 100, 30, 50, 3, 0.8, 0.3, 30, 50 )";
 
 
         try ( Connection conn = ds.getConnection();
@@ -90,7 +90,7 @@ public class SQLMonsters {
 
         //now query the database table for all its contents and display the results
         System.out.println( "Selecting all rows from test table" );
-        query = "SELECT * FROM monsters";
+        query = "SELECT * FROM monster";
 
         try ( Connection conn = ds.getConnection();
               Statement stmt = conn.createStatement(); ) {
