@@ -24,7 +24,7 @@ import java.sql.Statement;
  * @see <a href="https://shanemcd.org/2020/01/24/how-to-set-up-sqlite-with-jdbc-in-eclipse-on-windows/">
 https://shanemcd.org/2020/01/24/how-to-set-up-sqlite-with-jdbc-in-eclipse-on-windows/</a>
  *
- * Refactoring original code for monster classes dont run again or it will add the monsters twice, if you
+ * Refactoring original code for monster classes DONT RUN AGAIN or it will add the monsters twice, if you
  * want to rerun then you have to delete monsters.db first
  */
 public class SQLMonsters {
@@ -42,7 +42,6 @@ public class SQLMonsters {
         }
 
         System.out.println( "Opened database successfully" );
-
 
         //now create a table
         String query = "CREATE TABLE IF NOT EXISTS monsters ( " +
