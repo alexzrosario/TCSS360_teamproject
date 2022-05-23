@@ -27,6 +27,7 @@ public class Room implements Serializable {
     private Monster myMonster;
     private String myStringToken = " ";
     private static String[] monsterArray = {"ogre", "gremlin", "skeleton"};
+    private static final long serialVersionUID = 3536060713340084481L;
 
     public Room() {
         Random theRandom = new Random();

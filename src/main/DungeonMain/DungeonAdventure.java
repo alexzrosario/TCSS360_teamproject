@@ -8,6 +8,7 @@ import java.io.*;
 import java.util.Scanner;
 
 public class DungeonAdventure implements Serializable {
+    private static final long serialVersionUID = 3536060713340084481L;
     private Controller controller = new Controller(this);
     public void start(){
         boolean quit = false;
@@ -97,6 +98,8 @@ public class DungeonAdventure implements Serializable {
             System.out.println("Controller class not found");
             c.printStackTrace();
         }
+        System.out.println(controller.getMyDungeon());
+        play();
     }
 
 }

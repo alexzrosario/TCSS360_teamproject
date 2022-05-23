@@ -14,6 +14,7 @@ public class Controller implements Serializable{
     private boolean myGameDone = false;
     private Random r = new Random();
     private DungeonAdventure myDungeonAdventure;
+    private static final long serialVersionUID = 13425364675L;
     public Controller(DungeonAdventure theDungeonAdventure){
         myDungeonAdventure = theDungeonAdventure;
     }
@@ -146,6 +147,7 @@ public class Controller implements Serializable{
             System.out.println("B to use a Healing Potion");
             System.out.println("V to use a Vision Potion");
             System.out.println("S to Save Game");
+            System.out.println("Q to Save Game");
             System.out.println("C to close the inventory screen");
             String input = scan.next();
             switch (input){
@@ -160,6 +162,9 @@ public class Controller implements Serializable{
                     break;
                 case "S" :
                     useSave();
+                    break;
+                case "Q" :
+                    System.exit(0);
                     break;
             }
         }
@@ -333,11 +338,18 @@ public class Controller implements Serializable{
 
     public void useLoad() {
         myDungeonAdventure.loadGame();
+        System.out.println(myDungeon);
     }
 
+    public Dungeon getMyDungeon() {
+        return myDungeon;
+    }
 
+    public void setMyDungeon(Dungeon myDungeon) {
+        this.myDungeon = myDungeon;
+    }
 
-//    public class ChoiceController implements ActionListener {
+    //    public class ChoiceController implements ActionListener {
 //        public void actionPerformed(ActionEvent event) {
 //            String choice = event.getActionCommand();
 //            um.titleScreen();

@@ -13,6 +13,7 @@ public class Dungeon implements Serializable {
     private int myStartingRow;
     private int myStartingCol;
     private final Random r = new Random();
+    private static final long serialVersionUID = 3536060713340084481L;
 
     public Dungeon(int theDungeonRows, int theDungeonCols) {
         myDungeonRows = theDungeonRows;
