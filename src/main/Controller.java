@@ -147,7 +147,7 @@ public class Controller implements Serializable{
             System.out.println("B to use a Healing Potion");
             System.out.println("V to use a Vision Potion");
             System.out.println("S to Save Game");
-            System.out.println("Q to Save Game");
+            System.out.println("Q to Quit Game");
             System.out.println("C to close the inventory screen");
             String input = scan.next();
             switch (input){

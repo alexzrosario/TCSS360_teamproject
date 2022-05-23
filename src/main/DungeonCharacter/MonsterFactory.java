@@ -14,18 +14,18 @@ public class MonsterFactory {
         //establish connection (creates db file if it does not exist :-)
         try {
             ds = new SQLiteDataSource();
-            ds.setUrl("jdbc:sqlite:monsters.db");
+            ds.setUrl("jdbc:sqlite:monster.db");
         } catch ( Exception e ) {
             e.printStackTrace();
             System.exit(0);
         }
         String query = "";
         if (theMonster.equalsIgnoreCase("ogre")) {
-            query = "SELECT * FROM monsters WHERE NAME= 'Ogre' ";
+            query = "SELECT * FROM monster WHERE NAME= 'Ogre' ";
         } else if (theMonster.equalsIgnoreCase("gremlin")) {
-            query = "SELECT * FROM monsters WHERE NAME= 'Gremlin' ";
+            query = "SELECT * FROM monster WHERE NAME= 'Gremlin' ";
         } else if (theMonster.equalsIgnoreCase("skeleton")) {
-            query = "SELECT * FROM monsters WHERE NAME= 'Skeleton' ";
+            query = "SELECT * FROM monster WHERE NAME= 'Skeleton' ";
         } else {
             throw new IllegalArgumentException("Illegal Argument; Monster must be an Ogre, Gremlin, or Skeleton");
         }
