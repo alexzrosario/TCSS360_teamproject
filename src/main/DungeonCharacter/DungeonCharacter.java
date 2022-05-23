@@ -13,6 +13,7 @@ public abstract class DungeonCharacter implements Serializable {
     private double myHitChance;
     private boolean myAlive = true; // alive by default
     private final int MY_MAX_HEALTH; //used for priestess heal
+    private static final long serialVersionUID = 3536060713340084481L;
 
     public DungeonCharacter(final String theName, final int theHitPoints, final int theMinDam,
                             final int theMaxDam, final int theAttackSpeed, final double theHitChance) {
