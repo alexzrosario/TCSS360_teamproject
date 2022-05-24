@@ -2,7 +2,7 @@ package main.DungeonCharacter;
 
 public class Mage extends Hero {
     public Mage(final String theName) {
-        super(theName, 60, 45, 75, 5, 0.8, 0.3, "Fireball","MageImage.png");
+        super(theName, 60, 45, 75, 5, 0.7, 0.3, "Fireball","MageImage.png");
     }
 
     @Override

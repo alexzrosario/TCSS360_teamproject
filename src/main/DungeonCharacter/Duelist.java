@@ -2,7 +2,7 @@ package main.DungeonCharacter;
 
 public class Duelist extends Hero {
     public Duelist(final String theName) {
-        super(theName, 75, 20, 40, 5, 0.8, 0.3, "Fine Strike","DuelistImage.png");
+        super(theName, 75, 20, 40, 6, 0.8, 0.4, "Fine Strike","DuelistImage.png");
     }
 
     @Override

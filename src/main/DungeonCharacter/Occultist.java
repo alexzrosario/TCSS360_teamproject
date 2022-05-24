@@ -2,7 +2,7 @@ package main.DungeonCharacter;
 
 public class Occultist extends Hero {
     public Occultist(final String theName) {
-        super(theName, 75, 20, 40, 5, 0.8, 0.3,"Life Steal", "OccultistImage.png");
+        super(theName, 75, 25, 45, 5, 0.7, 0.3,"Life Steal", "OccultistImage.png");
     }
 
     @Override
@@ -13,7 +13,7 @@ public class Occultist extends Hero {
         int currMaxDam = this.getMyMaxDam();
 
         //update with special skill changes
-        this.setMyMinDam(20);
+        this.setMyMinDam(25);
         this.setMyMaxDam(40);
 
         //call attack - attacks only once
