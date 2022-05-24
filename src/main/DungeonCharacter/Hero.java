@@ -5,15 +5,17 @@ import java.util.Random;
 public abstract class Hero extends DungeonCharacter {
     private double myBlockChance;
     private String myImage;
+    private final String mySkillName;
     private int myHealingPotions = 0;
     private int myVisionPotions = 0;
     private int myPillars = 0;
 
     public Hero(final String theName, final int theHitPoints, final int theMinDam, final int theMaxDam,
-                final int theAttackSpeed, final double theHitChance, final double theBlockChance, String theImage) {
+                final int theAttackSpeed, final double theHitChance, final double theBlockChance, String skillName, String theImage) {
 
         super(theName, theHitPoints, theMinDam, theMaxDam, theAttackSpeed, theHitChance);
         this.myBlockChance = theBlockChance;
+        this.mySkillName = skillName;
         this.myImage = theImage;
     }
 
@@ -76,6 +78,10 @@ public abstract class Hero extends DungeonCharacter {
         damageRoll = r.nextInt(1, 20);
         return damageRoll;
     }*/
+
+    public String getMySkillName() {
+        return mySkillName;
+    }
 
     public void battleMenu(DungeonCharacter theMonster, int theChoice) {
         switch(theChoice) {

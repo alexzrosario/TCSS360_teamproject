@@ -4,7 +4,7 @@ public class Warrior extends Hero {
 
     public Warrior(final String theName) {
         //super(theName, 125, 400, 500, 4, 1.0, 0.2, "WarriorImage.png");
-        super(theName, 125, 35, 60, 4, 0.8, 0.2, "WarriorImage.png");
+        super(theName, 125, 35, 60, 4, 0.8, 0.2, "Crushing Blow","WarriorImage.png");
     }
 
     @Override

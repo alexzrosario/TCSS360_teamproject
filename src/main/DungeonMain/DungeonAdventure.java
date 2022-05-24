@@ -48,6 +48,12 @@ public class DungeonAdventure implements Serializable {
         System.out.println("To play the Warrior: 1");
         System.out.println("To play the Priestess: 2");
         System.out.println("To play the Thief: 3");
+        System.out.println("To play the Barbarian: 4");
+        System.out.println("To play the Mage: 5");
+        System.out.println("To play the Swordsman: 6");
+        System.out.println("To play the Duelist: 7");
+        System.out.println("To play the Samurai: 8");
+        System.out.println("To play the Occultist: 9");
         theClass = scan.next();
         switch (theClass) {
             case "1" -> {
@@ -58,6 +64,24 @@ public class DungeonAdventure implements Serializable {
             }
             case "3" -> {
                 controller.startGame(name, 3);
+            }
+            case "4" -> {
+                controller.startGame(name, 4);
+            }
+            case "5" -> {
+                controller.startGame(name, 5);
+            }
+            case "6" -> {
+                controller.startGame(name, 6);
+            }
+            case "7" -> {
+                controller.startGame(name, 7);
+            }
+            case "8" -> {
+                controller.startGame(name, 8);
+            }
+            case "9" -> {
+                controller.startGame(name, 9);
             }
             default -> {
                 System.out.println("Invalid Input");

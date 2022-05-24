@@ -33,6 +33,30 @@ public class Controller implements Serializable{
                 myHero = new Thief(theName);
                 myGameDone = false;
                 break;
+            case 4: // barbarian
+                myHero = new Barbarian(theName);
+                myGameDone = false;
+                break;
+            case 5: // mage
+                myHero = new Mage(theName);
+                myGameDone = false;
+                break;
+            case 6: // swordsman
+                myHero = new Swordsman(theName);
+                myGameDone = false;
+                break;
+            case 7: // duelist
+                myHero = new Duelist(theName);
+                myGameDone = false;
+                break;
+            case 8: // samurai
+                myHero = new Samurai(theName);
+                myGameDone = false;
+                break;
+            case 9: // occultist
+                myHero = new Occultist(theName);
+                myGameDone = false;
+                break;
         }
 
         myDungeon = new Dungeon(5,5);
@@ -314,7 +338,8 @@ public class Controller implements Serializable{
             System.out.println(theHero.getMyName() + " health: " + theHero.getMyHitPoints());
             System.out.println(theMonster.getMyName() + " health: " + theMonster.getMyHitPoints());
             System.out.println("Attack: 1");
-            System.out.println("Special Attack: 2");
+            System.out.println(myHero.getMySkillName() + ": 2");
+            //System.out.println("Special Attack: 2");
             System.out.println("Use Health Potion: 3\n" + "Potions Remaining: " + theHero.getMyHealingPotions());
             myChoice = scan.nextInt();
             if(myChoice == 3 && theHero.getMyHealingPotions() > 0) {
