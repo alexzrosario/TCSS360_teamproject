@@ -52,7 +52,7 @@ public class DungeonAdventure implements Serializable {
         System.out.println("To play the Barbarian: 4");
         System.out.println("To play the Mage: 5");
         System.out.println("To play the Swordsman: 6");
-        System.out.println("To play the Duelist: 7");
+        System.out.println("To play the Monk: 7");
         System.out.println("To play the Samurai: 8");
         System.out.println("To play the Occultist: 9");
         theClass = scan.next();
@@ -89,6 +89,45 @@ public class DungeonAdventure implements Serializable {
             }
         }
     }
+
+    public int dungeonSizePrompt() {
+        int theSize;
+        System.out.println("Enter the size of your dungeon; The number inputted is for rows and columns");
+        System.out.println("Number be a minimum of 3, and a maximum of 10");
+        Scanner scan = new Scanner(System.in);
+        theSize = scan.nextInt();
+        while (theSize < 3 || theSize > 10) {
+            System.out.println("Invalid Input. Try Again");
+            System.out.println("Number be a minimum of 3, and a maximum of 10");
+            theSize = scan.nextInt();
+        }
+        return theSize;
+    }
+
+    public String difficultyPrompt() {
+        String theDifficulty;
+        System.out.println("Select your difficulty");
+        System.out.println("1: Easy");
+        System.out.println("2: Normal");
+        System.out.println("3: Hard");
+        Scanner scan = new Scanner(System.in);
+        theDifficulty = scan.next();
+        switch(theDifficulty) {
+            case "1" -> {
+                return "EASY";
+            }
+            case "2" -> {
+                return "NORMAL";
+            }
+            case "3" -> {
+                return "HARD";
+            }
+            default -> {
+                return "Invalid Input";
+            }
+        }
+    }
+
     public void play(){
         //while(controller.isAlive()) {
             controller.traverse();

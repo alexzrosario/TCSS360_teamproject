@@ -45,7 +45,7 @@ public class DungeonUI extends JPanel{
     Font gameTitleFont;
     Font regularFont = new Font("Times New Roman", Font.PLAIN, 20);
 
-    private Dungeon myDungeon = new Dungeon(5, 5);
+    private Dungeon myDungeon = new Dungeon(5, 5, "NORMAL");
     final private String[] heroes = {"None","Warrior", "Priestess", "Thief"};
     private String name = "";
     private String userClass = "";
