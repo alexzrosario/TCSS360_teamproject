@@ -89,8 +89,11 @@ public abstract class Hero extends DungeonCharacter {
                 basicAttack(theMonster);
             case 2 ->
                 specialSkill(theMonster);
-            default ->
-                System.out.println("Invalid Choice");
+            default -> {
+                if(theChoice != 3) {
+                    System.out.println("Invalid Choice");
+                }
+            }
         }
     }
 

@@ -4,6 +4,7 @@ import main.DungeonCharacter.*;
 import main.DungeonMain.*;
 
 import java.io.*;
+import java.nio.Buffer;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -298,7 +299,10 @@ public class Controller implements Serializable{
                 myHero.setMyBlockChance(tempBlockChance);
                 System.out.println("You have fallen into a pit and have taken " + pitDamageTaken + " damage!");
                 room.setHasPit(false);
-                if (!myHero.getMyAlive()) myGameDone = true;
+                if (!myHero.getMyAlive()) {
+                    myGameDone = true;
+                    gameover();
+                }
             }
             if(room.isHasHealPotion()) {
                 myHero.setMyHealingPotions(myHero.getMyHealingPotions() + 1);
@@ -316,7 +320,9 @@ public class Controller implements Serializable{
                 battle(myHero, theMonster);
                 room.setMyMonster(null);
                 room.setHasMonster(false);
-                System.out.println(myDungeon);
+                if(myHero.getMyAlive()) {
+                    System.out.println(myDungeon);
+                }
             }
             if(room.isExit()) {
                 if(myHero.getMyPillars() < 4) {
@@ -324,7 +330,7 @@ public class Controller implements Serializable{
                 }
                 else {
                     myGameDone = true;
-                    System.out.println("you win!");
+                    victory();
                 }
             }
             traverse();
@@ -352,6 +358,7 @@ public class Controller implements Serializable{
                 theMonster.basicAttack(theHero);
                 if(!theHero.getMyAlive()) {
                     myGameDone = true;
+                    gameover();
                 }
             }
         }
@@ -374,15 +381,26 @@ public class Controller implements Serializable{
         this.myDungeon = myDungeon;
     }
 
-    //    public class ChoiceController implements ActionListener {
-//        public void actionPerformed(ActionEvent event) {
-//            String choice = event.getActionCommand();
-//            um.titleScreen();
-//            switch (choice) {
-//                case "start" -> um.nameInputScreen();
-//                case "name" -> um.heroSelectScreen();
-//                case "hero" -> um.dungeonRoomScreen();
-//            }
-//        }
-//    }
+    public void victory() {
+        try(BufferedReader br = new BufferedReader(new FileReader("src/victory.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void gameover() {
+        try(BufferedReader br = new BufferedReader(new FileReader("src/gameover.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
