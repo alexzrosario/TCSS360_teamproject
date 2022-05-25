@@ -5,7 +5,7 @@ import java.util.Random;
 public class Priestess extends Hero {
 
     public Priestess(final String theName) {
-        super(theName, 75, 25, 45, 5, 0.7, 0.3, "PriestessImage.png");
+        super(theName, 75, 25, 45, 5, 0.7, 0.3, "Heal", "PriestessImage.png");
     }
 
 

@@ -5,7 +5,7 @@ import java.util.Random;
 public class Thief extends Hero {
 
     public Thief(final String theName) {
-        super(theName, 75, 20, 40, 6, 0.8, 0.4, "ThiefImage.png");
+        super(theName, 75, 20, 40, 6, 0.8, 0.4, "Surprise Attack","ThiefImage.png");
     }
 
     @Override
