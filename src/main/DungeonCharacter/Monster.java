@@ -19,8 +19,9 @@ public class Monster extends DungeonCharacter {
         this.setMyHitPoints(this.getMyHitPoints() - theDamage);
         if(this.getMyHitPoints() <= 0){
             setMyAlive();
+        }else{
+            heal();
         }
-        heal();
     }
 
     public void heal() {
