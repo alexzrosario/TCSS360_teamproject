@@ -4,7 +4,6 @@ import main.DungeonCharacter.*;
 import main.DungeonMain.*;
 
 import java.io.*;
-import java.nio.Buffer;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -46,8 +45,8 @@ public class Controller implements Serializable{
                 myHero = new Swordsman(theName);
                 myGameDone = false;
                 break;
-            case 7: // duelist
-                myHero = new Duelist(theName);
+            case 7: // Monk
+                myHero = new Monk(theName);
                 myGameDone = false;
                 break;
             case 8: // samurai
