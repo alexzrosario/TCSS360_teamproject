@@ -89,6 +89,39 @@ public class DungeonAdventure implements Serializable {
             }
         }
     }
+
+    public int dungeonSizePrompt() {
+        int theSize;
+        System.out.println("Enter the size of your dungeon; The number inputted is for rows and columns");
+        Scanner scan = new Scanner(System.in);
+        theSize = scan.nextInt();
+        return theSize;
+    }
+
+    public String difficultyPrompt() {
+        String theDifficulty;
+        System.out.println("Select your difficulty");
+        System.out.println("1: Easy");
+        System.out.println("2: Normal");
+        System.out.println("3: Hard");
+        Scanner scan = new Scanner(System.in);
+        theDifficulty = scan.next();
+        switch(theDifficulty) {
+            case "1" -> {
+                return "EASY";
+            }
+            case "2" -> {
+                return "NORMAL";
+            }
+            case "3" -> {
+                return "HARD";
+            }
+            default -> {
+                return "Invalid Input";
+            }
+        }
+    }
+
     public void play(){
         //while(controller.isAlive()) {
             controller.traverse();

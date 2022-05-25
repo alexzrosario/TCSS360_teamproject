@@ -27,9 +27,10 @@ public class Room implements Serializable {
     private Monster myMonster;
     private String myStringToken = " ";
     private static String[] monsterArray = {"ogre", "gremlin", "skeleton"};
+    private double myDifficultyModifier;
     private static final long serialVersionUID = 3536060713340084481L;
 
-    public Room() {
+    public Room(String theDifficulty) {
         Random theRandom = new Random();
         int items = 0;
         int itemRoll = theRandom.nextInt(10) + 1; // Determining if the room will contain a pit
@@ -53,14 +54,21 @@ public class Room implements Serializable {
         if (items > 1) {
             myStringToken = "M";
         }
+        findDifficultyModifier(theDifficulty);
         // Determining if the room contains a monster, and randomly decides which monster to use
-        if (Math.random() < 0.25) {
+        if (Math.random() < myDifficultyModifier) {
             int monsterRoll = theRandom.nextInt(3);
             setMyMonster(new MonsterFactory().createMonster(monsterArray[monsterRoll]));
             setHasMonster(true);
 
             myStringToken = "m"; // temp string token to indicate if a monster exists in the room
         }
+    }
+
+    public void findDifficultyModifier(String theDifficulty) {
+        if (theDifficulty.equals("EASY")) myDifficultyModifier = 0.125;
+        if (theDifficulty.equals("NORMAL")) myDifficultyModifier = 0.25;
+        if (theDifficulty.equals("HARD")) myDifficultyModifier = 0.3333333;
     }
 
     public String toString() {

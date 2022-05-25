@@ -59,11 +59,17 @@ public class Controller implements Serializable{
                 myGameDone = false;
                 break;
         }
-
-        myDungeon = new Dungeon(5,5);
+        int dungeonSize = myDungeonAdventure.dungeonSizePrompt();
+        String dungeonDifficulty = myDungeonAdventure.difficultyPrompt();
+        myDungeon = buildDungeon(dungeonSize, dungeonSize, dungeonDifficulty);
+        //myDungeon = new Dungeon(5,5);
         System.out.println(myDungeon);
         System.out.println(myHero.getMyName());
         myCurrRoom = myDungeon.getMyRoom();
+    }
+
+    public Dungeon buildDungeon(int theRows, int theCols, String theDifficulty) {
+        return new Dungeon(theRows, theCols, theDifficulty);
     }
 
     public void traverseDungeon(){
@@ -94,7 +100,7 @@ public class Controller implements Serializable{
     public void useHealPotion(){
         int maxHealth = myHero.getMY_MAX_HEALTH();
         if(myHero.getMyHealingPotions()>0 && myHero.getMyHitPoints() < myHero.getMY_MAX_HEALTH()){
-            int heal = r.nextInt((int) (.05*maxHealth),(int) (.1*maxHealth)); // can change later
+            int heal = r.nextInt((int) (.14*maxHealth),(int) (.28*maxHealth)); // can change later
             myHero.setMyHealingPotions(myHero.getMyHealingPotions()-1);
             //call to add heal from healing potion
             myHero.setMyHitPoints(Math.min((myHero.getMyHitPoints() + heal), myHero.getMY_MAX_HEALTH()));

@@ -12,12 +12,14 @@ public class Dungeon implements Serializable {
     private int myDungeonCols;
     private int myStartingRow;
     private int myStartingCol;
+    private String myDifficulty;
     private final Random r = new Random();
     private static final long serialVersionUID = 3536060713340084481L;
 
-    public Dungeon(int theDungeonRows, int theDungeonCols) {
+    public Dungeon(int theDungeonRows, int theDungeonCols, String theDifficulty) {
         myDungeonRows = theDungeonRows;
         myDungeonCols = theDungeonCols;
+        myDifficulty = theDifficulty;
         myDungeon = new Room[myDungeonRows][myDungeonCols];
         buildDungeonArray();
         generateDungeon();
@@ -26,7 +28,7 @@ public class Dungeon implements Serializable {
     public void buildDungeonArray() {
         for(int row = 0; row < myDungeonRows; row++) {
             for(int col = 0; col < myDungeonCols; col++) {
-                myDungeon[row][col] = new Room();
+                myDungeon[row][col] = new Room(myDifficulty);
             }
         }
     }
@@ -166,12 +168,16 @@ public class Dungeon implements Serializable {
 
     public String toString() {
         String s = "";
-        for(int row = 0; row < myDungeonRows; row++) {
+        for (int row = 0; row < myDungeonRows; row++) {
             s += getTopString(row);
             s += getEmptyMidString(row);
             //s += getMidString(row);
         }
-        s+= "***********";
+        s += "***";
+        for (int row = 0; row < myDungeonRows-1; row++) {
+            s += "**";
+        }
+        //s+= "***********";
         return s;
     }
     public String getTopString(final int theRow){
