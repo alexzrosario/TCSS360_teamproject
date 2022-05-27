@@ -3,9 +3,12 @@ package main;
 import main.DungeonCharacter.*;
 import main.DungeonMain.*;
 
+import javax.sound.sampled.*;
 import java.io.*;
+import java.nio.Buffer;
 import java.util.Random;
 import java.util.Scanner;
+
 
 public class Controller implements Serializable{
     private Dungeon myDungeon;
@@ -14,6 +17,7 @@ public class Controller implements Serializable{
     private boolean myGameDone = false;
     private Random r = new Random();
     private DungeonAdventure myDungeonAdventure;
+    private Clip clip;
     private static final long serialVersionUID = 13425364675L;
     public Controller(DungeonAdventure theDungeonAdventure){
         myDungeonAdventure = theDungeonAdventure;
@@ -65,6 +69,7 @@ public class Controller implements Serializable{
         System.out.println(myDungeon);
         System.out.println(myHero.getMyName());
         myCurrRoom = myDungeon.getMyRoom();
+        playAudio("src/backgroundmusic.wav");
     }
 
     public Dungeon buildDungeon(int theRows, int theCols, String theDifficulty) {
@@ -301,6 +306,7 @@ public class Controller implements Serializable{
                 double tempBlockChance = myHero.getMyBlockChance();
                 myHero.setMyBlockChance(0.0);
                 myHero.updateHealth(pitDamageTaken);
+//                playAudio("src/playerhurt.wav");
                 myHero.setMyBlockChance(tempBlockChance);
                 System.out.println("You have fallen into a pit and have taken " + pitDamageTaken + " damage!");
                 room.setHasPit(false);
@@ -320,13 +326,20 @@ public class Controller implements Serializable{
                 room.setHasVisionPotion(false);
             }
             if(room.isHasMonster()) {
-                Monster theMonster = room.getMyMonster();
-                System.out.println("You have encountered a " + theMonster.getMyName() + "!");
-                battle(myHero, theMonster);
+//                boolean fightDone = false;
+                clip.stop();
+//                while(!fightDone) {
+//                    playAudio("src/battlemusic.wav");
+                    Monster theMonster = room.getMyMonster();
+                    System.out.println("You have encountered a " + theMonster.getMyName() + "!");
+                    battle(myHero, theMonster);
+//                    fightDone = true;
+//                }
                 room.setMyMonster(null);
                 room.setHasMonster(false);
                 if(myHero.getMyAlive()) {
                     System.out.println(myDungeon);
+                    clip.start();
                 }
             }
             if(room.isExit()) {
@@ -405,6 +418,25 @@ public class Controller implements Serializable{
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public void playAudio(String audioFile) {
+        try {
+            File musicPath = new File(audioFile);
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+            clip = AudioSystem.getClip();
+            clip.open(audioInput);
+            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControl.setValue(-30.f);
+            clip.start();
+            if(audioFile.equals("src/backgroundmusic.wav") || audioFile.equals("src/battlemusic.wav")) {
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+            } else {
+                Thread.sleep(clip.getMicrosecondLength()/1000);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

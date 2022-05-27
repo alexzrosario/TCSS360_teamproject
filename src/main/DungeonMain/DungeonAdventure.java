@@ -129,9 +129,7 @@ public class DungeonAdventure implements Serializable {
     }
 
     public void play(){
-        //while(controller.isAlive()) {
-            controller.traverse();
-        //}
+        controller.traverse();
     }
 
     public void saveGame() {
