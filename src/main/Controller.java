@@ -22,6 +22,8 @@ public class Controller implements Serializable{
     private Random r = new Random();
     private DungeonAdventure myDungeonAdventure;
     private transient Clip clip;
+    private transient Clip backgroundClip;
+    private transient Clip battleClip;
     private static final long serialVersionUID = 13425364675L;
     public Controller(DungeonAdventure theDungeonAdventure){
         myDungeonAdventure = theDungeonAdventure;
@@ -73,7 +75,7 @@ public class Controller implements Serializable{
         System.out.println(myDungeon);
         System.out.println(myHero.getMyName());
         myCurrRoom = myDungeon.getMyRoom();
-        playAudio("src/backgroundmusic.wav");
+        playBackgroundAudio();
     }
 
     public Dungeon buildDungeon(int theRows, int theCols, String theDifficulty) {
@@ -331,20 +333,17 @@ public class Controller implements Serializable{
                 room.setHasVisionPotion(false);
             }
             if(room.isHasMonster()) {
-//                boolean fightDone = false;
-                clip.stop();
-//                while(!fightDone) {
-//                    playAudio("src/battlemusic.wav");
-                    Monster theMonster = room.getMyMonster();
-                    System.out.println("You have encountered a " + theMonster.getMyName() + "!");
-                    battle(myHero, theMonster);
-//                    fightDone = true;
-//                }
+                backgroundClip.stop();
+                playBattleAudio();
+                Monster theMonster = room.getMyMonster();
+                System.out.println("You have encountered a " + theMonster.getMyName() + "!");
+                battle(myHero, theMonster);
                 room.setMyMonster(null);
                 room.setHasMonster(false);
+                battleClip.stop();
                 if(myHero.getMyAlive()) {
                     System.out.println(myDungeon);
-                    clip.start();
+                    backgroundClip.start();
                 }
             }
             if(room.isExit()) {
@@ -371,7 +370,6 @@ public class Controller implements Serializable{
     }
 
     private void battle(Hero theHero, Monster theMonster) {
-        playAudio("src/battlemusic.wav");
         Scanner scan = new Scanner(System.in);
         int myChoice;
         while(theHero.getMyAlive() && theMonster.getMyAlive()) {
@@ -456,6 +454,35 @@ public class Controller implements Serializable{
             } else {
                 Thread.sleep(clip.getMicrosecondLength()/1000);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void playBackgroundAudio() {
+        try {
+            File musicPath = new File("src/backgroundmusic.wav");
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+            backgroundClip = AudioSystem.getClip();
+            backgroundClip.open(audioInput);
+            FloatControl gainControl = (FloatControl) backgroundClip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControl.setValue(-30.f);
+            backgroundClip.start();
+            backgroundClip.loop(Clip.LOOP_CONTINUOUSLY);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void playBattleAudio() {
+        try {
+            File musicPath = new File("src/battlemusic.wav");
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+            battleClip = AudioSystem.getClip();
+            battleClip.open(audioInput);
+            FloatControl gainControl = (FloatControl) battleClip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControl.setValue(-30.f);
+            battleClip.start();
+            battleClip.loop(Clip.LOOP_CONTINUOUSLY);
         } catch (Exception e) {
             e.printStackTrace();
         }
