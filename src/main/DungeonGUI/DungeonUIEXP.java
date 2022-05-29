@@ -43,5 +43,6 @@ public class DungeonUIEXP extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1000, 1000);
         JPanel mainPanel = new JPanel();
+
     }
 }
