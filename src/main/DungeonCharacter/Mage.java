@@ -9,6 +9,7 @@ public class Mage extends Hero {
     void specialSkill(DungeonCharacter theTarget) {
         // Fireball: Has a guaranteed chance to hit, but with the cost of reduced damage
         System.out.println(getMyName() + " shoots out a fireball");
+        this.pause(2000);
         double currHitChance = this.getMyHitChance();
         int currMinDam = this.getMyMinDam();
         int currMaxDam = this.getMyMaxDam();

@@ -392,6 +392,11 @@ public class Controller implements Serializable{
                 theMonster.basicAttack(theHero);
                 if(!theHero.getMyAlive()) {
                     myGameDone = true;
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     gameover();
                 }
             }

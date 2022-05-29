@@ -9,6 +9,7 @@ public class Occultist extends Hero {
     void specialSkill(DungeonCharacter theTarget) {
         // Life-steal: Attack to deal 25-40 damage, and heal health for the amount of damage you dealt
         System.out.println(getMyName() + " tries to steal " + theTarget.getMyName() + "'s health");
+        this.pause(2000);
         int currMinDam = this.getMyMinDam();
         int currMaxDam = this.getMyMaxDam();
 

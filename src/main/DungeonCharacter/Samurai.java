@@ -17,6 +17,7 @@ public class Samurai extends Hero {
         myTarget = theTarget;
         this.setMyBlockChance(0.7);
         System.out.println(getMyName() + " enters a defensive stance");
+        this.pause(2000);
     }
 
     @Override

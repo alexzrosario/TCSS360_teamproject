@@ -44,9 +44,20 @@ public abstract class DungeonCharacter implements Serializable {
             //damageCheck(damageRoll,theTarget);
             System.out.println(myName + " hits for " + damageRoll + " damage");
             theTarget.updateHealth(damageRoll);
+            this.pause(500);
         }
-        else System.out.println(myName + " missed their attack");
+        else {
+            System.out.println(myName + " missed their attack");
+            this.pause(500);
+        }
         return damageRoll;
+    }
+    public void pause(int theMs) {
+        try {
+            Thread.sleep(theMs);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     /*public void damageCheck(int theDamageRoll, final DungeonCharacter theTarget){
