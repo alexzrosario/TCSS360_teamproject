@@ -30,7 +30,7 @@ https://shanemcd.org/2020/01/24/how-to-set-up-sqlite-with-jdbc-in-eclipse-on-win
 public class SQLMonsters {
 
     public static void main(String[] args) {
-       // make();
+        make();
     }
 
     public static void make(){
@@ -71,21 +71,20 @@ public class SQLMonsters {
         //next insert two rows of data
         System.out.println( "Attempting to insert 3 rows into monsters table" );
 
-        //String query1 = "INSERT INTO monster ( NAME, HP, MIND, MADAM, SPEED, HITCHANCE, HEALCHANCE, MINHEAL, MAXHEAL ) VALUES ( 'Ogre', 200, 30, 60, 2, 0.6, 0.1, 30, 60 )";
-        //String query2 = "INSERT INTO monster ( NAME, HP, MIND, MADAM, SPEED, HITCHANCE, HEALCHANCE, MINHEAL, MAXHEAL ) VALUES ( 'Gremlin', 70, 15, 30, 5, 0.8, 0.4, 20, 40 )";
-        //String query3 = "INSERT INTO monster ( NAME, HP, MIND, MADAM, SPEED, HITCHANCE, HEALCHANCE, MINHEAL, MAXHEAL ) VALUES ( 'Skeleton', 100, 30, 50, 3, 0.8, 0.3, 30, 50 )";
-        String query1 = "INSERT INTO monster ( NAME, HP, MIND, MADAM, SPEED, HITCHANCE, HEALCHANCE, MINHEAL, MAXHEAL ) VALUES ( 'Boss', 350, 35, 65, 2, 0.5, 0.08, 30, 50 )";
+//        String query1 = "INSERT INTO monster ( NAME, HP, MIND, MADAM, SPEED, HITCHANCE, HEALCHANCE, MINHEAL, MAXHEAL ) VALUES ( 'Ogre', 200, 30, 60, 2, 0.6, 0.1, 30, 60 )";
+//        String query2 = "INSERT INTO monster ( NAME, HP, MIND, MADAM, SPEED, HITCHANCE, HEALCHANCE, MINHEAL, MAXHEAL ) VALUES ( 'Gremlin', 70, 15, 30, 5, 0.8, 0.4, 20, 40 )";
+//        String query3 = "INSERT INTO monster ( NAME, HP, MIND, MADAM, SPEED, HITCHANCE, HEALCHANCE, MINHEAL, MAXHEAL ) VALUES ( 'Skeleton', 100, 25, 45, 3, 0.8, 0.3, 30, 50 )";
+        String query1 = "INSERT INTO monster ( NAME, HP, MIND, MADAM, SPEED, HITCHANCE, HEALCHANCE, MINHEAL, MAXHEAL ) VALUES ( 'Lord of OO', 300, 30, 60, 2, 0.65, 0.08, 30, 50 )";
 
         try ( Connection conn = ds.getConnection();
               Statement stmt = conn.createStatement(); ) {
             int rv = stmt.executeUpdate( query1 );
             System.out.println( "1st executeUpdate() returned " + rv );
-/*
-            rv = stmt.executeUpdate( query2 );
-            System.out.println( "2nd executeUpdate() returned " + rv );
-
-            rv = stmt.executeUpdate( query3 );
-            System.out.println( "3rd executeUpdate() returned " + rv );*/
+//            rv = stmt.executeUpdate( query2 );
+//            System.out.println( "2nd executeUpdate() returned " + rv );
+//
+//            rv = stmt.executeUpdate( query3 );
+//            System.out.println( "3rd executeUpdate() returned " + rv );
         } catch ( SQLException e ) {
             e.printStackTrace();
             System.exit( 0 );
