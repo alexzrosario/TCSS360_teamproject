@@ -30,7 +30,7 @@ https://shanemcd.org/2020/01/24/how-to-set-up-sqlite-with-jdbc-in-eclipse-on-win
 public class SQLMonsters {
 
     public static void main(String[] args) {
-        make();
+        //make();
     }
 
     public static void make(){

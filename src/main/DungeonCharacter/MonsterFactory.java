@@ -26,7 +26,7 @@ public class MonsterFactory {
             query = "SELECT * FROM monster WHERE NAME= 'Gremlin' ";
         } else if (theMonster.equalsIgnoreCase("skeleton")) {
             query = "SELECT * FROM monster WHERE NAME= 'Skeleton' ";
-        } else if (theMonster.equalsIgnoreCase("boss")) {
+        } else if (theMonster.equalsIgnoreCase("Lord of OO")) {
             query = "SELECT * FROM monster WHERE NAME= 'Lord of OO' ";
         }else {
             throw new IllegalArgumentException("Illegal Argument; Monster must be an Ogre, Gremlin, or Skeleton");
