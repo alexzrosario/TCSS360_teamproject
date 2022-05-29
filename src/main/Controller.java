@@ -354,7 +354,7 @@ public class Controller implements Serializable{
                 else {
                     System.out.println("You have collected all the pillars!");
                     System.out.println("However, one last challenge stands in your way.");
-                    Monster theMonster = new MonsterFactory().createMonster("boss");
+                    Monster theMonster = new MonsterFactory().createMonster("Lord of OO");
                     System.out.println("You have encountered a " + theMonster.getMyName() + "!");
                     battle(myHero, theMonster);
                     myGameDone = true;
