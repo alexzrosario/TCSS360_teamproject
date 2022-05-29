@@ -24,6 +24,7 @@ public class Controller implements Serializable{
     private transient Clip clip;
     private transient Clip backgroundClip;
     private transient Clip battleClip;
+    private transient Clip bossClip;
     private static final long serialVersionUID = 13425364675L;
     public Controller(DungeonAdventure theDungeonAdventure){
         myDungeonAdventure = theDungeonAdventure;
@@ -352,15 +353,22 @@ public class Controller implements Serializable{
 
                 }
                 else {
+                    backgroundClip.stop();
                     System.out.println("You have collected all the pillars!");
+                    pause(1500);
                     System.out.println("However, one last challenge stands in your way.");
+                    pause(1500);
                     Monster theMonster = new MonsterFactory().createMonster("Lord of OO");
                     System.out.println("You have encountered a " + theMonster.getMyName() + "!");
+                    pause(1500);
+                    playBossAudio();
                     battle(myHero, theMonster);
                     myGameDone = true;
                     if(!myHero.getMyAlive()) {
+                        bossClip.stop();
                         gameover();
                     }else{
+                        bossClip.stop();
                         victory();
                     }
                 }
@@ -449,11 +457,7 @@ public class Controller implements Serializable{
             FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             gainControl.setValue(-30.f);
             clip.start();
-            if(audioFile.equals("src/backgroundmusic.wav") || audioFile.equals("src/battlemusic.wav")) {
-                clip.loop(Clip.LOOP_CONTINUOUSLY);
-            } else {
-                Thread.sleep(clip.getMicrosecondLength()/1000);
-            }
+            Thread.sleep(clip.getMicrosecondLength()/1000);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -488,4 +492,26 @@ public class Controller implements Serializable{
         }
     }
 
+    public void playBossAudio() {
+        try {
+            File musicPath = new File("src/finalboss.wav");
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+            bossClip = AudioSystem.getClip();
+            bossClip.open(audioInput);
+            FloatControl gainControl = (FloatControl) bossClip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControl.setValue(-30.f);
+            bossClip.start();
+            bossClip.loop(Clip.LOOP_CONTINUOUSLY);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void pause(int theMs) {
+        try {
+            Thread.sleep(theMs);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
