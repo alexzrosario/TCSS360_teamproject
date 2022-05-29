@@ -1,11 +1,15 @@
 package main;
 
 import main.DungeonCharacter.*;
-import main.DungeonMain.*;
+import main.DungeonMain.Dungeon;
+import main.DungeonMain.DungeonAdventure;
+import main.DungeonMain.Room;
 
-import javax.sound.sampled.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import java.io.*;
-import java.nio.Buffer;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -17,7 +21,7 @@ public class Controller implements Serializable{
     private boolean myGameDone = false;
     private Random r = new Random();
     private DungeonAdventure myDungeonAdventure;
-    private Clip clip;
+    private transient Clip clip;
     private static final long serialVersionUID = 13425364675L;
     public Controller(DungeonAdventure theDungeonAdventure){
         myDungeonAdventure = theDungeonAdventure;
@@ -143,6 +147,7 @@ public class Controller implements Serializable{
             }
             myHero.setMyVisionPotions(myHero.getMyVisionPotions() - 1);
             System.out.println("You can see nearby traversable rooms");
+            System.out.println(myDungeon);
         }
         else System.out.println("No Vision Potions To Use");
     }
@@ -345,10 +350,20 @@ public class Controller implements Serializable{
             if(room.isExit()) {
                 if(myHero.getMyPillars() < 4) {
                     System.out.println("You have not collected all the pillars!");
+
                 }
                 else {
+                    System.out.println("You have collected all the pillars!");
+                    System.out.println("However, one last challenge stands in your way.");
+                    Monster theMonster = new MonsterFactory().createMonster("boss");
+                    System.out.println("You have encountered a " + theMonster.getMyName() + "!");
+                    battle(myHero, theMonster);
                     myGameDone = true;
-                    victory();
+                    if(!myHero.getMyAlive()) {
+                        gameover();
+                    }else{
+                        victory();
+                    }
                 }
             }
             traverse();
@@ -356,6 +371,7 @@ public class Controller implements Serializable{
     }
 
     private void battle(Hero theHero, Monster theMonster) {
+        playAudio("src/battlemusic.wav");
         Scanner scan = new Scanner(System.in);
         int myChoice;
         while(theHero.getMyAlive() && theMonster.getMyAlive()) {
