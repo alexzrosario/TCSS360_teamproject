@@ -1,5 +1,6 @@
 package main.DungeonMain;
 
+import main.AudioController;
 import main.Controller;
 
 import java.io.*;
@@ -26,7 +27,6 @@ public class DungeonAdventure implements Serializable {
                     break;
                 case "2" :
                     controller.useLoad();
-                    play();
                     break;
                 case "q":
                     quit = true;
@@ -146,38 +146,9 @@ public class DungeonAdventure implements Serializable {
     }
 
     public void play(){
+        System.out.println(controller.getMyDungeon());
         controller.traverse();
     }
 
-    public void saveGame() {
-        try {
-            FileOutputStream fileOut = new FileOutputStream("src/savefile.ser");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(controller);
-            out.close();
-            fileOut.close();
-            System.out.println("Your game has been saved");
-        } catch (IOException i) {
-            i.printStackTrace();
-        }
-        controller = null;
-    }
-
-    public void loadGame() {
-        try {
-            FileInputStream fileIn = new FileInputStream("src/savefile.ser");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            controller = (Controller) in.readObject();
-            in.close();
-            fileIn.close();
-        } catch (IOException i) {
-            i.printStackTrace();
-        } catch (ClassNotFoundException c) {
-            System.out.println("Controller class not found");
-            c.printStackTrace();
-        }
-        System.out.println(controller.getMyDungeon());
-        play();
-    }
 
 }

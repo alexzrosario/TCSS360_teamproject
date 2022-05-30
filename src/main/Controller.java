@@ -4,11 +4,6 @@ import main.DungeonCharacter.*;
 import main.DungeonMain.Dungeon;
 import main.DungeonMain.DungeonAdventure;
 import main.DungeonMain.Room;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.FloatControl;
 import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
@@ -21,10 +16,9 @@ public class Controller implements Serializable{
     private boolean myGameDone = false;
     private Random r = new Random();
     private DungeonAdventure myDungeonAdventure;
-    private transient Clip clip;
-    private transient Clip backgroundClip;
-    private transient Clip battleClip;
-    private transient Clip bossClip;
+
+    private final AudioController audioController = new AudioController();
+
     private static final long serialVersionUID = 13425364675L;
     public Controller(DungeonAdventure theDungeonAdventure){
         myDungeonAdventure = theDungeonAdventure;
@@ -72,16 +66,14 @@ public class Controller implements Serializable{
         int dungeonSize = myDungeonAdventure.dungeonSizePrompt();
         String dungeonDifficulty = myDungeonAdventure.difficultyPrompt();
         myDungeon = buildDungeon(dungeonSize, dungeonSize, dungeonDifficulty);
-        //myDungeon = new Dungeon(5,5);
-        System.out.println(myDungeon);
-        System.out.println(myHero.getMyName());
         myCurrRoom = myDungeon.getMyRoom();
-        playBackgroundAudio();
+        audioController.playBackgroundAudio();
     }
 
     public Dungeon buildDungeon(int theRows, int theCols, String theDifficulty) {
         return new Dungeon(theRows, theCols, theDifficulty);
     }
+
 
     public void traverseDungeon(){
         myCurrRoom = myDungeon.getMyRoom();
@@ -113,7 +105,6 @@ public class Controller implements Serializable{
         if(myHero.getMyHealingPotions()>0 && myHero.getMyHitPoints() < myHero.getMY_MAX_HEALTH()){
             int heal = r.nextInt((int) (.14*maxHealth),(int) (.28*maxHealth)); // can change later
             myHero.setMyHealingPotions(myHero.getMyHealingPotions()-1);
-            //call to add heal from healing potion
             myHero.setMyHitPoints(Math.min((myHero.getMyHitPoints() + heal), myHero.getMY_MAX_HEALTH()));
             System.out.println("You healed for " + heal + " health");
         }
@@ -204,7 +195,7 @@ public class Controller implements Serializable{
                     inventoryHelper = false;
                     break;
                 case "S" :
-                    useSave();
+                    saveGame();
                     break;
                 case "Q" :
                     System.exit(0);
@@ -220,11 +211,9 @@ public class Controller implements Serializable{
 
     public void traverse() {
         Scanner scan = new Scanner(System.in);
-        //boolean gameNotDone = true;
         String dir;
         while (!myGameDone)   {
             System.out.println("Select an option to move the following:\n");
-            //System.out.println("N for North, S for South, E for East, or W for West");
             if (myCurrRoom.getMyNorthRoom() != null) {
                 System.out.println("N to traverse North");
             }
@@ -240,38 +229,30 @@ public class Controller implements Serializable{
             System.out.println("H to see hero info");
             System.out.println("I to open hero inventory");
             dir = scan.next();
-            switch (dir){
+            switch (dir.toUpperCase()){
                 case "N" :
                     if (myCurrRoom.getMyNorthRoom() != null) {
                         moveNorth();
                         checkRoom();
                     }
-                    //moveNorth();
-                    //checkRoom();
                     break;
                 case "S" :
                     if (myCurrRoom.getMySouthRoom() != null) {
                         moveSouth();
                         checkRoom();
                     }
-                    //moveSouth();
-                    //checkRoom();
                     break;
                 case "E":
                     if (myCurrRoom.getMyEastRoom() != null) {
                         moveEast();
                         checkRoom();
                     }
-                    //moveEast();
-                    //checkRoom();
                     break;
                 case "W":
                     if (myCurrRoom.getMyWestRoom() != null) {
                         moveWest();
                         checkRoom();
                     }
-                    //moveWest();
-                    //checkRoom();
                     break;
                 case "H":
                     heroInfo();
@@ -314,7 +295,7 @@ public class Controller implements Serializable{
                 double tempBlockChance = myHero.getMyBlockChance();
                 myHero.setMyBlockChance(0.0);
                 myHero.updateHealth(pitDamageTaken);
-                playAudio("src/playerhurt.wav");
+                audioController.playAudio("src/playerhurt.wav");
                 myHero.setMyBlockChance(tempBlockChance);
                 System.out.println("You have fallen into a pit and have taken " + pitDamageTaken + " damage!");
                 room.setHasPit(false);
@@ -334,17 +315,19 @@ public class Controller implements Serializable{
                 room.setHasVisionPotion(false);
             }
             if(room.isHasMonster()) {
-                backgroundClip.stop();
-                playBattleAudio();
+                audioController.stopBackgroundAudio();
+                audioController.playBattleAudio();
                 Monster theMonster = room.getMyMonster();
                 System.out.println("You have encountered a " + theMonster.getMyName() + "!");
                 battle(myHero, theMonster);
                 room.setMyMonster(null);
                 room.setHasMonster(false);
-                battleClip.stop();
+                audioController.stopBattleAudio();
                 if(myHero.getMyAlive()) {
                     System.out.println(myDungeon);
-                    backgroundClip.start();
+                    audioController.startBackgroundAudio();
+                } else {
+                    gameover();
                 }
             }
             if(room.isExit()) {
@@ -353,7 +336,7 @@ public class Controller implements Serializable{
 
                 }
                 else {
-                    backgroundClip.stop();
+                    audioController.stopBackgroundAudio();
                     System.out.println("You have collected all the pillars!");
                     pause(1500);
                     System.out.println("However, one last challenge stands in your way.");
@@ -361,14 +344,13 @@ public class Controller implements Serializable{
                     Monster theMonster = new MonsterFactory().createMonster("Lord of OO");
                     System.out.println("You have encountered a " + theMonster.getMyName() + "!");
                     pause(1500);
-                    playBossAudio();
+                    audioController.playBossAudio();
                     battle(myHero, theMonster);
                     myGameDone = true;
+                    audioController.stopBossAudio();
                     if(!myHero.getMyAlive()) {
-                        bossClip.stop();
                         gameover();
                     }else{
-                        bossClip.stop();
                         victory();
                     }
                 }
@@ -385,7 +367,6 @@ public class Controller implements Serializable{
             System.out.println(theMonster.getMyName() + " health: " + theMonster.getMyHitPoints());
             System.out.println("Attack: 1");
             System.out.println(myHero.getMySkillName() + ": 2");
-            //System.out.println("Special Attack: 2");
             System.out.println("Use Health Potion: 3\n" + "Potions Remaining: " + theHero.getMyHealingPotions());
             myChoice = scan.nextInt();
             if(myChoice == 3 && theHero.getMyHealingPotions() > 0) {
@@ -403,19 +384,14 @@ public class Controller implements Serializable{
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    gameover();
                 }
             }
         }
     }
 
-    public void useSave() {
-        myDungeonAdventure.saveGame();
-    }
-
     public void useLoad() {
-        myDungeonAdventure.loadGame();
-        System.out.println(myDungeon);
+        loadGame();
+
     }
 
     public Dungeon getMyDungeon() {
@@ -432,7 +408,7 @@ public class Controller implements Serializable{
             while ((line = br.readLine()) != null) {
                 System.out.println(line);
             }
-            playAudio("src/victorysound.wav");
+            audioController.playAudio("src/victorysound.wav");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -444,68 +420,9 @@ public class Controller implements Serializable{
             while ((line = br.readLine()) != null) {
                 System.out.println(line);
             }
-            playAudio("src/deathsound.wav");
+            audioController.playAudio("src/deathsound.wav");
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
-    }
-
-    public void playAudio(String audioFile) {
-        try {
-            File musicPath = new File(audioFile);
-            AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
-            clip = AudioSystem.getClip();
-            clip.open(audioInput);
-            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(-30.f);
-            clip.start();
-            Thread.sleep(clip.getMicrosecondLength()/1000);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    public void playBackgroundAudio() {
-        try {
-            File musicPath = new File("src/backgroundmusic.wav");
-            AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
-            backgroundClip = AudioSystem.getClip();
-            backgroundClip.open(audioInput);
-            FloatControl gainControl = (FloatControl) backgroundClip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(-30.f);
-            backgroundClip.start();
-            backgroundClip.loop(Clip.LOOP_CONTINUOUSLY);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void playBattleAudio() {
-        try {
-            File musicPath = new File("src/battlemusic.wav");
-            AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
-            battleClip = AudioSystem.getClip();
-            battleClip.open(audioInput);
-            FloatControl gainControl = (FloatControl) battleClip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(-30.f);
-            battleClip.start();
-            battleClip.loop(Clip.LOOP_CONTINUOUSLY);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void playBossAudio() {
-        try {
-            File musicPath = new File("src/finalboss.wav");
-            AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
-            bossClip = AudioSystem.getClip();
-            bossClip.open(audioInput);
-            FloatControl gainControl = (FloatControl) bossClip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(-30.f);
-            bossClip.start();
-            bossClip.loop(Clip.LOOP_CONTINUOUSLY);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -515,5 +432,35 @@ public class Controller implements Serializable{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public void saveGame() {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("src/savefile.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(myDungeonAdventure);
+            out.close();
+            fileOut.close();
+            System.out.println("Your game has been saved");
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+        myDungeonAdventure = null;
+    }
+
+    public void loadGame() {
+        try {
+            FileInputStream fileIn = new FileInputStream("src/savefile.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            myDungeonAdventure = (DungeonAdventure) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            System.out.println("Controller class not found");
+            c.printStackTrace();
+        }
+        myDungeonAdventure.play();
     }
 }
