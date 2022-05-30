@@ -1,9 +1,11 @@
 package main.DungeonGUI;
 
+import main.Controller;
 import main.DungeonCharacter.Hero;
 import main.DungeonMain.Dungeon;
 import main.DungeonMain.Room;
 
+import javax.sound.sampled.Control;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.desktop.AboutEvent;
@@ -37,21 +39,51 @@ public class DungeonUIEXP extends JFrame {
     JLabel bottomRightWallLabel;
 
     JLabel playerIcon;
+////////////////////////////////////////////
+    Hero myHero;
+    Controller myController;
+
+    JPanel myMainPanel;
+    JPanel myDungeonPanel;
+    JPanel myAdventurePanel;
+    JPanel myNavigationPanel;
+    JPanel myInteractionsPanel;
+    JTextField myAdventureText;
+    JTextField myBlankTextFieldWhite = new JTextField();
+    JTextField myBlankTextFieldBlack = new JTextField();
 
     JButton testButton;
     Font gameTitleFont;
     Font regularFont = new Font("Times New Roman", Font.PLAIN, 20);
 
     public DungeonUIEXP(Room theCurrentRoom, Hero theHero) {
+        this.myHero = theHero;
         this.setTitle("Dungeon Adventure");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1000, 1000);
-        JPanel mainPanel = new JPanel();
-        mainPanel.setBackground(Color.WHITE);
-        mainPanel.setLayout(new GridLayout(2, 1));
-        JPanel dPanel = dungeonPanel(theCurrentRoom, theHero);
-        mainPanel.add(dPanel);
-        this.add(mainPanel);
+        myMainPanel = new JPanel();
+        myMainPanel.setBackground(Color.WHITE);
+        myMainPanel.setLayout(new BoxLayout(myMainPanel, BoxLayout.Y_AXIS));
+        //myMainPanel.setLayout(new GridLayout(0, 1));
+        setBlankTextFields();
+
+        myDungeonPanel = dungeonPanel(theCurrentRoom, theHero);
+        myMainPanel.add(myDungeonPanel);
+
+        myAdventurePanel = new JPanel();
+        myAdventurePanel.setLayout(new GridLayout(1, 3));
+        myAdventureText = new JTextField();
+        myAdventureText.setEditable(false);
+        myAdventurePanel.add(myAdventureText);
+
+        buildNavigationPanel();
+        myAdventurePanel.add(myNavigationPanel);
+
+        buildInteractionsPanel();
+        myAdventurePanel.add(myInteractionsPanel);
+        myMainPanel.add(myAdventurePanel);
+
+        this.add(myMainPanel);
         this.setVisible(true);
     }
 
@@ -98,5 +130,48 @@ public class DungeonUIEXP extends JFrame {
             dungeonPanel.add(temp);
         }
         return dungeonPanel;
+    }
+
+    public void setBlankTextFields() {
+        myBlankTextFieldWhite.setEditable(false);
+        myBlankTextFieldBlack.setEditable(false);
+        myBlankTextFieldBlack.setBackground(Color.BLACK);
+    }
+
+    public void buildNavigationPanel() {
+        JButton upButton = new JButton("^");
+        JButton leftButton = new JButton("<");
+        JButton rightButton = new JButton(">");
+        JButton downButton = new JButton("v");
+
+        myNavigationPanel = new JPanel();
+        myNavigationPanel.setLayout(new GridLayout(0, 3));
+        myNavigationPanel.add(new JLabel());
+        myNavigationPanel.add(upButton);
+        myNavigationPanel.add(new JLabel());
+        myNavigationPanel.add(leftButton);
+        myNavigationPanel.add(new JLabel());
+        myNavigationPanel.add(rightButton);
+        myNavigationPanel.add(new JLabel());
+        myNavigationPanel.add(downButton);
+        myNavigationPanel.add(new JLabel());
+    }
+
+    public void buildInteractionsPanel() {
+        JButton heroInfobutton = new JButton("Hero Info");
+        JButton healPotionButton = new JButton("Use Heal Potion");
+        JButton visionPotionButton = new JButton("Use Vision Potion");
+        JButton saveGameButton = new JButton("Save Game");
+        JButton quitGameButton = new JButton("Quit Game");
+
+        myInteractionsPanel = new JPanel();
+        myInteractionsPanel.setLayout(new BoxLayout(myInteractionsPanel, BoxLayout.Y_AXIS));
+        myInteractionsPanel.add(heroInfobutton);
+        myInteractionsPanel.add(healPotionButton);
+        myInteractionsPanel.add(visionPotionButton);
+        myInteractionsPanel.add(saveGameButton);
+        myInteractionsPanel.add(quitGameButton);
+        myInteractionsPanel.setBorder(BorderFactory.createTitledBorder("Options"));
+
     }
 }
