@@ -139,17 +139,17 @@ public class ControllerEXP {
             room.setHasVisionPotion(false);
         }
         if(room.isHasMonster()) {
-            backgroundClip.stop();
+            //backgroundClip.stop();
             //playBattleAudio();
             Monster theMonster = room.getMyMonster();
-            System.out.println("You have encountered a " + theMonster.getMyName() + "!");
+            //System.out.println("You have encountered a " + theMonster.getMyName() + "!");
             battle(myHero, theMonster);
             room.setMyMonster(null);
             room.setHasMonster(false);
-            battleClip.stop();
+            //battleClip.stop();
             if(myHero.getMyAlive()) {
                 System.out.println(myDungeon);
-                backgroundClip.start();
+                //backgroundClip.start();
             }
         }
         if(room.isExit()) {
@@ -174,15 +174,10 @@ public class ControllerEXP {
 
     private void battle(Hero theHero, Monster theMonster) {
         Scanner scan = new Scanner(System.in);
-        int myChoice;
-        while(theHero.getMyAlive() && theMonster.getMyAlive()) {
-            System.out.println(theHero.getMyName() + " health: " + theHero.getMyHitPoints());
-            System.out.println(theMonster.getMyName() + " health: " + theMonster.getMyHitPoints());
-            System.out.println("Attack: 1");
-            System.out.println(myHero.getMySkillName() + ": 2");
-            //System.out.println("Special Attack: 2");
-            System.out.println("Use Health Potion: 3\n" + "Potions Remaining: " + theHero.getMyHealingPotions());
-            myChoice = scan.nextInt();
+        String myChoice;
+        if(theHero.getMyAlive() && theMonster.getMyAlive()) {
+            myDungeonUIEXP.buildBattlePanel(theHero, theMonster);
+            /*myChoice = scan.nextInt();
             if(myChoice == 3 && theHero.getMyHealingPotions() > 0) {
                 useHealPotion();
             } else if (myChoice == 3 && theHero.getMyHealingPotions() == 0){
@@ -200,7 +195,7 @@ public class ControllerEXP {
                     }
                     gameover();
                 }
-            }
+            }*/
         }
     }
 
