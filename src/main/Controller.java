@@ -1,6 +1,7 @@
 package main;
 
 import main.DungeonCharacter.*;
+import main.DungeonGUI.DungeonUIEXP;
 import main.DungeonMain.Dungeon;
 import main.DungeonMain.DungeonAdventure;
 import main.DungeonMain.Room;
@@ -76,6 +77,7 @@ public class Controller implements Serializable{
         System.out.println(myHero.getMyName());
         myCurrRoom = myDungeon.getMyRoom();
         playBackgroundAudio();
+        DungeonUIEXP e = new DungeonUIEXP(myCurrRoom, myHero);
     }
 
     public Dungeon buildDungeon(int theRows, int theCols, String theDifficulty) {
