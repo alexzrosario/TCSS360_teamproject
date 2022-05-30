@@ -1,6 +1,9 @@
 package main.DungeonGUI;
 
 import main.ControllerEXP;
+import main.DungeonCharacter.Hero;
+import main.DungeonCharacter.Monster;
+import main.DungeonCharacter.Warrior;
 import main.DungeonMain.Room;
 
 import javax.swing.*;
@@ -21,14 +24,14 @@ public class DungeonUIEXP extends JFrame {
     JPanel myClassSelectPanel;
     final private String[] myHeroes = {"Warrior", "Priestess", "Thief", "Barbarian", "Mage", "Swordsman", "Monk", "Samurai", "Occultist"};
     final private Integer[] mySizes = {3, 4, 5, 6, 7, 8, 9, 10};
-    String myUserHero;
+    String myUserHero = "Warrior";
     final private String[] myDifficulty = {"EASY", "NORMAL", "HARD"};
 
     JPanel myDungeonSizePanel;
-    int myDungeonSize;
+    int myDungeonSize = 5;
 
     JPanel myDifficultySelectPanel;
-    String myUserDifficulty;
+    String myUserDifficulty = "NORMAL";
 
     JPanel myAdventurePanel;
     JPanel myDungeonPanel;
@@ -36,6 +39,8 @@ public class DungeonUIEXP extends JFrame {
     JPanel myNavigationPanel;
     JPanel myInteractionsPanel;
     JTextArea myAdventureTextBox = new JTextArea("");
+
+    JPanel myBattlePanel;
 
     JButton testButton;
     Font gameTitleFont;
@@ -238,10 +243,12 @@ public class DungeonUIEXP extends JFrame {
         myOptionsPanel = new JPanel();
         myOptionsPanel.setLayout(new GridLayout(4,1));
 
-        JTextField nameField = new JTextField("What is your name?");
+        JTextField nameField = new JTextField();
+        nameField.setText("");
         myOptionsPanel.add(nameField);
 
         JComboBox<String> heroSelectBox = new JComboBox<>(myHeroes);
+        heroSelectBox.setSelectedItem(myHeroes[0]);
         heroSelectBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -251,6 +258,7 @@ public class DungeonUIEXP extends JFrame {
         myOptionsPanel.add(heroSelectBox);
 
         JComboBox<Integer> dungeonSize = new JComboBox<>(mySizes);
+        dungeonSize.setSelectedItem(mySizes[2]);
         dungeonSize.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -260,6 +268,7 @@ public class DungeonUIEXP extends JFrame {
         myOptionsPanel.add(dungeonSize);
 
         JComboBox<String> difficultySelectBox = new JComboBox<>(myDifficulty);
+        difficultySelectBox.setSelectedItem(myDifficulty[1]);
         difficultySelectBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -283,8 +292,36 @@ public class DungeonUIEXP extends JFrame {
         this.setVisible(true);
     }
 
-    public void buildBattlePanel() {
+    public void buildBattlePanel(Hero theHero, Monster theMonster) {
+        myMainPanel.removeAll();
+        myMainPanel.repaint();
+        myBattlePanel = new JPanel();
+        myBattlePanel.setLayout(new GridLayout(0,3));
 
+        JPanel heroBattlePanel = new JPanel();
+        heroBattlePanel.setLayout(new GridLayout(3,1));
+        heroBattlePanel.add(new JLabel(new ImageIcon(new ImageIcon("src/" + myUserHero + "Image.png").getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH))));
+        heroBattlePanel.add(new JTextArea(theHero.getMyName() + "'s HP: " + theHero.getMyHitPoints()));
+
+        JPanel heroBattleOptions = new JPanel();
+        JButton attackButton = new JButton("ATTACK");
+        heroBattleOptions.add(attackButton);
+        JButton skillButton = new JButton(theHero.getMySkillName());
+        heroBattleOptions.add(skillButton);
+        JButton useHealButton = new JButton("USE HEAL POTION: " + theHero.getMyHealingPotions());
+        heroBattleOptions.add(useHealButton);
+        heroBattlePanel.add(heroBattleOptions);
+        myBattlePanel.add(heroBattlePanel);
+
+        myBattlePanel.add(myAdventureTextBox);
+
+        JPanel monsterBattlePanel = new JPanel();
+        monsterBattlePanel.setLayout(new GridLayout(2,1));
+        monsterBattlePanel.add(new JLabel(new ImageIcon(new ImageIcon("src/" + theMonster.getMyName() + "Image.png").getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH))));
+        monsterBattlePanel.add(new JTextArea(theMonster.getMyName() + "'s HP: " + theMonster.getMyHitPoints()));
+        myBattlePanel.add(monsterBattlePanel);
+
+        myMainPanel.add(myBattlePanel);
     }
 
     public void updateAdventureText(String newText) {
