@@ -314,7 +314,7 @@ public class Controller implements Serializable{
                 double tempBlockChance = myHero.getMyBlockChance();
                 myHero.setMyBlockChance(0.0);
                 myHero.updateHealth(pitDamageTaken);
-//                playAudio("src/playerhurt.wav");
+                playAudio("src/playerhurt.wav");
                 myHero.setMyBlockChance(tempBlockChance);
                 System.out.println("You have fallen into a pit and have taken " + pitDamageTaken + " damage!");
                 room.setHasPit(false);
@@ -432,6 +432,7 @@ public class Controller implements Serializable{
             while ((line = br.readLine()) != null) {
                 System.out.println(line);
             }
+            playAudio("src/victorysound.wav");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -443,6 +444,7 @@ public class Controller implements Serializable{
             while ((line = br.readLine()) != null) {
                 System.out.println(line);
             }
+            playAudio("src/deathsound.wav");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
