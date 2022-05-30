@@ -1,6 +1,7 @@
 package main.DungeonGUI;
 
 import main.Controller;
+import main.ControllerEXP;
 import main.DungeonCharacter.Hero;
 import main.DungeonMain.Dungeon;
 import main.DungeonMain.Room;
@@ -41,11 +42,26 @@ public class DungeonUIEXP extends JFrame {
     JLabel playerIcon;
 ////////////////////////////////////////////
     Hero myHero;
-    Controller myController;
+    private ControllerEXP myController = new ControllerEXP(this);
 
     JPanel myMainPanel;
-    JPanel myDungeonPanel;
+
+    JPanel myStartPanel;
+    JPanel myOptionsPanel;
+    JPanel myClassSelectPanel;
+    final private String[] myHeroes = {"Warrior", "Priestess", "Thief"};
+    String myUserHero;
+    final private String[] myDifficulty = {"EASY", "NORMAL", "HARD"};
+
+    JPanel myDungeonSizePanel;
+    int myDungeonSize;
+
+    JPanel myDifficultySelectPanel;
+    String myUserDifficulty;
+
     JPanel myAdventurePanel;
+    JPanel myDungeonPanel;
+    JPanel myControlPanel;
     JPanel myNavigationPanel;
     JPanel myInteractionsPanel;
     JTextField myAdventureText;
@@ -56,34 +72,40 @@ public class DungeonUIEXP extends JFrame {
     Font gameTitleFont;
     Font regularFont = new Font("Times New Roman", Font.PLAIN, 20);
 
-    public DungeonUIEXP(Room theCurrentRoom, Hero theHero) {
-        this.myHero = theHero;
+    public DungeonUIEXP() {
+        //this.myHero = theHero;
         this.setTitle("Dungeon Adventure");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1000, 1000);
         myMainPanel = new JPanel();
-        myMainPanel.setBackground(Color.WHITE);
-        myMainPanel.setLayout(new BoxLayout(myMainPanel, BoxLayout.Y_AXIS));
+        buildStartPanel();
+        //buildAdventurePanel(theCurrentRoom, theHero);
+    }
+
+    public void buildAdventurePanel(Room theCurrentRoom, Hero theHero) {
+        myAdventurePanel = new JPanel();
+        myAdventurePanel.setBackground(Color.WHITE);
+        myAdventurePanel.setLayout(new BoxLayout(myAdventurePanel, BoxLayout.Y_AXIS));
         //myMainPanel.setLayout(new GridLayout(0, 1));
         setBlankTextFields();
 
         myDungeonPanel = dungeonPanel(theCurrentRoom, theHero);
-        myMainPanel.add(myDungeonPanel);
+        myAdventurePanel.add(myDungeonPanel);
 
-        myAdventurePanel = new JPanel();
-        myAdventurePanel.setLayout(new GridLayout(1, 3));
+        myControlPanel = new JPanel();
+        myControlPanel.setLayout(new GridLayout(1, 3));
         myAdventureText = new JTextField();
         myAdventureText.setEditable(false);
-        myAdventurePanel.add(myAdventureText);
+        myControlPanel.add(myAdventureText);
 
         buildNavigationPanel();
-        myAdventurePanel.add(myNavigationPanel);
+        myControlPanel.add(myNavigationPanel);
 
         buildInteractionsPanel();
-        myAdventurePanel.add(myInteractionsPanel);
-        myMainPanel.add(myAdventurePanel);
+        myControlPanel.add(myInteractionsPanel);
+        myAdventurePanel.add(myControlPanel);
 
-        this.add(myMainPanel);
+        this.add(myAdventurePanel);
         this.setVisible(true);
     }
 
@@ -173,5 +195,56 @@ public class DungeonUIEXP extends JFrame {
         myInteractionsPanel.add(quitGameButton);
         myInteractionsPanel.setBorder(BorderFactory.createTitledBorder("Options"));
 
+    }
+
+    public void buildStartPanel() {
+        myMainPanel.add(myStartPanel);
+        JButton startButton = new JButton("START NEW GAME");
+        JButton loadButton = new JButton("LOAD GAME");
+        JButton quitButton = new JButton("QUIT GAME");
+        myStartPanel = new JPanel();
+        myStartPanel.add(startButton);
+        myStartPanel.add(loadButton);
+        myStartPanel.add(quitButton);
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myMainPanel.removeAll();
+            }
+        });
+        this.setVisible(true);
+    }
+
+    public void buildOptionsPanel() {
+        myOptionsPanel = new JPanel();
+        myOptionsPanel.setLayout(new GridLayout(4,1));
+
+        JComboBox<String> heroSelectBox = new JComboBox<>(myHeroes);
+        heroSelectBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myUserHero = (String)heroSelectBox.getSelectedItem();
+            }
+        });
+        myOptionsPanel.add(heroSelectBox);
+
+        JTextField dungeonSize = new JTextField("Select Dungeon Size");
+        myOptionsPanel.add(dungeonSize);
+
+        JComboBox<String> difficultySelectBox = new JComboBox<>(myDifficulty);
+        difficultySelectBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myUserDifficulty = (String)difficultySelectBox.getSelectedItem();
+            }
+        });
+
+        JButton startAdventureButton = new JButton("Start Adventure");
+        startAdventureButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 }
