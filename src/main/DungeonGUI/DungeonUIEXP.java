@@ -5,6 +5,7 @@ import main.DungeonCharacter.Hero;
 import main.DungeonMain.Room;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,9 +36,7 @@ public class DungeonUIEXP extends JFrame {
     JPanel myControlPanel;
     JPanel myNavigationPanel;
     JPanel myInteractionsPanel;
-    JTextField myAdventureText;
-    JTextField myBlankTextFieldWhite = new JTextField();
-    JTextField myBlankTextFieldBlack = new JTextField();
+    JTextArea myAdventureTextBox = new JTextArea("");
 
     JButton testButton;
     Font gameTitleFont;
@@ -49,6 +48,7 @@ public class DungeonUIEXP extends JFrame {
         this.setSize(1000, 1000);
         myMainPanel = new JPanel();
         myMainPanel.setLayout(new GridLayout(0,1));
+        myAdventureTextBox.setPreferredSize(new Dimension(20,0));
         this.add(myMainPanel);
     }
 
@@ -56,23 +56,20 @@ public class DungeonUIEXP extends JFrame {
         buildStartPanel();
     }
 
-    public void buildAdventurePanel(Room theCurrentRoom, Hero theHero) {
+    public void buildAdventurePanel(Room theCurrentRoom) {
         myMainPanel.removeAll();
         myMainPanel.repaint();
         myAdventurePanel = new JPanel();
         myAdventurePanel.setBackground(Color.WHITE);
         myAdventurePanel.setLayout(new BoxLayout(myAdventurePanel, BoxLayout.Y_AXIS));
         //myMainPanel.setLayout(new GridLayout(0, 1));
-        setBlankTextFields();
 
-        myDungeonPanel = dungeonPanel(theCurrentRoom, theHero);
+        myDungeonPanel = dungeonPanel(theCurrentRoom);
         myAdventurePanel.add(myDungeonPanel);
 
         myControlPanel = new JPanel();
         myControlPanel.setLayout(new GridLayout(1, 3));
-        myAdventureText = new JTextField();
-        myAdventureText.setEditable(false);
-        myControlPanel.add(myAdventureText);
+        myControlPanel.add(myAdventureTextBox);
 
         buildNavigationPanel();
         myControlPanel.add(myNavigationPanel);
@@ -85,7 +82,7 @@ public class DungeonUIEXP extends JFrame {
         this.setVisible(true);
     }
 
-    public JPanel dungeonPanel(Room theRoom, Hero theHero){
+    public JPanel dungeonPanel(Room theRoom){
         JPanel dungeonPanel = new JPanel();
         dungeonPanel.setLayout(new GridLayout(0, 3));
         JTextField temp;
@@ -109,7 +106,7 @@ public class DungeonUIEXP extends JFrame {
             }
             else if (i ==4) {
                 JLabel playerIcon;
-                playerIcon = new JLabel(new ImageIcon(new ImageIcon("src/" + theHero.getMyImage()).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH)));
+                playerIcon = new JLabel(new ImageIcon(new ImageIcon("src/" + myUserHero + "Image.png").getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH)));
                 dungeonPanel.add(playerIcon);
                 continue;
             }
@@ -130,17 +127,15 @@ public class DungeonUIEXP extends JFrame {
         return dungeonPanel;
     }
 
-    public void setBlankTextFields() {
-        myBlankTextFieldWhite.setEditable(false);
-        myBlankTextFieldBlack.setEditable(false);
-        myBlankTextFieldBlack.setBackground(Color.BLACK);
-    }
-
     public void buildNavigationPanel() {
         JButton upButton = new JButton("^");
+        if (myController.getMyCurrRoom().getMyNorthRoom() == null) upButton.setEnabled(false);
         JButton leftButton = new JButton("<");
+        if (myController.getMyCurrRoom().getMyWestRoom() == null) leftButton.setEnabled(false);
         JButton rightButton = new JButton(">");
+        if (myController.getMyCurrRoom().getMyEastRoom() == null) rightButton.setEnabled(false);
         JButton downButton = new JButton("v");
+        if (myController.getMyCurrRoom().getMySouthRoom() == null) downButton.setEnabled(false);
 
         myNavigationPanel = new JPanel();
         myNavigationPanel.setLayout(new GridLayout(0, 3));
@@ -153,6 +148,39 @@ public class DungeonUIEXP extends JFrame {
         myNavigationPanel.add(new JLabel());
         myNavigationPanel.add(downButton);
         myNavigationPanel.add(new JLabel());
+
+        upButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myController.checkDirection("^");
+                buildAdventurePanel(myController.getMyCurrRoom());
+            }
+        });
+
+        leftButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myController.checkDirection("<");
+                buildAdventurePanel(myController.getMyCurrRoom());
+            }
+        });
+
+        rightButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myController.checkDirection(">");
+                buildAdventurePanel(myController.getMyCurrRoom());
+            }
+        });
+
+        downButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myController.checkDirection("v");
+                buildAdventurePanel(myController.getMyCurrRoom());
+            }
+        });
+
     }
 
     public void buildInteractionsPanel() {
@@ -247,12 +275,24 @@ public class DungeonUIEXP extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String heroName = nameField.getSelectedText();
                 myController.startGame(heroName, myUserHero, myUserDifficulty, myDungeonSize);
-                buildAdventurePanel(myController.getMyCurrRoom(), myController.getMyHero());
+                buildAdventurePanel(myController.getMyCurrRoom());
             }
         });
         myOptionsPanel.add(startAdventureButton);
 
         myMainPanel.add(myOptionsPanel);
         this.setVisible(true);
+    }
+
+    public void buildBattlePanel() {
+
+    }
+
+    public void updateAdventureText(String newText) {
+        try {
+            myAdventureTextBox.getDocument().insertString(0, newText + "\n", null);
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
     }
 }
