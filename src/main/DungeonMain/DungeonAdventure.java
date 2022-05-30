@@ -26,7 +26,7 @@ public class DungeonAdventure implements Serializable {
                     play();
                     break;
                 case "2" :
-                    controller.useLoad();
+                    controller.loadGame();
                     break;
                 case "q":
                     quit = true;

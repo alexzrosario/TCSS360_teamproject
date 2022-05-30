@@ -1,7 +1,6 @@
 package main.DungeonGUI;
 
 import main.ControllerEXP;
-import main.DungeonCharacter.Hero;
 import main.DungeonMain.Room;
 
 import javax.swing.*;

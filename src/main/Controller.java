@@ -333,7 +333,6 @@ public class Controller implements Serializable{
             if(room.isExit()) {
                 if(myHero.getMyPillars() < 4) {
                     System.out.println("You have not collected all the pillars!");
-
                 }
                 else {
                     audioController.stopBackgroundAudio();
@@ -387,11 +386,6 @@ public class Controller implements Serializable{
                 }
             }
         }
-    }
-
-    public void useLoad() {
-        loadGame();
-
     }
 
     public Dungeon getMyDungeon() {

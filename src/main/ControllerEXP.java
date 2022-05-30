@@ -3,7 +3,6 @@ package main;
 import main.DungeonCharacter.*;
 import main.DungeonGUI.DungeonUIEXP;
 import main.DungeonMain.Dungeon;
-import main.DungeonMain.DungeonAdventure;
 import main.DungeonMain.Room;
 
 import javax.sound.sampled.Clip;
@@ -20,9 +19,7 @@ public class ControllerEXP {
     private boolean myGameDone = false;
     private Random r = new Random();
     private DungeonUIEXP myDungeonUIEXP;
-    private transient Clip clip;
-    private transient Clip backgroundClip;
-    private transient Clip battleClip;
+    private AudioController audioController = new AudioController();
     private static final long serialVersionUID = 13425364675L;
     public ControllerEXP(DungeonUIEXP theDungeonUIEXP){
         myDungeonUIEXP = theDungeonUIEXP;
@@ -65,7 +62,7 @@ public class ControllerEXP {
             myHero = new Occultist(theName);
             myGameDone = false;
         }
-
+        audioController.playBackgroundAudio();
         myDungeon = new Dungeon(theDungeonSize, theDungeonSize, theDifficulty);
         System.out.println(myDungeon);
         myCurrRoom = myDungeon.getMyRoom();
@@ -119,9 +116,9 @@ public class ControllerEXP {
             double tempBlockChance = myHero.getMyBlockChance();
             myHero.setMyBlockChance(0.0);
             myHero.updateHealth(pitDamageTaken);
-//                playAudio("src/playerhurt.wav");
             myHero.setMyBlockChance(tempBlockChance);
             myDungeonUIEXP.updateAdventureText("You have fallen into a pit and have taken " + pitDamageTaken + " damage!");
+            audioController.playAudio("src/playerhurt.wav");
             room.setHasPit(false);
             if (!myHero.getMyAlive()) {
                 myGameDone = true;
@@ -139,33 +136,37 @@ public class ControllerEXP {
             room.setHasVisionPotion(false);
         }
         if(room.isHasMonster()) {
-            backgroundClip.stop();
-            //playBattleAudio();
+            audioController.stopBackgroundAudio();
+            audioController.playBattleAudio();
             Monster theMonster = room.getMyMonster();
             System.out.println("You have encountered a " + theMonster.getMyName() + "!");
             battle(myHero, theMonster);
             room.setMyMonster(null);
             room.setHasMonster(false);
-            battleClip.stop();
+            audioController.stopBattleAudio();
             if(myHero.getMyAlive()) {
                 System.out.println(myDungeon);
-                backgroundClip.start();
+                audioController.startBackgroundAudio();
+            } else {
+                gameover();
             }
         }
         if(room.isExit()) {
-            if(myHero.getMyPillars() < 4) {
+            if (myHero.getMyPillars() < 4) {
                 myDungeonUIEXP.updateAdventureText("You have not collected all the pillars!");
-            }
-            else {
+            } else {
+                audioController.stopBackgroundAudio();
                 System.out.println("You have collected all the pillars!");
                 System.out.println("However, one last challenge stands in your way.");
                 Monster theMonster = new MonsterFactory().createMonster("Lord of OO");
                 System.out.println("You have encountered a " + theMonster.getMyName() + "!");
+                audioController.playBossAudio();
                 battle(myHero, theMonster);
                 myGameDone = true;
-                if(!myHero.getMyAlive()) {
+                audioController.stopBossAudio();
+                if (!myHero.getMyAlive()) {
                     gameover();
-                }else{
+                } else {
                     victory();
                 }
             }
@@ -180,7 +181,6 @@ public class ControllerEXP {
             System.out.println(theMonster.getMyName() + " health: " + theMonster.getMyHitPoints());
             System.out.println("Attack: 1");
             System.out.println(myHero.getMySkillName() + ": 2");
-            //System.out.println("Special Attack: 2");
             System.out.println("Use Health Potion: 3\n" + "Potions Remaining: " + theHero.getMyHealingPotions());
             myChoice = scan.nextInt();
             if(myChoice == 3 && theHero.getMyHealingPotions() > 0) {
@@ -198,7 +198,6 @@ public class ControllerEXP {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    gameover();
                 }
             }
         }
@@ -230,6 +229,7 @@ public class ControllerEXP {
             while ((line = br.readLine()) != null) {
                 System.out.println(line);
             }
+            audioController.playAudio("src/victorysound.wav");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -241,6 +241,7 @@ public class ControllerEXP {
             while ((line = br.readLine()) != null) {
                 System.out.println(line);
             }
+            audioController.playAudio("src/deathsound.wav");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
