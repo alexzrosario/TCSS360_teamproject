@@ -143,7 +143,7 @@ public class ControllerEXP {
             //playBattleAudio();
             Monster theMonster = room.getMyMonster();
             myDungeonUIEXP.updateAdventureText("You have encountered a " + theMonster.getMyName() + "!");
-            battle(myHero, theMonster);
+            myDungeonUIEXP.buildBattlePanel(myHero, theMonster);
             room.setMyMonster(null);
             room.setHasMonster(false);
             //battleClip.stop();
@@ -164,7 +164,7 @@ public class ControllerEXP {
                 System.out.println("However, one last challenge stands in your way.");
                 Monster theMonster = new MonsterFactory().createMonster("Lord of OO");
                 System.out.println("You have encountered a " + theMonster.getMyName() + "!");
-                battle(myHero, theMonster);
+                myDungeonUIEXP.buildBattlePanel(myHero, theMonster);
                 myGameDone = true;
                 if(!myHero.getMyAlive()) {
                     gameover();
@@ -175,9 +175,10 @@ public class ControllerEXP {
         }
     }
 
-    private void battle(Hero theHero, Monster theMonster) {
+    public void battle(Hero theHero, Monster theMonster, String Action) {
         Scanner scan = new Scanner(System.in);
         String myChoice;
+
         if(theHero.getMyAlive() && theMonster.getMyAlive()) {
             myDungeonUIEXP.buildBattlePanel(theHero, theMonster);
             /*myChoice = scan.nextInt();

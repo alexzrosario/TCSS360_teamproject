@@ -311,6 +311,7 @@ public class DungeonUIEXP extends JFrame {
         JButton skillButton = new JButton(theHero.getMySkillName());
         heroBattleOptions.add(skillButton);
         JButton useHealButton = new JButton("USE HEAL POTION: " + theHero.getMyHealingPotions());
+        if (theHero.getMyHealingPotions() < 1) useHealButton.setEnabled(false);
         heroBattleOptions.add(useHealButton);
         heroBattlePanel.add(heroBattleOptions);
         myBattlePanel.add(heroBattlePanel);
@@ -328,6 +329,25 @@ public class DungeonUIEXP extends JFrame {
 
         myMainPanel.add(myBattlePanel);
         this.setVisible(true);
+
+        attackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myController.battle(theHero, theMonster, "ATTACK");
+            }
+        });
+        skillButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myController.battle(theHero, theMonster, "SKILL");
+            }
+        });
+        useHealButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myController.battle(theHero, theMonster, "HEAL");
+            }
+        });
     }
 
     public void updateAdventureText(String newText) {
