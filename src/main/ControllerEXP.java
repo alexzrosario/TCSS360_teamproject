@@ -142,7 +142,7 @@ public class ControllerEXP {
             //backgroundClip.stop();
             //playBattleAudio();
             Monster theMonster = room.getMyMonster();
-            //System.out.println("You have encountered a " + theMonster.getMyName() + "!");
+            myDungeonUIEXP.updateAdventureText("You have encountered a " + theMonster.getMyName() + "!");
             battle(myHero, theMonster);
             room.setMyMonster(null);
             room.setHasMonster(false);
@@ -151,6 +151,9 @@ public class ControllerEXP {
                 System.out.println(myDungeon);
                 //backgroundClip.start();
             }
+        }
+        else {
+            myDungeonUIEXP.buildAdventurePanel(getMyCurrRoom());
         }
         if(room.isExit()) {
             if(myHero.getMyPillars() < 4) {
