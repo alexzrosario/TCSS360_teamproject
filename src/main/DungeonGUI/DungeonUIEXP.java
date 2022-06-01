@@ -157,7 +157,7 @@ public class DungeonUIEXP extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 myController.checkDirection("^");
-                buildAdventurePanel(myController.getMyCurrRoom());
+                //buildAdventurePanel(myController.getMyCurrRoom());
             }
         });
 
@@ -165,7 +165,7 @@ public class DungeonUIEXP extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 myController.checkDirection("<");
-                buildAdventurePanel(myController.getMyCurrRoom());
+                //buildAdventurePanel(myController.getMyCurrRoom());
             }
         });
 
@@ -173,7 +173,7 @@ public class DungeonUIEXP extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 myController.checkDirection(">");
-                buildAdventurePanel(myController.getMyCurrRoom());
+                //buildAdventurePanel(myController.getMyCurrRoom());
             }
         });
 
@@ -181,7 +181,7 @@ public class DungeonUIEXP extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 myController.checkDirection("v");
-                buildAdventurePanel(myController.getMyCurrRoom());
+                //buildAdventurePanel(myController.getMyCurrRoom());
             }
         });
 
@@ -301,7 +301,9 @@ public class DungeonUIEXP extends JFrame {
         JPanel heroBattlePanel = new JPanel();
         heroBattlePanel.setLayout(new GridLayout(3,1));
         heroBattlePanel.add(new JLabel(new ImageIcon(new ImageIcon("src/" + myUserHero + "Image.png").getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH))));
-        heroBattlePanel.add(new JTextArea(theHero.getMyName() + "'s HP: " + theHero.getMyHitPoints()));
+        JTextField heroHP = new JTextField(theHero.getMyName() + "'s HP: " + theHero.getMyHitPoints());
+        heroHP.setEditable(false);
+        heroBattlePanel.add(heroHP);
 
         JPanel heroBattleOptions = new JPanel();
         JButton attackButton = new JButton("ATTACK");
@@ -313,15 +315,19 @@ public class DungeonUIEXP extends JFrame {
         heroBattlePanel.add(heroBattleOptions);
         myBattlePanel.add(heroBattlePanel);
 
+        myAdventureTextBox.setEditable(false);
         myBattlePanel.add(myAdventureTextBox);
 
         JPanel monsterBattlePanel = new JPanel();
         monsterBattlePanel.setLayout(new GridLayout(2,1));
-        monsterBattlePanel.add(new JLabel(new ImageIcon(new ImageIcon("src/" + theMonster.getMyName() + "Image.png").getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH))));
-        monsterBattlePanel.add(new JTextArea(theMonster.getMyName() + "'s HP: " + theMonster.getMyHitPoints()));
+        monsterBattlePanel.add(new JLabel(new ImageIcon(new ImageIcon("src/" + theMonster.getMyName() + "Image.jpeg").getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH))));
+        JTextField monsterHP = new JTextField(theMonster.getMyName() + "'s HP: " + theMonster.getMyHitPoints());
+        monsterHP.setEditable(false);
+        monsterBattlePanel.add(monsterHP);
         myBattlePanel.add(monsterBattlePanel);
 
         myMainPanel.add(myBattlePanel);
+        this.setVisible(true);
     }
 
     public void updateAdventureText(String newText) {
