@@ -175,9 +175,19 @@ public class ControllerEXP {
         }
     }
 
-    public void battle(Hero theHero, Monster theMonster, String Action) {
-        Scanner scan = new Scanner(System.in);
-        String myChoice;
+    public void battle(Hero theHero, Monster theMonster, String theAction) {
+        if (theAction.equals("ATTACK")) {
+
+        }
+        else if (theAction.equals("SKILL")) {
+
+        }
+        else if (theAction.equals("HEAL")) {
+
+        }
+        else {
+
+        }
 
         if(theHero.getMyAlive() && theMonster.getMyAlive()) {
             myDungeonUIEXP.buildBattlePanel(theHero, theMonster);
@@ -201,6 +211,7 @@ public class ControllerEXP {
                 }
             }*/
         }
+        else myDungeonUIEXP.buildAdventurePanel(myCurrRoom);
     }
 
     public void useHealPotion(){
