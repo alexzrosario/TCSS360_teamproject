@@ -3,13 +3,15 @@ package main.DungeonMain;
 import main.AudioController;
 import main.Controller;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.*;
 import java.util.Scanner;
 
 public class DungeonAdventure implements Serializable {
     private static final long serialVersionUID = 3536060713340084481L;
     private Controller controller = new Controller(this);
-    public void start(){
+    public void start() {
         boolean quit = false;
         System.out.println("Welcome to the Dungeon\n");
         String choice;
@@ -149,6 +151,4 @@ public class DungeonAdventure implements Serializable {
         System.out.println(controller.getMyDungeon());
         controller.traverse();
     }
-
-
 }

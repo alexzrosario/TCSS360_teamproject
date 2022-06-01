@@ -4,6 +4,11 @@ import main.DungeonCharacter.*;
 import main.DungeonMain.Dungeon;
 import main.DungeonMain.DungeonAdventure;
 import main.DungeonMain.Room;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
@@ -456,5 +461,9 @@ public class Controller implements Serializable{
             c.printStackTrace();
         }
         myDungeonAdventure.play();
+    }
+    private Object readResolve() throws LineUnavailableException, UnsupportedAudioFileException, IOException {
+        audioController.setBackgroundClip();
+        return this;
     }
 }

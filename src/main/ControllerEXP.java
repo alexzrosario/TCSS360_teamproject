@@ -139,7 +139,8 @@ public class ControllerEXP {
             audioController.stopBackgroundAudio();
             audioController.playBattleAudio();
             Monster theMonster = room.getMyMonster();
-            System.out.println("You have encountered a " + theMonster.getMyName() + "!");
+            myDungeonUIEXP.buildBattlePanel(myHero, theMonster);
+            myDungeonUIEXP.updateAdventureText("You have encountered a " + theMonster.getMyName() + "!");
             battle(myHero, theMonster);
             room.setMyMonster(null);
             room.setHasMonster(false);
@@ -156,10 +157,10 @@ public class ControllerEXP {
                 myDungeonUIEXP.updateAdventureText("You have not collected all the pillars!");
             } else {
                 audioController.stopBackgroundAudio();
-                System.out.println("You have collected all the pillars!");
-                System.out.println("However, one last challenge stands in your way.");
+                myDungeonUIEXP.updateAdventureText("You have collected all the pillars!");
+                myDungeonUIEXP.updateAdventureText("However, one last challenge stands in your way.");
                 Monster theMonster = new MonsterFactory().createMonster("Lord of OO");
-                System.out.println("You have encountered a " + theMonster.getMyName() + "!");
+                myDungeonUIEXP.updateAdventureText("You have encountered a " + theMonster.getMyName() + "!");
                 audioController.playBossAudio();
                 battle(myHero, theMonster);
                 myGameDone = true;
@@ -177,16 +178,16 @@ public class ControllerEXP {
         Scanner scan = new Scanner(System.in);
         int myChoice;
         while(theHero.getMyAlive() && theMonster.getMyAlive()) {
-            System.out.println(theHero.getMyName() + " health: " + theHero.getMyHitPoints());
-            System.out.println(theMonster.getMyName() + " health: " + theMonster.getMyHitPoints());
-            System.out.println("Attack: 1");
-            System.out.println(myHero.getMySkillName() + ": 2");
-            System.out.println("Use Health Potion: 3\n" + "Potions Remaining: " + theHero.getMyHealingPotions());
+            myDungeonUIEXP.updateAdventureText(theHero.getMyName() + " health: " + theHero.getMyHitPoints());
+            myDungeonUIEXP.updateAdventureText(theMonster.getMyName() + " health: " + theMonster.getMyHitPoints());
+            myDungeonUIEXP.updateAdventureText("Attack: 1");
+            myDungeonUIEXP.updateAdventureText(myHero.getMySkillName() + ": 2");
+            myDungeonUIEXP.updateAdventureText("Use Health Potion: 3\n" + "Potions Remaining: " + theHero.getMyHealingPotions());
             myChoice = scan.nextInt();
             if(myChoice == 3 && theHero.getMyHealingPotions() > 0) {
                 useHealPotion();
             } else if (myChoice == 3 && theHero.getMyHealingPotions() == 0){
-                System.out.println("You have no health potions remaining!");
+                myDungeonUIEXP.updateAdventureText("You have no health potions remaining!");
             }
             theHero.battleMenu(theMonster, myChoice);
             if(theMonster.getMyAlive()) {

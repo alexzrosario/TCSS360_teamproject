@@ -56,13 +56,13 @@ public class Room implements Serializable {
         }
         findDifficultyModifier(theDifficulty);
         // Determining if the room contains a monster, and randomly decides which monster to use
-//        if (Math.random() < myDifficultyModifier) {
-//            int monsterRoll = theRandom.nextInt(3);
-//            setMyMonster(new MonsterFactory().createMonster(monsterArray[monsterRoll]));
-//            setHasMonster(true);
-//
-//            myStringToken = "m"; // temp string token to indicate if a monster exists in the room
-//        }
+        if (Math.random() < myDifficultyModifier) {
+            int monsterRoll = theRandom.nextInt(3);
+            setMyMonster(new MonsterFactory().createMonster(monsterArray[monsterRoll]));
+            setHasMonster(true);
+
+            myStringToken = "m"; // temp string token to indicate if a monster exists in the room
+        }
     }
 
     public void findDifficultyModifier(String theDifficulty) {

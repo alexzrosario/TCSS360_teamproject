@@ -1,9 +1,6 @@
 package main;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.*;
 import java.io.*;
 
 public class AudioController implements Serializable {
@@ -75,7 +72,18 @@ public class AudioController implements Serializable {
     }
 
     public void stopBackgroundAudio() {
-        backgroundClip.stop();
+        this.backgroundClip.stop();
+    }
+
+    public void setBackgroundClip() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        File musicPath = new File("src/backgroundmusic.wav");
+        AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+        backgroundClip = AudioSystem.getClip();
+        backgroundClip.open(audioInput);
+        FloatControl gainControl = (FloatControl) backgroundClip.getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(-30.f);
+        backgroundClip.start();
+        backgroundClip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
     public void startBackgroundAudio() {
@@ -88,18 +96,6 @@ public class AudioController implements Serializable {
 
     public void stopBossAudio() {
         bossClip.stop();
-    }
-
-    public void startNullCheck(Clip theClip) {
-        if(theClip != null) {
-            theClip.start();
-        }
-    }
-
-    public void stopNullCheck(Clip theClip) {
-        if(theClip != null) {
-            theClip.stop();
-        }
     }
 
 }
