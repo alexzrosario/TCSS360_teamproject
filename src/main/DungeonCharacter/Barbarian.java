@@ -1,6 +1,6 @@
 package main.DungeonCharacter;
 
-public class Barbarian extends Hero{
+public class Barbarian extends Hero implements StateResettable {
     private boolean isReckless = false;
     private final double MY_STORED_BLOCK_CHANCE = 0.15;
     public Barbarian(final String theName) {
@@ -51,5 +51,10 @@ public class Barbarian extends Hero{
             System.out.println(getMyName() + " blocked the attack");
             isReckless = false;
         }
+    }
+
+    @Override
+    public void resetState() {
+        isReckless = false;
     }
 }

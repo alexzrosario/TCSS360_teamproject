@@ -124,8 +124,8 @@ public class ControllerEXP {
             myDungeonUIEXP.updateAdventureText("You have fallen into a pit and have taken " + pitDamageTaken + " damage!");
             room.setHasPit(false);
             if (!myHero.getMyAlive()) {
-                myGameDone = true;
-                gameover();
+                //myGameDone = true;
+                myDungeonUIEXP.buildDefeatScreen();
             }
         }
         if(room.isHasHealPotion()) {
@@ -143,7 +143,7 @@ public class ControllerEXP {
             //playBattleAudio();
             Monster theMonster = room.getMyMonster();
             myDungeonUIEXP.updateAdventureText("You have encountered a " + theMonster.getMyName() + "!");
-            battle(myHero, theMonster);
+            myDungeonUIEXP.buildBattlePanel(myHero, theMonster);
             room.setMyMonster(null);
             room.setHasMonster(false);
             //battleClip.stop();
@@ -160,46 +160,47 @@ public class ControllerEXP {
                 myDungeonUIEXP.updateAdventureText("You have not collected all the pillars!");
             }
             else {
-                System.out.println("You have collected all the pillars!");
-                System.out.println("However, one last challenge stands in your way.");
+                myDungeonUIEXP.updateAdventureText("You have collected all the pillars!");
+                myDungeonUIEXP.getMyMainPanel().repaint();
+                myHero.pause(2000);
+                myDungeonUIEXP.updateAdventureText("However, one last challenge stands in your way.");
+                myDungeonUIEXP.getMyMainPanel().repaint();
+                myHero.pause(2000);
                 Monster theMonster = new MonsterFactory().createMonster("Lord of OO");
-                System.out.println("You have encountered a " + theMonster.getMyName() + "!");
-                battle(myHero, theMonster);
-                myGameDone = true;
-                if(!myHero.getMyAlive()) {
-                    gameover();
-                }else{
-                    victory();
-                }
+                myDungeonUIEXP.updateAdventureText("You must now face the " + theMonster.getMyName() + "!");
+                myDungeonUIEXP.getMyMainPanel().repaint();
+                myHero.pause(2000);
+                myDungeonUIEXP.buildBattlePanel(myHero, theMonster);
             }
         }
     }
 
-    private void battle(Hero theHero, Monster theMonster) {
-        Scanner scan = new Scanner(System.in);
-        String myChoice;
-        if(theHero.getMyAlive() && theMonster.getMyAlive()) {
-            myDungeonUIEXP.buildBattlePanel(theHero, theMonster);
-            /*myChoice = scan.nextInt();
-            if(myChoice == 3 && theHero.getMyHealingPotions() > 0) {
-                useHealPotion();
-            } else if (myChoice == 3 && theHero.getMyHealingPotions() == 0){
-                System.out.println("You have no health potions remaining!");
+    public void battle(Monster theMonster, String theAction) {
+        switch (theAction) {
+            case "ATTACK" -> {
+                myDungeonUIEXP.updateAdventureText(myHero.getMyName() + " attacks");
+                myHero.battleMenu(theMonster, 1);
             }
-            theHero.battleMenu(theMonster, myChoice);
-            if(theMonster.getMyAlive()) {
-                theMonster.basicAttack(theHero);
-                if(!theHero.getMyAlive()) {
-                    myGameDone = true;
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    gameover();
-                }
-            }*/
+            case "SKILL" -> {
+                myDungeonUIEXP.updateAdventureText(myHero.getMyName() + " uses " + myHero.getMySkillName());
+                myHero.battleMenu(theMonster, 2);
+            }
+            case "HEAL" -> useHealPotion();
+            default -> myDungeonUIEXP.updateAdventureText("Invalid Choice");
         }
+        if (theMonster.getMyAlive()) {
+            myDungeonUIEXP.updateAdventureText(theMonster.getMyName() + " attacks");
+            theMonster.basicAttack(myHero);
+            if(!myHero.getMyAlive()) {
+                myDungeonUIEXP.buildDefeatScreen();
+                return;
+            }
+        }
+        ((StateResettable) myHero).resetState();
+
+        if(myHero.getMyAlive() && theMonster.getMyAlive()) myDungeonUIEXP.buildBattlePanel(myHero, theMonster);
+        else if (!theMonster.getMyAlive() && theMonster.getMyName().equals("Lord of OO")) myDungeonUIEXP.buildVictoryScreen();
+        else myDungeonUIEXP.buildAdventurePanel(myCurrRoom);
     }
 
     public void useHealPotion(){

@@ -42,6 +42,7 @@ public class DungeonUIEXP extends JFrame {
 
     JPanel myBattlePanel;
 
+    JButton returnButton;
     JButton testButton;
     Font gameTitleFont;
     Font regularFont = new Font("Times New Roman", Font.PLAIN, 20);
@@ -53,6 +54,14 @@ public class DungeonUIEXP extends JFrame {
         myMainPanel = new JPanel();
         myMainPanel.setLayout(new GridLayout(0,1));
         myAdventureTextBox.setPreferredSize(new Dimension(20,0));
+        returnButton = new JButton("RETURN TO TITLE SCREEN");
+        returnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myAdventureTextBox.setText("");
+                buildStartPanel();
+            }
+        });
         this.add(myMainPanel);
     }
 
@@ -281,8 +290,15 @@ public class DungeonUIEXP extends JFrame {
         startAdventureButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //String heroName = "GOD";
                 String heroName = nameField.getSelectedText();
                 myController.startGame(heroName, myUserHero, myUserDifficulty, myDungeonSize);
+                if (heroName.equals("GOD")) {
+                    myController.getMyHero().setMyHitChance(1.0);
+                    myController.getMyHero().setMyMinDam(500);
+                    myController.getMyHero().setMyMaxDam(501);
+                    myController.getMyHero().setMyBlockChance(1.0);
+                }
                 buildAdventurePanel(myController.getMyCurrRoom());
             }
         });
@@ -311,6 +327,7 @@ public class DungeonUIEXP extends JFrame {
         JButton skillButton = new JButton(theHero.getMySkillName());
         heroBattleOptions.add(skillButton);
         JButton useHealButton = new JButton("USE HEAL POTION: " + theHero.getMyHealingPotions());
+        if (theHero.getMyHealingPotions() < 1) useHealButton.setEnabled(false);
         heroBattleOptions.add(useHealButton);
         heroBattlePanel.add(heroBattleOptions);
         myBattlePanel.add(heroBattlePanel);
@@ -328,6 +345,47 @@ public class DungeonUIEXP extends JFrame {
 
         myMainPanel.add(myBattlePanel);
         this.setVisible(true);
+
+        attackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myController.battle(theMonster, "ATTACK");
+            }
+        });
+        skillButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myController.battle(theMonster, "SKILL");
+            }
+        });
+        useHealButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myController.battle(theMonster, "HEAL");
+            }
+        });
+    }
+
+    public void buildVictoryScreen() {
+        myMainPanel.removeAll();
+        myMainPanel.repaint();
+        JPanel victoryScreenPanel = new JPanel();
+        victoryScreenPanel.setLayout(new GridLayout(2,1));
+        victoryScreenPanel.add(new JLabel("YOU WIN"));
+        victoryScreenPanel.add(returnButton);
+        myMainPanel.add(victoryScreenPanel);
+        this.setVisible(true);
+    }
+
+    public void buildDefeatScreen() {
+        myMainPanel.removeAll();
+        myMainPanel.repaint();
+        JPanel defeatScreenPanel = new JPanel();
+        defeatScreenPanel.setLayout(new GridLayout(2,1));
+        defeatScreenPanel.add(new JLabel("YOU WERE DEFEATED"));
+        defeatScreenPanel.add(returnButton);
+        myMainPanel.add(defeatScreenPanel);
+        this.setVisible(true);
     }
 
     public void updateAdventureText(String newText) {
@@ -336,5 +394,14 @@ public class DungeonUIEXP extends JFrame {
         } catch (BadLocationException e) {
             e.printStackTrace();
         }
+    }
+
+    public void mainPanelReset() {
+        myMainPanel.removeAll();
+        myMainPanel.repaint();
+    }
+
+    public JPanel getMyMainPanel() {
+        return myMainPanel;
     }
 }
