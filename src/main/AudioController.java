@@ -20,7 +20,6 @@ public class AudioController implements Serializable {
             FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             gainControl.setValue(-30.f);
             clip.start();
-            Thread.sleep(clip.getMicrosecondLength()/1000);
         } catch (Exception e) {
             e.printStackTrace();
         }

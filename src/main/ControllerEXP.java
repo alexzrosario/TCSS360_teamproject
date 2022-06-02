@@ -20,9 +20,7 @@ public class ControllerEXP {
     private boolean myGameDone = false;
     private Random r = new Random();
     private DungeonUIEXP myDungeonUIEXP;
-    private transient Clip clip;
-    private transient Clip backgroundClip;
-    private transient Clip battleClip;
+    private final AudioController audioController = new AudioController();
     private static final long serialVersionUID = 13425364675L;
     public ControllerEXP(DungeonUIEXP theDungeonUIEXP){
         myDungeonUIEXP = theDungeonUIEXP;
@@ -69,6 +67,7 @@ public class ControllerEXP {
         myDungeon = new Dungeon(theDungeonSize, theDungeonSize, theDifficulty);
         System.out.println(myDungeon);
         myCurrRoom = myDungeon.getMyRoom();
+        audioController.playBackgroundAudio();
     }
 
     public void checkDirection(String theDirection) {
@@ -119,7 +118,7 @@ public class ControllerEXP {
             double tempBlockChance = myHero.getMyBlockChance();
             myHero.setMyBlockChance(0.0);
             myHero.updateHealth(pitDamageTaken);
-//                playAudio("src/playerhurt.wav");
+            audioController.playAudio("src/playerhurt.wav");
             myHero.setMyBlockChance(tempBlockChance);
             myDungeonUIEXP.updateAdventureText("You have fallen into a pit and have taken " + pitDamageTaken + " damage!");
             room.setHasPit(false);
@@ -139,18 +138,13 @@ public class ControllerEXP {
             room.setHasVisionPotion(false);
         }
         if(room.isHasMonster()) {
-            //backgroundClip.stop();
-            //playBattleAudio();
+            audioController.stopBackgroundAudio();
+            audioController.playBattleAudio();
             Monster theMonster = room.getMyMonster();
             myDungeonUIEXP.updateAdventureText("You have encountered a " + theMonster.getMyName() + "!");
             myDungeonUIEXP.buildBattlePanel(myHero, theMonster);
             room.setMyMonster(null);
             room.setHasMonster(false);
-            //battleClip.stop();
-            if(myHero.getMyAlive()) {
-                System.out.println(myDungeon);
-                //backgroundClip.start();
-            }
         }
         else {
             myDungeonUIEXP.buildAdventurePanel(getMyCurrRoom());
@@ -160,6 +154,7 @@ public class ControllerEXP {
                 myDungeonUIEXP.updateAdventureText("You have not collected all the pillars!");
             }
             else {
+                audioController.stopBackgroundAudio();
                 myDungeonUIEXP.updateAdventureText("You have collected all the pillars!");
                 myDungeonUIEXP.getMyMainPanel().repaint();
                 myHero.pause(2000);
@@ -170,6 +165,7 @@ public class ControllerEXP {
                 myDungeonUIEXP.updateAdventureText("You must now face the " + theMonster.getMyName() + "!");
                 myDungeonUIEXP.getMyMainPanel().repaint();
                 myHero.pause(2000);
+                audioController.playBossAudio();
                 myDungeonUIEXP.buildBattlePanel(myHero, theMonster);
             }
         }
@@ -192,15 +188,26 @@ public class ControllerEXP {
             myDungeonUIEXP.updateAdventureText(theMonster.getMyName() + " attacks");
             theMonster.basicAttack(myHero);
             if(!myHero.getMyAlive()) {
+                audioController.stopBattleAudio();
+                audioController.playAudio("src/deathsound.wav");
                 myDungeonUIEXP.buildDefeatScreen();
                 return;
             }
         }
-        ((StateResettable) myHero).resetState();
+        if (myHero instanceof StateResettable) ((StateResettable) myHero).resetState();
 
         if(myHero.getMyAlive() && theMonster.getMyAlive()) myDungeonUIEXP.buildBattlePanel(myHero, theMonster);
-        else if (!theMonster.getMyAlive() && theMonster.getMyName().equals("Lord of OO")) myDungeonUIEXP.buildVictoryScreen();
-        else myDungeonUIEXP.buildAdventurePanel(myCurrRoom);
+        else if (!theMonster.getMyAlive() && theMonster.getMyName().equals("Lord of OO")){
+            audioController.stopBossAudio();
+            audioController.playAudio("src/victorysound.wav");
+            myDungeonUIEXP.buildVictoryScreen();
+        }
+        else {
+            audioController.stopBattleAudio();
+            audioController.startBackgroundAudio();
+            myDungeonUIEXP.buildAdventurePanel(myCurrRoom);
+        }
+
     }
 
     public void useHealPotion(){

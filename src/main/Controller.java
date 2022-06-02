@@ -189,7 +189,7 @@ public class Controller implements Serializable{
             System.out.println("Q to Quit Game");
             System.out.println("C to close the inventory screen");
             String input = scan.next();
-            switch (input){
+            switch (input.toUpperCase()){
                 case "B" :
                     useHealPotion();
                     break;

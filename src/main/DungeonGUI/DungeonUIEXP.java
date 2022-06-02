@@ -1,5 +1,6 @@
 package main.DungeonGUI;
 
+import main.AudioController;
 import main.ControllerEXP;
 import main.DungeonCharacter.Hero;
 import main.DungeonCharacter.Monster;
@@ -14,6 +15,7 @@ import java.awt.event.ActionListener;
 
 public class DungeonUIEXP extends JFrame {
     private ControllerEXP myController = new ControllerEXP(this);
+    private final AudioController audioController = new AudioController();
 
     JPanel myMainPanel;
 
@@ -291,7 +293,7 @@ public class DungeonUIEXP extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //String heroName = "GOD";
-                String heroName = nameField.getSelectedText();
+                String heroName = nameField.getText();
                 myController.startGame(heroName, myUserHero, myUserDifficulty, myDungeonSize);
                 if (heroName.equals("GOD")) {
                     myController.getMyHero().setMyHitChance(1.0);
@@ -313,7 +315,6 @@ public class DungeonUIEXP extends JFrame {
         myMainPanel.repaint();
         myBattlePanel = new JPanel();
         myBattlePanel.setLayout(new GridLayout(0,3));
-
         JPanel heroBattlePanel = new JPanel();
         heroBattlePanel.setLayout(new GridLayout(3,1));
         heroBattlePanel.add(new JLabel(new ImageIcon(new ImageIcon("src/" + myUserHero + "Image.png").getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH))));
