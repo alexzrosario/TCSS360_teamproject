@@ -1,6 +1,6 @@
 package main.DungeonCharacter;
 
-public class Samurai extends Hero {
+public class Samurai extends Hero implements StateResettable {
     private boolean isDefensive = false;
     private DungeonCharacter myTarget;
     private final double MY_STORED_BLOCK_CHANCE = 0.25;
@@ -57,5 +57,10 @@ public class Samurai extends Hero {
             }
             else System.out.println(getMyName() + " blocked the attack"); //When the samurai blocks while not defensive
         }
+    }
+
+    @Override
+    public void resetState() {
+        isDefensive = false;
     }
 }
