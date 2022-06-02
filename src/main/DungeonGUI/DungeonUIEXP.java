@@ -48,6 +48,7 @@ public class DungeonUIEXP extends JFrame {
     JButton testButton;
     Font gameTitleFont;
     Font regularFont = new Font("Times New Roman", Font.PLAIN, 20);
+    Font dungeonRoomFont = new Font("Times New Roman", Font.BOLD, 50);
 
     public DungeonUIEXP() {
         this.setTitle("Dungeon Adventure");
@@ -104,6 +105,8 @@ public class DungeonUIEXP extends JFrame {
         for(int i = 0; i < 9; i++) {
             temp = new JTextField();
             temp.setEditable(false);
+            temp.setHorizontalAlignment(JTextField.CENTER);
+            temp.setFont(dungeonRoomFont);
             if (i == 0 || i == 2 || i == 6 || i == 8) {
                 temp.setBackground(Color.DARK_GRAY);
             }
@@ -214,6 +217,40 @@ public class DungeonUIEXP extends JFrame {
         myInteractionsPanel.add(quitGameButton);
         myInteractionsPanel.setBorder(BorderFactory.createTitledBorder("Options"));
 
+        heroInfobutton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        healPotionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myController.useHealPotion();
+            }
+        });
+
+        visionPotionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myController.useVisionPotion();
+            }
+        });
+
+        saveGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        quitGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
     public void buildStartPanel() {

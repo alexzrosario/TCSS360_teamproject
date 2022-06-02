@@ -224,6 +224,39 @@ public class ControllerEXP {
         else myDungeonUIEXP.updateAdventureText("No Healing Potions To Use");
     }
 
+    public void useVisionPotion() {
+        if (myHero.getMyVisionPotions() > 0) {
+            if (myCurrRoom.getMyNorthRoom() != null) {
+                myCurrRoom.getMyNorthRoom().setSeen(true);
+            }
+            if (myCurrRoom.getMySouthRoom() != null) {
+                myCurrRoom.getMySouthRoom().setSeen(true);
+            }
+            if (myCurrRoom.getMyWestRoom() != null) {
+                myCurrRoom.getMyWestRoom().setSeen(true);
+            }
+            if (myCurrRoom.getMyEastRoom() != null) {
+                myCurrRoom.getMyEastRoom().setSeen(true);
+            }
+            /*if (myCurrRoom.getMyNorthRoom() != null && myCurrRoom.getMyNorthRoom().getMyWestRoom() != null) {
+                myCurrRoom.getMyNorthRoom().getMyWestRoom().setSeen(true);
+            }
+            if (myCurrRoom.getMySouthRoom() != null && myCurrRoom.getMySouthRoom().getMyWestRoom() != null) {
+                myCurrRoom.getMySouthRoom().getMyWestRoom().setSeen(true);
+            }
+            if (myCurrRoom.getMyNorthRoom() != null && myCurrRoom.getMyNorthRoom().getMyEastRoom() != null) {
+                myCurrRoom.getMyNorthRoom().getMyEastRoom().setSeen(true);
+            }
+            if (myCurrRoom.getMySouthRoom() != null && myCurrRoom.getMySouthRoom().getMyEastRoom() != null) {
+                myCurrRoom.getMySouthRoom().getMyEastRoom().setSeen(true);
+            }*/
+            myHero.setMyVisionPotions(myHero.getMyVisionPotions() - 1);
+            myDungeonUIEXP.updateAdventureText("You can see nearby traversable rooms");
+        }
+        else myDungeonUIEXP.updateAdventureText("No Vision Potions To Use");
+        myDungeonUIEXP.buildAdventurePanel(getMyCurrRoom());
+    }
+
     public int pitDamage() {
         Random r = new Random();
         return r.nextInt(1, 15) + 1;
