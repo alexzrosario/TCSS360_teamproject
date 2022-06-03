@@ -187,7 +187,12 @@ public class ControllerEXP {
         if (theMonster.getMyAlive()) {
             myDungeonUIEXP.updateAdventureText(theMonster.getMyName() + " attacks");
             theMonster.basicAttack(myHero);
-            if(!myHero.getMyAlive()) {
+            if(!myHero.getMyAlive() && theMonster.getMyName().equals("Lord of OO")) {
+                audioController.stopBossAudio();
+                audioController.playAudio("src/deathsound.wav");
+                myDungeonUIEXP.buildDefeatScreen();
+                return;
+            } else if(!myHero.getMyAlive()) {
                 audioController.stopBattleAudio();
                 audioController.playAudio("src/deathsound.wav");
                 myDungeonUIEXP.buildDefeatScreen();
