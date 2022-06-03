@@ -83,18 +83,8 @@ public abstract class Hero extends DungeonCharacter {
         return mySkillName;
     }
 
-    public void battleMenu(DungeonCharacter theMonster, int theChoice) {
-        switch(theChoice) {
-            case 1 ->
-                basicAttack(theMonster);
-            case 2 ->
-                specialSkill(theMonster);
-            default -> {
-                if(theChoice != 3) {
-                    System.out.println("Invalid Choice");
-                }
-            }
-        }
+    public void useSkill(DungeonCharacter theMonster) {
+        specialSkill(theMonster);
     }
 
 }

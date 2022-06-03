@@ -175,11 +175,12 @@ public class ControllerEXP {
         switch (theAction) {
             case "ATTACK" -> {
                 myDungeonUIEXP.updateAdventureText(myHero.getMyName() + " attacks");
-                myHero.battleMenu(theMonster, 1);
+                basicAttack(myHero, theMonster);
+                //myHero.battleMenu(theMonster, 1);
             }
             case "SKILL" -> {
                 myDungeonUIEXP.updateAdventureText(myHero.getMyName() + " uses " + myHero.getMySkillName());
-                myHero.battleMenu(theMonster, 2);
+                myHero.useSkill(theMonster);
             }
             case "HEAL" -> useHealPotion();
             default -> myDungeonUIEXP.updateAdventureText("Invalid Choice");
@@ -265,6 +266,26 @@ public class ControllerEXP {
     public int pitDamage() {
         Random r = new Random();
         return r.nextInt(1, 15) + 1;
+    }
+
+    public int basicAttack(final DungeonCharacter theAttacker, final DungeonCharacter theTarget){
+        int attacks = 1;
+        int tempTargetHealth = theTarget.getMyHitPoints();
+        if(theAttacker.getMyAttackSpeed() > theTarget.getMyAttackSpeed()) {
+            attacks = theAttacker.getMyAttackSpeed() / theTarget.getMyAttackSpeed();
+        }
+        for (int i = 0; i < attacks; i++) {
+            int damage = theAttacker.attackValue(theTarget);
+            if (damage > 0) {
+                myDungeonUIEXP.updateAdventureText(theAttacker.getMyName() + " hits for " + damage + " damage");
+                if(theTarget.getMyHitPoints() > tempTargetHealth - damage) {
+                    myDungeonUIEXP.updateAdventureText(theTarget.getMyName() + " heals for " + ((theTarget.getMyHitPoints())-(tempTargetHealth - damage)) + " damage");
+                }
+            }
+            else myDungeonUIEXP.updateAdventureText(theAttacker.getMyName() + " missed their attack");
+        }
+        myDungeonUIEXP.updateBattlePanel();
+        return attacks;
     }
 
 
