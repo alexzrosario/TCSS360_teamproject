@@ -2,7 +2,7 @@ package main.DungeonCharacter;
 
 import java.util.Random;
 
-public abstract class Monster extends DungeonCharacter {
+public class Monster extends DungeonCharacter {
     private double myHealChance;
     private int myMinHeal;
     private int myMaxHeal;
@@ -14,12 +14,25 @@ public abstract class Monster extends DungeonCharacter {
         this.myMaxHeal = theMaxHeal;
     }
 
-    void heal() {
-        Random r = new Random();
-        int healChanceRoll = r.nextInt(100) + 1;
+    @Override
+    public void updateHealth(final int theDamage) {
+        this.setMyHitPoints(this.getMyHitPoints() - theDamage);
+        if(this.getMyHitPoints() <= 0){
+            setMyAlive();
+            System.out.println(this.getMyName() + " has died");
+        }else{
+            heal();
+        }
+    }
+
+    public void heal() {
+        Random theRandom = new Random();
+        int healChanceRoll = theRandom.nextInt(100) + 1;
         if (healChanceRoll >= 100 * (1 - myHealChance)) {
-            int healRoll = r.nextInt(myMaxHeal - myMinHeal + 1) + myMinHeal;
+            int healRoll = theRandom.nextInt(myMaxHeal - myMinHeal + 1) + myMinHeal;
+            System.out.println(getMyName() + " healed for " + healRoll + " health");
             setMyHitPoints(Math.min(healRoll + getMyHitPoints(), getMY_MAX_HEALTH()));
+            this.pause(500);
         }
     }
 

@@ -1,11 +1,12 @@
 package main.DungeonMain;
 
-import main.DungeonCharacter.*;
+import main.DungeonCharacter.Monster;
+import main.DungeonCharacter.MonsterFactory;
 
-import java.sql.SQLOutput;
+import java.io.Serializable;
 import java.util.Random;
 
-public class Room {
+public class Room implements Serializable {
     private Room myNorthRoom;
     private Room myEastRoom;
     private Room mySouthRoom;
@@ -22,26 +23,29 @@ public class Room {
     private boolean isVisited = false;
     private boolean isBuilt = false;
     private boolean hasMonster = false;
+    private boolean isSeen = false;
     private Monster myMonster;
     private String myStringToken = " ";
     private static String[] monsterArray = {"ogre", "gremlin", "skeleton"};
+    private double myDifficultyModifier;
+    private static final long serialVersionUID = 3536060713340084481L;
 
-    public Room() {
-        Random r = new Random();
+    public Room(String theDifficulty) {
+        Random theRandom = new Random();
         int items = 0;
-        int itemRoll = r.nextInt(10) + 1; // Determining if the room will contain a pit
+        int itemRoll = theRandom.nextInt(10) + 1; // Determining if the room will contain a pit
         if (itemRoll == 1) {
             hasPit = true;
             items++;
             myStringToken = "X";
         }
-        itemRoll = r.nextInt(10) + 1; // Determining if the room will contain a vision potion
+        itemRoll = theRandom.nextInt(10) + 1; // Determining if the room will contain a vision potion
         if (itemRoll == 1) {
             hasVisionPotion = true;
             items++;
             myStringToken = "V";
         }
-        itemRoll = r.nextInt(10) + 1; // Determining if the room will contain a healing potion
+        itemRoll = theRandom.nextInt(10) + 1; // Determining if the room will contain a healing potion
         if (itemRoll == 1) {
             hasHealPotion = true;
             items++;
@@ -50,14 +54,21 @@ public class Room {
         if (items > 1) {
             myStringToken = "M";
         }
+        findDifficultyModifier(theDifficulty);
         // Determining if the room contains a monster, and randomly decides which monster to use
-        if (Math.random() < 0.25) {
-            int monsterRoll = r.nextInt(3);
+        if (Math.random() < myDifficultyModifier) {
+            int monsterRoll = theRandom.nextInt(3);
             setMyMonster(new MonsterFactory().createMonster(monsterArray[monsterRoll]));
             setHasMonster(true);
 
             myStringToken = "m"; // temp string token to indicate if a monster exists in the room
         }
+    }
+
+    public void findDifficultyModifier(String theDifficulty) {
+        if (theDifficulty.equals("EASY")) myDifficultyModifier = 0.125;
+        if (theDifficulty.equals("NORMAL")) myDifficultyModifier = 0.25;
+        if (theDifficulty.equals("HARD")) myDifficultyModifier = 0.3333333;
     }
 
     public String toString() {
@@ -221,5 +232,13 @@ public class Room {
 
     public void setMyMonster(Monster myMonster) {
         this.myMonster = myMonster;
+    }
+
+    public boolean isSeen() {
+        return isSeen;
+    }
+
+    public void setSeen(boolean seen) {
+        isSeen = seen;
     }
 }

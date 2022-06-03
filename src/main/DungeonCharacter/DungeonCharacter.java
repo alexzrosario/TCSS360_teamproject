@@ -1,9 +1,10 @@
 package main.DungeonCharacter;
 
 
+import java.io.Serializable;
 import java.util.Random;
 
-public abstract class DungeonCharacter {
+public abstract class DungeonCharacter implements Serializable {
     private String myName;
     private int myHitPoints;
     private int myMinDam;
@@ -12,6 +13,7 @@ public abstract class DungeonCharacter {
     private double myHitChance;
     private boolean myAlive = true; // alive by default
     private final int MY_MAX_HEALTH; //used for priestess heal
+    private static final long serialVersionUID = 3536060713340084481L;
 
     public DungeonCharacter(final String theName, final int theHitPoints, final int theMinDam,
                             final int theMaxDam, final int theAttackSpeed, final double theHitChance) {
@@ -23,7 +25,7 @@ public abstract class DungeonCharacter {
         this.myAttackSpeed = theAttackSpeed;
         this.myHitChance = theHitChance;
     }
-    public void basicAttack(final DungeonCharacter theTarget){
+    public int basicAttack(final DungeonCharacter theTarget){
         int attacks = 1;
         if(this.getMyAttackSpeed() > theTarget.getMyAttackSpeed()) {
             attacks = this.getMyAttackSpeed() / theTarget.getMyAttackSpeed();
@@ -31,6 +33,7 @@ public abstract class DungeonCharacter {
         for (int i = 0; i < attacks; i++) {
             attackValue(theTarget);
         }
+        return attacks;
     }
 
     public int attackValue(final DungeonCharacter theTarget) {
@@ -38,14 +41,26 @@ public abstract class DungeonCharacter {
         int damageRoll = 0;
         if (Math.random() <= this.getMyHitChance()) {
             damageRoll = r.nextInt(this.getMyMinDam(), this.getMyMaxDam() + 1);
-            damageCheck(damageRoll,theTarget);
+            //damageCheck(damageRoll,theTarget);
+            System.out.println(myName + " hits for " + damageRoll + " damage");
+            theTarget.updateHealth(damageRoll);
+            this.pause(500);
         }
-        //for testing - correct damage
-        System.out.println(damageRoll);
+        else {
+            System.out.println(myName + " missed their attack");
+            this.pause(500);
+        }
         return damageRoll;
     }
+    public void pause(int theMs) {
+        try {
+            Thread.sleep(theMs);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
-    public void damageCheck(int theDamageRoll, final DungeonCharacter theTarget){
+    /*public void damageCheck(int theDamageRoll, final DungeonCharacter theTarget){
         if (theTarget instanceof Hero) {
             if (Math.random() <= ((Hero) theTarget).getMyBlockChance()) {
                 //for testing - block
@@ -66,13 +81,9 @@ public abstract class DungeonCharacter {
                 theTarget.updateHealth(theDamageRoll);
             }
         }
-    }
+    }*/
 
     public void updateHealth(final int theDamage){
-       this.setMyHitPoints(this.getMyHitPoints() - theDamage);
-       if(this.getMyHitPoints() <= 0){
-           setMyAlive();
-       }
     }
     public void setMyAlive() {this.myAlive = false;}
 
