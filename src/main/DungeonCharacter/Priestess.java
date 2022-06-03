@@ -20,15 +20,9 @@ public class Priestess extends Hero {
     }
 
     @Override
-    public void battleMenu(DungeonCharacter theMonster, int theChoice) {
-        switch(theChoice) {
-            case 1 ->
-                    basicAttack(theMonster);
-            case 2 ->
-                    specialSkill(this);
-            default ->
-                    System.out.println("Invalid Choice");
-        }
+    public void useSkill(DungeonCharacter theMonster) {
+        specialSkill(this);
     }
+
 }
 

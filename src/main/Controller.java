@@ -378,7 +378,7 @@ public class Controller implements Serializable{
             } else if (myChoice == 3 && theHero.getMyHealingPotions() == 0){
                 System.out.println("You have no health potions remaining!");
             }
-            theHero.battleMenu(theMonster, myChoice);
+            //theHero.battleMenu(theMonster, myChoice);
             if(theMonster.getMyAlive()) {
                 theMonster.basicAttack(theHero);
                 if(!theHero.getMyAlive()) {

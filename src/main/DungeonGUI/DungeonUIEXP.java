@@ -442,6 +442,9 @@ public class DungeonUIEXP extends JFrame {
             e.printStackTrace();
         }
     }
+    public void updateBattlePanel() {
+        myBattlePanel.repaint();
+    }
 
     public void mainPanelReset() {
         myMainPanel.removeAll();
