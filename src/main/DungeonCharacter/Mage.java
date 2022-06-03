@@ -6,7 +6,7 @@ public class Mage extends Hero {
     }
 
     @Override
-    void specialSkill(DungeonCharacter theTarget) {
+    public void specialSkill(DungeonCharacter theTarget) {
         // Fireball: Has a guaranteed chance to hit, but with the cost of reduced damage
         System.out.println(getMyName() + " shoots out a fireball");
         this.pause(2000);

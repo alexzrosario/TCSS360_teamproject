@@ -1,28 +1,28 @@
 package main.Tests;
 
+import main.DungeonCharacter.Monk;
 import main.DungeonCharacter.Monster;
 import main.DungeonCharacter.MonsterFactory;
-import main.DungeonCharacter.Warrior;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class WarriorTest {
-    private Warrior testHero = new Warrior("testWarrior");
+public class MonkTest {
+    private Monk testHero = new Monk("testHero");
     private Monster testMonster = new MonsterFactory().createMonster("ogre");
 
     @RepeatedTest(20)
     void testAttackValue() {
         testHero.setMyHitChance(1.0);
-        assertTrue(35 <= testHero.attackValue(testMonster) && 60 >= testHero.attackValue(testMonster));
+        assertTrue(20 <= testHero.attackValue(testMonster) && 40 >= testHero.attackValue(testMonster));
     }
 
     @Test
     void testUpdateHealth() {
         testHero.setMyBlockChance(0.0);
         testHero.updateHealth(25);
-        assertEquals(100, testHero.getMyHitPoints());
+        assertEquals(50, testHero.getMyHitPoints());
     }
 
     @Test
@@ -43,8 +43,15 @@ class WarriorTest {
     @Test
     void testIsAliveFalse() {
         testHero.setMyBlockChance(0.0);
-        testHero.updateHealth(125);
+        testHero.updateHealth(75);
         assertFalse(testHero.getMyAlive());
     }
 
+    @Test
+    void testSpecialSkill() {
+        testMonster.setMyHealChance(0.0);
+        testHero.setMyAttackSpeed(2);
+        testHero.testFineStrike(testMonster);
+        assertTrue(Math.round(((0.6 * 2)/3)*10)/10 == Math.round(testMonster.getMyHitChance()*10)/10);
+    }
 }

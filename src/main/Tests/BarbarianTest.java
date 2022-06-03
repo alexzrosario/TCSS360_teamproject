@@ -1,21 +1,19 @@
 package main.Tests;
-
+import main.DungeonCharacter.Barbarian;
 import main.DungeonCharacter.Monster;
 import main.DungeonCharacter.MonsterFactory;
-import main.DungeonCharacter.Warrior;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-class WarriorTest {
-    private Warrior testHero = new Warrior("testWarrior");
+public class BarbarianTest {
+    private Barbarian testHero = new Barbarian("testHero");
     private Monster testMonster = new MonsterFactory().createMonster("ogre");
 
     @RepeatedTest(20)
     void testAttackValue() {
         testHero.setMyHitChance(1.0);
-        assertTrue(35 <= testHero.attackValue(testMonster) && 60 >= testHero.attackValue(testMonster));
+        assertTrue(40 <= testHero.attackValue(testMonster) && 65 >= testHero.attackValue(testMonster));
     }
 
     @Test
@@ -47,4 +45,19 @@ class WarriorTest {
         assertFalse(testHero.getMyAlive());
     }
 
+    @Test
+    void testSpecialSkill() {
+        testMonster.setMyHealChance(0.0);
+        testHero.setMyAttackSpeed(2);
+        testHero.specialSkill(testMonster);
+        assertTrue(120 <= testMonster.getMyHitPoints() && 140>= testMonster.getMyHitPoints());
+    }
+
+    @Test
+    void testRecklessBlockFail() {
+        testHero.setMyBlockChance(0.0);
+        testHero.setReckless();
+        testHero.updateHealth(10);
+        assertTrue(testHero.getMyHitPoints() == 110);
+    }
 }

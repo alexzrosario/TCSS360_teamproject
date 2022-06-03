@@ -6,7 +6,7 @@ public class Monk extends Hero {
     }
 
     @Override
-    void specialSkill(DungeonCharacter theTarget) {
+    public void specialSkill(DungeonCharacter theTarget) {
         // Fine Strike: does 40 to 60 points of damage but only has a 50% chance of succeeding.
         // The target's chance to hit is permanently reduced if hit
         //save current hit chance, min damage, max damage
@@ -26,12 +26,16 @@ public class Monk extends Hero {
         int fineStrikeRoll = attackValue(theTarget);
         if (fineStrikeRoll > 0) {
             System.out.println(theTarget.getMyName() + " chance to hit has been reduced");
-            theTarget.setMyHitChance(Math.min(0.1, theTarget.getMyHitChance() * (double)(2/3)));
+            theTarget.setMyHitChance(Math.max(0.1, (theTarget.getMyHitChance() * 2)/3));
         }
 
         //set values back
         this.setMyHitChance(currHitChance);
         this.setMyMinDam(currMinDam);
         this.setMyMaxDam(currMaxDam);
+    }
+
+    public void testFineStrike(DungeonCharacter theTarget){
+        theTarget.setMyHitChance(Math.max(0.1, (theTarget.getMyHitChance() * 2)/3));
     }
 }
