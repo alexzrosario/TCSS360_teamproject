@@ -8,7 +8,7 @@ public class Swordsman extends Hero {
     }
 
     @Override
-    void specialSkill(DungeonCharacter theTarget) {
+    public void specialSkill(DungeonCharacter theTarget) {
         Random theRand = new Random();
         // Blade Flurry: Triple attack speed for one round, but lose 10-15 health
         // Can only be used if the hero is above 15 health

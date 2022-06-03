@@ -1,6 +1,7 @@
 package main.Tests;
 
-import main.DungeonCharacter.Ogre;
+import main.DungeonCharacter.Monster;
+import main.DungeonCharacter.MonsterFactory;
 import main.DungeonCharacter.Priestess;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PriestessTest {
     private Priestess testHero = new Priestess("testPriestess");
-    private Ogre testMonster = new Ogre();
+    private Monster testMonster = new MonsterFactory().createMonster("ogre");
 
     @RepeatedTest(20)
     void testAttackValue() {
