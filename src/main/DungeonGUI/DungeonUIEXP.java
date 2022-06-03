@@ -203,6 +203,7 @@ public class DungeonUIEXP extends JFrame {
 
     public void buildInteractionsPanel() {
         JButton heroInfobutton = new JButton("Hero Info");
+        JButton dungeonMapButton = new JButton("Dungeon Map");
         JButton healPotionButton = new JButton("Use Heal Potion");
         JButton visionPotionButton = new JButton("Use Vision Potion");
         JButton saveGameButton = new JButton("Save Game");
@@ -211,6 +212,7 @@ public class DungeonUIEXP extends JFrame {
         myInteractionsPanel = new JPanel();
         myInteractionsPanel.setLayout(new BoxLayout(myInteractionsPanel, BoxLayout.Y_AXIS));
         myInteractionsPanel.add(heroInfobutton);
+        myInteractionsPanel.add(dungeonMapButton);
         myInteractionsPanel.add(healPotionButton);
         myInteractionsPanel.add(visionPotionButton);
         myInteractionsPanel.add(saveGameButton);
@@ -220,7 +222,14 @@ public class DungeonUIEXP extends JFrame {
         heroInfobutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                new HeroInfoWindow(myController.getMyHero());
+            }
+        });
 
+        dungeonMapButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new DungeonMapWindow(myController.getMyDungeon());
             }
         });
 
