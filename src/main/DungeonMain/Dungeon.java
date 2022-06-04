@@ -5,7 +5,6 @@ import java.util.Random;
 
 public class Dungeon implements Serializable {
     private Room[][] myDungeon;
-    //private Room myHeroPosition;
     private int myHeroRow;
     private int myHeroCol;
     private int myDungeonRows;
@@ -39,7 +38,6 @@ public class Dungeon implements Serializable {
         myStartingCol = r.nextInt(myDungeonCols);
         myHeroRow = myStartingRow;
         myHeroCol = myStartingCol;
-        //myHeroPosition = myDungeon[myStartingRow][myStartingCol];
         setEntrance(myStartingRow, myStartingCol);
         int currentRow = myStartingRow;
         int currentCol = myStartingCol;
@@ -171,13 +169,11 @@ public class Dungeon implements Serializable {
         for (int row = 0; row < myDungeonRows; row++) {
             s += getTopString(row);
             s += getEmptyMidString(row);
-            //s += getMidString(row);
         }
         s += "***";
         for (int row = 0; row < myDungeonRows-1; row++) {
             s += "**";
         }
-        //s+= "***********";
         return s;
     }
     public String getTopString(final int theRow){
@@ -195,7 +191,6 @@ public class Dungeon implements Serializable {
     public String getEmptyMidString(final int theRow){
         String s = "*";
         for (int i = 0; i < myDungeonRows; i++) {
-            //s += myDungeon[theRow][i].getMyStringToken(); show all tokens
             if (myDungeon[theRow][i].getMyStringToken().equals("i")) {
                 s += "h";
             }else if(myDungeon[theRow][i].getMyStringToken().equals("h")) {
@@ -220,7 +215,6 @@ public class Dungeon implements Serializable {
     public String getMidString(final int theRow){
         String s = "*";
         for (int i = 0; i < myDungeonRows; i++) {
-            //s += myDungeon[theRow][i].getMyStringToken(); show all tokens
             if (myDungeon[theRow][i].getMyStringToken() == "i") {
                 s += "h";
             }else if(myDungeon[theRow][i].getMyStringToken()== "h") {

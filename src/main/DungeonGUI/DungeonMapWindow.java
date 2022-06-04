@@ -3,9 +3,6 @@ package main.DungeonGUI;
 import main.DungeonMain.Dungeon;
 
 import javax.swing.*;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
 import java.awt.*;
 
 public class DungeonMapWindow extends JFrame {

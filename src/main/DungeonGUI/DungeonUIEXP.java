@@ -18,7 +18,6 @@ public class DungeonUIEXP extends JFrame {
 
     JPanel myMainPanel;
 
-    JLabel myHeroIcon;
 
     JPanel myStartPanel;
     JPanel myOptionsPanel;
@@ -28,10 +27,8 @@ public class DungeonUIEXP extends JFrame {
     String myUserHero = "Warrior";
     final private String[] myDifficulty = {"EASY", "NORMAL", "HARD"};
 
-    JPanel myDungeonSizePanel;
     int myDungeonSize = 5;
 
-    JPanel myDifficultySelectPanel;
     String myUserDifficulty = "NORMAL";
 
     JPanel myAdventurePanel;
@@ -44,9 +41,6 @@ public class DungeonUIEXP extends JFrame {
     JPanel myBattlePanel;
 
     JButton returnButton;
-    JButton testButton;
-    Font gameTitleFont;
-    Font regularFont = new Font("Times New Roman", Font.PLAIN, 20);
     Font dungeonUiFont = new Font("Times New Roman", Font.ITALIC, 20);
     Font navigationFont = new Font("Times New Roman", Font.BOLD, 50);
 
@@ -175,7 +169,6 @@ public class DungeonUIEXP extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 myController.checkDirection("^");
-                //buildAdventurePanel(myController.getMyCurrRoom());
             }
         });
 
@@ -183,7 +176,6 @@ public class DungeonUIEXP extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 myController.checkDirection("<");
-                //buildAdventurePanel(myController.getMyCurrRoom());
             }
         });
 
@@ -191,7 +183,6 @@ public class DungeonUIEXP extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 myController.checkDirection(">");
-                //buildAdventurePanel(myController.getMyCurrRoom());
             }
         });
 
@@ -199,7 +190,6 @@ public class DungeonUIEXP extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 myController.checkDirection("v");
-                //buildAdventurePanel(myController.getMyCurrRoom());
             }
         });
 
@@ -354,10 +344,9 @@ public class DungeonUIEXP extends JFrame {
         startAdventureButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //String heroName = "GOD";
                 String heroName = nameField.getText();
                 myController.startGame(heroName, myUserHero, myUserDifficulty, myDungeonSize);
-                if (heroName.equals("GOD")) {
+                if (heroName.equals("GOD")) { //Cheat Code: Enter name as "GOD" to activate god mode
                     myController.getMyHero().setMyHitChance(1.0);
                     myController.getMyHero().setMyMinDam(500);
                     myController.getMyHero().setMyMaxDam(501);

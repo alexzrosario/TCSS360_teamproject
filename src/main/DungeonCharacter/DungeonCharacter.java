@@ -41,7 +41,6 @@ public abstract class DungeonCharacter implements Serializable {
         int damageRoll = 0;
         if (Math.random() <= this.getMyHitChance()) {
             damageRoll = r.nextInt(this.getMyMinDam(), this.getMyMaxDam() + 1);
-            //damageCheck(damageRoll,theTarget);
             System.out.println(myName + " hits for " + damageRoll + " damage");
             theTarget.updateHealth(damageRoll);
         }
@@ -50,29 +49,6 @@ public abstract class DungeonCharacter implements Serializable {
         }
         return damageRoll;
     }
-
-    /*public void damageCheck(int theDamageRoll, final DungeonCharacter theTarget){
-        if (theTarget instanceof Hero) {
-            if (Math.random() <= ((Hero) theTarget).getMyBlockChance()) {
-                //for testing - block
-                System.out.println("Attack blocked by hero.");
-            } else {
-                theTarget.updateHealth(theDamageRoll);
-            }
-        }else if(theTarget instanceof Monster) {
-            if(Math.random() <= ((Monster) theTarget).getMyHealChance()){
-                //for testing - heal
-                theTarget.updateHealth(theDamageRoll);
-                System.out.println("Monster Healed.");
-
-                if(theTarget.getMyAlive()) { // if monster is alive
-                    ((Monster) theTarget).heal();
-                }
-            }else{
-                theTarget.updateHealth(theDamageRoll);
-            }
-        }
-    }*/
 
     public void updateHealth(final int theDamage){
     }

@@ -123,7 +123,6 @@ public class ControllerEXP {
             myDungeonUIEXP.updateAdventureText("You have fallen into a pit and have taken " + pitDamageTaken + " damage!");
             room.setHasPit(false);
             if (!myHero.getMyAlive()) {
-                //myGameDone = true;
                 myDungeonUIEXP.buildDefeatScreen();
             }
         }
@@ -173,7 +172,6 @@ public class ControllerEXP {
             case "ATTACK" -> {
                 myDungeonUIEXP.updateAdventureText(myHero.getMyName() + " attacks");
                 basicAttack(myHero, theMonster);
-                //myHero.battleMenu(theMonster, 1);
             }
             case "SKILL" -> {
                 myDungeonUIEXP.updateAdventureText(myHero.getMyName() + " uses " + myHero.getMySkillName());
@@ -241,18 +239,6 @@ public class ControllerEXP {
             if (myCurrRoom.getMyEastRoom() != null) {
                 myCurrRoom.getMyEastRoom().setSeen(true);
             }
-            /*if (myCurrRoom.getMyNorthRoom() != null && myCurrRoom.getMyNorthRoom().getMyWestRoom() != null) {
-                myCurrRoom.getMyNorthRoom().getMyWestRoom().setSeen(true);
-            }
-            if (myCurrRoom.getMySouthRoom() != null && myCurrRoom.getMySouthRoom().getMyWestRoom() != null) {
-                myCurrRoom.getMySouthRoom().getMyWestRoom().setSeen(true);
-            }
-            if (myCurrRoom.getMyNorthRoom() != null && myCurrRoom.getMyNorthRoom().getMyEastRoom() != null) {
-                myCurrRoom.getMyNorthRoom().getMyEastRoom().setSeen(true);
-            }
-            if (myCurrRoom.getMySouthRoom() != null && myCurrRoom.getMySouthRoom().getMyEastRoom() != null) {
-                myCurrRoom.getMySouthRoom().getMyEastRoom().setSeen(true);
-            }*/
             myHero.setMyVisionPotions(myHero.getMyVisionPotions() - 1);
             myDungeonUIEXP.updateAdventureText("You can see nearby traversable rooms");
         }
@@ -275,7 +261,7 @@ public class ControllerEXP {
             int damage = theAttacker.attackValue(theTarget);
             if (damage > 0) {
                 myDungeonUIEXP.updateAdventureText(theAttacker.getMyName() + " hits for " + damage + " damage");
-                if(theTarget.getMyHitPoints() > tempTargetHealth - damage) {
+                if(theTarget.getMyHitPoints() > tempTargetHealth - damage && theTarget instanceof Monster) {
                     myDungeonUIEXP.updateAdventureText(theTarget.getMyName() + " heals for " + ((theTarget.getMyHitPoints())-(tempTargetHealth - damage)) + " damage");
                 }
             }

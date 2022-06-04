@@ -72,13 +72,6 @@ public abstract class Hero extends DungeonCharacter {
         this.myPillars = myPillars;
     }
 
-    /*public int pitDamage() {
-        Random r = new Random();
-        int damageRoll = 0;
-        damageRoll = r.nextInt(1, 20);
-        return damageRoll;
-    }*/
-
     public String getMySkillName() {
         return mySkillName;
     }
