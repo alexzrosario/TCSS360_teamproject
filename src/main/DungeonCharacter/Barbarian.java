@@ -56,4 +56,6 @@ public class Barbarian extends Hero implements StateResettable {
     public void resetState() {
         isReckless = false;
     }
+
+    public void setReckless(){isReckless = true;}
 }

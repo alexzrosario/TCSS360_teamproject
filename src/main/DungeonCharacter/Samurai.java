@@ -9,7 +9,7 @@ public class Samurai extends Hero implements StateResettable {
     }
 
     @Override
-    void specialSkill(DungeonCharacter theTarget) {
+    public void specialSkill(DungeonCharacter theTarget) {
         // Counter Attack: Lose your attack for the round to enter a defensive stance. If the monster
         // hits you, and you block it, deal 80 to 120 damage
         // but if you fail to block, you take extra damage
@@ -62,4 +62,8 @@ public class Samurai extends Hero implements StateResettable {
     public void resetState() {
         isDefensive = false;
     }
+
+    public void setDefensive(){isDefensive = true; }
+
+    public void setMyTarget(Monster theMonster){myTarget = theMonster;}
 }
