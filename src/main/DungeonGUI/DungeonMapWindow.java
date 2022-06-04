@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class DungeonMapWindow extends JFrame {
-    Font dungeonRoomFont = new Font(Font.MONOSPACED, Font.BOLD, 30);
     public DungeonMapWindow(Dungeon theDungeon) {
         this.setTitle("Hero Info");
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -18,6 +17,7 @@ public class DungeonMapWindow extends JFrame {
     }
 
     private JTextArea buildDungeonMapLabel(Dungeon theDungeon) {
+        Font dungeonRoomFont = new Font(Font.MONOSPACED, Font.BOLD, 180/theDungeon.getMyDungeonCols());
         JTextArea dungeonMap = new JTextArea();
         dungeonMap.setEditable(false);
         dungeonMap.setFont(dungeonRoomFont);

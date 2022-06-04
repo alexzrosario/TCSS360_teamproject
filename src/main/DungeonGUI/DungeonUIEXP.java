@@ -264,6 +264,8 @@ public class DungeonUIEXP extends JFrame {
 
     public void buildStartPanel() {
         mainPanelReset();
+        JLabel titleScreenLabel = new JLabel();
+        titleScreenLabel.setIcon(new ImageIcon(new ImageIcon("src/TitleScreen.png").getImage().getScaledInstance(1000, 1000, Image.SCALE_SMOOTH)));
         JButton startButton = new JButton("START NEW GAME");
         setButtonColor(startButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
         JButton loadButton = new JButton("LOAD GAME");
@@ -292,6 +294,8 @@ public class DungeonUIEXP extends JFrame {
 
             }
         });
+        myStartPanel.add(titleScreenLabel);
+        myStartPanel.setBackground(Color.DARK_GRAY);
         myMainPanel.add(myStartPanel);
         this.setVisible(true);
     }
@@ -367,7 +371,7 @@ public class DungeonUIEXP extends JFrame {
         myBattlePanel.setLayout(new GridLayout(0,3));
         JPanel heroBattlePanel = new JPanel();
         heroBattlePanel.setLayout(new GridLayout(3,1));
-        heroBattlePanel.add(new JLabel(new ImageIcon(new ImageIcon("src/" + myUserHero + "Image.png").getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH))));
+        heroBattlePanel.add(new JLabel(new ImageIcon(new ImageIcon("src/" + myUserHero + "Image.png").getImage().getScaledInstance(300, 300, Image.SCALE_SMOOTH))));
         JTextField heroHP = new JTextField(theHero.getMyName() + "'s HP: " + theHero.getMyHitPoints());
         heroHP.setEditable(false);
         heroHP.setFont(dungeonUiFont);
@@ -392,7 +396,7 @@ public class DungeonUIEXP extends JFrame {
 
         JPanel monsterBattlePanel = new JPanel();
         monsterBattlePanel.setLayout(new GridLayout(2,1));
-        monsterBattlePanel.add(new JLabel(new ImageIcon(new ImageIcon("src/" + theMonster.getMyName() + "Image.jpeg").getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH))));
+        monsterBattlePanel.add(new JLabel(new ImageIcon(new ImageIcon("src/" + theMonster.getMyName() + "Image.jpeg").getImage().getScaledInstance(300, 300, Image.SCALE_SMOOTH))));
         JTextField monsterHP = new JTextField(theMonster.getMyName() + "'s HP: " + theMonster.getMyHitPoints());
         monsterHP.setEditable(false);
         monsterHP.setFont(dungeonUiFont);
@@ -424,21 +428,25 @@ public class DungeonUIEXP extends JFrame {
 
     public void buildVictoryScreen() {
         mainPanelReset();
-        JPanel victoryScreenPanel = new JPanel();
-        victoryScreenPanel.setLayout(new GridLayout(2,1));
-        victoryScreenPanel.add(new JLabel("YOU WIN"));
-        victoryScreenPanel.add(returnButton);
-        myMainPanel.add(victoryScreenPanel);
+        JLabel victoryScreenLabel = new JLabel();
+        JPanel victoryPanel = new JPanel();
+        victoryPanel.setBackground(Color.BLACK);
+        victoryScreenLabel.setIcon(new ImageIcon(new ImageIcon("src/VictoryScreen.png").getImage().getScaledInstance(1000, 1000, Image.SCALE_SMOOTH)));
+        victoryPanel.add(returnButton);
+        victoryPanel.add(victoryScreenLabel);
+        myMainPanel.add(victoryPanel);
         this.setVisible(true);
     }
 
     public void buildDefeatScreen() {
         mainPanelReset();
-        JPanel defeatScreenPanel = new JPanel();
-        defeatScreenPanel.setLayout(new GridLayout(2,1));
-        defeatScreenPanel.add(new JLabel("YOU WERE DEFEATED"));
-        defeatScreenPanel.add(returnButton);
-        myMainPanel.add(defeatScreenPanel);
+        JLabel defeatScreenLabel = new JLabel();
+        JPanel defeatPanel = new JPanel();
+        defeatPanel.setBackground(Color.BLACK);
+        defeatScreenLabel.setIcon(new ImageIcon(new ImageIcon("src/DefeatScreen.png").getImage().getScaledInstance(1000, 1000, Image.SCALE_SMOOTH)));
+        defeatPanel.add(returnButton);
+        defeatPanel.add(defeatScreenLabel);
+        myMainPanel.add(defeatPanel);
         this.setVisible(true);
     }
 
