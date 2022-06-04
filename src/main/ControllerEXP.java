@@ -270,35 +270,6 @@ public class ControllerEXP implements Serializable{
         return attacks;
     }
 
-    public void saveGame() {
-        try {
-            FileOutputStream fileOut = new FileOutputStream("src/savefile.ser");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(myDungeonUIEXP);
-            out.close();
-            fileOut.close();
-            System.out.println("Your game has been saved");
-        } catch (IOException i) {
-            i.printStackTrace();
-        }
-        myDungeonUIEXP = null;
-    }
-
-    public void loadGame() {
-        try {
-            FileInputStream fileIn = new FileInputStream("src/savefile.ser");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            myDungeonUIEXP = (DungeonUIEXP) in.readObject();
-            in.close();
-            fileIn.close();
-        } catch (IOException i) {
-            i.printStackTrace();
-        } catch (ClassNotFoundException c) {
-            System.out.println("Controller class not found");
-            c.printStackTrace();
-        }
-        myDungeonUIEXP.buildAdventurePanel(myCurrRoom);
-    }
     private Object readResolve() throws LineUnavailableException, UnsupportedAudioFileException, IOException {
         audioController.setBackgroundClip();
         return this;

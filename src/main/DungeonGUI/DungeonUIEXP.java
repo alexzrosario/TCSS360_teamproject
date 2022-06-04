@@ -1,23 +1,27 @@
 package main.DungeonGUI;
 
 import main.AudioController;
+import main.Controller;
 import main.ControllerEXP;
 import main.DungeonCharacter.Hero;
 import main.DungeonCharacter.Monster;
 import main.DungeonMain.Room;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Serializable;
+import java.io.*;
 
 public class DungeonUIEXP extends JFrame implements Serializable {
     private ControllerEXP myController = new ControllerEXP(this);
+    private AudioController audioController = new AudioController();
     private static final long serialVersionUID = 3536060713340084481L;
 
-    transient JPanel myMainPanel;
+    JPanel myMainPanel;
 
 
     JPanel myStartPanel;
@@ -251,7 +255,7 @@ public class DungeonUIEXP extends JFrame implements Serializable {
         saveGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                myController.saveGame();
+                saveGame();
             }
         });
 
@@ -286,7 +290,7 @@ public class DungeonUIEXP extends JFrame implements Serializable {
         loadButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                myController.loadGame();
+                loadGame();
             }
         });
         quitButton.addActionListener(new ActionListener() {
@@ -481,4 +485,35 @@ public class DungeonUIEXP extends JFrame implements Serializable {
     public JPanel getMyMainPanel() {
         return myMainPanel;
     }
+
+    public void saveGame() {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("src/savefile.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(myController);
+            out.close();
+            fileOut.close();
+            System.out.println("Your game has been saved");
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+        myController = null;
+    }
+
+    public void loadGame() {
+        try {
+            FileInputStream fileIn = new FileInputStream("src/savefile.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            myController = (ControllerEXP) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            System.out.println("Controller class not found");
+            c.printStackTrace();
+        }
+        buildAdventurePanel(myController.getMyCurrRoom());
+    }
+
 }
