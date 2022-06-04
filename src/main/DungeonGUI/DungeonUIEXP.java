@@ -486,7 +486,7 @@ public class DungeonUIEXP extends JFrame implements Serializable {
         return myMainPanel;
     }
 
-    public void saveGame() {
+    private void saveGame() {
         try {
             FileOutputStream fileOut = new FileOutputStream("src/savefile.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -500,7 +500,7 @@ public class DungeonUIEXP extends JFrame implements Serializable {
         myController = null;
     }
 
-    public void loadGame() {
+    private void loadGame() {
         try {
             FileInputStream fileIn = new FileInputStream("src/savefile.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
