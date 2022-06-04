@@ -11,10 +11,11 @@ import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 
-public class DungeonUIEXP extends JFrame {
+public class DungeonUIEXP extends JFrame implements Serializable {
     private ControllerEXP myController = new ControllerEXP(this);
-    private final AudioController audioController = new AudioController();
+    private static final long serialVersionUID = 3536060713340084481L;
 
     JPanel myMainPanel;
 
@@ -250,7 +251,7 @@ public class DungeonUIEXP extends JFrame {
         saveGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                myController.saveGame();
             }
         });
 
@@ -285,7 +286,7 @@ public class DungeonUIEXP extends JFrame {
         loadButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                myController.loadGame();
             }
         });
         quitButton.addActionListener(new ActionListener() {
