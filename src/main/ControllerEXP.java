@@ -270,29 +270,6 @@ public class ControllerEXP implements Serializable{
         return attacks;
     }
 
-
-    public void victory() {
-        try(BufferedReader br = new BufferedReader(new FileReader("src/victory.txt"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                System.out.println(line);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void gameover() {
-        try(BufferedReader br = new BufferedReader(new FileReader("src/gameover.txt"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                System.out.println(line);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public void saveGame() {
         try {
             FileOutputStream fileOut = new FileOutputStream("src/savefile.ser");
@@ -320,7 +297,7 @@ public class ControllerEXP implements Serializable{
             System.out.println("Controller class not found");
             c.printStackTrace();
         }
-        myDungeonUIEXP.start();
+        myDungeonUIEXP.buildAdventurePanel(myCurrRoom);
     }
     private Object readResolve() throws LineUnavailableException, UnsupportedAudioFileException, IOException {
         audioController.setBackgroundClip();

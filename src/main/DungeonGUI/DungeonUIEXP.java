@@ -17,7 +17,7 @@ public class DungeonUIEXP extends JFrame implements Serializable {
     private ControllerEXP myController = new ControllerEXP(this);
     private static final long serialVersionUID = 3536060713340084481L;
 
-    JPanel myMainPanel;
+    transient JPanel myMainPanel;
 
 
     JPanel myStartPanel;
@@ -258,7 +258,7 @@ public class DungeonUIEXP extends JFrame implements Serializable {
         quitGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                System.exit(0);
             }
         });
     }
@@ -472,8 +472,10 @@ public class DungeonUIEXP extends JFrame implements Serializable {
     }
 
     public void mainPanelReset() {
-        myMainPanel.removeAll();
-        myMainPanel.repaint();
+        if(myMainPanel != null) {
+            myMainPanel.removeAll();
+            myMainPanel.repaint();
+        }
     }
 
     public JPanel getMyMainPanel() {
