@@ -32,7 +32,6 @@ public class Monster extends DungeonCharacter {
             int healRoll = theRandom.nextInt(myMaxHeal - myMinHeal + 1) + myMinHeal;
             System.out.println(getMyName() + " healed for " + healRoll + " health");
             setMyHitPoints(Math.min(healRoll + getMyHitPoints(), getMY_MAX_HEALTH()));
-            this.pause(500);
         }
     }
 

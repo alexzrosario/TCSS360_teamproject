@@ -157,14 +157,11 @@ public class ControllerEXP {
                 audioController.stopBackgroundAudio();
                 myDungeonUIEXP.updateAdventureText("You have collected all the pillars!");
                 myDungeonUIEXP.getMyMainPanel().repaint();
-                myHero.pause(2000);
                 myDungeonUIEXP.updateAdventureText("However, one last challenge stands in your way.");
                 myDungeonUIEXP.getMyMainPanel().repaint();
-                myHero.pause(2000);
                 Monster theMonster = new MonsterFactory().createMonster("Lord of OO");
                 myDungeonUIEXP.updateAdventureText("You must now face the " + theMonster.getMyName() + "!");
                 myDungeonUIEXP.getMyMainPanel().repaint();
-                myHero.pause(2000);
                 audioController.playBossAudio();
                 myDungeonUIEXP.buildBattlePanel(myHero, theMonster);
             }
@@ -280,7 +277,6 @@ public class ControllerEXP {
             }
             else myDungeonUIEXP.updateAdventureText(theAttacker.getMyName() + " missed their attack");
         }
-        myDungeonUIEXP.updateBattlePanel();
         return attacks;
     }
 

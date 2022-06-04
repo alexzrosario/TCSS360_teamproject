@@ -15,7 +15,6 @@ public class Thief extends Hero {
         // There is a 20 percent chance the Thief is caught in which case no attack at all is rendered.
         // The other 40 percent is just a normal attack.
         System.out.println(getMyName() + " goes for a surprise attack");
-        this.pause(2000);
         Random theRandom = new Random();
         float roll = theRandom.nextFloat(1);
         if (roll <= .4){

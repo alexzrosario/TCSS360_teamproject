@@ -4,7 +4,6 @@ import main.AudioController;
 import main.ControllerEXP;
 import main.DungeonCharacter.Hero;
 import main.DungeonCharacter.Monster;
-import main.DungeonCharacter.Warrior;
 import main.DungeonMain.Room;
 
 import javax.swing.*;
@@ -48,7 +47,8 @@ public class DungeonUIEXP extends JFrame {
     JButton testButton;
     Font gameTitleFont;
     Font regularFont = new Font("Times New Roman", Font.PLAIN, 20);
-    Font dungeonRoomFont = new Font("Times New Roman", Font.BOLD, 50);
+    Font dungeonUiFont = new Font("Times New Roman", Font.ITALIC, 20);
+    Font navigationFont = new Font("Times New Roman", Font.BOLD, 50);
 
     public DungeonUIEXP() {
         this.setTitle("Dungeon Adventure");
@@ -58,6 +58,7 @@ public class DungeonUIEXP extends JFrame {
         myMainPanel.setLayout(new GridLayout(0,1));
         myAdventureTextBox.setPreferredSize(new Dimension(20,0));
         returnButton = new JButton("RETURN TO TITLE SCREEN");
+        setButtonColor(returnButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
         returnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -73,8 +74,7 @@ public class DungeonUIEXP extends JFrame {
     }
 
     public void buildAdventurePanel(Room theCurrentRoom) {
-        myMainPanel.removeAll();
-        myMainPanel.repaint();
+        mainPanelReset();
         myAdventurePanel = new JPanel();
         myAdventurePanel.setBackground(Color.WHITE);
         myAdventurePanel.setLayout(new BoxLayout(myAdventurePanel, BoxLayout.Y_AXIS));
@@ -106,7 +106,7 @@ public class DungeonUIEXP extends JFrame {
             temp = new JTextField();
             temp.setEditable(false);
             temp.setHorizontalAlignment(JTextField.CENTER);
-            temp.setFont(dungeonRoomFont);
+            temp.setFont(navigationFont);
             if (i == 0 || i == 2 || i == 6 || i == 8) {
                 temp.setBackground(Color.DARK_GRAY);
             }
@@ -146,13 +146,17 @@ public class DungeonUIEXP extends JFrame {
     }
 
     public void buildNavigationPanel() {
-        JButton upButton = new JButton("^");
+        JButton upButton = new JButton("N");
+        setButtonColor(upButton, Color.LIGHT_GRAY, Color.BLACK, navigationFont);
         if (myController.getMyCurrRoom().getMyNorthRoom() == null) upButton.setEnabled(false);
-        JButton leftButton = new JButton("<");
+        JButton leftButton = new JButton("W");
+        setButtonColor(leftButton, Color.LIGHT_GRAY, Color.BLACK,  navigationFont);
         if (myController.getMyCurrRoom().getMyWestRoom() == null) leftButton.setEnabled(false);
-        JButton rightButton = new JButton(">");
+        JButton rightButton = new JButton("E");
+        setButtonColor(rightButton, Color.LIGHT_GRAY, Color.BLACK,  navigationFont);
         if (myController.getMyCurrRoom().getMyEastRoom() == null) rightButton.setEnabled(false);
-        JButton downButton = new JButton("v");
+        JButton downButton = new JButton("S");
+        setButtonColor(downButton, Color.LIGHT_GRAY, Color.BLACK,  navigationFont);
         if (myController.getMyCurrRoom().getMySouthRoom() == null) downButton.setEnabled(false);
 
         myNavigationPanel = new JPanel();
@@ -203,11 +207,17 @@ public class DungeonUIEXP extends JFrame {
 
     public void buildInteractionsPanel() {
         JButton heroInfobutton = new JButton("Hero Info");
+        setButtonColor(heroInfobutton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
         JButton dungeonMapButton = new JButton("Dungeon Map");
+        setButtonColor(dungeonMapButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
         JButton healPotionButton = new JButton("Use Heal Potion");
+        setButtonColor(healPotionButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
         JButton visionPotionButton = new JButton("Use Vision Potion");
+        setButtonColor(visionPotionButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
         JButton saveGameButton = new JButton("Save Game");
+        setButtonColor(saveGameButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
         JButton quitGameButton = new JButton("Quit Game");
+        setButtonColor(quitGameButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
 
         myInteractionsPanel = new JPanel();
         myInteractionsPanel.setLayout(new BoxLayout(myInteractionsPanel, BoxLayout.Y_AXIS));
@@ -263,11 +273,13 @@ public class DungeonUIEXP extends JFrame {
     }
 
     public void buildStartPanel() {
-        myMainPanel.removeAll();
-        myMainPanel.repaint();
+        mainPanelReset();
         JButton startButton = new JButton("START NEW GAME");
+        setButtonColor(startButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
         JButton loadButton = new JButton("LOAD GAME");
+        setButtonColor(loadButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
         JButton quitButton = new JButton("QUIT GAME");
+        setButtonColor(quitButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
         myStartPanel = new JPanel();
         myStartPanel.add(startButton);
         myStartPanel.add(loadButton);
@@ -295,17 +307,18 @@ public class DungeonUIEXP extends JFrame {
     }
 
     public void buildOptionsPanel() {
-        myMainPanel.removeAll();
-        myMainPanel.repaint();
+        mainPanelReset();
         myOptionsPanel = new JPanel();
         myOptionsPanel.setLayout(new GridLayout(4,1));
 
         JTextField nameField = new JTextField();
+        nameField.setFont(dungeonUiFont);
         nameField.setText("");
         myOptionsPanel.add(nameField);
 
         JComboBox<String> heroSelectBox = new JComboBox<>(myHeroes);
         heroSelectBox.setSelectedItem(myHeroes[0]);
+        setComboBoxColor(heroSelectBox, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
         heroSelectBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -316,6 +329,7 @@ public class DungeonUIEXP extends JFrame {
 
         JComboBox<Integer> dungeonSize = new JComboBox<>(mySizes);
         dungeonSize.setSelectedItem(mySizes[2]);
+        setComboBoxColor(dungeonSize, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
         dungeonSize.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -326,6 +340,7 @@ public class DungeonUIEXP extends JFrame {
 
         JComboBox<String> difficultySelectBox = new JComboBox<>(myDifficulty);
         difficultySelectBox.setSelectedItem(myDifficulty[1]);
+        setComboBoxColor(difficultySelectBox, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
         difficultySelectBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -335,6 +350,7 @@ public class DungeonUIEXP extends JFrame {
         myOptionsPanel.add(difficultySelectBox);
 
         JButton startAdventureButton = new JButton("Start Adventure");
+        setButtonColor(startAdventureButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
         startAdventureButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -357,8 +373,7 @@ public class DungeonUIEXP extends JFrame {
     }
 
     public void buildBattlePanel(Hero theHero, Monster theMonster) {
-        myMainPanel.removeAll();
-        myMainPanel.repaint();
+        mainPanelReset();
         myBattlePanel = new JPanel();
         myBattlePanel.setLayout(new GridLayout(0,3));
         JPanel heroBattlePanel = new JPanel();
@@ -366,15 +381,19 @@ public class DungeonUIEXP extends JFrame {
         heroBattlePanel.add(new JLabel(new ImageIcon(new ImageIcon("src/" + myUserHero + "Image.png").getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH))));
         JTextField heroHP = new JTextField(theHero.getMyName() + "'s HP: " + theHero.getMyHitPoints());
         heroHP.setEditable(false);
+        heroHP.setFont(dungeonUiFont);
         heroBattlePanel.add(heroHP);
 
         JPanel heroBattleOptions = new JPanel();
         JButton attackButton = new JButton("ATTACK");
+        setButtonColor(attackButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
         heroBattleOptions.add(attackButton);
         JButton skillButton = new JButton(theHero.getMySkillName());
+        setButtonColor(skillButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
         heroBattleOptions.add(skillButton);
         JButton useHealButton = new JButton("USE HEAL POTION: " + theHero.getMyHealingPotions());
         if (theHero.getMyHealingPotions() < 1) useHealButton.setEnabled(false);
+        setButtonColor(useHealButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
         heroBattleOptions.add(useHealButton);
         heroBattlePanel.add(heroBattleOptions);
         myBattlePanel.add(heroBattlePanel);
@@ -387,6 +406,7 @@ public class DungeonUIEXP extends JFrame {
         monsterBattlePanel.add(new JLabel(new ImageIcon(new ImageIcon("src/" + theMonster.getMyName() + "Image.jpeg").getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH))));
         JTextField monsterHP = new JTextField(theMonster.getMyName() + "'s HP: " + theMonster.getMyHitPoints());
         monsterHP.setEditable(false);
+        monsterHP.setFont(dungeonUiFont);
         monsterBattlePanel.add(monsterHP);
         myBattlePanel.add(monsterBattlePanel);
 
@@ -414,8 +434,7 @@ public class DungeonUIEXP extends JFrame {
     }
 
     public void buildVictoryScreen() {
-        myMainPanel.removeAll();
-        myMainPanel.repaint();
+        mainPanelReset();
         JPanel victoryScreenPanel = new JPanel();
         victoryScreenPanel.setLayout(new GridLayout(2,1));
         victoryScreenPanel.add(new JLabel("YOU WIN"));
@@ -425,8 +444,7 @@ public class DungeonUIEXP extends JFrame {
     }
 
     public void buildDefeatScreen() {
-        myMainPanel.removeAll();
-        myMainPanel.repaint();
+        mainPanelReset();
         JPanel defeatScreenPanel = new JPanel();
         defeatScreenPanel.setLayout(new GridLayout(2,1));
         defeatScreenPanel.add(new JLabel("YOU WERE DEFEATED"));
@@ -442,8 +460,17 @@ public class DungeonUIEXP extends JFrame {
             e.printStackTrace();
         }
     }
-    public void updateBattlePanel() {
-        myBattlePanel.repaint();
+
+    public void setButtonColor(JButton theButton, Color theBackColor, Color theForeColor, Font theFont) {
+        theButton.setBackground(theBackColor);
+        theButton.setFont(theFont);
+        theButton.setForeground(theForeColor);
+    }
+
+    public void setComboBoxColor(JComboBox theBox, Color theBackColor, Color theForeColor, Font theFont) {
+        theBox.setBackground(theBackColor);
+        theBox.setFont(theFont);
+        theBox.setForeground(theForeColor);
     }
 
     public void mainPanelReset() {

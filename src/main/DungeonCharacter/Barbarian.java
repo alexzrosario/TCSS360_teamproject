@@ -12,7 +12,6 @@ public class Barbarian extends Hero implements StateResettable {
         // Reckless Attack: Gain an increase to hit chance and damage, but lose the ability to block and
         // take extra damage until after a round of taking damage
         System.out.println(getMyName() + " recklessly attacks");
-        this.pause(2000);
         double currHitChance = this.getMyHitChance();
         int currMinDam = this.getMyMinDam();
         int currMaxDam = this.getMyMaxDam();

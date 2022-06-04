@@ -11,7 +11,6 @@ public class Monk extends Hero {
         // The target's chance to hit is permanently reduced if hit
         //save current hit chance, min damage, max damage
         System.out.println(getMyName() + " goes for a fine strike");
-        this.pause(2000);
         double currHitChance = this.getMyHitChance();
         int currMinDam = this.getMyMinDam();
         int currMaxDam = this.getMyMaxDam();

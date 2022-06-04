@@ -3,8 +3,10 @@ package main.DungeonGUI;
 import main.DungeonCharacter.Hero;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class HeroInfoWindow extends JFrame {
+    Font heroWindowFont = new Font(Font.MONOSPACED, Font.BOLD, 30);
 
     public HeroInfoWindow(Hero theHero) {
         this.setTitle("Hero Info");
@@ -12,6 +14,7 @@ public class HeroInfoWindow extends JFrame {
         this.setSize(600, 600);
 
         JTextArea heroInfoLabel = buildHeroInfoLabel(theHero);
+        heroInfoLabel.setFont(heroWindowFont);
         this.add(heroInfoLabel);
         this.setVisible(true);
     }

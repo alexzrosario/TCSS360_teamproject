@@ -14,12 +14,10 @@ public class Swordsman extends Hero {
         // Can only be used if the hero is above 15 health
         if (this.getMyHitPoints() <= 15) {
             System.out.println(getMyName() + " does not have enough health to use Blade Flurry and instead does a regular attack");
-            this.pause(2000);
             basicAttack(theTarget);
         }
         else {
             System.out.println(getMyName() + " does a flurry attack");
-            this.pause(2000);
             int currAttackSpeed = this.getMyAttackSpeed();
             double currBlockChance = this.getMyBlockChance();
 
