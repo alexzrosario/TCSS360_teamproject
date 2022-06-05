@@ -54,10 +54,15 @@ public class BarbarianTest {
     }
 
     @Test
-    void testRecklessBlockFail() {
-        testHero.setMyBlockChance(0.0);
+    void testRecklessTakeExtraDamage() {
         testHero.setReckless();
         testHero.updateHealth(10);
-        assertTrue(testHero.getMyHitPoints() == 110);
+        assertEquals(112, testHero.getMyHitPoints());
+    }
+
+    @Test
+    void testRecklessBlockChance() {
+        testHero.specialSkill(testMonster);
+        assertEquals(0.0, testHero.getMyBlockChance());
     }
 }

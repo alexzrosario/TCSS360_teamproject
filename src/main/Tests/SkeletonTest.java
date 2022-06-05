@@ -15,7 +15,7 @@ class SkeletonTest {
     @RepeatedTest(20)
     void testAttackValue() {
         testMonster.setMyHitChance(1.0);
-        assertTrue(30 <= testMonster.attackValue(testHero) && 50 >= testMonster.attackValue(testHero));
+        assertTrue(25 <= testMonster.attackValue(testHero) && 45 >= testMonster.attackValue(testHero));
     }
 
     @Test

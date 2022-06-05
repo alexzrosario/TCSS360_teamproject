@@ -52,6 +52,6 @@ public class MonkTest {
         testMonster.setMyHealChance(0.0);
         testHero.setMyAttackSpeed(2);
         testHero.testFineStrike(testMonster);
-        assertTrue(Math.round(((0.6 * 2)/3)*10)/10 == Math.round(testMonster.getMyHitChance()*10)/10);
+        assertEquals(Math.round(((0.6 * 2) / 3) * 10) / 10, Math.round(testMonster.getMyHitChance() * 10) / 10);
     }
 }
