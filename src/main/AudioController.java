@@ -27,12 +27,12 @@ public class AudioController implements Serializable {
 
     public void playBackgroundAudio() {
         try {
-            File musicPath = new File("src/backgroundmusic.wav");
+            File musicPath = new File("src/backgroundmusic2.wav");
             AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
             backgroundClip = AudioSystem.getClip();
             backgroundClip.open(audioInput);
             FloatControl gainControl = (FloatControl) backgroundClip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(-30.f);
+            gainControl.setValue(-35.f);
             backgroundClip.start();
             backgroundClip.loop(Clip.LOOP_CONTINUOUSLY);
         } catch (Exception e) {
@@ -42,12 +42,12 @@ public class AudioController implements Serializable {
 
     public void playBattleAudio() {
         try {
-            File musicPath = new File("src/battlemusic.wav");
+            File musicPath = new File("src/battlemusic2.wav");
             AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
             battleClip = AudioSystem.getClip();
             battleClip.open(audioInput);
             FloatControl gainControl = (FloatControl) battleClip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(-30.f);
+            gainControl.setValue(-35.f);
             battleClip.start();
             battleClip.loop(Clip.LOOP_CONTINUOUSLY);
         } catch (Exception e) {
@@ -75,12 +75,12 @@ public class AudioController implements Serializable {
     }
 
     public void setBackgroundClip() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        File musicPath = new File("src/backgroundmusic.wav");
+        File musicPath = new File("src/backgroundmusic2.wav");
         AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
         backgroundClip = AudioSystem.getClip();
         backgroundClip.open(audioInput);
         FloatControl gainControl = (FloatControl) backgroundClip.getControl(FloatControl.Type.MASTER_GAIN);
-        gainControl.setValue(-30.f);
+        gainControl.setValue(-50.f);
         backgroundClip.start();
         backgroundClip.loop(Clip.LOOP_CONTINUOUSLY);
     }

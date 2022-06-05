@@ -493,7 +493,7 @@ public class DungeonUIEXP extends JFrame implements Serializable {
             out.writeObject(myController);
             out.close();
             fileOut.close();
-            System.out.println("Your game has been saved");
+            updateAdventureText("Your game has been saved!");
         } catch (IOException i) {
             i.printStackTrace();
         }

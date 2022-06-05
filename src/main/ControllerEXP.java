@@ -118,7 +118,7 @@ public class ControllerEXP implements Serializable{
             double tempBlockChance = myHero.getMyBlockChance();
             myHero.setMyBlockChance(0.0);
             myHero.updateHealth(pitDamageTaken);
-            audioController.playAudio("src/playerhurt.wav");
+            audioController.playAudio("src/playerhurt2.wav");
             myHero.setMyBlockChance(tempBlockChance);
             myDungeonUIEXP.updateAdventureText("You have fallen into a pit and have taken " + pitDamageTaken + " damage!");
             room.setHasPit(false);
