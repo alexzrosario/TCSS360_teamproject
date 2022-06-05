@@ -11,12 +11,11 @@ public class Samurai extends Hero implements StateResettable {
     @Override
     public void specialSkill(DungeonCharacter theTarget) {
         // Counter Attack: Lose your attack for the round to enter a defensive stance. If the monster
-        // hits you, and you block it, deal 80 to 120 damage
+        // hits you, and you block it, deal 90 to 120 damage
         // but if you fail to block, you take extra damage
         isDefensive = true;
         myTarget = theTarget;
         this.setMyBlockChance(0.7);
-        System.out.println(getMyName() + " enters a defensive stance");
     }
 
     @Override
@@ -37,7 +36,6 @@ public class Samurai extends Hero implements StateResettable {
         }
         else {
             if (isDefensive) { //When the samurai blocks while defensive
-                System.out.println(getMyName() + " counter attacks");
                 int currMinDam = this.getMyMinDam();
                 int currMaxDam = this.getMyMaxDam();
 
@@ -54,7 +52,6 @@ public class Samurai extends Hero implements StateResettable {
                 this.setMyMaxDam(currMaxDam);
                 isDefensive = false;
             }
-            else System.out.println(getMyName() + " blocked the attack"); //When the samurai blocks while not defensive
         }
     }
 

@@ -17,9 +17,8 @@ public class ControllerEXP implements Serializable{
     private Dungeon myDungeon;
     private Room myCurrRoom;
     private Hero myHero;
-    private boolean myGameDone = false;
-    private Random r = new Random();
-    private DungeonUIEXP myDungeonUIEXP;
+    private final Random r = new Random();
+    private final DungeonUIEXP myDungeonUIEXP;
     private final AudioController audioController = new AudioController();
     private static final long serialVersionUID = 13425364675L;
     public ControllerEXP(DungeonUIEXP theDungeonUIEXP){
@@ -29,43 +28,33 @@ public class ControllerEXP implements Serializable{
     public void startGame(final String theName, final String theClass, final String theDifficulty, int theDungeonSize) {
         if (theClass.equals("Warrior")) {
             myHero = new Warrior(theName);
-            myGameDone = false;
         }
         else if (theClass.equals("Priestess")) {
             myHero = new Priestess(theName);
-            myGameDone = false;
         }
         else if (theClass.equals("Thief")) {
             myHero = new Thief(theName);
-            myGameDone = false;
         }
         else if (theClass.equals("Barbarian")) {
             myHero = new Barbarian(theName);
-            myGameDone = false;
         }
         else if (theClass.equals("Mage")) {
             myHero = new Mage(theName);
-            myGameDone = false;
         }
         else if (theClass.equals("Swordsman")) {
             myHero = new Swordsman(theName);
-            myGameDone = false;
         }
         else if (theClass.equals("Monk")) {
             myHero = new Monk(theName);
-            myGameDone = false;
         }
         else if (theClass.equals("Samurai")) {
             myHero = new Samurai(theName);
-            myGameDone = false;
         }
         else if (theClass.equals("Occultist")){
             myHero = new Occultist(theName);
-            myGameDone = false;
         }
 
         myDungeon = new Dungeon(theDungeonSize, theDungeonSize, theDifficulty);
-        System.out.println(myDungeon);
         myCurrRoom = myDungeon.getMyRoom();
         audioController.playBackgroundAudio();
     }
@@ -301,11 +290,4 @@ public class ControllerEXP implements Serializable{
         this.myHero = myHero;
     }
 
-    public boolean isMyGameDone() {
-        return myGameDone;
-    }
-
-    public void setMyGameDone(boolean myGameDone) {
-        this.myGameDone = myGameDone;
-    }
 }

@@ -27,7 +27,6 @@ public abstract class Hero extends DungeonCharacter {
                 setMyAlive();
             }
         }
-        else System.out.println(getMyName() + " blocked the attack");
     }
 
     abstract void specialSkill(final DungeonCharacter theTarget);

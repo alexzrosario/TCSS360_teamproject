@@ -1,14 +1,11 @@
 package main.DungeonGUI;
 
 import main.AudioController;
-import main.Controller;
 import main.ControllerEXP;
 import main.DungeonCharacter.Hero;
 import main.DungeonCharacter.Monster;
 import main.DungeonMain.Room;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import java.awt.*;
@@ -26,7 +23,6 @@ public class DungeonUIEXP extends JFrame implements Serializable {
 
     JPanel myStartPanel;
     JPanel myOptionsPanel;
-    JPanel myClassSelectPanel;
     final private String[] myHeroes = {"Warrior", "Priestess", "Thief", "Barbarian", "Mage", "Swordsman", "Monk", "Samurai", "Occultist"};
     final private Integer[] mySizes = {3, 4, 5, 6, 7, 8, 9, 10};
     String myUserHero = "Warrior";
@@ -81,7 +77,6 @@ public class DungeonUIEXP extends JFrame implements Serializable {
         myAdventurePanel = new JPanel();
         myAdventurePanel.setBackground(Color.WHITE);
         myAdventurePanel.setLayout(new BoxLayout(myAdventurePanel, BoxLayout.Y_AXIS));
-        //myMainPanel.setLayout(new GridLayout(0, 1));
 
         myDungeonPanel = dungeonPanel(theCurrentRoom);
         myAdventurePanel.add(myDungeonPanel);

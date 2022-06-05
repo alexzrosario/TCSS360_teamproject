@@ -26,7 +26,7 @@ public class Room implements Serializable {
     private boolean isSeen = false;
     private Monster myMonster;
     private String myStringToken = " ";
-    private static String[] monsterArray = {"ogre", "gremlin", "skeleton"};
+    private static final String[] monsterArray = {"ogre", "gremlin", "skeleton"};
     private double myDifficultyModifier;
     private static final long serialVersionUID = 3536060713340084481L;
 

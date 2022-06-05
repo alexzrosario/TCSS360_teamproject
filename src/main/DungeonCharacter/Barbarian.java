@@ -11,7 +11,6 @@ public class Barbarian extends Hero implements StateResettable {
     public void specialSkill(final DungeonCharacter theTarget) {
         // Reckless Attack: Gain an increase to hit chance and damage, but lose the ability to block and
         // take extra damage until after a round of taking damage
-        System.out.println(getMyName() + " recklessly attacks");
         double currHitChance = this.getMyHitChance();
         int currMinDam = this.getMyMinDam();
         int currMaxDam = this.getMyMaxDam();
@@ -37,7 +36,7 @@ public class Barbarian extends Hero implements StateResettable {
     public void updateHealth(final int theDamage) {
         if (Math.random() > this.getMyBlockChance()) {
             if (isReckless) { //When the barbarian is hit while reckless
-                this.setMyHitPoints(this.getMyHitPoints() - (int)(theDamage * 1.5));
+                this.setMyHitPoints(this.getMyHitPoints() - (int)(theDamage * 1.30));
                 isReckless = false;
                 this.setMyBlockChance(MY_STORED_BLOCK_CHANCE);
             }

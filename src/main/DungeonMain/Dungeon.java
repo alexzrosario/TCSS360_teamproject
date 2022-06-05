@@ -4,14 +4,14 @@ import java.io.Serializable;
 import java.util.Random;
 
 public class Dungeon implements Serializable {
-    private Room[][] myDungeon;
+    private final Room[][] myDungeon;
     private int myHeroRow;
     private int myHeroCol;
-    private int myDungeonRows;
-    private int myDungeonCols;
+    private final int myDungeonRows;
+    private final int myDungeonCols;
     private int myStartingRow;
     private int myStartingCol;
-    private String myDifficulty;
+    private final String myDifficulty;
     private final Random r = new Random();
     private static final long serialVersionUID = 3536060713340084481L;
 

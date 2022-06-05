@@ -14,7 +14,6 @@ public class Thief extends Hero {
         // If it is successful, Thief gets an attack and another turn (extra attack) in the current round.
         // There is a 20 percent chance the Thief is caught in which case no attack at all is rendered.
         // The other 40 percent is just a normal attack.
-        System.out.println(getMyName() + " goes for a surprise attack");
         Random theRandom = new Random();
         float roll = theRandom.nextFloat(1);
         if (roll <= .4){
@@ -23,6 +22,5 @@ public class Thief extends Hero {
         }else if(.4 < roll && roll <= .8 ){
             basicAttack(theTarget);
         }
-        else System.out.println(getMyName() + " missed their attack");
     }
 }

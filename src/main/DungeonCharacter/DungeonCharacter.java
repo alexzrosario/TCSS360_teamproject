@@ -41,11 +41,9 @@ public abstract class DungeonCharacter implements Serializable {
         int damageRoll = 0;
         if (Math.random() <= this.getMyHitChance()) {
             damageRoll = r.nextInt(this.getMyMinDam(), this.getMyMaxDam() + 1);
-            System.out.println(myName + " hits for " + damageRoll + " damage");
             theTarget.updateHealth(damageRoll);
         }
         else {
-            System.out.println(myName + " missed their attack");
         }
         return damageRoll;
     }
