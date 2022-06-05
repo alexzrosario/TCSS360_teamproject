@@ -148,7 +148,11 @@ public class Controller implements Serializable{
                 }
             }
         }
-        else myDungeonUIEXP.buildDefeatScreen();
+        else {
+            audioController.stopBackgroundAudio();
+            audioController.playAudio("src/deathsound.wav");
+            myDungeonUIEXP.buildDefeatScreen();
+        }
     }
 
     public void battle(Monster theMonster, String theAction) {
