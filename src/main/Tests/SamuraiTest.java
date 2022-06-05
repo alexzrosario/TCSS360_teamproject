@@ -61,6 +61,6 @@ public class SamuraiTest {
         testHero.setDefensive();
         testHero.setMyTarget(testMonster);
         testHero.updateHealth(10);
-        assertTrue(testHero.getMyHitPoints() == 85);
+        assertEquals(85, testHero.getMyHitPoints());
     }
 }
