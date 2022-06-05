@@ -1,223 +1,523 @@
 package main.DungeonGUI;
 
+import main.AudioController;
 import main.Controller;
-import main.DungeonCharacter.*;
-import main.DungeonMain.Dungeon;
-import main.DungeonMain.DungeonAdventure;
+import main.DungeonCharacter.Hero;
+import main.DungeonCharacter.Monster;
+import main.DungeonMain.Room;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.util.Objects;
+import java.io.*;
 
-public class DungeonUI extends JPanel{
-    JFrame window;
-    Container container;
+public class DungeonUI extends JFrame implements Serializable {
+    private Controller myController = new Controller(this);
+    private AudioController audioController = new AudioController();
+    private static final long serialVersionUID = 3536060713340084481L;
 
-    JPanel gameTitlePanel;
-    JPanel gameStartPanel;
-    JPanel heroSelectPanel;
-    JPanel nameInputPanel;
-    JPanel dungeonRoomPanel;
+    JPanel myMainPanel;
 
-    JLabel gameTitleLabel;
-    JLabel heroSelectLabel;
 
-    JButton gameStartButton;
-    JButton heroSelectButton;
+    JPanel myStartPanel;
+    JPanel myOptionsPanel;
+    final private String[] myHeroes = {"Warrior", "Priestess", "Thief", "Barbarian", "Mage", "Swordsman", "Monk", "Samurai", "Occultist"};
+    final private Integer[] mySizes = {3, 4, 5, 6, 7, 8, 9, 10};
+    String myUserHero = "Warrior";
+    final private String[] myDifficulty = {"EASY", "NORMAL", "HARD"};
 
-    JTextField nameInputBox;
-    JButton nameSubmitButton;
-    JLabel nameInputLabel;
-    JComboBox<String> choices;
+    int myDungeonSize = 5;
 
-    JLabel topLeftWallLabel;
-    JLabel topRightWallLabel;
-    JLabel bottomLeftWallLabel;
-    JLabel bottomRightWallLabel;
+    String myUserDifficulty = "NORMAL";
 
-    JLabel playerIcon;
+    JPanel myAdventurePanel;
+    JPanel myDungeonPanel;
+    JPanel myControlPanel;
+    JPanel myNavigationPanel;
+    JPanel myInteractionsPanel;
+    JTextArea myAdventureTextBox = new JTextArea("");
 
-    JButton testButton;
-    Font gameTitleFont;
-    Font regularFont = new Font("Times New Roman", Font.PLAIN, 20);
+    JPanel myBattlePanel;
 
-    private Dungeon myDungeon = new Dungeon(5, 5, "NORMAL");
-    final private String[] heroes = {"None","Warrior", "Priestess", "Thief"};
-    private String name = "";
-    private String userClass = "";
-    DungeonAdventure dummy = new DungeonAdventure();
-    private Controller controller = new Controller(dummy);
-    ChoiceController handleChoice = new ChoiceController();
-    private DungeonUIManager um = new DungeonUIManager(this);
-    public void DungeonUI() throws IOException {
+    JButton returnButton;
+    Font dungeonUiFont = new Font("Times New Roman", Font.ITALIC, 20);
+    Font navigationFont = new Font("Times New Roman", Font.BOLD, 50);
 
-        try {
-            gameTitleFont = Font.createFont(Font.TRUETYPE_FONT, new File("Antique Quest St.ttf")).deriveFont(40f);
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("Antique Quest St.ttf")));
-        }
-        catch (IOException | FontFormatException ignored) {
-        }
-
-        window = new JFrame();
-        window.setSize(1200, 1000);
+    public DungeonUI() {
+        this.setTitle("Dungeon Adventure");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(1000, 1000);
 
         //puts frame in middle of screen
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        window.setLocation(dim.width / 2 - window.getSize().width / 2, dim.height / 2 - window.getSize().height / 2);
-
-        window.getContentPane().setBackground(Color.WHITE);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setLayout(new GridBagLayout());
-        window.setResizable(false);
-        container = window.getContentPane();
-
-        gameTitle();
-        namePanel();
-        heroSelect();
-        dungeonRooms();
-
-        window.setVisible(true);
-
-        //Dungeon
-    }
-    public void gameTitle() {
-        //Title
-        gameTitlePanel = new JPanel();
-        gameTitlePanel.setBounds(150, 25, 500, 150);
-        gameTitlePanel.setBackground(Color.BLACK);
-        gameTitleLabel = new JLabel("Dungeon Adventure");
-        gameTitleLabel.setForeground(Color.WHITE);
-        gameTitleLabel.setFont(gameTitleFont);
-        gameTitlePanel.add(gameTitleLabel);
-        container.add(gameTitlePanel);
-
-        //Start Button
-        gameStartPanel = new JPanel();
-        gameStartPanel.setBounds(300, 400, 200, 100);
-        gameStartPanel.setBackground(Color.BLACK);
-        gameStartButton = new JButton("START");
-        gameStartButton.setBackground(Color.BLACK);
-        gameStartButton.setForeground(Color.WHITE);
-        gameStartButton.setFont(regularFont);
-        gameStartButton.setFocusPainted(false);
-        gameStartButton.addActionListener(handleChoice);
-        gameStartButton.setActionCommand("start");
-        gameStartPanel.add(gameStartButton);
-        container.add(gameStartPanel);
-    }
-
-    public void namePanel() {
-        //Name Input
-        nameInputPanel = new JPanel();
-        nameInputPanel.setBounds(150, 25, 500, 300);
-        nameInputPanel.setBackground(Color.BLACK);
-        nameInputLabel = new JLabel("Enter your Hero's name:");
-        nameInputLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        nameInputBox = new JTextField(10);
-        nameSubmitButton = new JButton();
-        nameSubmitButton.setBackground(Color.BLACK);
-        nameSubmitButton.setForeground(Color.WHITE);
-        nameSubmitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        nameSubmitButton.addActionListener(e -> name = nameInputBox.getText());
-        nameSubmitButton.addActionListener(handleChoice);
-        nameSubmitButton.setActionCommand("name");
-
-        nameInputPanel.add(nameInputLabel);
-        nameInputPanel.add(nameInputBox);
-        nameInputPanel.add(nameSubmitButton);
-        container.add(nameInputPanel);
-        nameInputPanel.setVisible(false);
-    }
-
-    public void heroSelect() {
-        //Hero Selection
-        heroSelectPanel = new JPanel();
-        heroSelectPanel.setLayout(new BoxLayout(heroSelectPanel, BoxLayout.Y_AXIS));
-        heroSelectPanel.setBounds(150, 25, 500, 300);
-        heroSelectPanel.setBackground(Color.BLACK);
-        heroSelectLabel = new JLabel("Select your hero!");
-        heroSelectLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        heroSelectPanel.add(heroSelectLabel);
-        choices = new JComboBox<>(heroes);
-        choices.setMaximumSize(choices.getPreferredSize());
-        choices.setAlignmentX(Component.CENTER_ALIGNMENT);
-        choices.addActionListener(new ActionListener() {
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+        myMainPanel = new JPanel();
+        myMainPanel.setLayout(new GridLayout(0,1));
+        myAdventureTextBox.setPreferredSize(new Dimension(20,0));
+        returnButton = new JButton("RETURN TO TITLE SCREEN");
+        setButtonColor(returnButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
+        returnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                userClass = (String) choices.getSelectedItem();
-                switch (Objects.requireNonNull(userClass)) {
-                    case "Warrior" -> {
-                        controller.startGame(name, 1);
-                        playerIcon = new JLabel(new ImageIcon(new ImageIcon("src/WarriorImage.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
-                        dungeonRoomPanel.add(playerIcon);
-                    }
-                    case "Priestess" -> {
-                        controller.startGame(name, 2);
-                        playerIcon = new JLabel(new ImageIcon(new ImageIcon("src/PriestessImage.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
-                        dungeonRoomPanel.add(playerIcon);
-                    }
-                    case "Thief" -> {
-                        controller.startGame(name, 3);
-                        playerIcon = new JLabel(new ImageIcon(new ImageIcon("src/ThiefImage.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH)));
-                        dungeonRoomPanel.add(playerIcon);
-                    }
-                }
+                myAdventureTextBox.setText("");
+                buildStartPanel();
             }
         });
-        heroSelectPanel.add(choices);
-        heroSelectButton = new JButton("OK");
-        heroSelectButton.setBackground(Color.BLACK);
-        heroSelectButton.setForeground(Color.WHITE);
-        heroSelectButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        heroSelectButton.addActionListener(handleChoice);
-        heroSelectButton.setActionCommand("hero");
-
-        heroSelectPanel.add(heroSelectButton);
-        container.add(heroSelectPanel);
-        heroSelectPanel.setVisible(false);
+        this.add(myMainPanel);
     }
 
-    public void dungeonRooms() {
-        dungeonRoomPanel = new JPanel();
-        dungeonRoomPanel.setBounds(0,0,1200,1000);
-        dungeonRoomPanel.setBackground(Color.WHITE);
-        dungeonRoomPanel.setLayout(new GridLayout(myDungeon.getMyDungeonRows(), myDungeon.getMyDungeonCols()));
-//        testButton = new JButton("Test");
-//        testButton.setBackground(Color.BLACK);
-//        testButton.setForeground(Color.WHITE);
-//        testButton.setFont(regularFont);
-//        testButton.setFocusPainted(false);
-//        testButton.addActionListener(e -> System.out.println(player + " " + player.getMyName()));
-//        BufferedImage topLeftWall = ImageIO.read(new File("src/TopLeftWall.png"));
-//        BufferedImage topRightWall = ImageIO.read(new File("src/TopRightWall.png"));
-//        BufferedImage bottomLeftWall = ImageIO.read(new File("src/BottomLeftWall.png"));
-//        BufferedImage bottomRightWall = ImageIO.read(new File("src/BottomRightWall.png"));
-//        ImageIcon topLeftWallImage = new ImageIcon("src/img.png");
-//        topLeftWallLabel = new JLabel(topLeftWallImage);
-//        topLeftWallLabel.setBounds(0, 0, 50, 50);
-//        topRightWallLabel = new JLabel(new ImageIcon("src/TopRightWall.png"));
-//        bottomLeftWallLabel = new JLabel(new ImageIcon("src/BottomLeftWall.png"));
-//        bottomRightWallLabel = new JLabel(new ImageIcon("src/BottomRightWall.png"));
-
-        container.add(dungeonRoomPanel);
-        dungeonRoomPanel.setVisible(false);
+    public void start() {
+        buildStartPanel();
     }
 
-    public class ChoiceController implements ActionListener {
-        public void actionPerformed(ActionEvent event) {
-            String choice = event.getActionCommand();
-            um.titleScreen();
-            switch (choice) {
-                case "start" -> um.nameInputScreen();
-                case "name" -> um.heroSelectScreen();
-                case "hero" -> um.dungeonRoomScreen();
+    public void buildAdventurePanel(Room theCurrentRoom) {
+        mainPanelReset();
+        myAdventurePanel = new JPanel();
+        myAdventurePanel.setBackground(Color.WHITE);
+        myAdventurePanel.setLayout(new BoxLayout(myAdventurePanel, BoxLayout.Y_AXIS));
+
+        myDungeonPanel = dungeonPanel(theCurrentRoom);
+        myAdventurePanel.add(myDungeonPanel);
+
+        myControlPanel = new JPanel();
+        myControlPanel.setLayout(new GridLayout(1, 3));
+        myControlPanel.add(myAdventureTextBox);
+
+        buildNavigationPanel();
+        myControlPanel.add(myNavigationPanel);
+
+        buildInteractionsPanel();
+        myControlPanel.add(myInteractionsPanel);
+        myAdventurePanel.add(myControlPanel);
+
+        myMainPanel.add(myAdventurePanel);
+
+        //puts frame in middle of screen
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+
+        this.setVisible(true);
+    }
+
+    public JPanel dungeonPanel(Room theRoom){
+        JPanel dungeonPanel = new JPanel();
+        dungeonPanel.setLayout(new GridLayout(0, 3));
+        JTextField temp;
+        for(int i = 0; i < 9; i++) {
+            temp = new JTextField();
+            temp.setEditable(false);
+            temp.setHorizontalAlignment(JTextField.CENTER);
+            temp.setFont(navigationFont);
+            if (i == 0 || i == 2 || i == 6 || i == 8) {
+                temp.setBackground(Color.DARK_GRAY);
             }
+            else if (i == 1) {
+                if (theRoom.getMyNorthRoom() == null) temp.setBackground(Color.DARK_GRAY);
+                else if (theRoom.getMyNorthRoom() != null && theRoom.getMyNorthRoom().isSeen()) {
+                    temp.setText(theRoom.getMyNorthRoom().getMyStringToken());
+                }
+            }
+            else if (i == 3) {
+                if (theRoom.getMyWestRoom() == null) temp.setBackground(Color.DARK_GRAY);
+                else if (theRoom.getMyWestRoom() != null && theRoom.getMyWestRoom().isSeen()) {
+                    temp.setText(theRoom.getMyWestRoom().getMyStringToken());
+                }
+            }
+            else if (i ==4) {
+                JLabel playerIcon;
+                playerIcon = new JLabel(new ImageIcon(new ImageIcon("src/" + myUserHero + "Image.png").getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH)));
+                dungeonPanel.add(playerIcon);
+                continue;
+            }
+            else if (i == 5) {
+                if (theRoom.getMyEastRoom() == null) temp.setBackground(Color.DARK_GRAY);
+                else if (theRoom.getMyEastRoom() != null && theRoom.getMyEastRoom().isSeen()) {
+                    temp.setText(theRoom.getMyEastRoom().getMyStringToken());
+                }
+            }
+            else {
+                if (theRoom.getMySouthRoom() == null) temp.setBackground(Color.DARK_GRAY);
+                else if (theRoom.getMySouthRoom() != null && theRoom.getMySouthRoom().isSeen()) {
+                    temp.setText(theRoom.getMySouthRoom().getMyStringToken());
+                }
+            }
+            dungeonPanel.add(temp);
         }
+        return dungeonPanel;
+    }
+
+    public void buildNavigationPanel() {
+        JButton upButton = new JButton("N");
+        setButtonColor(upButton, Color.LIGHT_GRAY, Color.BLACK, navigationFont);
+        if (myController.getMyCurrRoom().getMyNorthRoom() == null) upButton.setEnabled(false);
+        JButton leftButton = new JButton("W");
+        setButtonColor(leftButton, Color.LIGHT_GRAY, Color.BLACK,  navigationFont);
+        if (myController.getMyCurrRoom().getMyWestRoom() == null) leftButton.setEnabled(false);
+        JButton rightButton = new JButton("E");
+        setButtonColor(rightButton, Color.LIGHT_GRAY, Color.BLACK,  navigationFont);
+        if (myController.getMyCurrRoom().getMyEastRoom() == null) rightButton.setEnabled(false);
+        JButton downButton = new JButton("S");
+        setButtonColor(downButton, Color.LIGHT_GRAY, Color.BLACK,  navigationFont);
+        if (myController.getMyCurrRoom().getMySouthRoom() == null) downButton.setEnabled(false);
+
+        myNavigationPanel = new JPanel();
+        myNavigationPanel.setLayout(new GridLayout(0, 3));
+        myNavigationPanel.add(new JLabel());
+        myNavigationPanel.add(upButton);
+        myNavigationPanel.add(new JLabel());
+        myNavigationPanel.add(leftButton);
+        myNavigationPanel.add(new JLabel());
+        myNavigationPanel.add(rightButton);
+        myNavigationPanel.add(new JLabel());
+        myNavigationPanel.add(downButton);
+        myNavigationPanel.add(new JLabel());
+
+        upButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myController.checkDirection("^");
+            }
+        });
+
+        leftButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myController.checkDirection("<");
+            }
+        });
+
+        rightButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myController.checkDirection(">");
+            }
+        });
+
+        downButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myController.checkDirection("v");
+            }
+        });
+
+    }
+
+    public void buildInteractionsPanel() {
+        JButton heroInfobutton = new JButton("Hero Info");
+        setButtonColor(heroInfobutton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
+        JButton dungeonMapButton = new JButton("Dungeon Map");
+        setButtonColor(dungeonMapButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
+        JButton healPotionButton = new JButton("Use Heal Potion");
+        setButtonColor(healPotionButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
+        JButton visionPotionButton = new JButton("Use Vision Potion");
+        setButtonColor(visionPotionButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
+        JButton saveGameButton = new JButton("Save Game");
+        setButtonColor(saveGameButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
+        JButton quitGameButton = new JButton("Quit Game");
+        setButtonColor(quitGameButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
+
+        myInteractionsPanel = new JPanel();
+        myInteractionsPanel.setLayout(new BoxLayout(myInteractionsPanel, BoxLayout.Y_AXIS));
+        myInteractionsPanel.add(heroInfobutton);
+        myInteractionsPanel.add(dungeonMapButton);
+        myInteractionsPanel.add(healPotionButton);
+        myInteractionsPanel.add(visionPotionButton);
+        myInteractionsPanel.add(saveGameButton);
+        myInteractionsPanel.add(quitGameButton);
+        myInteractionsPanel.setBorder(BorderFactory.createTitledBorder("Options"));
+
+        heroInfobutton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new HeroInfoWindow(myController.getMyHero());
+            }
+        });
+
+        dungeonMapButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new DungeonMapWindow(myController.getMyDungeon());
+            }
+        });
+
+        healPotionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myController.useHealPotion();
+            }
+        });
+
+        visionPotionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myController.useVisionPotion();
+            }
+        });
+
+        saveGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveGame();
+            }
+        });
+
+        quitGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+    }
+
+    public void buildStartPanel() {
+        mainPanelReset();
+        JLabel titleScreenLabel = new JLabel();
+        titleScreenLabel.setIcon(new ImageIcon(new ImageIcon("src/TitleScreen.png").getImage().getScaledInstance(1000, 1000, Image.SCALE_SMOOTH)));
+        JButton startButton = new JButton("START NEW GAME");
+        setButtonColor(startButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
+        JButton loadButton = new JButton("LOAD GAME");
+        setButtonColor(loadButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
+        JButton quitButton = new JButton("QUIT GAME");
+        setButtonColor(quitButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
+        myStartPanel = new JPanel();
+        myStartPanel.add(startButton);
+        myStartPanel.add(loadButton);
+        myStartPanel.add(quitButton);
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buildOptionsPanel();
+            }
+        });
+        loadButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                loadGame();
+            }
+        });
+        quitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        myStartPanel.add(titleScreenLabel);
+        myStartPanel.setBackground(Color.DARK_GRAY);
+        myMainPanel.add(myStartPanel);
+        this.setVisible(true);
+    }
+
+    public void buildOptionsPanel() {
+        mainPanelReset();
+        myOptionsPanel = new JPanel();
+        myOptionsPanel.setLayout(new GridLayout(4,1));
+
+        JTextField nameField = new JTextField();
+        nameField.setFont(dungeonUiFont);
+        nameField.setText("");
+        myOptionsPanel.add(nameField);
+
+        JComboBox<String> heroSelectBox = new JComboBox<>(myHeroes);
+        heroSelectBox.setSelectedItem(myHeroes[0]);
+        setComboBoxColor(heroSelectBox, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
+        heroSelectBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myUserHero = (String)heroSelectBox.getSelectedItem();
+            }
+        });
+        myOptionsPanel.add(heroSelectBox);
+
+        JComboBox<Integer> dungeonSize = new JComboBox<>(mySizes);
+        dungeonSize.setSelectedItem(mySizes[2]);
+        setComboBoxColor(dungeonSize, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
+        dungeonSize.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myDungeonSize = (int) dungeonSize.getSelectedItem();
+            }
+        });
+        myOptionsPanel.add(dungeonSize);
+
+        JComboBox<String> difficultySelectBox = new JComboBox<>(myDifficulty);
+        difficultySelectBox.setSelectedItem(myDifficulty[1]);
+        setComboBoxColor(difficultySelectBox, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
+        difficultySelectBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myUserDifficulty = (String)difficultySelectBox.getSelectedItem();
+            }
+        });
+        myOptionsPanel.add(difficultySelectBox);
+
+        JButton startAdventureButton = new JButton("Start Adventure");
+        setButtonColor(startAdventureButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
+        startAdventureButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String heroName = nameField.getText();
+                myController.startGame(heroName, myUserHero, myUserDifficulty, myDungeonSize);
+                if (heroName.equals("GOD")) { //Cheat Code: Enter name as "GOD" to activate god mode
+                    myController.getMyHero().setMyHitChance(1.0);
+                    myController.getMyHero().setMyMinDam(500);
+                    myController.getMyHero().setMyMaxDam(501);
+                    myController.getMyHero().setMyBlockChance(1.0);
+                }
+                buildAdventurePanel(myController.getMyCurrRoom());
+            }
+        });
+        myOptionsPanel.add(startAdventureButton);
+
+        myMainPanel.add(myOptionsPanel);
+        this.setVisible(true);
+    }
+
+    public void buildBattlePanel(Hero theHero, Monster theMonster) {
+        mainPanelReset();
+        myBattlePanel = new JPanel();
+        myBattlePanel.setLayout(new GridLayout(0,3));
+        JPanel heroBattlePanel = new JPanel();
+        heroBattlePanel.setLayout(new GridLayout(3,1));
+        heroBattlePanel.add(new JLabel(new ImageIcon(new ImageIcon("src/" + myUserHero + "Image.png").getImage().getScaledInstance(300, 300, Image.SCALE_SMOOTH))));
+        JTextField heroHP = new JTextField(theHero.getMyName() + "'s HP: " + theHero.getMyHitPoints());
+        heroHP.setEditable(false);
+        heroHP.setFont(dungeonUiFont);
+        heroBattlePanel.add(heroHP);
+
+        JPanel heroBattleOptions = new JPanel();
+        JButton attackButton = new JButton("ATTACK");
+        setButtonColor(attackButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
+        heroBattleOptions.add(attackButton);
+        JButton skillButton = new JButton(theHero.getMySkillName());
+        setButtonColor(skillButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
+        heroBattleOptions.add(skillButton);
+        JButton useHealButton = new JButton("USE HEAL POTION: " + theHero.getMyHealingPotions());
+        if (theHero.getMyHealingPotions() < 1) useHealButton.setEnabled(false);
+        setButtonColor(useHealButton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
+        heroBattleOptions.add(useHealButton);
+        heroBattlePanel.add(heroBattleOptions);
+        myBattlePanel.add(heroBattlePanel);
+
+        myAdventureTextBox.setEditable(false);
+        myBattlePanel.add(myAdventureTextBox);
+
+        JPanel monsterBattlePanel = new JPanel();
+        monsterBattlePanel.setLayout(new GridLayout(2,1));
+        monsterBattlePanel.add(new JLabel(new ImageIcon(new ImageIcon("src/" + theMonster.getMyName() + "Image.jpeg").getImage().getScaledInstance(300, 300, Image.SCALE_SMOOTH))));
+        JTextField monsterHP = new JTextField(theMonster.getMyName() + "'s HP: " + theMonster.getMyHitPoints());
+        monsterHP.setEditable(false);
+        monsterHP.setFont(dungeonUiFont);
+        monsterBattlePanel.add(monsterHP);
+        myBattlePanel.add(monsterBattlePanel);
+
+        myMainPanel.add(myBattlePanel);
+        this.setVisible(true);
+
+        attackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myController.battle(theMonster, "ATTACK");
+            }
+        });
+        skillButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myController.battle(theMonster, "SKILL");
+            }
+        });
+        useHealButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myController.battle(theMonster, "HEAL");
+            }
+        });
+    }
+
+    public void buildVictoryScreen() {
+        mainPanelReset();
+        JLabel victoryScreenLabel = new JLabel();
+        JPanel victoryPanel = new JPanel();
+        victoryPanel.setBackground(Color.BLACK);
+        victoryScreenLabel.setIcon(new ImageIcon(new ImageIcon("src/VictoryScreen.png").getImage().getScaledInstance(1000, 1000, Image.SCALE_SMOOTH)));
+        victoryPanel.add(returnButton);
+        victoryPanel.add(victoryScreenLabel);
+        myMainPanel.add(victoryPanel);
+        this.setVisible(true);
+    }
+
+    public void buildDefeatScreen() {
+        mainPanelReset();
+        JLabel defeatScreenLabel = new JLabel();
+        JPanel defeatPanel = new JPanel();
+        defeatPanel.setBackground(Color.BLACK);
+        defeatScreenLabel.setIcon(new ImageIcon(new ImageIcon("src/DefeatScreen.png").getImage().getScaledInstance(1000, 1000, Image.SCALE_SMOOTH)));
+        defeatPanel.add(returnButton);
+        defeatPanel.add(defeatScreenLabel);
+        myMainPanel.add(defeatPanel);
+        this.setVisible(true);
+    }
+
+    public void updateAdventureText(String newText) {
+        try {
+            myAdventureTextBox.getDocument().insertString(0, newText + "\n", null);
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setButtonColor(JButton theButton, Color theBackColor, Color theForeColor, Font theFont) {
+        theButton.setBackground(theBackColor);
+        theButton.setFont(theFont);
+        theButton.setForeground(theForeColor);
+    }
+
+    public void setComboBoxColor(JComboBox theBox, Color theBackColor, Color theForeColor, Font theFont) {
+        theBox.setBackground(theBackColor);
+        theBox.setFont(theFont);
+        theBox.setForeground(theForeColor);
+    }
+
+    public void mainPanelReset() {
+        if(myMainPanel != null) {
+            myMainPanel.removeAll();
+            myMainPanel.repaint();
+        }
+    }
+
+    public JPanel getMyMainPanel() {
+        return myMainPanel;
+    }
+
+    private void saveGame() {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("src/savefile.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(myController);
+            out.close();
+            fileOut.close();
+            updateAdventureText("Your game has been saved!");
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+        myController = null;
+    }
+
+    private void loadGame() {
+        try {
+            FileInputStream fileIn = new FileInputStream("src/savefile.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            myController = (Controller) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            System.out.println("Controller class not found");
+            c.printStackTrace();
+        }
+        buildAdventurePanel(myController.getMyCurrRoom());
     }
 
 }
