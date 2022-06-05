@@ -182,7 +182,7 @@ public class ControllerEXP implements Serializable{
         }
         if (theMonster.getMyAlive()) {
             myDungeonUIEXP.updateAdventureText(theMonster.getMyName() + " attacks");
-            theMonster.basicAttack(myHero);
+            basicAttack(theMonster, myHero);
             if(!myHero.getMyAlive() && theMonster.getMyName().equals("Lord of OO")) {
                 audioController.stopBossAudio();
                 audioController.playAudio("src/deathsound.wav");
@@ -194,6 +194,8 @@ public class ControllerEXP implements Serializable{
                 myDungeonUIEXP.buildDefeatScreen();
                 return;
             }
+        }else{
+            myDungeonUIEXP.updateAdventureText(theMonster.getMyName() + " has been defeated");
         }
         if (myHero instanceof StateResettable) ((StateResettable) myHero).resetState();
 

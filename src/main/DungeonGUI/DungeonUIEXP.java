@@ -53,6 +53,11 @@ public class DungeonUIEXP extends JFrame implements Serializable {
         this.setTitle("Dungeon Adventure");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1000, 1000);
+
+        //puts frame in middle of screen
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+
         myMainPanel = new JPanel();
         myMainPanel.setLayout(new GridLayout(0,1));
         myAdventureTextBox.setPreferredSize(new Dimension(20,0));
@@ -296,7 +301,7 @@ public class DungeonUIEXP extends JFrame implements Serializable {
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                System.exit(0);
             }
         });
         myStartPanel.add(titleScreenLabel);
