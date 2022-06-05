@@ -80,7 +80,7 @@ public class AudioController implements Serializable {
         backgroundClip = AudioSystem.getClip();
         backgroundClip.open(audioInput);
         FloatControl gainControl = (FloatControl) backgroundClip.getControl(FloatControl.Type.MASTER_GAIN);
-        gainControl.setValue(-50.f);
+        gainControl.setValue(-35.f);
         backgroundClip.start();
         backgroundClip.loop(Clip.LOOP_CONTINUOUSLY);
     }
