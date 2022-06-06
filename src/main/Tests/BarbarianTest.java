@@ -50,12 +50,13 @@ public class BarbarianTest {
         testMonster.setMyHealChance(0.0);
         testHero.setMyAttackSpeed(2);
         testHero.specialSkill(testMonster);
-        assertTrue(120 <= testMonster.getMyHitPoints() && 140>= testMonster.getMyHitPoints());
+        assertTrue((120 <= testMonster.getMyHitPoints() && 140>= testMonster.getMyHitPoints()) || 200 == testMonster.getMyHitPoints());
     }
 
     @Test
     void testRecklessTakeExtraDamage() {
         testHero.setReckless();
+        testHero.setMyBlockChance(0.0);
         testHero.updateHealth(10);
         assertEquals(112, testHero.getMyHitPoints());
     }

@@ -49,8 +49,10 @@ public class SamuraiTest {
 
     @Test
     void testSpecialSkill() {
+        testHero.setMyHitChance(1.0);
         testHero.setMyBlockChance(1.0);
         testHero.setDefensive();
+        testMonster.setMyHealChance(0.0);
         testHero.setMyTarget(testMonster);
         testHero.updateHealth(10);
         assertTrue(80 <= testMonster.getMyHitPoints() && 110 >= testMonster.getMyHitPoints());

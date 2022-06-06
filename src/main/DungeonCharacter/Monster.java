@@ -27,7 +27,7 @@ public class Monster extends DungeonCharacter {
     public void heal() {
         Random theRandom = new Random();
         int healChanceRoll = theRandom.nextInt(100) + 1;
-        if (healChanceRoll >= 100 * (1 - myHealChance)) {
+        if (healChanceRoll > 100 * (1 - myHealChance)) {
             int healRoll = theRandom.nextInt(myMaxHeal - myMinHeal + 1) + myMinHeal;
             setMyHitPoints(Math.min(healRoll + getMyHitPoints(), getMY_MAX_HEALTH()));
         }
