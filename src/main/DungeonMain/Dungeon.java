@@ -248,4 +248,8 @@ public class Dungeon implements Serializable {
     public int getMyDungeonCols() {
         return myDungeon.length;
     }
+
+    public String getMyDifficulty() {
+        return myDifficulty;
+    }
 }

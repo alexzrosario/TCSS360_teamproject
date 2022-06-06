@@ -241,4 +241,12 @@ public class Room implements Serializable {
     public void setSeen(boolean seen) {
         isSeen = seen;
     }
+
+    public double getMyDifficultyModifier() {
+        return myDifficultyModifier;
+    }
+
+    public void setMyDifficultyModifier(double myDifficultyModifier) {
+        this.myDifficultyModifier = myDifficultyModifier;
+    }
 }
