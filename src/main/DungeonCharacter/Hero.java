@@ -27,6 +27,7 @@ public abstract class Hero extends DungeonCharacter {
                 setMyAlive();
             }
         }
+        else System.out.println(getMyName() + " blocked the attack");
     }
 
     public void battleMenu(DungeonCharacter theMonster, int theChoice) {

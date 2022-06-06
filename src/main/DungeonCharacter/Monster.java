@@ -19,6 +19,7 @@ public class Monster extends DungeonCharacter {
         this.setMyHitPoints(this.getMyHitPoints() - theDamage);
         if(this.getMyHitPoints() <= 0){
             setMyAlive();
+            System.out.println(this.getMyName() + " has died");
         }else{
             heal();
         }
@@ -30,6 +31,7 @@ public class Monster extends DungeonCharacter {
         if (healChanceRoll > 100 * (1 - myHealChance)) {
             int healRoll = theRandom.nextInt(myMaxHeal - myMinHeal + 1) + myMinHeal;
             setMyHitPoints(Math.min(healRoll + getMyHitPoints(), getMY_MAX_HEALTH()));
+            System.out.println(getMyName() + " healed for " + healRoll + " health");
         }
     }
 
