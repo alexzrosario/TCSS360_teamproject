@@ -10,6 +10,7 @@ public class Monk extends Hero {
         // Fine Strike: does 40 to 60 points of damage but only has a 50% chance of succeeding.
         // The target's chance to hit is permanently reduced if hit
         //save current hit chance, min damage, max damage
+        System.out.println(getMyName() + " goes for a fine strike");
         double currHitChance = this.getMyHitChance();
         int currMinDam = this.getMyMinDam();
         int currMaxDam = this.getMyMaxDam();
@@ -24,6 +25,7 @@ public class Monk extends Hero {
         int fineStrikeRoll = attackValue(theTarget);
         if (fineStrikeRoll > 0) {
             theTarget.setMyHitChance(Math.max(0.1, (theTarget.getMyHitChance() * 2)/3));
+            System.out.println(theTarget.getMyName() + " chance to hit has been reduced");
         }
 
         //set values back
