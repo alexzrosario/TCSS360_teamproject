@@ -54,7 +54,7 @@ public class OccultistTest {
         testHero.setMyHitPoints(74);
         testMonster.setMyHealChance(0.0);
         testHero.specialSkill(testMonster);
-        assertTrue(testHero.getMyHitPoints() == 75);
+        assertEquals(75, testHero.getMyHitPoints());
         assertTrue(160 <= testMonster.getMyHitPoints() && 175>= testMonster.getMyHitPoints());
     }
 
