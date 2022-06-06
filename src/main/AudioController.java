@@ -3,6 +3,9 @@ package main;
 import javax.sound.sampled.*;
 import java.io.*;
 
+/**
+ * The type Audio controller.
+ */
 public class AudioController implements Serializable {
 
     private transient Clip backgroundClip;
@@ -11,6 +14,11 @@ public class AudioController implements Serializable {
 
     private static final long serialVersionUID = 3536060713340084481L;
 
+    /**
+     * Play audio.
+     *
+     * @param audioFile the audio file
+     */
     public void playAudio(String audioFile) {
         try {
             File musicPath = new File(audioFile);
@@ -25,6 +33,9 @@ public class AudioController implements Serializable {
         }
     }
 
+    /**
+     * Play background audio.
+     */
     public void playBackgroundAudio() {
         try {
             File musicPath = new File("src/backgroundmusic2.wav");
@@ -40,6 +51,9 @@ public class AudioController implements Serializable {
         }
     }
 
+    /**
+     * Play battle audio.
+     */
     public void playBattleAudio() {
         try {
             File musicPath = new File("src/battlemusic2.wav");
@@ -55,6 +69,9 @@ public class AudioController implements Serializable {
         }
     }
 
+    /**
+     * Play boss audio.
+     */
     public void playBossAudio() {
         try {
             File musicPath = new File("src/finalboss.wav");
@@ -70,10 +87,20 @@ public class AudioController implements Serializable {
         }
     }
 
+    /**
+     * Stop background audio.
+     */
     public void stopBackgroundAudio() {
         this.backgroundClip.stop();
     }
 
+    /**
+     * Sets background clip.
+     *
+     * @throws UnsupportedAudioFileException the unsupported audio file exception
+     * @throws IOException                   the io exception
+     * @throws LineUnavailableException      the line unavailable exception
+     */
     public void setBackgroundClip() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         File musicPath = new File("src/backgroundmusic2.wav");
         AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
@@ -85,14 +112,23 @@ public class AudioController implements Serializable {
         backgroundClip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
+    /**
+     * Start background audio.
+     */
     public void startBackgroundAudio() {
         backgroundClip.start();
     }
 
+    /**
+     * Stop battle audio.
+     */
     public void stopBattleAudio() {
         battleClip.stop();
     }
 
+    /**
+     * Stop boss audio.
+     */
     public void stopBossAudio() {
         bossClip.stop();
     }

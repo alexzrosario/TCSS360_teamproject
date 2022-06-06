@@ -7,7 +7,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * The type Monster factory.
+ */
 public class MonsterFactory {
+    /**
+     * Create monster factory.
+     *
+     * @param theMonster the the monster
+     * @return the monster
+     */
     public Monster createMonster(String theMonster) {
         SQLiteDataSource ds = null;
 

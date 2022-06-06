@@ -14,6 +14,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 
+/**
+ * The type Console controller.
+ */
 public class ConsoleController implements Serializable{
     private Dungeon myDungeon;
     private Room myCurrRoom;
@@ -25,10 +28,22 @@ public class ConsoleController implements Serializable{
     private final AudioController audioController = new AudioController();
 
     private static final long serialVersionUID = 13425364675L;
+
+    /**
+     * Instantiates a new Console controller.
+     *
+     * @param theDungeonAdventure the the dungeon adventure
+     */
     public ConsoleController(DungeonAdventure theDungeonAdventure){
         myDungeonAdventure = theDungeonAdventure;
     }
 
+    /**
+     * Start game.
+     *
+     * @param theName  the the name
+     * @param theClass the the class
+     */
     public void startGame(final String theName, final int theClass){
         switch (theClass){
             case 1: // warrior
@@ -75,36 +90,65 @@ public class ConsoleController implements Serializable{
         audioController.playBackgroundAudio();
     }
 
+    /**
+     * Build dungeon dungeon.
+     *
+     * @param theRows       the the rows
+     * @param theCols       the the cols
+     * @param theDifficulty the the difficulty
+     * @return the dungeon
+     */
     public Dungeon buildDungeon(int theRows, int theCols, String theDifficulty) {
         return new Dungeon(theRows, theCols, theDifficulty);
     }
 
 
+    /**
+     * Traverse dungeon.
+     */
     public void traverseDungeon(){
         myCurrRoom = myDungeon.getMyRoom();
     }
 
+    /**
+     * Move north.
+     */
     public void moveNorth(){
         myDungeon.moveHero(-1,0);
         traverseDungeon();
         System.out.println(myDungeon);
     }
+
+    /**
+     * Move south.
+     */
     public void moveSouth(){
         myDungeon.moveHero(1,0);
         traverseDungeon();
         System.out.println(myDungeon);
     }
+
+    /**
+     * Move east.
+     */
     public void moveEast(){
         myDungeon.moveHero(0,1);
         traverseDungeon();
         System.out.println(myDungeon);
     }
+
+    /**
+     * Move west.
+     */
     public void moveWest(){
         myDungeon.moveHero(0,-1);
         traverseDungeon();
         System.out.println(myDungeon);
     }
 
+    /**
+     * Use heal potion.
+     */
     public void useHealPotion(){
         int maxHealth = myHero.getMY_MAX_HEALTH();
         if(myHero.getMyHealingPotions()>0 && myHero.getMyHitPoints() < myHero.getMY_MAX_HEALTH()){
@@ -118,6 +162,9 @@ public class ConsoleController implements Serializable{
         else System.out.println("No Healing Potions To Use");
     }
 
+    /**
+     * Use vision potion.
+     */
     public void useVisionPotion() {
         if (myHero.getMyVisionPotions() > 0) {
             if (myCurrRoom.getMyNorthRoom() != null) {
@@ -151,16 +198,29 @@ public class ConsoleController implements Serializable{
         else System.out.println("No Vision Potions To Use");
     }
 
+    /**
+     * Pit damage int.
+     *
+     * @return the int
+     */
     public int pitDamage() {
         Random r = new Random();
         int damageRoll = r.nextInt(1, 15) + 1;
         return damageRoll;
     }
 
+    /**
+     * Gets my curr room.
+     *
+     * @return the my curr room
+     */
     public Room getMyCurrRoom() {
         return myCurrRoom;
     }
 
+    /**
+     * Hero info.
+     */
     public void heroInfo() {
         System.out.println("\nName: " + myHero.getMyName());
         if(myHero instanceof Warrior){
@@ -176,6 +236,9 @@ public class ConsoleController implements Serializable{
         System.out.println("Hit Chance: " + myHero.getMyHitChance()+"\n");
     }
 
+    /**
+     * Hero inventory.
+     */
     public void heroInventory() {
         boolean inventoryHelper = true;
         Scanner scan = new Scanner(System.in);
@@ -210,10 +273,18 @@ public class ConsoleController implements Serializable{
         System.out.println(myDungeon);
     }
 
+    /**
+     * Is alive boolean.
+     *
+     * @return the boolean
+     */
     public boolean isAlive() {
         return myHero.getMyAlive();
     }
 
+    /**
+     * Traverse.
+     */
     public void traverse() {
         Scanner scan = new Scanner(System.in);
         String dir;
@@ -271,6 +342,9 @@ public class ConsoleController implements Serializable{
         }
     }
 
+    /**
+     * Check room.
+     */
     public void checkRoom() {
         Room room;
         while(!myGameDone) {
@@ -393,14 +467,27 @@ public class ConsoleController implements Serializable{
         }
     }
 
+    /**
+     * Gets my dungeon.
+     *
+     * @return the my dungeon
+     */
     public Dungeon getMyDungeon() {
         return myDungeon;
     }
 
+    /**
+     * Sets my dungeon.
+     *
+     * @param myDungeon the my dungeon
+     */
     public void setMyDungeon(Dungeon myDungeon) {
         this.myDungeon = myDungeon;
     }
 
+    /**
+     * Victory.
+     */
     public void victory() {
         try(BufferedReader br = new BufferedReader(new FileReader("src/victory.txt"))) {
             String line;
@@ -413,6 +500,9 @@ public class ConsoleController implements Serializable{
         }
     }
 
+    /**
+     * Gameover.
+     */
     public void gameover() {
         try(BufferedReader br = new BufferedReader(new FileReader("src/gameover.txt"))) {
             String line;
@@ -425,6 +515,11 @@ public class ConsoleController implements Serializable{
         }
     }
 
+    /**
+     * Pause.
+     *
+     * @param theMs the the ms
+     */
     public void pause(int theMs) {
         try {
             Thread.sleep(theMs);
@@ -433,6 +528,9 @@ public class ConsoleController implements Serializable{
         }
     }
 
+    /**
+     * Save game.
+     */
     public void saveGame() {
         try {
             FileOutputStream fileOut = new FileOutputStream("src/savefile.ser");
@@ -447,6 +545,9 @@ public class ConsoleController implements Serializable{
         myDungeonAdventure = null;
     }
 
+    /**
+     * Load game.
+     */
     public void loadGame() {
         try {
             FileInputStream fileIn = new FileInputStream("src/savefile.ser");

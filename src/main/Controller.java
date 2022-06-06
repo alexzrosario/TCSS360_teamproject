@@ -10,6 +10,9 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.*;
 import java.util.Random;
 
+/**
+ * The type Controller.
+ */
 public class Controller implements Serializable{
     private Dungeon myDungeon;
     private Room myCurrRoom;
@@ -18,10 +21,24 @@ public class Controller implements Serializable{
     private final DungeonUI myDungeonUIEXP;
     private final AudioController audioController = new AudioController();
     private static final long serialVersionUID = 13425364675L;
+
+    /**
+     * Instantiates a new Controller.
+     *
+     * @param theDungeonUIEXP the the dungeon uiexp
+     */
     public Controller(DungeonUI theDungeonUIEXP){
         myDungeonUIEXP = theDungeonUIEXP;
     }
 
+    /**
+     * Start game.
+     *
+     * @param theName        the the name
+     * @param theClass       the the class
+     * @param theDifficulty  the the difficulty
+     * @param theDungeonSize the the dungeon size
+     */
     public void startGame(final String theName, final String theClass, final String theDifficulty, int theDungeonSize) {
         if (theClass.equals("Warrior")) {
             myHero = new Warrior(theName);
@@ -56,6 +73,11 @@ public class Controller implements Serializable{
         audioController.playBackgroundAudio();
     }
 
+    /**
+     * Check direction.
+     *
+     * @param theDirection the the direction
+     */
     public void checkDirection(String theDirection) {
         if (theDirection.equals("^")) {
             traverseDungeon(-1,0);
@@ -71,12 +93,21 @@ public class Controller implements Serializable{
         }
     }
 
+    /**
+     * Traverse dungeon.
+     *
+     * @param rowDir the row dir
+     * @param colDir the col dir
+     */
     public void traverseDungeon(int rowDir, int colDir) {
         myDungeon.moveHero(rowDir,colDir);
         myCurrRoom = myDungeon.getMyRoom();
         checkRoom();
     }
 
+    /**
+     * Check room.
+     */
     public void checkRoom() {
         Room room = myCurrRoom;
         if(room.isHasAbstractionPillar()) {
@@ -155,6 +186,12 @@ public class Controller implements Serializable{
         }
     }
 
+    /**
+     * Battle.
+     *
+     * @param theMonster the the monster
+     * @param theAction  the the action
+     */
     public void battle(Monster theMonster, String theAction) {
         switch (theAction) {
             case "ATTACK" -> {
@@ -201,6 +238,9 @@ public class Controller implements Serializable{
 
     }
 
+    /**
+     * Use heal potion.
+     */
     public void useHealPotion(){
         int maxHealth = myHero.getMY_MAX_HEALTH();
         if(myHero.getMyHealingPotions()>0 && myHero.getMyHitPoints() < myHero.getMY_MAX_HEALTH()){
@@ -215,6 +255,9 @@ public class Controller implements Serializable{
         else myDungeonUIEXP.updateAdventureText("No Healing Potions To Use");
     }
 
+    /**
+     * Use vision potion.
+     */
     public void useVisionPotion() {
         if (myHero.getMyVisionPotions() > 0) {
             if (myCurrRoom.getMyNorthRoom() != null) {
@@ -236,11 +279,23 @@ public class Controller implements Serializable{
         myDungeonUIEXP.buildAdventurePanel(getMyCurrRoom());
     }
 
+    /**
+     * Pit damage int.
+     *
+     * @return the int
+     */
     public int pitDamage() {
         Random r = new Random();
         return r.nextInt(1, 15) + 1;
     }
 
+    /**
+     * Basic attack int.
+     *
+     * @param theAttacker the the attacker
+     * @param theTarget   the the target
+     * @return the int
+     */
     public int basicAttack(final DungeonCharacter theAttacker, final DungeonCharacter theTarget){
         int attacks = 1;
         int tempTargetHealth = theTarget.getMyHitPoints();
@@ -265,26 +320,56 @@ public class Controller implements Serializable{
         return this;
     }
 
+    /**
+     * Gets my dungeon.
+     *
+     * @return the my dungeon
+     */
     public Dungeon getMyDungeon() {
         return myDungeon;
     }
 
+    /**
+     * Sets my dungeon.
+     *
+     * @param myDungeon the my dungeon
+     */
     public void setMyDungeon(Dungeon myDungeon) {
         this.myDungeon = myDungeon;
     }
 
+    /**
+     * Gets my curr room.
+     *
+     * @return the my curr room
+     */
     public Room getMyCurrRoom() {
         return myCurrRoom;
     }
 
+    /**
+     * Sets my curr room.
+     *
+     * @param myCurrRoom the my curr room
+     */
     public void setMyCurrRoom(Room myCurrRoom) {
         this.myCurrRoom = myCurrRoom;
     }
 
+    /**
+     * Gets my hero.
+     *
+     * @return the my hero
+     */
     public Hero getMyHero() {
         return myHero;
     }
 
+    /**
+     * Sets my hero.
+     *
+     * @param myHero the my hero
+     */
     public void setMyHero(Hero myHero) {
         this.myHero = myHero;
     }

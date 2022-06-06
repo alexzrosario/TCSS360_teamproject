@@ -5,9 +5,20 @@ import main.DungeonCharacter.Hero;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The type Hero info window.
+ */
 public class HeroInfoWindow extends JFrame {
+    /**
+     * The Hero window font.
+     */
     Font heroWindowFont = new Font(Font.MONOSPACED, Font.BOLD, 30);
 
+    /**
+     * Instantiates a new Hero info window.
+     *
+     * @param theHero the the hero
+     */
     public HeroInfoWindow(Hero theHero) {
         this.setTitle("Hero Info");
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -19,6 +30,12 @@ public class HeroInfoWindow extends JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * Build hero info label j text area.
+     *
+     * @param theHero the the hero
+     * @return the j text area
+     */
     public JTextArea buildHeroInfoLabel(Hero theHero) {
         JTextArea heroInfo = new JTextArea();
         heroInfo.setEditable(false);

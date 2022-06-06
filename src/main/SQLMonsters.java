@@ -8,31 +8,25 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
+ * The type Sql monsters.
  *
- * @author tom capaul
- *
- * Simple class to demonstrate SQLite connectivity
- * 1) create connection
- * 2) add a table
- * 3) add entries to the table
- * 4) query the table for its contents
- * 5) display the results
- *
- * NOTE: any interactions with a database should utilize a try/catch
- * since things can go wrong
- *
- * @see <a href="https://shanemcd.org/2020/01/24/how-to-set-up-sqlite-with-jdbc-in-eclipse-on-windows/">
-https://shanemcd.org/2020/01/24/how-to-set-up-sqlite-with-jdbc-in-eclipse-on-windows/</a>
- *
- * Refactoring original code for monster classes DONT RUN AGAIN or it will add the monsters twice, if you
- * want to rerun then you have to delete monsters.db first
+ * @author tom capaul Simple class to demonstrate SQLite connectivity 1) create connection 2) add a table 3) add entries to the table 4) query the table for its contents 5) display the results NOTE: any interactions with a database should utilize a try/catch since things can go wrong
+ * @see <a href="https://shanemcd.org/2020/01/24/how-to-set-up-sqlite-with-jdbc-in-eclipse-on-windows/">https://shanemcd.org/2020/01/24/how-to-set-up-sqlite-with-jdbc-in-eclipse-on-windows/</a> Refactoring original code for monster classes DONT RUN AGAIN or it will add the monsters twice, if you want to rerun then you have to delete monsters.db first
  */
 public class SQLMonsters {
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         //make();
     }
 
+    /**
+     * Make.
+     */
     public static void make(){
         SQLiteDataSource ds = null;
 

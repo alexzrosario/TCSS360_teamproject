@@ -1,9 +1,18 @@
 package main.DungeonCharacter;
 
+/**
+ * The type Samurai.
+ */
 public class Samurai extends Hero implements StateResettable {
     private boolean isDefensive = false;
     private DungeonCharacter myTarget;
     private final double MY_STORED_BLOCK_CHANCE = 0.25;
+
+    /**
+     * Instantiates a new Samurai.
+     *
+     * @param theName the the name
+     */
     public Samurai(final String theName) {
         super(theName, 100, 35, 60, 4, 0.8, 0.25, "Counter Attack","SamuraiImage.png");
     }
@@ -63,7 +72,15 @@ public class Samurai extends Hero implements StateResettable {
         isDefensive = false;
     }
 
+    /**
+     * Set defensive.
+     */
     public void setDefensive(){isDefensive = true; }
 
+    /**
+     * Set my target.
+     *
+     * @param theMonster the the monster
+     */
     public void setMyTarget(Monster theMonster){myTarget = theMonster;}
 }

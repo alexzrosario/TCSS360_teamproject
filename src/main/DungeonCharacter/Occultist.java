@@ -1,6 +1,14 @@
 package main.DungeonCharacter;
 
+/**
+ * The type Occultist.
+ */
 public class Occultist extends Hero {
+    /**
+     * Instantiates a new Occultist.
+     *
+     * @param theName the the name
+     */
     public Occultist(final String theName) {
         super(theName, 75, 25, 45, 5, 0.7, 0.3,"Life Steal", "OccultistImage.png");
     }

@@ -4,9 +4,16 @@ import main.ConsoleController;
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * The type Dungeon adventure.
+ */
 public class DungeonAdventure implements Serializable {
     private static final long serialVersionUID = 3536060713340084481L;
     private ConsoleController controller = new ConsoleController(this);
+
+    /**
+     * Start.
+     */
     public void start() {
         boolean quit = false;
         System.out.println("Welcome to the Dungeon\n");
@@ -35,6 +42,9 @@ public class DungeonAdventure implements Serializable {
         }
     }
 
+    /**
+     * Choose hero.
+     */
     public void chooseHero() {
         Scanner scan = new Scanner(System.in);
         String name;
@@ -90,6 +100,11 @@ public class DungeonAdventure implements Serializable {
         }while(repeat);
     }
 
+    /**
+     * Dungeon size prompt int.
+     *
+     * @return the int
+     */
     public int dungeonSizePrompt() {
         int theSize = 0;
         System.out.println("Enter the size of your dungeon; The number inputted is for rows and columns");
@@ -114,6 +129,11 @@ public class DungeonAdventure implements Serializable {
         return theSize;
     }
 
+    /**
+     * Difficulty prompt string.
+     *
+     * @return the string
+     */
     public String difficultyPrompt() {
         String theDifficulty;
         String diff = "";
@@ -143,6 +163,9 @@ public class DungeonAdventure implements Serializable {
         return diff;
     }
 
+    /**
+     * Play.
+     */
     public void play(){
         System.out.println(controller.getMyDungeon());
         controller.traverse();

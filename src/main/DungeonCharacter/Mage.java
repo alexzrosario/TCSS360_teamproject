@@ -1,6 +1,14 @@
 package main.DungeonCharacter;
 
+/**
+ * The type Mage.
+ */
 public class Mage extends Hero {
+    /**
+     * Instantiates a new Mage.
+     *
+     * @param theName the the name
+     */
     public Mage(final String theName) {
         super(theName, 60, 55, 75, 5, 0.7, 0.35, "Fireball","MageImage.png");
     }

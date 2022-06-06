@@ -2,8 +2,16 @@ package main.DungeonCharacter;
 
 import java.util.Random;
 
+/**
+ * The type Priestess.
+ */
 public class Priestess extends Hero {
 
+    /**
+     * Instantiates a new Priestess.
+     *
+     * @param theName the the name
+     */
     public Priestess(final String theName) {
         super(theName, 75, 25, 45, 5, 0.7, 0.3, "Heal", "PriestessImage.png");
     }

@@ -2,8 +2,16 @@ package main.DungeonCharacter;
 
 import java.util.Random;
 
+/**
+ * The type Thief.
+ */
 public class Thief extends Hero {
 
+    /**
+     * Instantiates a new Thief.
+     *
+     * @param theName the the name
+     */
     public Thief(final String theName) {
         super(theName, 75, 20, 40, 6, 0.8, 0.4, "Surprise Attack","ThiefImage.png");
     }

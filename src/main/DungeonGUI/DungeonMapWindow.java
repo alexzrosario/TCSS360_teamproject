@@ -5,7 +5,15 @@ import main.DungeonMain.Dungeon;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * The type Dungeon map window.
+ */
 public class DungeonMapWindow extends JFrame {
+    /**
+     * Instantiates a new Dungeon map window.
+     *
+     * @param theDungeon the the dungeon
+     */
     public DungeonMapWindow(Dungeon theDungeon) {
         this.setTitle("Hero Info");
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);

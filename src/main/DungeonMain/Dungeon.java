@@ -3,6 +3,9 @@ package main.DungeonMain;
 import java.io.Serializable;
 import java.util.Random;
 
+/**
+ * The type Dungeon.
+ */
 public class Dungeon implements Serializable {
     private final Room[][] myDungeon;
     private int myHeroRow;
@@ -15,6 +18,13 @@ public class Dungeon implements Serializable {
     private final Random r = new Random();
     private static final long serialVersionUID = 3536060713340084481L;
 
+    /**
+     * Instantiates a new Dungeon.
+     *
+     * @param theDungeonRows the the dungeon rows
+     * @param theDungeonCols the the dungeon cols
+     * @param theDifficulty  the the difficulty
+     */
     public Dungeon(int theDungeonRows, int theDungeonCols, String theDifficulty) {
         myDungeonRows = theDungeonRows;
         myDungeonCols = theDungeonCols;
@@ -24,6 +34,9 @@ public class Dungeon implements Serializable {
         generateDungeon();
     }
 
+    /**
+     * Build dungeon array.
+     */
     public void buildDungeonArray() {
         for(int row = 0; row < myDungeonRows; row++) {
             for(int col = 0; col < myDungeonCols; col++) {
@@ -32,6 +45,9 @@ public class Dungeon implements Serializable {
         }
     }
 
+    /**
+     * Generate dungeon.
+     */
     public void generateDungeon() {
         int roomsBuilt = 1;
         myStartingRow = r.nextInt(myDungeonRows);
@@ -85,18 +101,36 @@ public class Dungeon implements Serializable {
         setPolymorphismPillar(r.nextInt(myDungeonRows), r.nextInt(myDungeonCols));
     }
 
+    /**
+     * Sets entrance.
+     *
+     * @param row the row
+     * @param col the col
+     */
     public void setEntrance(int row, int col) {
         myDungeon[row][col].setEntrance(true);
         disableItems(row, col);
         myDungeon[row][col].setMyStringToken("i");
     }
 
+    /**
+     * Sets exit.
+     *
+     * @param row the row
+     * @param col the col
+     */
     public void setExit(int row, int col) {
         myDungeon[row][col].setExit(true);
         disableItems(row, col);
         myDungeon[row][col].setMyStringToken("O");
     }
 
+    /**
+     * Sets abstraction pillar.
+     *
+     * @param row the row
+     * @param col the col
+     */
     public void setAbstractionPillar(int row, int col) {
         if(myDungeon[row][col].isEntrance() || myDungeon[row][col].isExit() ||
                 myDungeon[row][col].isHasEncapsulationPillar() || myDungeon[row][col].isHasInheritancePillar() ||
@@ -108,6 +142,12 @@ public class Dungeon implements Serializable {
         }
     }
 
+    /**
+     * Sets inheritance pillar.
+     *
+     * @param row the row
+     * @param col the col
+     */
     public void setInheritancePillar(int row, int col) {
         if(myDungeon[row][col].isEntrance() || myDungeon[row][col].isExit() ||
                 myDungeon[row][col].isHasEncapsulationPillar() || myDungeon[row][col].isHasAbstractionPillar() ||
@@ -119,6 +159,12 @@ public class Dungeon implements Serializable {
         }
     }
 
+    /**
+     * Sets encapsulation pillar.
+     *
+     * @param row the row
+     * @param col the col
+     */
     public void setEncapsulationPillar(int row, int col) {
         if(myDungeon[row][col].isEntrance() || myDungeon[row][col].isExit() ||
                 myDungeon[row][col].isHasAbstractionPillar() || myDungeon[row][col].isHasInheritancePillar() ||
@@ -130,6 +176,12 @@ public class Dungeon implements Serializable {
         }
     }
 
+    /**
+     * Sets polymorphism pillar.
+     *
+     * @param row the row
+     * @param col the col
+     */
     public void setPolymorphismPillar(int row, int col) {
         if(myDungeon[row][col].isEntrance() || myDungeon[row][col].isExit() ||
                 myDungeon[row][col].isHasEncapsulationPillar() || myDungeon[row][col].isHasInheritancePillar() ||
@@ -141,6 +193,12 @@ public class Dungeon implements Serializable {
         }
     }
 
+    /**
+     * Check built int.
+     *
+     * @param theRoom the the room
+     * @return the int
+     */
     public int checkBuilt(Room theRoom) {
         if (!theRoom.isBuilt()) {
             theRoom.setBuilt();
@@ -149,6 +207,12 @@ public class Dungeon implements Serializable {
         else return 0;
     }
 
+    /**
+     * Disable items.
+     *
+     * @param row the row
+     * @param col the col
+     */
     public void disableItems(int row, int col) {
         myDungeon[row][col].setHasHealPotion(false);
         myDungeon[row][col].setHasVisionPotion(false);
@@ -157,6 +221,12 @@ public class Dungeon implements Serializable {
         myDungeon[row][col].setMyMonster(null);
     }
 
+    /**
+     * Move hero.
+     *
+     * @param rowDirection the row direction
+     * @param colDirection the col direction
+     */
     public void moveHero(int rowDirection, int colDirection) {
         myDungeon[myHeroRow][myHeroCol].setMyStringToken("v");
         myHeroRow += rowDirection;
@@ -176,6 +246,13 @@ public class Dungeon implements Serializable {
         }
         return s;
     }
+
+    /**
+     * Get top string string.
+     *
+     * @param theRow the the row
+     * @return the string
+     */
     public String getTopString(final int theRow){
         String s = "*";
         for (int i = 0; i < myDungeonRows; i++) {
@@ -188,6 +265,13 @@ public class Dungeon implements Serializable {
         s += "\n";
         return s;
     }
+
+    /**
+     * Get empty mid string string.
+     *
+     * @param theRow the the row
+     * @return the string
+     */
     public String getEmptyMidString(final int theRow){
         String s = "*";
         for (int i = 0; i < myDungeonRows; i++) {
@@ -212,6 +296,12 @@ public class Dungeon implements Serializable {
         return s;
     }
 
+    /**
+     * Get mid string string.
+     *
+     * @param theRow the the row
+     * @return the string
+     */
     public String getMidString(final int theRow){
         String s = "*";
         for (int i = 0; i < myDungeonRows; i++) {
@@ -234,21 +324,47 @@ public class Dungeon implements Serializable {
         return s;
     }
 
+    /**
+     * Get my dungeon room [ ] [ ].
+     *
+     * @return the room [ ] [ ]
+     */
     public Room[][] getMyDungeon() {
         return myDungeon;
     }
 
+    /**
+     * Gets my room.
+     *
+     * @return the my room
+     */
     public Room getMyRoom() {
         return myDungeon[myHeroRow][myHeroCol];
     }
 
+    /**
+     * Gets my dungeon rows.
+     *
+     * @return the my dungeon rows
+     */
     public int getMyDungeonRows() {
         return myDungeon.length;
     }
+
+    /**
+     * Gets my dungeon cols.
+     *
+     * @return the my dungeon cols
+     */
     public int getMyDungeonCols() {
         return myDungeon.length;
     }
 
+    /**
+     * Gets my difficulty.
+     *
+     * @return the my difficulty
+     */
     public String getMyDifficulty() {
         return myDifficulty;
     }

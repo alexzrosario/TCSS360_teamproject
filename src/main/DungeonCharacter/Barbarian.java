@@ -1,8 +1,17 @@
 package main.DungeonCharacter;
 
+/**
+ * The type Barbarian.
+ */
 public class Barbarian extends Hero implements StateResettable {
     private boolean isReckless = false;
     private final double MY_STORED_BLOCK_CHANCE = 0.15;
+
+    /**
+     * Instantiates a new Barbarian.
+     *
+     * @param theName the the name
+     */
     public Barbarian(final String theName) {
         super(theName, 125, 40, 65, 4, 0.8, 0.15, "Reckless Attack","BarbarianImage.png");
     }
@@ -57,5 +66,8 @@ public class Barbarian extends Hero implements StateResettable {
         isReckless = false;
     }
 
+    /**
+     * Set reckless.
+     */
     public void setReckless(){isReckless = true;}
 }

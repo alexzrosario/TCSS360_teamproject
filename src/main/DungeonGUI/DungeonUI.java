@@ -13,38 +13,92 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 
+/**
+ * The type Dungeon ui.
+ */
 public class DungeonUI extends JFrame implements Serializable {
     private Controller myController = new Controller(this);
     private AudioController audioController = new AudioController();
     private static final long serialVersionUID = 3536060713340084481L;
 
+    /**
+     * The My main panel.
+     */
     JPanel myMainPanel;
 
 
+    /**
+     * The My start panel.
+     */
     JPanel myStartPanel;
+    /**
+     * The My options panel.
+     */
     JPanel myOptionsPanel;
     final private String[] myHeroes = {"Warrior", "Priestess", "Thief", "Barbarian", "Mage", "Swordsman", "Monk", "Samurai", "Occultist"};
     final private Integer[] mySizes = {3, 4, 5, 6, 7, 8, 9, 10};
+    /**
+     * The My user hero.
+     */
     String myUserHero = "Warrior";
     final private String[] myDifficulty = {"EASY", "NORMAL", "HARD"};
 
+    /**
+     * The My dungeon size.
+     */
     int myDungeonSize = 5;
 
+    /**
+     * The My user difficulty.
+     */
     String myUserDifficulty = "NORMAL";
 
+    /**
+     * The My adventure panel.
+     */
     JPanel myAdventurePanel;
+    /**
+     * The My dungeon panel.
+     */
     JPanel myDungeonPanel;
+    /**
+     * The My control panel.
+     */
     JPanel myControlPanel;
+    /**
+     * The My navigation panel.
+     */
     JPanel myNavigationPanel;
+    /**
+     * The My interactions panel.
+     */
     JPanel myInteractionsPanel;
+    /**
+     * The My adventure text box.
+     */
     JTextArea myAdventureTextBox = new JTextArea("");
 
+    /**
+     * The My battle panel.
+     */
     JPanel myBattlePanel;
 
+    /**
+     * The Return button.
+     */
     JButton returnButton;
+    /**
+     * The Dungeon ui font.
+     */
     Font dungeonUiFont = new Font("Times New Roman", Font.ITALIC, 20);
+    /**
+     * The Navigation font.
+     */
     Font navigationFont = new Font("Times New Roman", Font.BOLD, 50);
 
+    /**
+     * Instantiates a new Dungeon ui.
+     */
     public DungeonUI() {
         this.setTitle("Dungeon Adventure");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,10 +122,18 @@ public class DungeonUI extends JFrame implements Serializable {
         this.add(myMainPanel);
     }
 
+    /**
+     * Start.
+     */
     public void start() {
         buildStartPanel();
     }
 
+    /**
+     * Build adventure panel.
+     *
+     * @param theCurrentRoom the the current room
+     */
     public void buildAdventurePanel(Room theCurrentRoom) {
         mainPanelReset();
         myAdventurePanel = new JPanel();
@@ -101,6 +163,12 @@ public class DungeonUI extends JFrame implements Serializable {
         this.setVisible(true);
     }
 
+    /**
+     * Dungeon panel j panel.
+     *
+     * @param theRoom the the room
+     * @return the j panel
+     */
     public JPanel dungeonPanel(Room theRoom){
         JPanel dungeonPanel = new JPanel();
         dungeonPanel.setLayout(new GridLayout(0, 3));
@@ -148,6 +216,9 @@ public class DungeonUI extends JFrame implements Serializable {
         return dungeonPanel;
     }
 
+    /**
+     * Build navigation panel.
+     */
     public void buildNavigationPanel() {
         JButton upButton = new JButton("N");
         setButtonColor(upButton, Color.LIGHT_GRAY, Color.BLACK, navigationFont);
@@ -204,6 +275,9 @@ public class DungeonUI extends JFrame implements Serializable {
 
     }
 
+    /**
+     * Build interactions panel.
+     */
     public void buildInteractionsPanel() {
         JButton heroInfobutton = new JButton("Hero Info");
         setButtonColor(heroInfobutton, Color.LIGHT_GRAY, Color.BLACK, dungeonUiFont);
@@ -271,6 +345,9 @@ public class DungeonUI extends JFrame implements Serializable {
         });
     }
 
+    /**
+     * Build start panel.
+     */
     public void buildStartPanel() {
         mainPanelReset();
         JLabel titleScreenLabel = new JLabel();
@@ -309,6 +386,9 @@ public class DungeonUI extends JFrame implements Serializable {
         this.setVisible(true);
     }
 
+    /**
+     * Build options panel.
+     */
     public void buildOptionsPanel() {
         mainPanelReset();
         myOptionsPanel = new JPanel();
@@ -374,6 +454,12 @@ public class DungeonUI extends JFrame implements Serializable {
         this.setVisible(true);
     }
 
+    /**
+     * Build battle panel.
+     *
+     * @param theHero    the the hero
+     * @param theMonster the the monster
+     */
     public void buildBattlePanel(Hero theHero, Monster theMonster) {
         mainPanelReset();
         myBattlePanel = new JPanel();
@@ -435,6 +521,9 @@ public class DungeonUI extends JFrame implements Serializable {
         });
     }
 
+    /**
+     * Build victory screen.
+     */
     public void buildVictoryScreen() {
         mainPanelReset();
         JLabel victoryScreenLabel = new JLabel();
@@ -447,6 +536,9 @@ public class DungeonUI extends JFrame implements Serializable {
         this.setVisible(true);
     }
 
+    /**
+     * Build defeat screen.
+     */
     public void buildDefeatScreen() {
         mainPanelReset();
         JLabel defeatScreenLabel = new JLabel();
@@ -459,6 +551,11 @@ public class DungeonUI extends JFrame implements Serializable {
         this.setVisible(true);
     }
 
+    /**
+     * Update adventure text.
+     *
+     * @param newText the new text
+     */
     public void updateAdventureText(String newText) {
         try {
             myAdventureTextBox.getDocument().insertString(0, newText + "\n", null);
@@ -467,18 +564,37 @@ public class DungeonUI extends JFrame implements Serializable {
         }
     }
 
+    /**
+     * Sets button color.
+     *
+     * @param theButton    the the button
+     * @param theBackColor the the back color
+     * @param theForeColor the the fore color
+     * @param theFont      the the font
+     */
     public void setButtonColor(JButton theButton, Color theBackColor, Color theForeColor, Font theFont) {
         theButton.setBackground(theBackColor);
         theButton.setFont(theFont);
         theButton.setForeground(theForeColor);
     }
 
+    /**
+     * Sets combo box color.
+     *
+     * @param theBox       the the box
+     * @param theBackColor the the back color
+     * @param theForeColor the the fore color
+     * @param theFont      the the font
+     */
     public void setComboBoxColor(JComboBox theBox, Color theBackColor, Color theForeColor, Font theFont) {
         theBox.setBackground(theBackColor);
         theBox.setFont(theFont);
         theBox.setForeground(theForeColor);
     }
 
+    /**
+     * Main panel reset.
+     */
     public void mainPanelReset() {
         if(myMainPanel != null) {
             myMainPanel.removeAll();
@@ -486,6 +602,11 @@ public class DungeonUI extends JFrame implements Serializable {
         }
     }
 
+    /**
+     * Gets my main panel.
+     *
+     * @return the my main panel
+     */
     public JPanel getMyMainPanel() {
         return myMainPanel;
     }
