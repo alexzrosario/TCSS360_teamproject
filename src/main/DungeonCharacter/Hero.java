@@ -29,6 +29,20 @@ public abstract class Hero extends DungeonCharacter {
         }
     }
 
+    public void battleMenu(DungeonCharacter theMonster, int theChoice) {
+        switch(theChoice) {
+            case 1 ->
+                    basicAttack(theMonster);
+            case 2 ->
+                    specialSkill(theMonster);
+            default -> {
+                if(theChoice != 3) {
+                    System.out.println("Invalid Choice");
+                }
+            }
+        }
+    }
+
     abstract void specialSkill(final DungeonCharacter theTarget);
 
     public double getMyBlockChance() {
