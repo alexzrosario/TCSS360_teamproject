@@ -18,18 +18,25 @@ public class Controller implements Serializable{
     private Room myCurrRoom;
     private Hero myHero;
     private final Random r = new Random();
-    private final DungeonUI myDungeonUIEXP;
+    private DungeonUI myDungeonUIEXP;
     private final AudioController audioController = new AudioController();
     private static final long serialVersionUID = 13425364675L;
 
     /**
      * Instantiates a new Controller.
      *
-     * @param theDungeonUIEXP the the dungeon uiexp
+     * @param theDungeonUIEXP the dungeon uiexp
      */
-    public Controller(DungeonUI theDungeonUIEXP){
+    public Controller(final DungeonUI theDungeonUIEXP){
         myDungeonUIEXP = theDungeonUIEXP;
     }
+
+    /**
+     * Used to load saved dungeon uiexp
+     *
+     * @param theDungeonUIEXP  the dungeon uiexp
+     */
+    public void setMyDungeonUIEXP(final DungeonUI theDungeonUIEXP){myDungeonUIEXP = theDungeonUIEXP;}
 
     /**
      * Start game.

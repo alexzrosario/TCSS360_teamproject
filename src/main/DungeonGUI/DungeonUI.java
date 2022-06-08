@@ -630,6 +630,7 @@ public class DungeonUI extends JFrame implements Serializable {
             FileInputStream fileIn = new FileInputStream("src/savefile.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             myController = (Controller) in.readObject();
+            myController.setMyDungeonUIEXP(this);
             in.close();
             fileIn.close();
         } catch (IOException i) {

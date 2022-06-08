@@ -7,7 +7,8 @@ public class Main {
 
     public static void main(String[] args) {
         DungeonUI v = new DungeonUI();
-        //DungeonAdventure v = new DungeonAdventure(); //Uncomment and comment DungeonUI version to test the console version
+        // Uncomment and comment DungeonUI version to test the console version
+        //DungeonAdventure v = new DungeonAdventure();
         v.start();
     }
 }
