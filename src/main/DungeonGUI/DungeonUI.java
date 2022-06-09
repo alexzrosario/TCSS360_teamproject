@@ -166,9 +166,6 @@ public class DungeonUI extends JFrame implements Serializable {
 
         myMainPanel.add(myAdventurePanel);
 
-        //puts frame in middle of screen
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
 
         this.setVisible(true);
     }

@@ -38,7 +38,7 @@ public class Room implements Serializable {
      *
      * @param theDifficulty the the difficulty
      */
-    public Room(String theDifficulty) {
+    public Room(final String theDifficulty) {
         Random theRandom = new Random();
         int items = 0;
         int itemRoll = theRandom.nextInt(10) + 1; // Determining if the room will contain a pit

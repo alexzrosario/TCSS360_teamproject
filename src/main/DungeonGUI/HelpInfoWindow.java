@@ -1,6 +1,7 @@
 package main.DungeonGUI;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -10,6 +11,10 @@ import java.util.Scanner;
  */
 public class HelpInfoWindow extends JFrame {
     /**
+     * The Help window font.
+     */
+    Font helpWindowFont = new Font(Font.MONOSPACED, Font.BOLD, 14);
+    /**
      * Instantiates a new Help window.
      */
     public HelpInfoWindow() {
@@ -18,7 +23,13 @@ public class HelpInfoWindow extends JFrame {
         this.setSize(600, 600);
 
         JTextArea helpInfoLabel = buildHelpLabel();
-        this.add(helpInfoLabel);
+        helpInfoLabel.setFont(helpWindowFont);
+        JScrollPane scrollPane = new JScrollPane(helpInfoLabel);
+        helpInfoLabel.setCaretPosition(0);
+        this.add(scrollPane);
+        //puts frame in middle of screen
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         this.setVisible(true);
     }
 

@@ -1,2 +1,175 @@
-test
-this
+	Welcome to the Dungeon!
+The main goal of this game is to find the 4
+pillars of OO and find the exit. As you traverse 
+the Dungeon you will encounter a multitude of monsters
+or trap which stand your the way.
+	
+	Start Screen
+Three options will display at the start. Start New Game,
+Load Game, Quit Game. 
+
+	Selection Screen
+If starting a new game, 4 items will determine your game
+experience. 
+
+The first text area is where users are able to enter
+their name. 
+
+The first drop down list contains 9 different classes 
+to choose from, each with their own special abilitites.
+The second drop down list is the size of the dungeon 
+you want to create. 3 is a 3x3 dungeon with 9 rooms,
+5 is a 5x5 dugeon with 25 rooms etc. The last drop down
+list is the difficulty the user want to play at(Easy, Normal,
+or Hard).  
+
+Once settings are two your liking press, Start Adventure 
+to start the game.
+
+	Traversal
+Moving to different rooms is done by selecting one of the 
+buttons (N,E,S,or W) that represent each of the cardinal 
+directions. On the lower right of the screen there are 
+more options available such as:
+
+Hero Info: Opens screen that displays the Hero's 
+current stats.
+
+Dungeon Map: Prints location in the dungeon as well as all the 
+Rooms previously visited
+
+Use Heal Potion:(If available) uses heal potion.
+
+Use Vision Potion:(If available) uses vision potion.
+
+Save Game: Saves current game, only one save file is allowed
+
+Quit Game: Stops current game
+
+
+	Item
+As you move through each room there is a chance that an Item
+will spawn. This can be one of three things:
+
+Health Potion: When used the health potion recovers lost health
+or restores the hero's health to Max HP.
+
+Vision Potion: When using vision postions, hero's are able to see
+the contents of nearby rooms. Each key has a specific meaning;
+	X = Room has a pit
+	V = Room has a vision potion
+	H = Room has a health potion
+	M = Room has Multiple Items
+	m = Room has a Monster
+	v = Room has been previously visited
+	i = Dungeon Entrance
+	O = Dungeon Exit
+	A,E,I, or P = Room contains one of the four pillars
+
+	Battle
+When encountering a monster, the player enters a battle mode.
+In this mode the player only has access to three options.
+
+An basic attack that is determined by the stats of the Hero.
+If a Hero has double or triple the attack speed of their
+opponent, then the Hero will attack twice or three times.
+The same is true for the Monster attacking the Hero. 
+Heros have a chance to block incomming damgage while Monsters
+can heal if the initial damage taken is non-lethal.
+
+Use Heal Potion:(If available) uses heal potion.
+
+Special Attack: These abilities are based on which class
+the user is playing. (each ability is listed below in 
+the Class Ability Info Section)
+
+	Class Ability Info
+Warrior - Crushing Blow
+The Warrior slams their sword on the target doing massive
+damage (75-175) however there is only a 40% of succeeding.
+
+Priestess - Heal
+The Priestess recites a prayer and heals for 25-50 hit points.
+
+Thief - Surprise Attack
+The Thief sneaks behind the target attacking twice if 
+successful (40%). There is a 20% chance the Thief 
+is caught in which case no attack at all is rendered.
+The other 40% is just a normal attack.
+
+Barbarian - Reckless Attack
+The Barbarian gains an increase to hit chance (90%) 
+and damage (60-80), but loses the ability to block 
+and takes extra damage until after a round of taking damage.
+
+Mage - Fireball
+The Mage summons a small Fireball that has a 
+guaranteed chance to hit, but with the cost 
+of reduced damage (20-25).
+
+Swordsman - Blade Flurry
+The Swordsman triples his attack speed for one round, 
+but loses 10-15 health. This ability can only 
+be used if the hero is above 15 health.
+
+Monk - Fine Strike
+The Monk strikes for 40-60 damage but only has a 50% 
+chance of succeeding. The target's chance to hit is 
+permanently reduced if hit.
+
+Samurai - Counter Attack 
+The Samurai loses their attack for the round to enter 
+a defensive stance. If the monster hits the Samurai
+and damage is blocked, the Samurai deals 
+90 to 120 damage. If he fails to block, the Samurai
+takes extra damage.
+
+Occultist - Life-steal
+The Occultist attacks to deal 25-40 damag. He heals 
+health for the amount of damage dealt.
+
+	Monster Info
+Ogre:
+	 HP:200
+ Min Damage:30
+ Max Damage:60
+Attk. Speed:2
+ Hit Chance:0.6
+Heal Chance:0.1
+   Min Heal:30
+   Max Heal:60
+
+Gremlin:
+	 HP:70
+ Min Damage:15
+ Max Damage:30
+Attk. Speed:5
+ Hit Chance:0.8
+Heal Chance:0.4
+   Min Heal:20
+   Max Heal:40
+
+Skeleton:
+	 HP:100
+ Min Damage:25
+ Max Damage:45
+Attk. Speed:3
+ Hit Chance:0.8
+Heal Chance:0.3
+   Min Heal:30
+   Max Heal:50
+
+Lord of OO:
+	 HP:300
+ Min Damage:30
+ Max Damage:60
+Attk. Speed:2
+ Hit Chance:0.65
+Heal Chance:0.08
+   Min Heal:30
+   Max Heal:50
+
+
+
+	
+	
