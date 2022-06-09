@@ -13,7 +13,7 @@ If starting a new game, 4 items will determine your game
 experience. 
 
 The first text area is where users are able to enter
-their name. 
+their name. (Enter the name "GOD" to activate cheat mode).
 
 The first drop down list contains 9 different classes 
 to choose from, each with their own special abilitites.
