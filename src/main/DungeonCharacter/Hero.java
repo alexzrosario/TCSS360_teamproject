@@ -16,15 +16,15 @@ public abstract class Hero extends DungeonCharacter {
     /**
      * Instantiates a new Hero.
      *
-     * @param theName        the the name
-     * @param theHitPoints   the the hit points
-     * @param theMinDam      the the min dam
-     * @param theMaxDam      the the max dam
-     * @param theAttackSpeed the the attack speed
-     * @param theHitChance   the the hit chance
-     * @param theBlockChance the the block chance
+     * @param theName        the name
+     * @param theHitPoints   the hit points
+     * @param theMinDam      the min dam
+     * @param theMaxDam      the max dam
+     * @param theAttackSpeed the attack speed
+     * @param theHitChance   the hit chance
+     * @param theBlockChance the block chance
      * @param skillName      the skill name
-     * @param theImage       the the image
+     * @param theImage       the image
      */
     public Hero(final String theName, final int theHitPoints, final int theMinDam, final int theMaxDam,
                 final int theAttackSpeed, final double theHitChance, final double theBlockChance, String skillName, String theImage) {
@@ -49,8 +49,8 @@ public abstract class Hero extends DungeonCharacter {
     /**
      * Battle menu.
      *
-     * @param theMonster the the monster
-     * @param theChoice  the the choice
+     * @param theMonster the monster
+     * @param theChoice  the choice
      */
     public void battleMenu(DungeonCharacter theMonster, int theChoice) {
         switch(theChoice) {
@@ -69,14 +69,14 @@ public abstract class Hero extends DungeonCharacter {
     /**
      * Special skill.
      *
-     * @param theTarget the the target
+     * @param theTarget the target
      */
     abstract void specialSkill(final DungeonCharacter theTarget);
 
     /**
      * Gets my block chance.
      *
-     * @return the my block chance
+     * @return the block chance
      */
     public double getMyBlockChance() {
         return myBlockChance;
@@ -85,7 +85,7 @@ public abstract class Hero extends DungeonCharacter {
     /**
      * Sets my block chance.
      *
-     * @param myBlockChance the my block chance
+     * @param myBlockChance the block chance
      */
     public void setMyBlockChance(double myBlockChance) {
         this.myBlockChance = myBlockChance;
@@ -94,7 +94,7 @@ public abstract class Hero extends DungeonCharacter {
     /**
      * Gets my image.
      *
-     * @return the my image
+     * @return the image
      */
     public String getMyImage() {
         return myImage;
@@ -103,7 +103,7 @@ public abstract class Hero extends DungeonCharacter {
     /**
      * Sets my image.
      *
-     * @param myImage the my image
+     * @param myImage the image
      */
     public void setMyImage(String myImage) {
         this.myImage = myImage;
@@ -112,7 +112,7 @@ public abstract class Hero extends DungeonCharacter {
     /**
      * Gets my healing potions.
      *
-     * @return the my healing potions
+     * @return the healing potions
      */
     public int getMyHealingPotions() {
         return myHealingPotions;
@@ -121,7 +121,7 @@ public abstract class Hero extends DungeonCharacter {
     /**
      * Sets my healing potions.
      *
-     * @param myHealingPotions the my healing potions
+     * @param myHealingPotions the healing potions
      */
     public void setMyHealingPotions(int myHealingPotions) {
         this.myHealingPotions = myHealingPotions;
@@ -130,7 +130,7 @@ public abstract class Hero extends DungeonCharacter {
     /**
      * Gets my vision potions.
      *
-     * @return the my vision potions
+     * @return the vision potions
      */
     public int getMyVisionPotions() {
         return myVisionPotions;
@@ -139,7 +139,7 @@ public abstract class Hero extends DungeonCharacter {
     /**
      * Sets my vision potions.
      *
-     * @param myVisionPotions the my vision potions
+     * @param myVisionPotions the vision potions
      */
     public void setMyVisionPotions(int myVisionPotions) {
         this.myVisionPotions = myVisionPotions;
@@ -157,7 +157,7 @@ public abstract class Hero extends DungeonCharacter {
     /**
      * Sets my pillars.
      *
-     * @param myPillars the my pillars
+     * @param myPillars the pillars
      */
     public void setMyPillars(int myPillars) {
         this.myPillars = myPillars;
@@ -166,7 +166,7 @@ public abstract class Hero extends DungeonCharacter {
     /**
      * Gets my skill name.
      *
-     * @return the my skill name
+     * @return the skill name
      */
     public String getMySkillName() {
         return mySkillName;
@@ -175,7 +175,7 @@ public abstract class Hero extends DungeonCharacter {
     /**
      * Use skill.
      *
-     * @param theMonster the the monster
+     * @param theMonster the monster
      */
     public void useSkill(DungeonCharacter theMonster) {
         specialSkill(theMonster);

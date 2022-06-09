@@ -17,7 +17,7 @@ public class HeroInfoWindow extends JFrame {
     /**
      * Instantiates a new Hero info window.
      *
-     * @param theHero the the hero
+     * @param theHero the hero
      */
     public HeroInfoWindow(Hero theHero) {
         this.setTitle("Hero Info");

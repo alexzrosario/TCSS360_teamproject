@@ -12,7 +12,7 @@ public class DungeonMapWindow extends JFrame {
     /**
      * Instantiates a new Dungeon map window.
      *
-     * @param theDungeon the the dungeon
+     * @param theDungeon the dungeon
      */
     public DungeonMapWindow(Dungeon theDungeon) {
         this.setTitle("Hero Info");

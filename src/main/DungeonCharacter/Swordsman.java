@@ -9,7 +9,7 @@ public class Swordsman extends Hero {
     /**
      * Instantiates a new Swordsman.
      *
-     * @param theName the the name
+     * @param theName the name
      */
     public Swordsman(final String theName) {
         super(theName, 75, 20, 40, 6, 0.8, 0.4, "Blade Flurry","SwordsmanImage.png");

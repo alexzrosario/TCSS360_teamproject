@@ -8,7 +8,7 @@ public class Warrior extends Hero {
     /**
      * Instantiates a new Warrior.
      *
-     * @param theName the the name
+     * @param theName the name
      */
     public Warrior(final String theName) {
         //super(theName, 125, 400, 500, 4, 1.0, 0.2, "WarriorImage.png");

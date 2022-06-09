@@ -7,7 +7,7 @@ public class Monk extends Hero {
     /**
      * Instantiates a new Monk.
      *
-     * @param theName the the name
+     * @param theName the name
      */
     public Monk(final String theName) {
         super(theName, 75, 20, 40, 7, 0.8, 0.4, "Fine Strike", "MonkImage.png");
@@ -45,7 +45,7 @@ public class Monk extends Hero {
     /**
      * Test fine strike.
      *
-     * @param theTarget the the target
+     * @param theTarget the target
      */
     public void testFineStrike(DungeonCharacter theTarget){
         theTarget.setMyHitChance(Math.max(0.1, (theTarget.getMyHitChance() * 2)/3));

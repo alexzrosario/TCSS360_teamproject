@@ -32,7 +32,7 @@ public class ConsoleController implements Serializable{
     /**
      * Instantiates a new Console controller.
      *
-     * @param theDungeonAdventure the the dungeon adventure
+     * @param theDungeonAdventure the dungeon adventure
      */
     public ConsoleController(DungeonAdventure theDungeonAdventure){
         myDungeonAdventure = theDungeonAdventure;
@@ -41,8 +41,8 @@ public class ConsoleController implements Serializable{
     /**
      * Start game.
      *
-     * @param theName  the the name
-     * @param theClass the the class
+     * @param theName  the name
+     * @param theClass the class
      */
     public void startGame(final String theName, final int theClass){
         switch (theClass){
@@ -93,9 +93,9 @@ public class ConsoleController implements Serializable{
     /**
      * Build dungeon dungeon.
      *
-     * @param theRows       the the rows
-     * @param theCols       the the cols
-     * @param theDifficulty the the difficulty
+     * @param theRows       the rows
+     * @param theCols       the cols
+     * @param theDifficulty the difficulty
      * @return the dungeon
      */
     public Dungeon buildDungeon(int theRows, int theCols, String theDifficulty) {
@@ -470,7 +470,7 @@ public class ConsoleController implements Serializable{
     /**
      * Gets my dungeon.
      *
-     * @return the my dungeon
+     * @return the dungeon
      */
     public Dungeon getMyDungeon() {
         return myDungeon;
@@ -479,7 +479,7 @@ public class ConsoleController implements Serializable{
     /**
      * Sets my dungeon.
      *
-     * @param myDungeon the my dungeon
+     * @param myDungeon the dungeon
      */
     public void setMyDungeon(Dungeon myDungeon) {
         this.myDungeon = myDungeon;
@@ -518,7 +518,7 @@ public class ConsoleController implements Serializable{
     /**
      * Pause.
      *
-     * @param theMs the the ms
+     * @param theMs the ms
      */
     public void pause(int theMs) {
         try {

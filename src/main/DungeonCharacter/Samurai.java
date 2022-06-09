@@ -11,7 +11,7 @@ public class Samurai extends Hero implements StateResettable {
     /**
      * Instantiates a new Samurai.
      *
-     * @param theName the the name
+     * @param theName the name
      */
     public Samurai(final String theName) {
         super(theName, 100, 35, 60, 4, 0.8, 0.25, "Counter Attack","SamuraiImage.png");

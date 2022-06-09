@@ -41,10 +41,10 @@ public class Controller implements Serializable{
     /**
      * Start game.
      *
-     * @param theName        the the name
-     * @param theClass       the the class
-     * @param theDifficulty  the the difficulty
-     * @param theDungeonSize the the dungeon size
+     * @param theName        the name
+     * @param theClass       the class
+     * @param theDifficulty  the difficulty
+     * @param theDungeonSize the dungeon size
      */
     public void startGame(final String theName, final String theClass, final String theDifficulty, int theDungeonSize) {
         if (theClass.equals("Warrior")) {
@@ -83,7 +83,7 @@ public class Controller implements Serializable{
     /**
      * Check direction.
      *
-     * @param theDirection the the direction
+     * @param theDirection the direction
      */
     public void checkDirection(String theDirection) {
         if (theDirection.equals("^")) {
@@ -196,8 +196,8 @@ public class Controller implements Serializable{
     /**
      * Battle.
      *
-     * @param theMonster the the monster
-     * @param theAction  the the action
+     * @param theMonster the monster
+     * @param theAction  the action
      */
     public void battle(Monster theMonster, String theAction) {
         switch (theAction) {

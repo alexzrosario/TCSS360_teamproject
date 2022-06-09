@@ -13,15 +13,15 @@ public class Monster extends DungeonCharacter {
     /**
      * Instantiates a new Monster.
      *
-     * @param theName        the the name
-     * @param theHitPoints   the the hit points
-     * @param theMinDam      the the min dam
-     * @param theMaxDam      the the max dam
-     * @param theAttackSpeed the the attack speed
-     * @param theHitChance   the the hit chance
-     * @param theHealChance  the the heal chance
-     * @param theMinHeal     the the min heal
-     * @param theMaxHeal     the the max heal
+     * @param theName        the name
+     * @param theHitPoints   the hit points
+     * @param theMinDam      the min dam
+     * @param theMaxDam      the max dam
+     * @param theAttackSpeed the attack speed
+     * @param theHitChance   the hit chance
+     * @param theHealChance  the heal chance
+     * @param theMinHeal     the min heal
+     * @param theMaxHeal     the max heal
      */
     public Monster(String theName, int theHitPoints, int theMinDam, int theMaxDam, int theAttackSpeed, double theHitChance, double theHealChance, int theMinHeal, int theMaxHeal) {
         super(theName, theHitPoints, theMinDam, theMaxDam, theAttackSpeed, theHitChance);
@@ -57,7 +57,7 @@ public class Monster extends DungeonCharacter {
     /**
      * Gets my heal chance.
      *
-     * @return the my heal chance
+     * @return the heal chance
      */
     public double getMyHealChance() {
         return myHealChance;
@@ -66,21 +66,21 @@ public class Monster extends DungeonCharacter {
     /**
      * Gets my min heal.
      *
-     * @return the my min heal
+     * @return the min heal
      */
     public int getMyMinHeal() { return myMinHeal; }
 
     /**
      * Gets my max heal.
      *
-     * @return the my max heal
+     * @return the max heal
      */
     public int getMyMaxHeal() { return myMaxHeal; }
 
     /**
      * Sets my heal chance.
      *
-     * @param myHealChance the my heal chance
+     * @param myHealChance the heal chance
      */
     public void setMyHealChance(double myHealChance) {
         this.myHealChance = myHealChance;

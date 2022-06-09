@@ -38,35 +38,35 @@ public class DungeonUI extends JFrame implements Serializable {
     final private String[] myHeroes = {"Warrior", "Priestess", "Thief", "Barbarian", "Mage", "Swordsman", "Monk", "Samurai", "Occultist"};
     final private Integer[] mySizes = {3, 4, 5, 6, 7, 8, 9, 10};
     /**
-     * The My user hero.
+     * The user hero.
      */
     String myUserHero = "Warrior";
     final private String[] myDifficulty = {"EASY", "NORMAL", "HARD"};
 
     /**
-     * The My dungeon size.
+     * The dungeon size.
      */
     int myDungeonSize = 5;
 
     /**
-     * The My user difficulty.
+     * The user difficulty.
      */
     String myUserDifficulty = "NORMAL";
 
     /**
-     * The My adventure panel.
+     * The adventure panel.
      */
     JPanel myAdventurePanel;
     /**
-     * The My dungeon panel.
+     * The dungeon panel.
      */
     JPanel myDungeonPanel;
     /**
-     * The My control panel.
+     * The control panel.
      */
     JPanel myControlPanel;
     /**
-     * The My navigation panel.
+     * The navigation panel.
      */
     JPanel myNavigationPanel;
     /**
@@ -74,12 +74,12 @@ public class DungeonUI extends JFrame implements Serializable {
      */
     JPanel myInteractionsPanel;
     /**
-     * The My adventure text box.
+     * The adventure text box.
      */
     JTextArea myAdventureTextBox = new JTextArea("");
 
     /**
-     * The My battle panel.
+     * The battle panel.
      */
     JPanel myBattlePanel;
 
@@ -133,7 +133,7 @@ public class DungeonUI extends JFrame implements Serializable {
     }
 
     /**
-     * Start.
+     * Starts the game.
      */
     public void start() {
         buildStartPanel();
@@ -464,8 +464,8 @@ public class DungeonUI extends JFrame implements Serializable {
     /**
      * Build battle panel.
      *
-     * @param theHero    the the hero
-     * @param theMonster the the monster
+     * @param theHero    the hero
+     * @param theMonster the monster
      */
     public void buildBattlePanel(Hero theHero, Monster theMonster) {
         mainPanelReset();
@@ -574,10 +574,10 @@ public class DungeonUI extends JFrame implements Serializable {
     /**
      * Sets button color.
      *
-     * @param theButton    the the button
-     * @param theBackColor the the back color
-     * @param theForeColor the the fore color
-     * @param theFont      the the font
+     * @param theButton    the button
+     * @param theBackColor the back color
+     * @param theForeColor the fore color
+     * @param theFont      the font
      */
     public void setButtonColor(JButton theButton, Color theBackColor, Color theForeColor, Font theFont) {
         theButton.setBackground(theBackColor);
@@ -588,10 +588,10 @@ public class DungeonUI extends JFrame implements Serializable {
     /**
      * Sets combo box color.
      *
-     * @param theBox       the the box
-     * @param theBackColor the the back color
-     * @param theForeColor the the fore color
-     * @param theFont      the the font
+     * @param theBox       the box
+     * @param theBackColor the back color
+     * @param theForeColor the fore color
+     * @param theFont      the font
      */
     public void setComboBoxColor(JComboBox theBox, Color theBackColor, Color theForeColor, Font theFont) {
         theBox.setBackground(theBackColor);
@@ -612,7 +612,7 @@ public class DungeonUI extends JFrame implements Serializable {
     /**
      * Gets my main panel.
      *
-     * @return the my main panel
+     * @return the main panel
      */
     public JPanel getMyMainPanel() {
         return myMainPanel;

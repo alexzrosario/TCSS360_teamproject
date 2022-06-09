@@ -36,7 +36,7 @@ public class Room implements Serializable {
     /**
      * Instantiates a new Room.
      *
-     * @param theDifficulty the the difficulty
+     * @param theDifficulty the difficulty
      */
     public Room(final String theDifficulty) {
         Random theRandom = new Random();
@@ -76,7 +76,7 @@ public class Room implements Serializable {
     /**
      * Find difficulty modifier.
      *
-     * @param theDifficulty the the difficulty
+     * @param theDifficulty the difficulty
      */
     public void findDifficultyModifier(String theDifficulty) {
         if (theDifficulty.equals("EASY")) myDifficultyModifier = 0.125;
@@ -106,7 +106,7 @@ public class Room implements Serializable {
     /**
      * Gets my north room.
      *
-     * @return the my north room
+     * @return the north room
      */
     public Room getMyNorthRoom() {
         return myNorthRoom;
@@ -115,7 +115,7 @@ public class Room implements Serializable {
     /**
      * Sets my north room.
      *
-     * @param myNorthRoom the my north room
+     * @param myNorthRoom the north room
      */
     public void setMyNorthRoom(Room myNorthRoom) {
         this.myNorthRoom = myNorthRoom;
@@ -124,7 +124,7 @@ public class Room implements Serializable {
     /**
      * Gets my east room.
      *
-     * @return the my east room
+     * @return the east room
      */
     public Room getMyEastRoom() {
         return myEastRoom;
@@ -133,7 +133,7 @@ public class Room implements Serializable {
     /**
      * Sets my east room.
      *
-     * @param myEastRoom the my east room
+     * @param myEastRoom the east room
      */
     public void setMyEastRoom(Room myEastRoom) {
         this.myEastRoom = myEastRoom;
@@ -142,7 +142,7 @@ public class Room implements Serializable {
     /**
      * Gets my south room.
      *
-     * @return the my south room
+     * @return the south room
      */
     public Room getMySouthRoom() {
         return mySouthRoom;
@@ -151,7 +151,7 @@ public class Room implements Serializable {
     /**
      * Sets my south room.
      *
-     * @param mySouthRoom the my south room
+     * @param mySouthRoom the south room
      */
     public void setMySouthRoom(Room mySouthRoom) {
         this.mySouthRoom = mySouthRoom;
@@ -160,7 +160,7 @@ public class Room implements Serializable {
     /**
      * Gets my west room.
      *
-     * @return the my west room
+     * @return the west room
      */
     public Room getMyWestRoom() {
         return myWestRoom;
@@ -169,7 +169,7 @@ public class Room implements Serializable {
     /**
      * Sets my west room.
      *
-     * @param myWestRoom the my west room
+     * @param myWestRoom the west room
      */
     public void setMyWestRoom(Room myWestRoom) {
         this.myWestRoom = myWestRoom;
@@ -408,7 +408,7 @@ public class Room implements Serializable {
     /**
      * Gets my monster.
      *
-     * @return the my monster
+     * @return the monster
      */
     public Monster getMyMonster() {
         return myMonster;
@@ -417,7 +417,7 @@ public class Room implements Serializable {
     /**
      * Sets my monster.
      *
-     * @param myMonster the my monster
+     * @param myMonster the monster
      */
     public void setMyMonster(Monster myMonster) {
         this.myMonster = myMonster;
@@ -444,7 +444,7 @@ public class Room implements Serializable {
     /**
      * Gets my difficulty modifier.
      *
-     * @return the my difficulty modifier
+     * @return the difficulty modifier
      */
     public double getMyDifficultyModifier() {
         return myDifficultyModifier;
@@ -453,7 +453,7 @@ public class Room implements Serializable {
     /**
      * Sets my difficulty modifier.
      *
-     * @param myDifficultyModifier the my difficulty modifier
+     * @param myDifficultyModifier the difficulty modifier
      */
     public void setMyDifficultyModifier(double myDifficultyModifier) {
         this.myDifficultyModifier = myDifficultyModifier;

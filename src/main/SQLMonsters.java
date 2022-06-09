@@ -25,7 +25,7 @@ public class SQLMonsters {
     }
 
     /**
-     * Make.
+     * Makes the monster database.
      */
     public static void make(){
         SQLiteDataSource ds = null;

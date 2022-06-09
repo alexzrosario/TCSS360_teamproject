@@ -196,7 +196,7 @@ public class Dungeon implements Serializable {
     /**
      * Check built int.
      *
-     * @param theRoom the the room
+     * @param theRoom the room
      * @return the int
      */
     public int checkBuilt(Room theRoom) {
@@ -250,7 +250,7 @@ public class Dungeon implements Serializable {
     /**
      * Get top string string.
      *
-     * @param theRow the the row
+     * @param theRow the row
      * @return the string
      */
     public String getTopString(final int theRow){
@@ -269,7 +269,7 @@ public class Dungeon implements Serializable {
     /**
      * Get empty mid string string.
      *
-     * @param theRow the the row
+     * @param theRow the row
      * @return the string
      */
     public String getEmptyMidString(final int theRow){
@@ -299,7 +299,7 @@ public class Dungeon implements Serializable {
     /**
      * Get mid string string.
      *
-     * @param theRow the the row
+     * @param theRow the row
      * @return the string
      */
     public String getMidString(final int theRow){
@@ -336,7 +336,7 @@ public class Dungeon implements Serializable {
     /**
      * Gets my room.
      *
-     * @return the my room
+     * @return the room
      */
     public Room getMyRoom() {
         return myDungeon[myHeroRow][myHeroCol];
@@ -345,7 +345,7 @@ public class Dungeon implements Serializable {
     /**
      * Gets my dungeon rows.
      *
-     * @return the my dungeon rows
+     * @return the dungeon rows
      */
     public int getMyDungeonRows() {
         return myDungeon.length;
@@ -354,7 +354,7 @@ public class Dungeon implements Serializable {
     /**
      * Gets my dungeon cols.
      *
-     * @return the my dungeon cols
+     * @return the dungeon cols
      */
     public int getMyDungeonCols() {
         return myDungeon.length;
@@ -363,7 +363,7 @@ public class Dungeon implements Serializable {
     /**
      * Gets my difficulty.
      *
-     * @return the my difficulty
+     * @return the difficulty
      */
     public String getMyDifficulty() {
         return myDifficulty;

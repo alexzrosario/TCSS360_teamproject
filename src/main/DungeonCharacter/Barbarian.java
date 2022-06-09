@@ -10,7 +10,7 @@ public class Barbarian extends Hero implements StateResettable {
     /**
      * Instantiates a new Barbarian.
      *
-     * @param theName the the name
+     * @param theName the name
      */
     public Barbarian(final String theName) {
         super(theName, 125, 40, 65, 4, 0.8, 0.15, "Reckless Attack","BarbarianImage.png");

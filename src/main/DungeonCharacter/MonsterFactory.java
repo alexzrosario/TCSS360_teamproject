@@ -14,7 +14,7 @@ public class MonsterFactory {
     /**
      * Create monster factory.
      *
-     * @param theMonster the the monster
+     * @param theMonster the monster
      * @return the monster
      */
     public Monster createMonster(String theMonster) {
