@@ -107,6 +107,12 @@ public class DungeonUI extends JFrame implements Serializable {
         //puts frame in middle of screen
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menu = new JMenu("Help");
+        JMenuItem help = new JMenuItem("Help");
+        menu.add(help);
+        menuBar.add(menu);
+        this.setJMenuBar(menuBar);
         myMainPanel = new JPanel();
         myMainPanel.setLayout(new GridLayout(0,1));
         myAdventureTextBox.setPreferredSize(new Dimension(20,0));
@@ -118,6 +124,10 @@ public class DungeonUI extends JFrame implements Serializable {
                 myAdventureTextBox.setText("");
                 buildStartPanel();
             }
+        });
+        help.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {new HelpInfoWindow();}
         });
         this.add(myMainPanel);
     }

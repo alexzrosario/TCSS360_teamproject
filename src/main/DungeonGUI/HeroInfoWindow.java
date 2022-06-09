@@ -33,7 +33,7 @@ public class HeroInfoWindow extends JFrame {
     /**
      * Build hero info label j text area.
      *
-     * @param theHero the the hero
+     * @param theHero the hero
      * @return the j text area
      */
     public JTextArea buildHeroInfoLabel(Hero theHero) {
