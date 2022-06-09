@@ -70,4 +70,10 @@ public class Barbarian extends Hero implements StateResettable {
      * Set reckless.
      */
     public void setReckless(){isReckless = true;}
+    /**
+     * @return string of the class
+     */
+    public String getHeroClass() {
+        return "Barbarian";
+    }
 }

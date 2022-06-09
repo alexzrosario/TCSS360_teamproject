@@ -381,4 +381,7 @@ public class Controller implements Serializable{
         this.myHero = myHero;
     }
 
+    public String getHeroClass() {
+        return myHero.getHeroClass();
+    }
 }

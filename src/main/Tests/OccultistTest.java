@@ -68,4 +68,8 @@ public class OccultistTest {
         assertTrue(35 <= testHero.getMyHitPoints() && 50>= testHero.getMyHitPoints());
         assertTrue(160 <= testMonster.getMyHitPoints() && 175>= testMonster.getMyHitPoints());
     }
+    @Test
+    void testGetHeroClass() {
+        assertEquals("Occultist",testHero.getHeroClass());
+    }
 }

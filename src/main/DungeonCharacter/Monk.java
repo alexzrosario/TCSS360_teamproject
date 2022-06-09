@@ -50,4 +50,10 @@ public class Monk extends Hero {
     public void testFineStrike(DungeonCharacter theTarget){
         theTarget.setMyHitChance(Math.max(0.1, (theTarget.getMyHitChance() * 2)/3));
     }
+    /**
+     * @return string of the class
+     */
+    public String getHeroClass() {
+        return "Monk";
+    }
 }

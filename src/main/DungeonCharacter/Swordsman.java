@@ -45,4 +45,10 @@ public class Swordsman extends Hero {
             System.out.println(getMyName() + " took " + exhaustionRoll + " damage due to exhaustion");
         }
     }
+    /**
+     * @return string of the class
+     */
+    public String getHeroClass() {
+        return "Swordsman";
+    }
 }

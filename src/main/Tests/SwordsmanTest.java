@@ -52,5 +52,9 @@ public class SwordsmanTest {
         testHero.specialSkill(testMonster);
         assertTrue(60 <= testHero.getMyHitPoints() && 65 >= testHero.getMyHitPoints());
     }
+    @Test
+    void testGetHeroClass() {
+        assertEquals("Swordsman",testHero.getHeroClass());
+    }
 
 }

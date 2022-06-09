@@ -83,4 +83,11 @@ public class Samurai extends Hero implements StateResettable {
      * @param theMonster the the monster
      */
     public void setMyTarget(Monster theMonster){myTarget = theMonster;}
+
+    /**
+     * @return string of the class
+     */
+    public String getHeroClass() {
+        return "Samurai";
+    }
 }

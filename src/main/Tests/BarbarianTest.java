@@ -66,4 +66,8 @@ public class BarbarianTest {
         testHero.specialSkill(testMonster);
         assertEquals(0.0, testHero.getMyBlockChance());
     }
+    @Test
+    void testGetHeroClass() {
+        assertEquals("Barbarian",testHero.getHeroClass());
+    }
 }

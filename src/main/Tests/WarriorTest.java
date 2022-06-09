@@ -47,4 +47,12 @@ class WarriorTest {
         assertFalse(testHero.getMyAlive());
     }
 
+    @Test
+    void specialSkill() {
+    }
+
+    @Test
+    void testGetHeroClass() {
+        assertEquals("Warrior",testHero.getHeroClass());
+    }
 }

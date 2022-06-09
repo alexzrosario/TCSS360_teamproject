@@ -54,4 +54,8 @@ public class MonkTest {
         testHero.testFineStrike(testMonster);
         assertEquals(Math.round(((0.6 * 2) / 3) * 10) / 10, Math.round(testMonster.getMyHitChance() * 10) / 10);
     }
+    @Test
+    void testGetHeroClass() {
+        assertEquals("Monk",testHero.getHeroClass());
+    }
 }

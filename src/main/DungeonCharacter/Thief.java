@@ -33,4 +33,11 @@ public class Thief extends Hero {
         }
         else System.out.println(getMyName() + " missed their attack");
     }
+
+    /**
+     * @return string of the class
+     */
+    public String getHeroClass() {
+        return "Thief";
+    }
 }

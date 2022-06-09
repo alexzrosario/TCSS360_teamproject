@@ -31,6 +31,11 @@ public class Priestess extends Hero {
     public void useSkill(DungeonCharacter theMonster) {
         specialSkill(this);
     }
-
+    /**
+     * @return string of the class
+     */
+    public String getHeroClass() {
+        return "Priestess";
+    }
 }
 

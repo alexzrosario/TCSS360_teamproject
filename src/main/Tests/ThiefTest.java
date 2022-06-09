@@ -46,5 +46,9 @@ class ThiefTest {
         testHero.updateHealth(75);
         assertFalse(testHero.getMyAlive());
     }
+    @Test
+    void testGetHeroClass() {
+        assertEquals("Thief",testHero.getHeroClass());
+    }
 
 }

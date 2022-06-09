@@ -53,5 +53,9 @@ public class MageTest {
         testHero.specialSkill(testMonster);
         assertTrue(175 <= testMonster.getMyHitPoints() && 180>= testMonster.getMyHitPoints());
     }
+    @Test
+    void testGetHeroClass() {
+        assertEquals("Mage",testHero.getHeroClass());
+    }
 
 }

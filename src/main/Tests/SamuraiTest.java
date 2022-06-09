@@ -65,4 +65,8 @@ public class SamuraiTest {
         testHero.updateHealth(10);
         assertEquals(85, testHero.getMyHitPoints());
     }
+    @Test
+    void testGetHeroClass() {
+        assertEquals("Samurai",testHero.getHeroClass());
+    }
 }

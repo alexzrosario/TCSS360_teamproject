@@ -1,7 +1,5 @@
 package main.DungeonCharacter;
 
-import java.util.Random;
-
 /**
  * The type Hero.
  */
@@ -181,4 +179,8 @@ public abstract class Hero extends DungeonCharacter {
         specialSkill(theMonster);
     }
 
+    /**
+     * @return class name
+     */
+    public abstract String getHeroClass();
 }

@@ -34,4 +34,10 @@ public class Mage extends Hero {
         this.setMyMinDam(currMinDam);
         this.setMyMaxDam(currMaxDam);
     }
+    /**
+     * @return string of the class
+     */
+    public String getHeroClass() {
+        return "Mage";
+    }
 }

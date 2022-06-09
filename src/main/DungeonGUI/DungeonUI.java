@@ -646,6 +646,7 @@ public class DungeonUI extends JFrame implements Serializable {
             System.out.println("Controller class not found");
             c.printStackTrace();
         }
+        myUserHero = myController.getHeroClass();
         buildAdventurePanel(myController.getMyCurrRoom());
     }
 

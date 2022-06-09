@@ -60,4 +60,8 @@ class PriestessTest {
         testHero.specialSkill(testHero);
         assertEquals(75, testHero.getMyHitPoints());
     }
+    @Test
+    void testGetHeroClass() {
+        assertEquals("Priestess",testHero.getHeroClass());
+    }
 }
