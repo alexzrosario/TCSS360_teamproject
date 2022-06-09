@@ -25,7 +25,7 @@ public class Dungeon implements Serializable {
      * @param theDungeonCols the the dungeon cols
      * @param theDifficulty  the the difficulty
      */
-    public Dungeon(int theDungeonRows, int theDungeonCols, String theDifficulty) {
+    public Dungeon(final int theDungeonRows, final int theDungeonCols, final String theDifficulty) {
         myDungeonRows = theDungeonRows;
         myDungeonCols = theDungeonCols;
         myDifficulty = theDifficulty;
@@ -107,7 +107,7 @@ public class Dungeon implements Serializable {
      * @param row the row
      * @param col the col
      */
-    public void setEntrance(int row, int col) {
+    public void setEntrance(final int row, final int col) {
         myDungeon[row][col].setEntrance(true);
         disableItems(row, col);
         myDungeon[row][col].setMyStringToken("i");
@@ -119,7 +119,7 @@ public class Dungeon implements Serializable {
      * @param row the row
      * @param col the col
      */
-    public void setExit(int row, int col) {
+    public void setExit(final int row, final int col) {
         myDungeon[row][col].setExit(true);
         disableItems(row, col);
         myDungeon[row][col].setMyStringToken("O");
@@ -131,7 +131,7 @@ public class Dungeon implements Serializable {
      * @param row the row
      * @param col the col
      */
-    public void setAbstractionPillar(int row, int col) {
+    public void setAbstractionPillar(final int row, final int col) {
         if(myDungeon[row][col].isEntrance() || myDungeon[row][col].isExit() ||
                 myDungeon[row][col].isHasEncapsulationPillar() || myDungeon[row][col].isHasInheritancePillar() ||
                 myDungeon[row][col].isHasPolymorphismPillar()) {
@@ -148,7 +148,7 @@ public class Dungeon implements Serializable {
      * @param row the row
      * @param col the col
      */
-    public void setInheritancePillar(int row, int col) {
+    public void setInheritancePillar(final int row, final int col) {
         if(myDungeon[row][col].isEntrance() || myDungeon[row][col].isExit() ||
                 myDungeon[row][col].isHasEncapsulationPillar() || myDungeon[row][col].isHasAbstractionPillar() ||
                 myDungeon[row][col].isHasPolymorphismPillar()) {
@@ -165,7 +165,7 @@ public class Dungeon implements Serializable {
      * @param row the row
      * @param col the col
      */
-    public void setEncapsulationPillar(int row, int col) {
+    public void setEncapsulationPillar(final int row, final int col) {
         if(myDungeon[row][col].isEntrance() || myDungeon[row][col].isExit() ||
                 myDungeon[row][col].isHasAbstractionPillar() || myDungeon[row][col].isHasInheritancePillar() ||
                 myDungeon[row][col].isHasPolymorphismPillar()) {
@@ -182,7 +182,7 @@ public class Dungeon implements Serializable {
      * @param row the row
      * @param col the col
      */
-    public void setPolymorphismPillar(int row, int col) {
+    public void setPolymorphismPillar(final int row, final int col) {
         if(myDungeon[row][col].isEntrance() || myDungeon[row][col].isExit() ||
                 myDungeon[row][col].isHasEncapsulationPillar() || myDungeon[row][col].isHasInheritancePillar() ||
                 myDungeon[row][col].isHasAbstractionPillar()) {
@@ -199,7 +199,7 @@ public class Dungeon implements Serializable {
      * @param theRoom the room
      * @return the int
      */
-    public int checkBuilt(Room theRoom) {
+    public int checkBuilt(final Room theRoom) {
         if (!theRoom.isBuilt()) {
             theRoom.setBuilt();
             return 1;
@@ -213,7 +213,7 @@ public class Dungeon implements Serializable {
      * @param row the row
      * @param col the col
      */
-    public void disableItems(int row, int col) {
+    public void disableItems(final int row, final int col) {
         myDungeon[row][col].setHasHealPotion(false);
         myDungeon[row][col].setHasVisionPotion(false);
         myDungeon[row][col].setHasPit(false);

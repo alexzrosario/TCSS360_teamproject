@@ -29,7 +29,11 @@ public class Monster extends DungeonCharacter {
         this.myMinHeal = theMinHeal;
         this.myMaxHeal = theMaxHeal;
     }
-
+    /**
+     * Updates the Health of the Monster
+     *
+     * @param theDamage
+     */
     @Override
     public void updateHealth(final int theDamage) {
         this.setMyHitPoints(this.getMyHitPoints() - theDamage);
@@ -42,7 +46,7 @@ public class Monster extends DungeonCharacter {
     }
 
     /**
-     * Heal.
+     * Heal method when Monster takes damage
      */
     public void heal() {
         Random theRandom = new Random();

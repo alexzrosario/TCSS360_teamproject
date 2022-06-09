@@ -17,8 +17,12 @@ public class Samurai extends Hero implements StateResettable {
         super(theName, 100, 35, 60, 4, 0.8, 0.25, "Counter Attack","SamuraiImage.png");
     }
 
+    /**
+     * Special skill for the Samurai
+     * @param theTarget the target
+     */
     @Override
-    public void specialSkill(DungeonCharacter theTarget) {
+    public void specialSkill(final DungeonCharacter theTarget) {
         // Counter Attack: Lose your attack for the round to enter a defensive stance. If the monster
         // hits you, and you block it, deal 90 to 120 damage
         // but if you fail to block, you take extra damage
@@ -28,6 +32,11 @@ public class Samurai extends Hero implements StateResettable {
         this.setMyBlockChance(0.7);
     }
 
+    /**
+     * Updates the Health of the Samurai
+     *
+     * @param theDamage
+     */
     @Override
     public void updateHealth(final int theDamage) {
         if (Math.random() > this.getMyBlockChance()) {
@@ -67,6 +76,9 @@ public class Samurai extends Hero implements StateResettable {
         }
     }
 
+    /**
+     * Resets isDefensive to false
+     */
     @Override
     public void resetState() {
         isDefensive = false;
@@ -82,7 +94,7 @@ public class Samurai extends Hero implements StateResettable {
      *
      * @param theMonster the the monster
      */
-    public void setMyTarget(Monster theMonster){myTarget = theMonster;}
+    public void setMyTarget(final Monster theMonster){myTarget = theMonster;}
 
     /**
      * @return string of the class

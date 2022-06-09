@@ -16,6 +16,11 @@ public class Barbarian extends Hero implements StateResettable {
         super(theName, 125, 40, 65, 4, 0.8, 0.15, "Reckless Attack","BarbarianImage.png");
     }
 
+    /**
+     * Special skill for the barbarian
+     *
+     * @param theTarget the target
+     */
     @Override
     public void specialSkill(final DungeonCharacter theTarget) {
         // Reckless Attack: Gain an increase to hit chance and damage, but lose the ability to block and
@@ -42,6 +47,11 @@ public class Barbarian extends Hero implements StateResettable {
         this.setMyMaxDam(currMaxDam);
     }
 
+    /**
+     * Updates the Health of the Barbarian
+     *
+     * @param theDamage
+     */
     @Override
     public void updateHealth(final int theDamage) {
         if (Math.random() > this.getMyBlockChance()) {
@@ -61,6 +71,9 @@ public class Barbarian extends Hero implements StateResettable {
         }
     }
 
+    /**
+     * Resets reckless to false
+     */
     @Override
     public void resetState() {
         isReckless = false;
@@ -70,6 +83,7 @@ public class Barbarian extends Hero implements StateResettable {
      * Set reckless.
      */
     public void setReckless(){isReckless = true;}
+
     /**
      * @return string of the class
      */

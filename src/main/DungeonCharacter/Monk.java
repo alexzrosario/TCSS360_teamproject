@@ -13,6 +13,10 @@ public class Monk extends Hero {
         super(theName, 75, 20, 40, 7, 0.8, 0.4, "Fine Strike", "MonkImage.png");
     }
 
+    /**
+     * Special skill for the Monk
+     * @param theTarget the target
+     */
     @Override
     public void specialSkill(DungeonCharacter theTarget) {
         // Fine Strike: does 40 to 60 points of damage but only has a 50% chance of succeeding.
@@ -43,13 +47,14 @@ public class Monk extends Hero {
     }
 
     /**
-     * Test fine strike.
+     * Used to test fine strike.
      *
      * @param theTarget the target
      */
     public void testFineStrike(DungeonCharacter theTarget){
         theTarget.setMyHitChance(Math.max(0.1, (theTarget.getMyHitChance() * 2)/3));
     }
+
     /**
      * @return string of the class
      */

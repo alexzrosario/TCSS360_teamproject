@@ -16,6 +16,11 @@ public class Thief extends Hero {
         super(theName, 75, 20, 40, 6, 0.8, 0.4, "Surprise Attack","ThiefImage.png");
     }
 
+    /**
+     * Special skill for the Thief
+     *
+     * @param theTarget the target
+     */
     @Override
     public void specialSkill(final DungeonCharacter theTarget) {
         // Surprise Attack: 40 percent chance it is successful.

@@ -2,6 +2,7 @@ package main.DungeonCharacter;
 
 /**
  * The type Gremlin.
+ * Not used due to the SQLite database
  */
 public class Gremlin extends Monster {
 

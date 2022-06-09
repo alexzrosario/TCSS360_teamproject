@@ -98,7 +98,7 @@ public class ConsoleController implements Serializable{
      * @param theDifficulty the difficulty
      * @return the dungeon
      */
-    public Dungeon buildDungeon(int theRows, int theCols, String theDifficulty) {
+    public Dungeon buildDungeon(final int theRows, final int theCols, final String theDifficulty) {
         return new Dungeon(theRows, theCols, theDifficulty);
     }
 
@@ -437,7 +437,7 @@ public class ConsoleController implements Serializable{
         }
     }
 
-    private void battle(Hero theHero, Monster theMonster) {
+    private void battle(final Hero theHero, final Monster theMonster) {
         Scanner scan = new Scanner(System.in);
         int myChoice;
         while(theHero.getMyAlive() && theMonster.getMyAlive()) {
@@ -479,10 +479,10 @@ public class ConsoleController implements Serializable{
     /**
      * Sets my dungeon.
      *
-     * @param myDungeon the dungeon
+     * @param theDungeon the dungeon
      */
-    public void setMyDungeon(Dungeon myDungeon) {
-        this.myDungeon = myDungeon;
+    public void setMyDungeon(final Dungeon theDungeon) {
+        this.myDungeon = theDungeon;
     }
 
     /**

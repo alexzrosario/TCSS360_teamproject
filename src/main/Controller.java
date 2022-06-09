@@ -85,7 +85,7 @@ public class Controller implements Serializable{
      *
      * @param theDirection the direction
      */
-    public void checkDirection(String theDirection) {
+    public void checkDirection(final String theDirection) {
         if (theDirection.equals("^")) {
             traverseDungeon(-1,0);
         }
@@ -106,7 +106,7 @@ public class Controller implements Serializable{
      * @param rowDir the row dir
      * @param colDir the col dir
      */
-    public void traverseDungeon(int rowDir, int colDir) {
+    public void traverseDungeon(final int rowDir, final int colDir) {
         myDungeon.moveHero(rowDir,colDir);
         myCurrRoom = myDungeon.getMyRoom();
         checkRoom();
@@ -199,7 +199,7 @@ public class Controller implements Serializable{
      * @param theMonster the monster
      * @param theAction  the action
      */
-    public void battle(Monster theMonster, String theAction) {
+    public void battle(final Monster theMonster, final String theAction) {
         switch (theAction) {
             case "ATTACK" -> {
                 myDungeonUIEXP.updateAdventureText(myHero.getMyName() + " attacks");
@@ -339,10 +339,10 @@ public class Controller implements Serializable{
     /**
      * Sets my dungeon.
      *
-     * @param myDungeon the my dungeon
+     * @param theDungeon the my dungeon
      */
-    public void setMyDungeon(Dungeon myDungeon) {
-        this.myDungeon = myDungeon;
+    public void setMyDungeon(final Dungeon theDungeon) {
+        this.myDungeon = theDungeon;
     }
 
     /**
@@ -357,10 +357,10 @@ public class Controller implements Serializable{
     /**
      * Sets my curr room.
      *
-     * @param myCurrRoom the my curr room
+     * @param theCurrRoom the my curr room
      */
-    public void setMyCurrRoom(Room myCurrRoom) {
-        this.myCurrRoom = myCurrRoom;
+    public void setMyCurrRoom(final Room theCurrRoom) {
+        this.myCurrRoom = theCurrRoom;
     }
 
     /**
@@ -375,10 +375,10 @@ public class Controller implements Serializable{
     /**
      * Sets my hero.
      *
-     * @param myHero the my hero
+     * @param theHero the my hero
      */
-    public void setMyHero(Hero myHero) {
-        this.myHero = myHero;
+    public void setMyHero(final Hero theHero) {
+        this.myHero = theHero;
     }
 
     public String getHeroClass() {

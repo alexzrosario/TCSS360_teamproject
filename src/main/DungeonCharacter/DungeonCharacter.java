@@ -110,10 +110,10 @@ public abstract class DungeonCharacter implements Serializable {
     /**
      * Sets my name.
      *
-     * @param myName the name
+     * @param theName the name
      */
-    public void setMyName(String myName) {
-        this.myName = myName;
+    public void setMyName(final String theName) {
+        this.myName = theName;
     }
 
     /**
@@ -128,10 +128,10 @@ public abstract class DungeonCharacter implements Serializable {
     /**
      * Sets my hit points.
      *
-     * @param myHitPoints the hit points
+     * @param theHitPoints the hit points
      */
-    public void setMyHitPoints(final int myHitPoints) {
-        this.myHitPoints = myHitPoints;
+    public void setMyHitPoints(final int theHitPoints) {
+        this.myHitPoints = theHitPoints;
     }
 
     /**
@@ -164,10 +164,10 @@ public abstract class DungeonCharacter implements Serializable {
     /**
      * Sets my max dam.
      *
-     * @param myMaxDam the max dam
+     * @param theMaxDam the max dam
      */
-    public void setMyMaxDam(final int myMaxDam) {
-        this.myMaxDam = myMaxDam;
+    public void setMyMaxDam(final int theMaxDam) {
+        this.myMaxDam = theMaxDam;
     }
 
     /**
@@ -182,10 +182,10 @@ public abstract class DungeonCharacter implements Serializable {
     /**
      * Sets my attack speed.
      *
-     * @param myAttackSpeed the attack speed
+     * @param theAttackSpeed the attack speed
      */
-    public void setMyAttackSpeed(int myAttackSpeed) {
-        this.myAttackSpeed = myAttackSpeed;
+    public void setMyAttackSpeed(final int theAttackSpeed) {
+        this.myAttackSpeed = theAttackSpeed;
     }
 
     /**
@@ -200,10 +200,10 @@ public abstract class DungeonCharacter implements Serializable {
     /**
      * Sets my hit chance.
      *
-     * @param myHitChance the hit chance
+     * @param theHitChance the hit chance
      */
-    public void setMyHitChance(final double myHitChance) {
-        this.myHitChance = myHitChance;
+    public void setMyHitChance(final double theHitChance) {
+        this.myHitChance = theHitChance;
     }
 
     /**

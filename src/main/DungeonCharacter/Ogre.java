@@ -2,6 +2,7 @@ package main.DungeonCharacter;
 
 /**
  * The type Ogre.
+ * Not used due to the SQLite database
  */
 public class Ogre extends Monster {
 

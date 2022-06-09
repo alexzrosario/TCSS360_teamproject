@@ -13,8 +13,13 @@ public class Occultist extends Hero {
         super(theName, 75, 25, 45, 5, 0.7, 0.3,"Life Steal", "OccultistImage.png");
     }
 
+    /**
+     * Special skill for the Occultist
+     *
+     * @param theTarget the target
+     */
     @Override
-    public void specialSkill(DungeonCharacter theTarget) {
+    public void specialSkill(final DungeonCharacter theTarget) {
         // Life-steal: Attack to deal 25-40 damage, and heal health for the amount of damage you dealt
         System.out.println(getMyName() + " tries to steal " + theTarget.getMyName() + "'s health");
         int currMinDam = this.getMyMinDam();

@@ -2,6 +2,7 @@ package main.DungeonCharacter;
 
 /**
  * The type Skeleton.
+ * Not used due to the SQLite database
  */
 public class Skeleton extends Monster {
 

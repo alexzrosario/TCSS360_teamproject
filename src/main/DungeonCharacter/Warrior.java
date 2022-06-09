@@ -15,6 +15,11 @@ public class Warrior extends Hero {
         super(theName, 125, 35, 60, 4, 0.8, 0.2, "Crushing Blow","WarriorImage.png");
     }
 
+    /**
+     * Special Skill for the Warrior
+     *
+     * @param theTarget the target
+     */
     @Override
     public void specialSkill(final DungeonCharacter theTarget) {
         // Crushing Blow: does 75 to 175 points of damage but only has a 40% chance of succeeding

@@ -14,7 +14,7 @@ public class DungeonMapWindow extends JFrame {
      *
      * @param theDungeon the dungeon
      */
-    public DungeonMapWindow(Dungeon theDungeon) {
+    public DungeonMapWindow(final Dungeon theDungeon) {
         this.setTitle("Hero Info");
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setSize(600, 600);
@@ -27,7 +27,13 @@ public class DungeonMapWindow extends JFrame {
         this.setVisible(true);
     }
 
-    private JTextArea buildDungeonMapLabel(Dungeon theDungeon) {
+    /**
+     * Builds dungeon map
+     *
+     * @param theDungeon
+     * @return dungeonMap
+     */
+    private JTextArea buildDungeonMapLabel(final Dungeon theDungeon) {
         Font dungeonRoomFont = new Font(Font.MONOSPACED, Font.BOLD, 180/theDungeon.getMyDungeonCols());
         JTextArea dungeonMap = new JTextArea();
         dungeonMap.setEditable(false);

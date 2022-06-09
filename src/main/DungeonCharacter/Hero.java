@@ -33,6 +33,11 @@ public abstract class Hero extends DungeonCharacter {
         this.myImage = theImage;
     }
 
+    /**
+     * Updates the Health of the Hero
+     *
+     * @param theDamage
+     */
     @Override
     public void updateHealth(final int theDamage) {
         if (Math.random() > myBlockChance) {
@@ -50,7 +55,7 @@ public abstract class Hero extends DungeonCharacter {
      * @param theMonster the monster
      * @param theChoice  the choice
      */
-    public void battleMenu(DungeonCharacter theMonster, int theChoice) {
+    public void battleMenu(final DungeonCharacter theMonster, final int theChoice) {
         switch(theChoice) {
             case 1 ->
                     basicAttack(theMonster);
@@ -83,10 +88,10 @@ public abstract class Hero extends DungeonCharacter {
     /**
      * Sets my block chance.
      *
-     * @param myBlockChance the block chance
+     * @param theBlockChance the block chance
      */
-    public void setMyBlockChance(double myBlockChance) {
-        this.myBlockChance = myBlockChance;
+    public void setMyBlockChance(final double theBlockChance) {
+        this.myBlockChance = theBlockChance;
     }
 
     /**
@@ -101,10 +106,10 @@ public abstract class Hero extends DungeonCharacter {
     /**
      * Sets my image.
      *
-     * @param myImage the image
+     * @param theImage the image
      */
-    public void setMyImage(String myImage) {
-        this.myImage = myImage;
+    public void setMyImage(final String theImage) {
+        this.myImage = theImage;
     }
 
     /**
@@ -119,10 +124,10 @@ public abstract class Hero extends DungeonCharacter {
     /**
      * Sets my healing potions.
      *
-     * @param myHealingPotions the healing potions
+     * @param theHealingPotions the healing potions
      */
-    public void setMyHealingPotions(int myHealingPotions) {
-        this.myHealingPotions = myHealingPotions;
+    public void setMyHealingPotions(final int theHealingPotions) {
+        this.myHealingPotions = theHealingPotions;
     }
 
     /**
@@ -137,10 +142,10 @@ public abstract class Hero extends DungeonCharacter {
     /**
      * Sets my vision potions.
      *
-     * @param myVisionPotions the vision potions
+     * @param theVisionPotions the vision potions
      */
-    public void setMyVisionPotions(int myVisionPotions) {
-        this.myVisionPotions = myVisionPotions;
+    public void setMyVisionPotions(final int theVisionPotions) {
+        this.myVisionPotions = theVisionPotions;
     }
 
     /**
@@ -155,10 +160,10 @@ public abstract class Hero extends DungeonCharacter {
     /**
      * Sets my pillars.
      *
-     * @param myPillars the pillars
+     * @param thePillars the pillars
      */
-    public void setMyPillars(int myPillars) {
-        this.myPillars = myPillars;
+    public void setMyPillars(final int thePillars) {
+        this.myPillars = thePillars;
     }
 
     /**
@@ -175,7 +180,7 @@ public abstract class Hero extends DungeonCharacter {
      *
      * @param theMonster the monster
      */
-    public void useSkill(DungeonCharacter theMonster) {
+    public void useSkill(final DungeonCharacter theMonster) {
         specialSkill(theMonster);
     }
 

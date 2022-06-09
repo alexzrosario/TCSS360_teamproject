@@ -17,6 +17,11 @@ public class Priestess extends Hero {
     }
 
 
+    /**
+     * Special skill for the Priestess
+     *
+     * @param theTarget the target
+     */
     @Override
     public void specialSkill(final DungeonCharacter theTarget) {
         // Heal: heals for 25 to 50 hit points
@@ -27,10 +32,16 @@ public class Priestess extends Hero {
         System.out.println(getMyName() + " heals for " + heal + " health");
     }
 
+    /**
+     * Calls Priestess specialSkill()
+     *
+     * @param theMonster the monster
+     */
     @Override
-    public void useSkill(DungeonCharacter theMonster) {
+    public void useSkill(final DungeonCharacter theMonster) {
         specialSkill(this);
     }
+
     /**
      * @return string of the class
      */

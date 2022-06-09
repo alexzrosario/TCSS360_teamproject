@@ -26,7 +26,6 @@ public class DungeonUI extends JFrame implements Serializable {
      */
     JPanel myMainPanel;
 
-
     /**
      * The My start panel.
      */
@@ -144,7 +143,7 @@ public class DungeonUI extends JFrame implements Serializable {
      *
      * @param theCurrentRoom the the current room
      */
-    public void buildAdventurePanel(Room theCurrentRoom) {
+    public void buildAdventurePanel(final Room theCurrentRoom) {
         mainPanelReset();
         myAdventurePanel = new JPanel();
         myAdventurePanel.setBackground(Color.WHITE);
@@ -176,7 +175,7 @@ public class DungeonUI extends JFrame implements Serializable {
      * @param theRoom the the room
      * @return the j panel
      */
-    public JPanel dungeonPanel(Room theRoom){
+    public JPanel dungeonPanel(final Room theRoom){
         JPanel dungeonPanel = new JPanel();
         dungeonPanel.setLayout(new GridLayout(0, 3));
         JTextField temp;
@@ -467,7 +466,7 @@ public class DungeonUI extends JFrame implements Serializable {
      * @param theHero    the hero
      * @param theMonster the monster
      */
-    public void buildBattlePanel(Hero theHero, Monster theMonster) {
+    public void buildBattlePanel(final Hero theHero, final Monster theMonster) {
         mainPanelReset();
         myBattlePanel = new JPanel();
         myBattlePanel.setLayout(new GridLayout(0,3));
@@ -563,7 +562,7 @@ public class DungeonUI extends JFrame implements Serializable {
      *
      * @param newText the new text
      */
-    public void updateAdventureText(String newText) {
+    public void updateAdventureText(final String newText) {
         try {
             myAdventureTextBox.getDocument().insertString(0, newText + "\n", null);
         } catch (BadLocationException e) {
@@ -579,7 +578,7 @@ public class DungeonUI extends JFrame implements Serializable {
      * @param theForeColor the fore color
      * @param theFont      the font
      */
-    public void setButtonColor(JButton theButton, Color theBackColor, Color theForeColor, Font theFont) {
+    public void setButtonColor(final JButton theButton, final Color theBackColor, final Color theForeColor, final Font theFont) {
         theButton.setBackground(theBackColor);
         theButton.setFont(theFont);
         theButton.setForeground(theForeColor);
@@ -593,7 +592,7 @@ public class DungeonUI extends JFrame implements Serializable {
      * @param theForeColor the fore color
      * @param theFont      the font
      */
-    public void setComboBoxColor(JComboBox theBox, Color theBackColor, Color theForeColor, Font theFont) {
+    public void setComboBoxColor(final JComboBox theBox, final Color theBackColor, final Color theForeColor, final Font theFont) {
         theBox.setBackground(theBackColor);
         theBox.setFont(theFont);
         theBox.setForeground(theForeColor);

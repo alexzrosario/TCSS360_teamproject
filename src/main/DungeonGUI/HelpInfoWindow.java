@@ -36,7 +36,7 @@ public class HelpInfoWindow extends JFrame {
     /**
      * Build help info label JTextArea
      *
-     * @return the JTextArea with help info
+     * @return helpInfo - the JTextArea with help info
      */
     public JTextArea buildHelpLabel() {
         JTextArea helpInfo = new JTextArea();
